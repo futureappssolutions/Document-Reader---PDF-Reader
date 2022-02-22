@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_previous"
+        android:icon="@drawable/ic_arrow_left"
+        android:title="Previous"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_next"
+        android:icon="@drawable/ic_arrow_right"
+        android:title="Next"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_change_font"
+        android:title="Change Font Size"
+        app:showAsAction="never">
+        <menu xmlns:android="http://schemas.android.com/apk/res/android">
+            <item
+                android:id="@+id/font_8"
+                android:title="8" />
+            <item
+                android:id="@+id/font_10"
+                android:title="10" />
+            <item
+                android:id="@+id/font_12"
+                android:title="12" />
+            <item
+                android:id="@+id/font_14"
+                android:title="14" />
+            <item
+                android:id="@+id/font_16"
+                android:title="16" />
+            <item
+                android:id="@+id/font_18"
+                android:title="18" />
+            <item
+                android:id="@+id/font_20"
+                android:title="20" />
+            <item
+                android:id="@+id/font_22"
+                android:title="22" />
+            <item
+                android:id="@+id/font_24"
+                android:title="24" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/action_mode_day"
+        android:title="@string/dayMode" />
+    <item
+        android:id="@+id/action_mode_night"
+        android:title="@string/nightMode" />
+</menu>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="security_question_arrays">
+        <item>1. What is your pet name?</item>
+        <item>2. What is your best friend name?</item>
+        <item>3. What was your childhood nickname?</item>
+        <item>4. What is your favorite team?</item>
+        <item>5. What is your favorite color?</item>
+        <item>6. Who was your childhood hero?</item>
+    </string-array>
+
+    <string-array name="setting_items">
+        <item>Maximum count of recently files(1~20)</item>
+    </string-array>
+
+    <string-array name="file_sort_items">
+        <item>Type</item>
+        <item>Date</item>
+        <item>Size</item>
+        <item>Name</item>
+    </string-array>
+</resources>

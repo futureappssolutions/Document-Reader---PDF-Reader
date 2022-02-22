@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_save_as_text"
+        android:title="Save as Text" />
+    <item
+        android:id="@+id/action_save_as_pdf"
+        android:title="Save as PDF" />
+    <item
+        android:id="@+id/action_open_as_text"
+        android:title="Open as Text File" />
+    <item
+        android:id="@+id/action_open_as_pdf"
+        android:title="Open as PDF" />
+</menu>

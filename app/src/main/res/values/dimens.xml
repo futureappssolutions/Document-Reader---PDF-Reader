@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="action_bar_size">16.0dip</dimen>
+    <dimen name="action_button_height">32.0dip</dimen>
+    <dimen name="action_button_min_width">56.0dip</dimen>
+    <dimen name="action_button_padding_horizontal">4.0dip</dimen>
+    <dimen name="action_button_text_size">14.0sp</dimen>
+
+    <dimen name="default_column_header_height">55.0dip</dimen>
+    <dimen name="default_dimension">100.0dip</dimen>
+    <dimen name="default_row_header_width">55.0dip</dimen>
+
+    <dimen name="text_size">12.0sp</dimen>
+
+    <dimen name="dgv_overlap_if_switch_straight_line">16dp</dimen>
+</resources>

@@ -1,0 +1,127 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'com.google.gms.google-services'
+}
+
+android {
+    signingConfigs {
+        release {
+            storeFile file('E:\\Nency\\NEW Application\\Document Reader - Word, Excel\\Document Reader - Word, Excel\\app\\KeyStore\\doc_reader.jks')
+            storePassword 'doc_reader'
+            keyAlias 'doc_reader'
+            keyPassword 'doc_reader'
+        }
+    }
+    dexOptions {
+        preDexLibraries true
+        javaMaxHeapSize "4G"
+    }
+
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
+
+    compileSdk 31
+
+    defaultConfig {
+        configurations.all {
+            resolutionStrategy { force 'androidx.core:core-ktx:1.6.0' }
+        }
+
+        applicationId "com.docreader.docviewer.pdfcreator.pdfreader.filereader"
+        minSdk 21
+        targetSdk 31
+        versionCode 2
+        versionName "1.1"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+}
+
+dependencies {
+    api 'androidx.appcompat:appcompat:1.4.1'
+    api 'com.google.android.material:material:1.5.0'
+    api 'androidx.constraintlayout:constraintlayout:2.1.2'
+    api 'androidx.constraintlayout:constraintlayout-core:1.0.2'
+    api 'androidx.exifinterface:exifinterface:1.3.3'
+    api 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    api 'androidx.core:core-ktx:1.7.0'
+    api "org.jetbrains.kotlin:kotlin-stdlib:1.6.10"
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
+
+    api 'org.tukaani:xz:1.9'
+    api 'com.itextpdf:itextpdf:5.5.13.2'
+    api 'com.intuit.sdp:sdp-android:1.0.6'
+    api 'com.airbnb.android:lottie:4.2.2'
+    api group: 'org.apache.commons', name: 'commons-compress', version: '1.21'
+
+    api 'com.android.volley:volley:1.2.1'
+    api 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    api platform('com.google.firebase:firebase-bom:29.0.3')
+    api 'com.google.firebase:firebase-database:20.0.3'
+
+    //Advertisement
+    api 'com.facebook.android:audience-network-sdk:6.8.0'
+    api 'com.google.android.gms:play-services-ads:20.5.0'
+    api "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    api "androidx.lifecycle:lifecycle-runtime:2.4.0"
+    //noinspection LifecycleAnnotationProcessorWithJava8
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.4.0"
+
+    // Recyclerview animation
+    api "com.mlsdev.animatedrv:library:2.0.0"
+
+    // Zoom Image View
+    api 'com.jsibbold:zoomage:1.3.1'
+
+    // Circle Image View
+    api 'de.hdodenhof:circleimageview:3.1.0'
+
+    // Signature Pad
+    api 'com.github.gcacace:signature-pad:1.3.1'
+
+    // SubsamplingScaleImageView
+    api 'com.davemorrissey.labs:subsampling-scale-image-view-androidx:3.10.0'
+
+    // Billing
+    api "com.android.billingclient:billing:4.0.0"
+
+    api 'com.google.android.play:core:1.10.3'
+    api 'com.google.android.gms:play-services-vision:20.1.3'
+
+    api 'com.google.code.gson:gson:2.8.9'
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+}

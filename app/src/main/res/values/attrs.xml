@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CodeView">
+        <attr name="cv_font_size" format="integer" />
+        <attr name="cv_highlight_line_number" format="integer" />
+        <attr name="cv_show_line_number" format="boolean" />
+        <attr name="cv_start_line_number" format="integer" />
+        <attr name="cv_wrap_line" format="boolean" />
+        <attr name="cv_zoom_enable" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="LineEditText">
+        <attr name="lineColor" format="integer" />
+        <attr name="strokeWidtha" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="PeriodicTableView">
+        <attr name="allowStacking" format="boolean" />
+        <attr name="allow_click_inside_cell" format="boolean" />
+        <attr name="allow_click_inside_column_header" format="boolean" />
+        <attr name="allow_click_inside_row_header" format="boolean" />
+        <attr name="column_header_height" format="dimension" />
+        <attr name="row_header_width" format="dimension" />
+        <attr name="separator_color" format="color" />
+        <attr name="shadow_color" format="color" />
+        <attr name="show_horizontal_separator" format="boolean" />
+        <attr name="show_vertical_separator" format="boolean" />
+        <attr name="unselected_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="circleView">
+        <attr name="circleBackgroundColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundedHorizontalProgress">
+        <attr name="backgroundColor" format="color" />
+        <attr name="progressColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="CropImageView">
+
+        <attr name="guidelines">
+            <enum name="off" value="0" />
+            <enum name="onTouch" value="1" />
+            <enum name="on" value="2" />
+        </attr>
+
+        <attr name="fixAspectRatio" format="boolean" />
+        <attr name="aspectRatioX" format="integer" />
+        <attr name="aspectRatioY" format="integer" />
+
+        <attr name="cropGuidelines">
+            <enum name="off" value="0" />
+            <enum name="onTouch" value="1" />
+            <enum name="on" value="2" />
+        </attr>
+        <attr name="cropScaleType">
+            <enum name="fitCenter" value="0" />
+            <enum name="center" value="1" />
+            <enum name="centerCrop" value="2" />
+            <enum name="centerInside" value="3" />
+        </attr>
+        <attr name="cropShape">
+            <enum name="rectangle" value="0" />
+            <enum name="oval" value="1" />
+        </attr>
+        <attr name="cropAutoZoomEnabled" format="boolean" />
+        <attr name="cropMaxZoom" format="integer" />
+        <attr name="cropFixAspectRatio" format="boolean" />
+        <attr name="cropAspectRatioX" format="integer" />
+        <attr name="cropAspectRatioY" format="integer" />
+        <attr name="cropInitialCropWindowPaddingRatio" format="float" />
+        <attr name="cropBorderLineThickness" format="dimension" />
+        <attr name="cropBorderLineColor" format="color" />
+        <attr name="cropBorderCornerThickness" format="dimension" />
+        <attr name="cropBorderCornerOffset" format="dimension" />
+        <attr name="cropBorderCornerLength" format="dimension" />
+        <attr name="cropBorderCornerColor" format="color" />
+        <attr name="cropGuidelinesThickness" format="dimension" />
+        <attr name="cropGuidelinesColor" format="color" />
+        <attr name="cropBackgroundColor" format="color" />
+        <attr name="cropSnapRadius" format="dimension" />
+        <attr name="cropTouchRadius" format="dimension" />
+        <attr name="cropShowCropOverlay" format="boolean" />
+        <attr name="cropShowProgressBar" format="boolean" />
+        <attr name="cropMinCropWindowWidth" format="dimension" />
+        <attr name="cropMinCropWindowHeight" format="dimension" />
+        <attr name="cropMinCropResultWidthPX" format="float" />
+        <attr name="cropMinCropResultHeightPX" format="float" />
+        <attr name="cropMaxCropResultWidthPX" format="float" />
+        <attr name="cropMaxCropResultHeightPX" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="PasscodeView">
+        <attr name="passcodeViewType" format="enum">
+            <enum name="set_passcode" value="0"/>
+            <enum name="check_passcode" value="1"/>
+        </attr>
+        <attr name="normalStateColor" format="color"/>
+        <attr name="correctStateColor" format="color"/>
+        <attr name="wrongStateColor" format="color"/>
+        <attr name="numberTextColor" format="color"/>
+        <attr name="passcodeLength" format="integer"/>
+        <attr name="firstInputTip" format="string"/>
+        <attr name="secondInputTip" format="string"/>
+        <attr name="wrongLengthTip" format="string"/>
+        <attr name="wrongInputTip" format="string"/>
+        <attr name="correctInputTip" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="ActionImageView">
+        <attr name="actionType">
+            <enum name="none" value="0" />
+            <enum name="family" value="1" />
+            <enum name="size" value="2" />
+            <enum name="lineHeight" value="3" />
+            <enum name="foreColor" value="4" />
+            <enum name="backColor" value="5" />
+            <enum name="bold" value="6" />
+            <enum name="italic" value="7" />
+            <enum name="underline" value="8" />
+            <enum name="subscript" value="9" />
+            <enum name="superscript" value="10" />
+            <enum name="strikethrough" value="11" />
+            <enum name="normal" value="12" />
+            <enum name="h1" value="13" />
+            <enum name="h2" value="14" />
+            <enum name="h3" value="15" />
+            <enum name="h4" value="16" />
+            <enum name="h5" value="17" />
+            <enum name="h6" value="18" />
+            <enum name="justifyLeft" value="19" />
+            <enum name="justifyCenter" value="20" />
+            <enum name="justifyRight" value="21" />
+            <enum name="justifyFull" value="22" />
+            <enum name="ordered" value="23" />
+            <enum name="unordered" value="24" />
+            <enum name="indent" value="25" />
+            <enum name="outdent" value="26" />
+            <enum name="image" value="27" />
+            <enum name="link" value="28" />
+            <enum name="table" value="29" />
+            <enum name="line" value="30" />
+            <enum name="blockQuote" value="31" />
+            <enum name="blockCode" value="32" />
+            <enum name="codeView" value="33" />
+        </attr>
+    </declare-styleable>
+</resources>

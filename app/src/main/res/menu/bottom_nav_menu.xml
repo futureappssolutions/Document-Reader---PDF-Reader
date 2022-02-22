@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_tutorial"
+        android:icon="@drawable/ic_tutorial"
+        android:title="Tutorial" />
+    <item
+        android:id="@+id/navigation_invoice"
+        android:icon="@drawable/ic_invoice"
+        android:title="Invoices" />
+    <item
+        android:id="@+id/navigation_clients"
+        android:icon="@drawable/ic_clients"
+        android:title="Clients" />
+    <item
+        android:id="@+id/navigation_items"
+        android:icon="@drawable/ic_product"
+        android:title="Products" />
+    <item
+        android:id="@+id/navigation_setting"
+        android:icon="@drawable/sys_setting"
+        android:title="Settings" />
+</menu>

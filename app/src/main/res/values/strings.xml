@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="AaZz">Aa - Za</string>
+    <string name="AchievementMostProudOf">Achievement / Most Proud Of</string>
+    <string name="ChangeFileLoadingOptionAccordingToYourNeed">Change File Loading Option According To Your Need</string>
+    <string name="GetStarted">Get Started</string>
+    <string name="MoreApps">More APPS(Ad)</string>
+    <string name="ORWatchVideoAD">OR Watch Video AD</string>
+    <string name="PremiumMember">Premium Member</string>
+    <string name="PrivacyPolicy">Privacy Policy</string>
+    <string name="PrivacyPolicyContinue">By clicking on GET STARTED Button below,you agree to the</string>
+    <string name="PrivacyPolicyShortDes">Click on get start if you agree Privacy Policy</string>
+    <string name="RateNow">Rate Now</string>
+    <string name="RateUs">Rate Us</string>
+    <string name="ShareApp">Share APP</string>
+    <string name="ZzAa">Zz - Aa</string>
+    <string name="about">About</string>
+    <string name="aboutCodeFileAndFolderView">About Code File Folder View</string>
+    <string name="aboutPersonalInfoSummaryHint">"About / Personal Profile / Summary "</string>
+    <string name="achievements">Achievements</string>
+    <string name="action_close">Close</string>
+    <string name="action_redo">Redo</string>
+    <string name="action_undo">Undo</string>
+    <string name="adWillDisplayHere">Ad will be display here</string>
+    <string name="add">ADD</string>
+    <string name="address1">Address 1</string>
+    <string name="address2_optional">Address 2 (optional)</string>
+    <string name="admob_rewarded_video_id" />
+    <string name="alert">Alert.!</string>
+    <string name="all">ALL</string>
+    <string name="allFieldAreRequired">All fields are required!</string>
+    <string name="allFiles">All Files</string>
+    <string name="allFilesConverter">All Files Converter</string>
+    <string name="allFilesNotOpeningChangeFileLoadingSetting">All files not opening? Change files loading setting</string>
+    <string name="allInOneCompelteOfficeApp">All in one complete office suite app</string>
+    <string name="allInvoicesMakerWithNewLine">"All Invoices
+Maker"</string>
+    <string name="allPaidAndLockedFeatureMessage">All locked and paid features has been unlocked for next <b>12 hours</b>. Keep using our app. Thank You</string>
+    <string name="allowPermission">Allow Permission</string>
+    <string name="alreadyRattedNeverShowAgain">Already Rated Never Show Again</string>
+    <string name="anErrorOccured">Error occurred please try again</string>
+    <string name="androidElevenNewUpdateMessage">"On Android 11 and above version Google added a new data protection update, after this now we can't load all document files at once. So Android 11 and above version user can only use second option (selection mode) to load and view doc files "</string>
+    <string name="androidx_startup">androidx.startup</string>
+    <string name="answerDoesNotMatched">Answer does not matched!</string>
+    <string name="app_folder_name">/AllDocumentReader/data</string>
+    <string name="app_name">Document Reader</string>
+    <string name="appbar_scrolling_view_behavior">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="areYouSureToClearChat">Are you sure to clear chat?</string>
+    <string name="areYouSureToDeleteThisFile">Are you sure to delete this file?</string>
+    <string name="areYouSureToRemove">Are you sure to remove?</string>
+    <string name="back">Back</string>
+    <string name="bannar_id_admob" />
+    <string name="bottom_sheet_behavior">com.google.android.material.bottomsheet.BottomSheetBehavior</string>
+    <string name="bottomsheet_action_expand_halfway">Expand halfway</string>
+    <string name="bracketRight">)</string>
+    <string name="cancel">Cancel</string>
+    <string name="changResumeHighlightTitleAccordingToYourRequirement">Change resume highlight title according to your requirements</string>
+    <string name="changeAppLanguage">Change App Language</string>
+    <string name="changeColor">Change Color</string>
+    <string name="character_counter_content_description">Characters entered %1$d of %2$d</string>
+    <string name="character_counter_overflowed_content_description">Character limit exceeded %1$d of %2$d</string>
+    <string name="character_counter_pattern">%1$d/%2$d</string>
+    <string name="chatApp">ChatApp</string>
+    <string name="chatHahBeenCleared">Chat has been cleared</string>
+    <string name="checkForUpdate">Check For Update</string>
+    <string name="chip_text">Chip text</string>
+    <string name="choosColor">Choose Color</string>
+    <string name="chooseStorageLocation">Choose Storage Location</string>
+    <string name="clear">clear</string>
+    <string name="clearAll">Clear All</string>
+    <string name="clearChat">Clear Chat !</string>
+    <string name="clear_text_end_icon_content_description">Clear text</string>
+    <string name="clickHereOrPlus">"'Click here or +'"</string>
+    <string name="clickHereToSearchAnyDocument">Click here to Search to any documents</string>
+    <string name="clickOnFileToRearrageRemoveOrView">click on files to rearrange, remove or view</string>
+    <string name="code">Code</string>
+    <string name="codeFile">Code Files</string>
+    <string name="codeFileFolderView">Code Files Folder View</string>
+    <string name="codeFileFolderViewMessage">"With this 'Code File Folder View' option you can only see programing code files like JAVA, CPP, HTML, XML etc. To view document files please use 'Doc Files Folder View' option"</string>
+    <string name="codeFileFolderViewWithNewLine">Code Files Folder View</string>
+    <string name="common_signin_button_text">Sign in</string>
+    <string name="common_signin_button_text_long">Sign in with Google</string>
+    <string name="companyName">Company Name</string>
+    <string name="contact">"Contact  "</string>
+    <string name="contactUs">Contact Us</string>
+    <string name="convert">Convert</string>
+    <string name="convertToPdf">Convert to PDF</string>
+    <string name="copyText">Copy Text</string>
+    <string name="copyTextToClipBoard">Text copied to clipboard</string>
+    <string name="country_prompt">Choose question</string>
+    <string name="createNewPdfFile">"Create New
+PDF File"</string>
+    <string name="createdFile">Created Files</string>
+    <string name="creatingNewFile">Creating File..</string>
+    <string name="cretingPdfPleaseWait">Creating PDF Please Wait</string>
+    <string name="crop_image_activity_no_permissions">Cancelling, required permissions are not granted</string>
+    <string name="crop_image_menu_crop">Crop</string>
+    <string name="crop_image_menu_flip">Flip</string>
+    <string name="crop_image_menu_flip_horizontally">Flip horizontally</string>
+    <string name="crop_image_menu_flip_vertically">Flip vertically</string>
+    <string name="crop_image_menu_rotate_left">Rotate counter clockwise</string>
+    <string name="crop_image_menu_rotate_right">Rotate</string>
+    <string name="csv">CSV</string>
+    <string name="csvToPDF">"CSV
+to PDF"</string>
+    <string name="currentlyOCRsupportedOnlyEnglishLanguageMessage">Currently OCR (Optical Character Recognition) recognize english language charter &amp; digit only. Other language will be added soon</string>
+    <string name="dayMode">Day Mode</string>
+    <string name="degree">Degree</string>
+    <string name="delete">Delete</string>
+    <string name="deletedSuccessfully">Deleted Successfully</string>
+    <string name="description">Description</string>
+    <string name="details"><b>Details</b></string>
+    <string name="dialog_ascending">Ascending</string>
+    <string name="dialog_create_folder_error">Failed to create folder</string>
+    <string name="dialog_descending">Descending</string>
+    <string name="dialog_file_name">File Name</string>
+    <string name="dialog_file_rename_error">Failed to rename file</string>
+    <string name="dialog_folder_name">Folder Name</string>
+    <string name="dialog_name_error">%s already exists.</string>
+    <string name="dialog_title_text_back_color">Select a Text Background Color</string>
+    <string name="dialog_title_text_color">Select a Text Color</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="doYouWantToSave">Do you want to save changes?</string>
+    <string name="doYouWantToSaveMessage">With the help of source file you will be able to edit it later whenever you want.</string>
+    <string name="dob_optional">DOB (Optional)</string>
+    <string name="doc">DOC</string>
+    <string name="docFile">Doc Files</string>
+    <string name="docScannerImageToTxtOCR">"Doc Scanner
+Img to Txt (OCR)"</string>
+    <string name="documentReader">Document Reader</string>
+    <string name="documentReader_two">Document Reader</string>
+    <string name="documentScanner">"Document
+Scanner"</string>
+    <string name="docurmentFile">Document Files</string>
+    <string name="dontSave">"Don't Save"</string>
+    <string name="download">Download</string>
+    <string name="downloadSuccessfully">Downloaded Successfully..</string>
+    <string name="downloadingImagePleaseWait">Downloading Image Please Wait</string>
+    <string name="eBook">eBook</string>
+    <string name="eBookFiles">eBook Files</string>
+    <string name="ebookReaderIsPaidFeature">Ebook reader is paid feature</string>
+    <string name="edit">Edit</string>
+    <string name="editText">Edit Text</string>
+    <string name="edited">Edited</string>
+    <string name="education">"Education "</string>
+    <string name="educationalDetailWithNewLine">"Educational
+Detail"</string>
+    <string name="email">Email</string>
+    <string name="empty">Empty</string>
+    <string name="emptyData">Empty Data</string>
+    <string name="emptyList">Empty List</string>
+    <string name="empty_directory_hint">No document file found</string>
+    <string name="enableMarqueeEffectForFileName">Enable Marquee Effect For File Name</string>
+    <string name="endDate">End Date</string>
+    <string name="enjoyUsingDocumentReader">Enjoyed using Doc Reader?</string>
+    <string name="enterContentFirst">Enter content first</string>
+    <string name="enterFileNameFirst">Enter file name first</string>
+    <string name="enterFourDigitPassword">Enter 4 Digits Password To Lock Notepad</string>
+    <string name="enterLink">Enter link</string>
+    <string name="enterNoOfColumn">Enter No Of Column</string>
+    <string name="enterNoOfRow">Enter No Of Rows</string>
+    <string name="enterPdfPageTitleHere">Enter PDF page title here</string>
+    <string name="enterRowAndColumn">Enter row and columns</string>
+    <string name="enterTextAndUrl">Enter Text &amp; Url</string>
+    <string name="enterTextToDisplay">Enter text to display</string>
+    <string name="enterTitle">Enter Title</string>
+    <string name="enterTitleFirst">Enter title first</string>
+    <string name="enterValueFirst">Enter value first</string>
+    <string name="enterWebsiteUrlMessage">"Enter website complete url e.g 'www.christopher.com'"</string>
+    <string name="enterYourAnswer">Enter Your Answer</string>
+    <string name="enterYourContentHere">Enter your content here</string>
+    <string name="enterYourHobby">Enter your Hobby</string>
+    <string name="enterYourHobbyFirst">Enter your hobby first</string>
+    <string name="enterYourLanguage">Enter your language</string>
+    <string name="enterYourLanguageFirst">Enter your language first</string>
+    <string name="enterYourSkill">Enter Your Skill</string>
+    <string name="enterYourSkillFirst">Enter your skill first</string>
+    <string name="enteryouAnswerFirst">Enter your answer first</string>
+    <string name="errorOccuredTryAgain">"Something goes wrong!
+Please try again"</string>
+    <string name="error_icon_content_description">Error</string>
+    <string name="excelFiles">Excel Files</string>
+    <string name="exit">Exit</string>
+    <string name="experience">Experience</string>
+    <string name="exposed_dropdown_menu_content_description">Show dropdown menu</string>
+    <string name="facebook">Facebook</string>
+    <string name="facebook_interstitial_id">3411535275568401_3421431751245420</string>
+    <string name="facebook_native_id">3411535275568401_3411539688901293</string>
+    <string name="failedToLoadADPleaseTryAgainLater">"Failed to load AD, Please try again later "</string>
+    <string name="faqs">FAQs</string>
+    <string name="favoriteFile">Favorite Files</string>
+    <string name="fcm_fallback_notification_channel_label">Miscellaneous</string>
+    <string name="fileCSV">CSV File</string>
+    <string name="fileHTML">HTML Files</string>
+    <string name="fileHasBeenSavedTo">" has been saved to "</string>
+    <string name="fileMangerWithNewLine">File Manager</string>
+    <string name="fileName">File Name</string>
+    <string name="fileNameEffect">File Name Effect</string>
+    <string name="filePath">File Path</string>
+    <string name="fileRenamedSuccessfully">File Renamed Successfully</string>
+    <string name="fileSaved">File Saved!</string>
+    <string name="fileSelectionModMessage">"With this option you don't have to wait for a while. You just manually pick your desire file from storage directory. Drawback of this option is you may not open all files because in first option we just load only those files which this app is supported to open.
+
+Supported files format are doc, docx, xls, xlsx, ppt, pptx, txt, pdf, dot, dotx, dotm, rtf, xlt, xlsm, xltm, pot, pptm, potx, potm, csv, epub and all programing file format like html, json, c++, etc...."</string>
+    <string name="file_info">"
+ File Name : %1$s
+
+ Path : %2$s
+
+ Size : %3$s
+
+ Date Modified %4$s"</string>
+    <string name="filedCannotBeEmpty">Fields cannot be empty.</string>
+    <string name="findAndLikeUsOnFacebook">Find and like us on Facebook</string>
+    <string name="findAnyVehicleSpeedUsingYourPhone">Find any vehicle speed by using your phone</string>
+    <string name="findMoreMotivationalQuoteOnFb">View More Motivational Quotes On Our FB Page</string>
+    <string name="findOurMoreAppsOnGooglePlay">Find our more apps on Google Play store</string>
+    <string name="findUs">Find Us</string>
+    <string name="firstName">First Name</string>
+    <string name="font1">casual</string>
+    <string name="font10">sans-serif-smallcaps</string>
+    <string name="font11">sans-serif-thin</string>
+    <string name="font12">serif</string>
+    <string name="font13">serif-monospace</string>
+    <string name="font2">cursive</string>
+    <string name="font3">monospace</string>
+    <string name="font4">sans-serif</string>
+    <string name="font5">sans-serif-black</string>
+    <string name="font6">sans-serif-condensed</string>
+    <string name="font7">sans-serif-condensed-light</string>
+    <string name="font8">sans-serif-light</string>
+    <string name="font9">sans-serif-medium</string>
+    <string name="forgetPassword">Forget Password</string>
+    <string name="found">Found</string>
+    <string name="frequentlyAskedQuestions">Frequently Asked Questions</string>
+    <string name="goToSetting">Go To Setting</string>
+    <string name="gotIt">Got IT</string>
+    <string name="gotItNeverShowAgain">Got it &amp; never show it again</string>
+    <string name="gpsSpeedometrAD">GPS Speedometer (A.D)</string>
+    <string name="hide">Hide (</string>
+    <string name="hide_bottom_view_on_scroll_behavior">com.google.android.material.behavior.HideBottomViewOnScrollBehavior</string>
+    <string name="highlightSkillWithNewLine">"<Highlight></Highlight>
+Skill"</string>
+    <string name="highlightskill">Skill</string>
+    <string name="hint_link_to">Link to</string>
+    <string name="hint_no_of_columns">Number of columns</string>
+    <string name="hint_no_of_rows">Number of rows</string>
+    <string name="hint_text_to_display">Text to display</string>
+    <string name="hobbiesOrInterestWithNewLine">"Hobbies
+or Interest"</string>
+    <string name="hobby">Hobby</string>
+    <string name="hobbyInterest">Hobby / Interest</string>
+    <string name="howToCrateAndViewNewlyCreatedPdfFile">How to create and view newly created PDF</string>
+    <string name="howToSavePdfFile">How to save CV as PDF File</string>
+    <string name="howToSavePdfFileMessage">"In order to save PDF file click on Save PDF Button in coming next screen. If save PDF button is not showing just click on 'Select Printer' &amp; 'choose Save as PDF' option from the top right corner"</string>
+    <string name="html">HTML</string>
+    <string name="icon_content_description">Dialog Icon</string>
+    <string name="imagToText">Image To Text</string>
+    <string name="imageCropFaild">Image Crop Failed</string>
+    <string name="imageToPdfFile">Image To PDF</string>
+    <string name="imageToPdfFileWithNewLine">"Image To
+PDF File"</string>
+    <string name="info">Info</string>
+    <string name="insert">Insert</string>
+    <string name="insertPdfContentFirst">Insert PDF Content First</string>
+    <string name="installNow">Install NOW</string>
+    <string name="internetConnectionRequiredToViewThisFeature">Internet connection require to view this feature</string>
+    <string name="internetConnectionRequrieToViewVideo">Internet connection required to view video</string>
+    <string name="interstitial_id_admob" />
+    <string name="item_view_role_description">Tab</string>
+    <string name="items">Item(s)</string>
+    <string name="jobTitle">Job Title</string>
+    <string name="knownLanguageWithNewLine">"Known
+Languages"</string>
+    <string name="knownlLangugages">"Known Languages "</string>
+    <string name="language">Language</string>
+    <string name="lastName">Last Name</string>
+    <string name="latestVersionOfDocumentReaderInstalledMessage">"The least version of Document Reader App is installed on your phone. "</string>
+    <string name="learnMath">Learn Math</string>
+    <string name="leaveTheFieldEmptyMessage">"Leave the input field empty if you don't want to include them in your CV, for better understanding we filled input field with example data"</string>
+    <string name="linkedin">Linkedin</string>
+    <string name="loadAllFilesAtOnce">Load all files at once</string>
+    <string name="loadAllFilesTypeAtOnceMessage">With this option Document Reader App automatically load all supported document files from your phone storage. (This option may take long time to load files because all files are loaded from all folders)</string>
+    <string name="loadFileFromExternalStorage">Load files from external storage</string>
+    <string name="loadFileFromInternalStorage">Load files from internal storage</string>
+    <string name="loadSpecificFileTitle">Load specific files one by one (Selection Mode)</string>
+    <string name="loadingFiles">Loading Files...</string>
+    <string name="location">Location</string>
+    <string name="longPressOnImageToSelectAndDeleteImage">Long press on image to rearrange and delete images</string>
+    <string name="mergePdfFiles">Merge PDF Files</string>
+    <string name="mergePdfFilesWithNewLine">"Merge PDF
+Files"</string>
+    <string name="mergingPdfFilePleaseWait">Merging File Please Wait</string>
+    <string name="messageCannotBeEmpty">Message cannot be empty</string>
+    <string name="modifyDateColon">"Modify Date : "</string>
+    <string name="moreAppsLink">Solo+Tech+Apps</string>
+    <string name="moreFileConverterWillBeAddedInComingUpdates">More file converter will be added in coming updates</string>
+    <string name="moreResumeTamplateWillBeAddedInComingUpdates">More resume template will be added in coming updates</string>
+    <string name="motivationalQuotes">Motivational Quotes</string>
+    <string name="nameColon">Name :</string>
+    <string name="neverShowAgain">Never show again</string>
+    <string name="newName">New Name</string>
+    <string name="newPdfFile">New PDF File</string>
+    <string name="nightMode">Night Mode</string>
+    <string name="no">No</string>
+    <string name="noFilesFound">No Files Found</string>
+    <string name="noInternetConnection">No, Internet connection.!</string>
+    <string name="noInternetConnectionTurnItOnAndTryAgainLater">No Internet Connection, Turn On Your InterNet And Try Agin.</string>
+    <string name="noNotification">No Notification!</string>
+    <string name="noPdfFileFound">No PDF Files Found</string>
+    <string name="noTextRecognizeOnThisImagePleaseTryAgain">No text recognize on this image. please try again</string>
+    <string name="no_thanks">No, Thanks</string>
+    <string name="notepad">Notepad</string>
+    <string name="notification">Notification</string>
+    <string name="notificationMessage">"We'll Notify You When There Is Something New"</string>
+    <string name="ocrResult">OCR Result</string>
+    <string name="offline_notification_text">Tap to open ad</string>
+    <string name="offline_notification_title">View the ad you saved when you were offline</string>
+    <string name="offline_opt_in_confirm">OK</string>
+    <string name="offline_opt_in_confirmation">"You'll get a notification with the link when you're back online"</string>
+    <string name="offline_opt_in_decline">No thanks</string>
+    <string name="offline_opt_in_message">"We'll send you a notification with a link to the advertiser site."</string>
+    <string name="offline_opt_in_title">"Open ad when you're back online."</string>
+    <string name="ok">OK</string>
+    <string name="open">Open</string>
+    <string name="openThisFile">Open This File</string>
+    <string name="otherDetail">Other Detail</string>
+    <string name="otherDetailWithNewLine">"Other
+Detail"</string>
+    <string name="otherUseFulOptions">Other Useful Options</string>
+    <string name="paidTemplate">Paid Template</string>
+    <string name="passwordDoNotMatch">Password do not match</string>
+    <string name="passwordHasbeenSet">Password Has Been Set</string>
+    <string name="passwordMatch">Password Match</string>
+    <string name="password_toggle_content_description">Show password</string>
+    <string name="pathColon">Path :</string>
+    <string name="pdf">PDF</string>
+    <string name="pdfContent">PDF Content</string>
+    <string name="pdfContentWithOptions">PDF Content With Options</string>
+    <string name="pdfFileCreatedSuccessfully">PDF File Created Successfully</string>
+    <string name="pdfFiles">PDF Files</string>
+    <string name="pdfPageTitle">PDF Page Title</string>
+    <string name="pdf_ext">.pdf</string>
+    <string name="periodicTable">Periodic Table</string>
+    <string name="permissionGranted">Permission Granted</string>
+    <string name="permission_denied">Permission Denied</string>
+    <string name="permission_denied_message">"You have denied Read Storage Permission, All Document Reader will not work without these Permission. Please grant these permissions at
+[Setting] > [Permissions]"</string>
+    <string name="permission_denied_message2">Permission Denied, the app may not work without these permission. Try again.</string>
+    <string name="personalInfo">Personal Info</string>
+    <string name="personalInformationWithNewLine">"Personal
+Information"</string>
+
+    <string name="phone">Phone</string>
+    <string name="phoneStorage">Phone Storage</string>
+    <string name="pickAnyCodeDocFileFromFolderView">Pick any document or codes files from folder view</string>
+    <string name="pick_image_intent_chooser_title">Select source</string>
+    <string name="pin">Pin</string>
+    <string name="pleaseSendUsMessageIfYouHaveAny">Please send us message if you have any issue, question or suggestions regarding Document Reader App</string>
+    <string name="pleaseWait">please wait...</string>
+    <string name="pleaseWaitAsecFilesAreLoading">Please wait a sec, files are loading</string>
+    <string name="pleaseWaitVideoAdIsLoading">Please wait, Video ad is loading..</string>
+    <string name="powerPointFiles">Power Point Files</string>
+    <string name="ppt">PPT</string>
+    <string name="pptFile">PPT Files</string>
+    <string name="premiumFeature">Premium Feature</string>
+    <string name="premiumFeatureHasBeenUnlock">Premium feature has been unlock</string>
+    <string name="preparingPdfPagesPleaseWait">Preparing PDF Pages Please Wait</string>
+    <string name="preview">Preview</string>
+    <string name="previewResumeWithNewLine">"Preview
+Resume"</string>
+    <string name="print">Print</string>
+    <string name="printingFailed">Printing Failed</string>
+    <string name="privacyPolicyTermsAndConditions">Privacy Policy Terms and Conditions</string>
+    <string name="prjectName">Project Name</string>
+    <string name="professionTitle">Profession Title</string>
+    <string name="professionalResumeMaker">Professional Resume Maker</string>
+    <string name="profilePicture">Profile Picture</string>
+    <string name="project">"Project "</string>
+    <string name="projectDetail">Project Detail</string>
+    <string name="projectDetailWithNewLine">"Projects
+Details"</string>
+
+    <string name="prompt_conversion_failed">Conversion Failed</string>
+    <string name="prompt_creating_pdf">Create PDF</string>
+    <string name="prompt_pdf_saved">PDF Saved</string>
+    <string name="prompt_preparing_pages">Preparing Pages</string>
+    <string name="prompt_print_failed">Print Failed</string>
+    <string name="maritalStatus_optional">Marital Status (Optional)</string>
+    <string name="rateOurApp">Rate Our App</string>
+    <string name="rateUsMessage">"We'd really appreciate if you take a moment to share your experience with us and other users. It won't take more then a minute. Thank you for your support!"</string>
+    <string name="rateYourLanguageFirst">Rate your language first</string>
+    <string name="rateYourLanguagesOutOfFive">Rate Your language Out Of 5</string>
+    <string name="rateYourSkillFirst">Rate your skill first</string>
+    <string name="rateYourSkillOutOfFive">Rate Your Skill Out Of 5</string>
+    <string name="reEnterNewPassword">Re-enter New Password</string>
+    <string name="read">Read</string>
+    <string name="readAllDocumentOfficeCodesFiles">Read all document, office &amp; codes files</string>
+    <string name="readStoragePermission">Read Storage Permission</string>
+    <string name="readStoragePermissionMessage">"All Document file reader app require 'Read Phone Storage' permissions in order to view files. Click Allow Permission Button to grant these permission."</string>
+    <string name="rearrange">Rearrange</string>
+    <string name="rearrangeFile">Rearrange Files</string>
+    <string name="rearrangeImages">Rearrange Images</string>
+    <string name="reference">Reference</string>
+    <string name="releaseMessage">In this update, PDF file zoom in and zoom out issue has been solved</string>
+    <string name="remove">Remove</string>
+    <string name="remove_pages_error">The input value is not valid</string>
+    <string name="rename">Rename</string>
+    <string name="renameFile">Rename File</string>
+    <string name="restoreOrManageSubscriptionOnGooglePlay">Restore Or Manage Subscription On GooglePlay</string>
+    <string name="restoreSubscription">Restore Subscription</string>
+    <string name="resumeCreateSuccessfullyAndCanBeFoundMessage">Resume Created Successfully.. can be find in PDF Files option in main screen</string>
+    <string name="resumeCvMaker">"Resume / CV
+Maker"</string>
+    <string name="resumeHighlightTitles">Resume Highlight Titles</string>
+    <string name="resumeHiglightRestSuccessfully">Resume Highlights Reset Successfully</string>
+    <string name="rtf">RTF</string>
+    <string name="rtfFile">RTF Files</string>
+    <string name="rtfFileTakeFewSecondToLoadPleaseWait">RTF files takes few seconds to load, please wait</string>
+    <string name="rtfToPDF">"RTF
+ to PDF"</string>
+    <string name="s1">Save image</string>
+    <string name="s2">Allow Ad to store image in Picture gallery?</string>
+    <string name="s3">Accept</string>
+    <string name="s4">Decline</string>
+    <string name="s5">Create calendar event</string>
+    <string name="s6">Allow Ad to create a calendar event?</string>
+    <string name="s7">Test Ad</string>
+    <string name="save">Save</string>
+    <string name="saveAsPDF">Save as PDF</string>
+    <string name="saveAsSourceFile">Save as source files?</string>
+    <string name="saved">Saved</string>
+    <string name="scanCreateConvertPdfFileResumeMaker">Scan, Create, Convert PDF Files &amp; Resume Maker</string>
+    <string name="school">School</string>
+    <string name="schoolName">School Name</string>
+    <string name="scrollToBottom">Scroll To Bottom</string>
+    <string name="scrollToTop">Scroll To Top</string>
+    <string name="sdCard">SD Card</string>
+    <string name="search">Search</string>
+    <string name="searchAllDocFile">"Search All
+Doc Files"</string>
+    <string name="searchAndDocFile">Search, View Doc &amp; Code Files</string>
+    <string name="searchHere">Search Here</string>
+    <string name="search_menu_title">Search</string>
+    <string name="securityQuestion">Security Question</string>
+    <string name="seeAppPrivacyPolicyHere">See app privacy policy here</string>
+    <string name="selectFileFirst">Select file first</string>
+    <string name="selectPdfFileToMerge">Select PDF File TO Merge</string>
+    <string name="selectPdfFilesFirst">Select PDF files first</string>
+    <string name="selectPhotoFirst">Select photos first</string>
+    <string name="selectSecurityQuestion">Select Security Question</string>
+    <string name="selectToDelete">Select to delete</string>
+    <string name="select_zero">Select (0)</string>
+    <string name="sendMessage">Send Message</string>
+    <string name="sendingMessage">Sending message..</string>
+    <string name="sendingMessagePleaseWait">Sending message please wait</string>
+    <string name="setName">Set Name</string>
+    <string name="setPassword">Set Password</string>
+    <string name="setPdfFileName">Set PDF File Name</string>
+    <string name="setTextFileName">Set Text File Name</string>
+    <string name="setting">Settings</string>
+    <string name="share">Share</string>
+    <string name="shareThisAppWithOther">Share this app with others</string>
+    <string name="shareUsing">Share using</string>
+    <string name="shareVia">Share Via</string>
+    <string name="shareYourAppRelatedIssueAndSuggestionWithUs">Share your app related suggestion or issue with us</string>
+    <string name="showNotification">Show Notification</string>
+    <string name="size">size</string>
+    <string name="sizeColon">Size :</string>
+    <string name="skillAndExpertise">Skill &amp; Expertise / Highlight Skill</string>
+    <string name="socialLink">Social Links</string>
+    <string name="someThingWentWrongPleaseTryAgain">Something went wrong please try again.</string>
+    <string name="sorryThisFeatureIsStartFromKitKatDevices">Sorry, This feature is start from KITKAT Devices</string>
+    <string name="sortByDate">By Date</string>
+    <string name="sortBySize">By Size</string>
+    <string name="startDate">Start Date</string>
+    <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="subscribeToPremiumToUnlockThisTemplate">Subscribe to Premium to unlock this template</string>
+    <string name="summary">Summary</string>
+    <string name="supportAndMotivateUs">Support &amp; motivate us</string>
+    <string name="symbol_separator">ㅡ</string>
+    <string name="sys_button_cancel">Cancel</string>
+    <string name="sys_button_ok">OK</string>
+    <string name="sys_button_search">Search</string>
+    <string name="sys_menu_settings">Settings</string>
+    <string name="sys_name">Document Reader - Word, Excel, PPT &amp; PDF Viewer</string>
+    <string name="sys_search_hint">Search for files</string>
+    <string name="sys_share_title">Sending mail...</string>
+    <string name="takeLongTimeToLoadFileMessage">Takes long time to load files, change loading setting</string>
+    <string name="template">Template</string>
+    <string name="textFiles">Txt Files</string>
+    <string name="textRecognizerCouldNotBeSetUpOnYourDevice">Text recognizer could not be set up on your device</string>
+    <string name="theseAreASourceFileWhichIsCreatedByYouMessage">These are a source file of documents which is created by you (by using this app). With the help of these file you can edit it later whenever you want.</string>
+    <string name="title">Title</string>
+    <string name="title_insert_link">Insert Link</string>
+    <string name="title_insert_table">Insert Table</string>
+    <string name="toAddMoreLanguageClickOnPlusSignMessage">"To add new language click on '+' sign, To change the language order long press on it &amp; drag to desired position, To remove language swap left or right"</string>
+    <string name="toAddNewDataClickOnPlusSignMessage">"To add new data click on '+' sign, to remove just swap left or right, to edit just click on it, for better understanding we inserted one example data"</string>
+    <string name="toAddNewHobbyClickOnPlusSign">"To add new Hobby click on '+' sign, To change the Hobby order long press on it &amp; drag to desired position, To remove Hobbie swap left or right"</string>
+    <string name="toAddNewSkillClickOnPlushSignMessage">"To add new Skill click on '+' sign, To change the skill order long press on it &amp; drag to desired position, To remove skill swap left or right"</string>
+    <string name="toChooseImage">to choose images</string>
+    <string name="toCreateUnlimitedInvoicePleaseUpgradeToPremium">To crate unlimited invoices, please upgrade to premium</string>
+    <string name="toGetExactClickAbleUrlMessage">To get exact clickable url in CV just enter your user name / profile name in social link field</string>
+    <string name="toSelectPdfFile">to select PDF files</string>
+    <string name="twitter">Twitter</string>
+    <string name="txt">TXT</string>
+    <string name="typeYourMessage">Type your message</string>
+    <string name="type_apk">APK</string>
+    <string name="type_archive">Archive</string>
+    <string name="type_certificate">Certificate</string>
+    <string name="type_directory">Directory</string>
+    <string name="type_document">File</string>
+    <string name="type_drawing">Picture</string>
+    <string name="type_excel">Spreadsheet</string>
+    <string name="type_image">Image</string>
+    <string name="type_music">Music</string>
+    <string name="type_pdf">PDF document</string>
+    <string name="type_power_point">Presentation</string>
+    <string name="type_video">Video</string>
+    <string name="type_word">Document</string>
+    <string name="unPin">Unpin</string>
+    <string name="unlockAllPaidFeatureWithNoMoreADsAndMuchMore">Unlock all paid feature with no more ADs &amp; much more</string>
+    <string name="unlockPremiumPaidForOneHour">To Unlock Paid Features For Next 12 Hour</string>
+    <string name="unlockedSuccessfully">Unlocked Successfully</string>
+    <string name="upGrade">Upgrade</string>
+    <string name="upGradeToPremium">Upgrade To Premium</string>
+    <string name="update">Update</string>
+    <string name="updateAvailable">Update Available</string>
+    <string name="verification">Verification</string>
+    <string name="verifySecurityQuestion">Verify security question</string>
+    <string name="videoTutorial">Video Tutorial</string>
+    <string name="view">View</string>
+    <string name="viewFile">View File</string>
+    <string name="viewImaage">View Image</string>
+    <string name="viewMoreConverter">View More Converter</string>
+    <string name="viewOrManageYourSubsciption">View Or Manage Your Subscription</string>
+    <string name="viewPdfContentOnly">View PDF Content Only</string>
+    <string name="viewPdfFile">View PDF Files</string>
+    <string name="watchShortVideoTutorialToDoDifferentTask">Watch short video tutorial to do different task</string>
+    <string name="watchVideo">Watch Video</string>
+    <string name="watchVideoAd">Watch Video AD</string>
+    <string name="website">Website</string>
+    <string name="withCodeFileFolderViewYouCanSeeMessage">With <b>"'Code File Folder View'"</b> option you can only see program code files like <b>JAVA, CPP, HTML, XML, yaml etc.</b> To view <b>Document Files</b> please use <b>"'File Manager'"</b> option</string>
+    <string name="wordFiles">Word Files</string>
+    <string name="workExperienc">"Work Experience "</string>
+    <string name="workingExperienceWithNewLine">"Working
+Experience"</string>
+    <string name="writeHere">Write here</string>
+    <string name="xlx">XLX</string>
+    <string name="xlxFiles">XLX Files</string>
+    <string name="youAlreadySubscribeToThisItem">"You are already subscribe to this item "</string>
+    <string name="youAreUpToDate">"You're up-to-date!"</string>
+    <string name="youCanUnLockThisFeatureByWatchingVideoAd">You can unlock this premium feature by watching video Ad</string>
+    <string name="yourAnswer">Your answer</string>
+    <string name="yourHobbies">Your Hobbies</string>
+    <string name="yourMessage">Your Message</string>
+    <string name="yourName">Your Name</string>
+    <string name="zipFiles">Zip Files</string>
+
+
+    <!--      system         -->
+    <string name="sys_button_memory_card" translatable="false">MemoryCard</string>
+    <string name="sys_button_recently_files" translatable="false">Recently Files</string>
+    <string name="sys_button_mark_files" translatable="false">Marked Files</string>
+    <string name="sys_button_local_storage" translatable="false">Local Storage</string>
+    <string name="sys_menu_account" translatable="false">Account</string>
+    <string name="sys_menu_register" translatable="false">Register</string>
+    <string name="sys_menu_update" translatable="false">Update</string>
+    <string name="sys_menu_help" translatable="false">Help</string>
+    <string name="sys_menu_about" translatable="false">About</string>
+    <string name="sys_url_wxiwei" translatable="false">https://my.oschina.net/wxiwei</string>
+    <string name="sys_url_internet_search" translatable="false">http://www.baidu.com</string>
+    <string name="sys_no_match" translatable="false">No matches.</string>
+    <string name="sys_progress_message_loading" translatable="false">Loading, please wait...</string>
+
+    <!--      file list         -->
+    <string name="file_toolsbar_create_folder" translatable="false">Create folder</string>
+    <string name="file_toolsbar_rename" translatable="false">Rename</string>
+    <string name="file_toolsbar_copy" translatable="false">Copy</string>
+    <string name="file_toolsbar_cut" translatable="false">Cut</string>
+    <string name="file_toolsbar_paste" translatable="false">Paste</string>
+    <string name="file_toolsbar_delete" translatable="false">Delete</string>
+    <string name="file_toolsbar_share" translatable="false">Share</string>
+    <string name="file_toolsbar_sort" translatable="false">Sort</string>
+    <string name="file_toolsbar_print" translatable="false">Printer</string>
+    <string name="file_toolsbar_mark_star" translatable="false">Mark</string>
+    <string name="file_toolsbar_unmark_star" translatable="false">UnMark</string>
+    <string name="file_message_empty_directory" translatable="false">Empty Folder</string>
+
+    <string name="default_notification_channel_id" translatable="false">default</string>
+
+    <!--      application         -->
+    <string name="app_toolsbar_hyperlink" translatable="false">Goto</string>
+    <string name="app_toolsbar_find" translatable="false">Find</string>
+    <string name="app_toolsbar_share" translatable="false">Share</string>
+    <string name="app_toolsbar_internet_search" translatable="false">Internet Search</string>
+    <string name="app_toolsbar_read" translatable="false">Read</string>
+    <string name="app_toolsbar_approve" translatable="false">Approve</string>
+    <string name="app_toolsbar_generated_picture" translatable="false">Generated Picture</string>
+
+    <string name="app_toolsbar_draw" translatable="false">Draw Mode</string>
+    <string name="app_toolsbar_back" translatable="false">Back</string>
+    <string name="app_toolsbar_pen" translatable="false">UnDraw</string>
+    <string name="app_toolsbar_pen_check" translatable="false">Draw</string>
+    <string name="app_toolsbar_eraser" translatable="false">UnErase</string>
+    <string name="app_toolsbar_eraser_check" translatable="false">Erase</string>
+    <string name="app_toolsbar_color" translatable="false">Pen Settings</string>
+
+    <string name="app_searchbar_backward" translatable="false">Find Backward</string>
+    <string name="app_searchbar_forward" translatable="false">Find Forward</string>
+    <string name="app_searchbar_find" translatable="false">Find</string>
+    <string name="app_searchbar_failed" translatable="false">iOffice Reader cannot find the data you are searching for</string>
+    <string name="app_searchbar_reachedBegin" translatable="false">iOffice Reader has reached the beginning of the document</string>
+    <string name="app_searchbar_reachedEnd" translatable="false">iOffice Reader has reached the end of the document</string>
+
+    <!--      word         -->
+    <string name="wp_toolsbar_switch_view" translatable="false">Switch View</string>
+    <string name="wp_toolsbar_print_mode" translatable="false">Print Mode</string>
+    <string name="wp_toolsbar_select_text" translatable="false">Select Text</string>
+
+    <!--      excel         -->
+    <string name="ss_toolsbar_sheet_switch" translatable="false">Sheet Switch</string>
+
+    <!--      ppt         -->
+    <string name="pg_toolsbar_note" translatable="false">Note</string>
+    <string name="pg_slideshow" translatable="false">SlideShow</string>
+    <string name="pg_slideshow_pageup" translatable="false">Page Up</string>
+    <string name="pg_slideshow_pagedown" translatable="false">Page Down</string>
+
+    <string name="dialog_encoding_title" translatable="false">Text Encoding</string>
+    <string name="dialog_delete_file" translatable="false">Are you sure you want to delete the selected item(s)?</string>
+    <string name="dialog_move_file_error" translatable="false">You can not move or copy a folder into itself.</string>
+    <string name="dialog_overwrite_file" translatable="false">Do you want to overwrite it?</string>
+    <string name="dialog_error_title" translatable="false">Error</string>
+    <string name="dialog_insufficient_memory" translatable="false">Unable to complete operation due to insufficient memory</string>
+    <string name="dialog_system_crash_error" translatable="false">System crash, terminate running</string>
+    <string name="dialog_format_error" translatable="false">File format error</string>
+    <string name="dialog_old_document" translatable="false">The document is too old - Office 95 or older, which is not supported</string>
+    <string name="dialog_parse_error" translatable="false">File parsing error</string>
+    <string name="dialog_rtf_file" translatable="false">The document is really a RTF file, which is not supported</string>
+</resources>

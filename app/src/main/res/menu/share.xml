@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/ic_pdf_view_option"
+        android:icon="@drawable/ic_file_view"
+        android:title="@string/viewPdfFile"
+        android:visible="false"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/ic_option_one"
+                android:title="@string/pdfContentWithOptions" />
+            <item
+                android:id="@+id/ic_option_two"
+                android:title="@string/viewPdfContentOnly" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/ic_full_screen_view"
+        android:icon="@drawable/ic_crop_free"
+        android:title="Share"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/ic_share"
+        android:icon="@drawable/share"
+        android:title="Share"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/ic_print"
+        android:title="@string/print"
+        android:visible="false"
+        app:showAsAction="never" />
+</menu>

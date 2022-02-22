@@ -1,0 +1,2281 @@
+/*
+ * æ–‡ä»¶åç§°:          EarlyArrowPathBuilder.java
+ *  
+ * ç¼–è¯‘å™¨:            android2.2
+ * æ—¶é—´:              ä¸‹åˆ2:42:46
+ */
+package com.documentviewer.reader.scaner.pdfreader.toolsapp.office.common.autoshape.pathbuilder.arrow;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.documentviewer.reader.scaner.pdfreader.toolsapp.office.common.shape.AutoShape;
+import com.documentviewer.reader.scaner.pdfreader.toolsapp.office.common.shape.ShapeTypes;
+
+import android.graphics.Matrix;
+import android.graphics.Path;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.Path.Direction;
+
+/**
+ * TODO: æ–‡ä»¶æ³¨é‡Š
+ * <p>
+ * <p>
+ * Readç‰ˆæœ¬:        Read V1.0
+ * <p>
+ * ä½œè€…:            jqin
+ * <p>
+ * æ—¥æœŸ:            2012-10-17
+ * <p>
+ * è´Ÿè´£äºº:           jqin
+ * <p>
+ * è´Ÿè´£å°ç»„:           
+ * <p>
+ * <p>
+ */
+public class EarlyArrowPathBuilder extends ArrowPathBuilder
+{
+    private static final float TODEGREE = 18000000f / 54620000f;
+    
+    private static RectF s_rect = new RectF();
+    
+    private static Path path = new Path();
+    
+    /**
+     * get autoshape path
+     * @param shape
+     * @param rect
+     * @return
+     */
+    public static Object getArrowPath(AutoShape shape, Rect rect)
+    {
+        path.reset();
+        
+        switch(shape.getShapeType())
+        {
+            case ShapeTypes.RightArrow:
+                return getRightArrowPath(shape, rect);
+                
+            case ShapeTypes.LeftArrow:
+                return getLeftArrowPath(shape, rect);
+                
+            case ShapeTypes.UpArrow:
+                return getUpArrowPath(shape, rect);
+                
+            case ShapeTypes.DownArrow:
+                return getDownArrowPath(shape, rect);
+                
+            case ShapeTypes.LeftRightArrow:
+                return getLeftRightArrowPath(shape, rect);
+                
+            case ShapeTypes.UpDownArrow:
+                return getUpDownArrowPath(shape, rect);
+                
+            case ShapeTypes.QuadArrow:
+                return getQuadArrowPath(shape, rect);
+                
+            case ShapeTypes.LeftRightUpArrow:
+                return getLeftRightUpArrowPath(shape, rect);
+                
+            case ShapeTypes.BentArrow:
+                return getBentArrowPath(shape, rect);
+                
+            case ShapeTypes.UturnArrow:
+                return getUturnArrowPath(shape, rect);
+                
+            case ShapeTypes.LeftUpArrow:
+                return getLeftUpArrowPath(shape, rect);
+                
+            case ShapeTypes.BentUpArrow:
+                return getBentUpArrowPath(shape, rect);
+                
+            case ShapeTypes.CurvedRightArrow:
+                return getCurvedRightArrowPath(shape, rect);
+                
+            case ShapeTypes.CurvedLeftArrow:
+                return getCurvedLeftArrowPath(shape, rect);
+                
+            case ShapeTypes.CurvedUpArrow:
+                return getCurvedUpArrowPath(shape, rect);
+                
+            case ShapeTypes.CurvedDownArrow:
+                return getCurvedDownArrowPath(shape, rect);
+                
+            case ShapeTypes.StripedRightArrow:
+                return getStripedRightArrowPath(shape, rect);
+                
+            case ShapeTypes.NotchedRightArrow:
+                return getNotchedRightArrowPath(shape, rect);
+                
+            case ShapeTypes.HomePlate:
+                return getHomePlatePath(shape, rect);
+                
+            case ShapeTypes.Chevron:
+                return getChevronPath(shape, rect);
+                
+            case ShapeTypes.RightArrowCallout:
+                return getRightArrowCalloutPath(shape, rect);
+                
+            case ShapeTypes.LeftArrowCallout:
+                return getLeftArrowCalloutPath(shape, rect);
+                
+            case ShapeTypes.UpArrowCallout:
+                return getUpArrowCalloutPath(shape, rect);
+                
+            case ShapeTypes.DownArrowCallout:
+                return getDownArrowCalloutPath(shape, rect);
+                
+            case ShapeTypes.LeftRightArrowCallout:
+                return getLeftRightArrowCalloutPath(shape, rect);
+                
+            case ShapeTypes.UpDownArrowCallout:
+                return getUpDownArrowCalloutPath(shape, rect);
+                
+            case ShapeTypes.QuadArrowCallout:
+                return getQuadArrowCalloutPath(shape, rect);
+                
+            case ShapeTypes.CircularArrow:
+                return getCircularArrowPath(shape, rect);
+        }
+        
+        return new Path();
+    }
+
+    private static Path getRightArrowPath(AutoShape shape, Rect rect)
+    {
+        Float[] values = shape.getAdjustData();
+        
+        int adj1 = 0;
+        int adj2 = 0;
+        if(values != null && values.length >= 1)
+        {
+            if(values[0] != null)
+            {                
+                adj1 = Math.round(rect.width() * values[0]);
+            }
+            else
+            {
+                adj1 = Math.round(rect.width() * 0.75f);
+            }            
+            
+            if(values.length >= 2 && values[1] != null)
+            {
+                adj2 = Math.round(rect.height() * values[1]);
+            }
+            else
+            {
+                adj2 = Math.round(rect.height() * 0.25f);
+            }
+        } 
+        else
+        {
+            adj1 = Math.round(rect.width() * 0.75f);
+            adj2 = Math.round(rect.height() * 0.25f);
+        }
+        
+        path.moveTo(rect.left, rect.top + adj2);
+        path.lineTo(rect.left + adj1, rect.top + adj2);
+        path.lineTo(rect.left + adj1, rect.top);
+        path.lineTo(rect.right, rect.centerY());
+        path.lineTo(rect.left + adj1, rect.bottom);
+        path.lineTo(rect.left + adj1, rect.bottom - adj2);
+        path.lineTo(rect.left, rect.bottom - adj2);
+        path.close();
+        return path;
+    }
+    
+    private static Path getLeftArrowPath(AutoShape shape, Rect rect)
+    {
+        Float[] values = shape.getAdjustData();
+        int adj1 = 0;
+        int adj2 = 0;
+        if(values != null && values.length >= 1)
+        {
+            if(values[0] != null)
+            {                
+                adj1 = Math.round(rect.width() * values[0]);
+            }
+            else
+            {
+                adj1 = Math.round(rect.width() * 0.25f);
+            }            
+            
+            if(values.length >= 2 && values[1] != null)
+            {
+                adj2 = Math.round(rect.height() * values[1]);
+            }
+            else
+            {
+                adj2 = Math.round(rect.height() * 0.25f);
+            }
+        } 
+        else
+        {
+            adj1 = Math.round(rect.width() * 0.25f);
+            adj2 = Math.round(rect.height() * 0.25f);
+        }
+        
+        path.moveTo(rect.left, rect.centerY());
+        path.lineTo(rect.left + adj1, rect.top);
+        path.lineTo(rect.left + adj1, rect.top + adj2);
+        path.lineTo(rect.right, rect.top + adj2);
+        path.lineTo(rect.right, rect.bottom - adj2);
+        path.lineTo(rect.left + adj1, rect.bottom - adj2);
+        path.lineTo(rect.left + adj1, rect.bottom);
+        path.close();
+        
+        return path;
+    }
+    
+    private static Path getUpArrowPath(AutoShape shape, Rect rect)
+    {
+        Float[] values = shape.getAdjustData();
+        int adj1 = 0;
+        int adj2 = 0;
+        if(values != null && values.length >= 1)
+        {
+            if(values[0] != null)
+            {                
+                adj1 = Math.round(rect.height() * values[0]);
+            }
+            else
+            {
+                adj1 = Math.round(rect.height() * 0.25f);
+            }            
+            
+            if(values.length >= 2 && values[1] != null)
+            {                    
+                adj2 = Math.round(rect.width() * values[1]);
+            }
+            else
+            {
+                adj2 = Math.round(rect.width() * 0.25f);
+            }
+        } 
+        else
+        {
+            adj1 = Math.round(rect.height() * 0.25f);
+            adj2 = Math.round(rect.width() * 0.25f);
+        }
+        
+        path.moveTo(rect.centerX(), rect.top);
+        path.lineTo(rect.right, rect.top + adj1);
+        path.lineTo(rect.right - adj2, rect.top + adj1);
+        path.lineTo(rect.right - adj2, rect.bottom);
+        path.lineTo(rect.left + adj2, rect.bottom);
+        path.lineTo(rect.left + adj2, rect.top + adj1);
+        path.lineTo(rect.left, rect.top + adj1);
+        path.close();
+        
+        return path;
+    }
+    
+    private static Path getDownArrowPath(AutoShape shape, Rect rect)
+    {
+        Float[] values = shape.getAdjustData();
+        int adj1 = 0;
+        int adj2 = 0;
+        if(values != null && values.length >= 1)
+        {
+            if(values[0] != null)
+            {                
+                adj1 = Math.round(rect.height() * values[0]);
+            }
+            else
+            {
+                adj1 = Math.round(rect.height() * 0.75f);
+            }            
+            
+            if(values.length >= 2 && values[1] != null)
+            {                    
+                adj2 = Math.round(rect.width() * values[1]);
+            }
+            else
+            {
+                adj2 = Math.round(rect.width() * 0.25f);
+            }
+        } 
+        else
+        {
+            adj1 = Math.round(rect.height() * 0.75f);
+            adj2 = Math.round(rect.width() * 0.25f);
+        }
+        
+        path.moveTo(rect.left + adj2, rect.top);
+        path.lineTo(rect.right - adj2, rect.top);
+        path.lineTo(rect.right - adj2, rect.top + adj1);
+        path.lineTo(rect.right, rect.top + adj1);
+        path.lineTo(rect.centerX(), rect.bottom);
+        path.lineTo(rect.left, rect.top + adj1);
+        path.lineTo(rect.left + adj2, rect.top + adj1);
+        path.close();
+        
+        return path;
+    }
+    
+    private static Path getLeftRightArrowPath(AutoShape shape, Rect rect)
+    {
+        Float[] values = shape.getAdjustData();
+        int adj1 = 0;
+        int adj2 = 0;
+        if(values != null && values.length >= 1)
+        {
+            if(values[0] != null)
+            {                
+                adj1 = Math.round(rect.width() * values[0]);
+            }
+            else
+            {
+                adj1 = Math.round(rect.width() * 0.2f);
+            }
+            
+            if(values.length >= 2 && values[1] != null)
+            {
+                adj2 = Math.round(rect.height()* values[1]);
+            }
+            else
+            {
+                adj2 = Math.round(rect.height() * 0.25f);
+            }
+            
+        } 
+        else
+        {
+            adj1 = Math.round(rect.width() * 0.2f);
+            adj2 = Math.round(rect.height() * 0.25f);
+        }
+        
+        path.moveTo(rect.left, rect.centerY());
+        path.lineTo(rect.left + adj1, rect.top);
+        path.lineTo(rect.left + adj1, rect.top + adj2);
+        path.lineTo(rect.right - adj1, rect.top + adj2);
+        path.lineTo(rect.right - adj1, rect.top);
+        
+        path.lineTo(rect.right, rect.centerY());
+        
+        path.lineTo(rect.right - adj1, rect.bottom);
+        path.lineTo(rect.right - adj1, rect.bottom - adj2);
+        path.lineTo(rect.left + adj1, rect.bottom - adj2);
+        path.lineTo(rect.left + adj1, rect.bottom);
+        
+        path.close();
+        return path;
+    }
+    
+    private static Path getUpDownArrowPath(AutoShape shape, Rect rect)
+    {
+        Float[] values = shape.getAdjustData();
+        int adj1 = 0;
+        int adj2 = 0;
+        if(values != null && values.length >= 1)
+        {
+            if(values[0] != null)
+            {                
+                adj1 = Math.round(rect.width() * values[0]);
+            }
+            else
+            {
+                adj1 = Math.round(rect.width() * 0.25f);
+            }
+            
+            
+            if(values.length >= 2 && values[1] != null)
+            {
+                adj2 = Math.round(rect.height() * values[1]); 
+            }
+            else
+            {
+                adj2 = Math.round(rect.height() * 0.25f);
+            }
+            
+        } 
+        else
+        {
+            adj1 = Math.round(rect.width() * 0.25f);
+            adj2 = Math.round(rect.height() * 0.25f);
+        }
+        
+        path.moveTo(rect.centerX(), rect.top);
+        path.lineTo(rect.right, rect.top + adj2);
+        path.lineTo(rect.right - adj1, rect.top + adj2);
+        path.lineTo(rect.right - adj1, rect.bottom - adj2);
+        path.lineTo(rect.right, rect.bottom - adj2);
+        
+        path.lineTo(rect.centerX(), rect.bottom);
+        
+        path.lineTo(rect.left, rect.bottom - adj2);
+        path.lineTo(rect.left + adj1, rect.bottom - adj2);            
+        path.lineTo(rect.left + adj1, rect.top + adj2);
+        path.lineTo(rect.left, rect.top + adj2);
+        path.close();
+        
+        return path;
+    }
+    
+    private static Path getQuadArrowPath(AutoShape shape, Rect rect)
+    {
+        Float[] values = shape.getAdjustData();
+        int adjLR1 = 0;
+        int adjLR2 = 0;
+        int adjLR3 = 0;
+        
+        int adjUD1 = 0;
+        int adjUD2 = 0;
+        int adjUD3 = 0;
+        if(values != null && values.length >= 1)
+        {
+            if(values[0] != null)
+            {
+                adjLR1 = Math.round(rect.height() * values[0]);
+                adjUD1 = Math.round(rect.width() * values[0]);
+            }
+            else
+            {
+                adjLR1 = Math.round(rect.height() * 0.3f);
+                adjUD1 = Math.round(rect.width() * 0.3f);
+            }
+            
+            if(values.length >= 2 && values[1] != null)
+            {
+                adjLR2 = Math.round(rect.height() * values[1]);
+                adjUD2 = Math.round(rect.width() * values[1]);
+            }
+            else
+            {
+                adjLR2 = Math.round(rect.height() * 0.4f);
+                adjUD2 = Math.round(rect.width() * 0.4f);
+            }
+            
+            if(values.length >= 3 && values[2] != null)
+            {
+                adjLR3 = Math.round(rect.width() * values[2]);
+                adjUD3 = Math.round(rect.height() * values[2]);
+            }
+            else
+            {
+                adjLR3 = Math.round(rect.width() * 0.2f);
+                adjUD3 = Math.round(rect.height() * 0.2f);
+            }
+        } 
+        else
+        {
+            adjLR1 = Math.round(rect.height() * 0.3f);
+            adjLR2 = Math.round(rect.height() * 0.4f);
+            adjLR3 = Math.round(rect.width() * 0.2f);
+            
+            adjUD1 = Math.round(rect.width() * 0.3f);
+            adjUD2 = Math.round(rect.width() * 0.4f);
+            adjUD3 = Math.round(rect.height() * 0.2f);
+        }
+        
+        //left
+        path.moveTo(rect.left + adjUD2, rect.bottom - adjLR2);
+        path.lineTo(rect.left + adjLR3, rect.bottom - adjLR2);
+        path.lineTo(rect.left + adjLR3, rect.bottom - adjLR1);
+        path.lineTo(rect.left, rect.centerY());
+        path.lineTo(rect.left + adjLR3, rect.top + adjLR1);
+        path.lineTo(rect.left + adjLR3, rect.top + adjLR2);
+        
+        //up
+        path.lineTo(rect.left + adjUD2, rect.top + adjLR2);
+        path.lineTo(rect.left + adjUD2, rect.top + adjUD3);
+        path.lineTo(rect.left + adjUD1, rect.top + adjUD3);
+        path.lineTo(rect.centerX(), rect.top);
+        path.lineTo(rect.right - adjUD1, rect.top + adjUD3);
+        path.lineTo(rect.right - adjUD2, rect.top + adjUD3);
+        
+        //right
+        path.lineTo(rect.right - adjUD2, rect.top + adjLR2);
+        path.lineTo(rect.right - adjLR3, rect.top + adjLR2);
+        path.lineTo(rect.right - adjLR3, rect.top + adjLR1);
+        path.lineTo(rect.right, rect.centerY());
+        path.lineTo(rect.right - adjLR3, rect.bottom - adjLR1);
+        path.lineTo(rect.right - adjLR3, rect.bottom - adjLR2);
+        
+        //down
+        path.lineTo(rect.right - adjUD2, rect.bottom - adjLR2);
+        path.lineTo(rect.right - adjUD2, rect.bottom - adjUD3);
+        path.lineTo(rect.right - adjUD1, rect.bottom - adjUD3);
+        path.lineTo(rect.centerX(), rect.bottom);
+        path.lineTo(rect.left + adjUD1, rect.bottom - adjUD3);
+        path.lineTo(rect.left + adjUD2, rect.bottom - adjUD3);
+        
+        path.close();
+        
+        return path;
+    }
+    
+    private static Path getLeftRightUpArrowPath(AutoShape shape, Rect rect)
+    {
+        Float[] values = shape.getAdjustData();
+        
+        int adjLR1 = 0;
+        int adjLR2 = 0;
+        int adjLR3 = 0;
+        
+        int adjUD1 = 0;
+        int adjUD2 = 0;
+        int adjUD3 = 0;
+        if(values != null && values.length >= 1)
+        {
+            if(values[0] != null)
+            {
+                adjLR1 = Math.round(rect.height() * (0.5f - values[0]) * 10 / 7);
+                adjUD1 = Math.round(rect.width() * values[0]);
+            }
+            else
+            {
+                adjLR1 = Math.round(rect.height() * 0.2f * 10 / 7);
+                adjUD1 = Math.round(rect.width() * 0.3f);
+            }
+            
+            if(values.length >= 2 && values[1] != null)
+            {
+                adjLR2 = Math.round(rect.height() * (0.5f - values[1]) * 10 / 7);
+                adjUD2 = Math.round(rect.width() * values[1]);
+            }
+            else
+            {
+                adjLR2 = Math.round(rect.height() * 0.1f * 10 / 7);
+                adjUD2 = Math.round(rect.width() * 0.4f);
+            }
+            
+            if(values.length >= 3 && values[2] != null)
+            {
+                adjLR3 = Math.round(rect.width() * values[2] * 0.7f);
+                adjUD3 = Math.round(rect.height() * values[2]);
+            }
+            else
+            {
+                adjLR3 = Math.round(rect.width() * 0.2f * 0.7f);
+                adjUD3 = Math.round(rect.height() * 0.2f);
+            }
+        } 
+        else
+        {
+            adjLR1 = Math.round(rect.height() * 0.2f * 10 / 7);
+            adjLR2 = Math.round(rect.height() * 0.1f * 10 / 7);
+            adjLR3 = Math.round(rect.width() *  0.3f * 0.7f);
+            
+            adjUD1 = Math.round(rect.width() * 0.3f);
+            adjUD2 = Math.round(rect.width() * 0.4f);
+            adjUD3 = Math.round(rect.height() * 0.2f);
+        }
+        
+        //left
+        path.moveTo(rect.left + adjLR3, rect.bottom - adjLR1 + adjLR2);
+        path.lineTo(rect.left + adjLR3, rect.bottom);
+        path.lineTo(rect.left, rect.bottom - adjLR1);
+        path.lineTo(rect.left + adjLR3, rect.bottom - adjLR1 * 2);
+        path.lineTo(rect.left + adjLR3, rect.bottom - adjLR1 - adjLR2);
+        
+        //up
+        path.lineTo(rect.left + adjUD2, rect.bottom - adjLR1 - adjLR2);
+        path.lineTo(rect.left + adjUD2, rect.top + adjUD3);
+        path.lineTo(rect.left + adjUD1, rect.top + adjUD3);
+        path.lineTo(rect.centerX(), rect.top);
+        path.lineTo(rect.right - adjUD1, rect.top + adjUD3);
+        path.lineTo(rect.right - adjUD2, rect.top + adjUD3);
+        
+        //right
+        path.lineTo(rect.right - adjUD2, rect.bottom - adjLR1 - adjLR2);
+        path.lineTo(rect.right - adjLR3, rect.bottom - adjLR1 - adjLR2);
+        path.lineTo(rect.right - adjLR3, rect.bottom - adjLR1 * 2);
+        path.lineTo(rect.right, rect.bottom - adjLR1);
+        path.lineTo(rect.right - adjLR3, rect.bottom);
+        path.lineTo(rect.right - adjLR3, rect.bottom - adjLR1 + adjLR2);
+        
+        path.close();
+        
+        return path;
+    }
+
+    private static Path getBentArrowPath(AutoShape shape, Rect rect)
+    {
+        Float[] values = shape.getAdjustData();
+        
+        int adj1 = 0;
+        int adj2 = 0;
+        if(values != null&& values.length >= 1)
+        {
+            if(values[0] != null)
+            {
+                adj1 = Math.round(rect.width() * values[0]);
+            }
+            else
+            {
+                adj1 = Math.round(rect.width() * 0.7f);
+            }
+            
+            if(values.length >= 2 && values[1] != null)
+            {
+                adj2 = Math.round(rect.height() * values[1]);
+            }
+            else
+            {
+                adj2 = Math.round(rect.height() * 0.125f);
+            }
+            
+        } 
+        else
+        {
+            adj1 = Math.round(rect.width() * 0.7f);
+            adj2 = Math.round(rect.height() * 0.125f);
+        }
+        
+        float arrowHeight = rect.height() * 0.57f;
+        
+        path.moveTo(rect.left, rect.bottom);
+        path.lineTo(rect.left, rect.top + arrowHeight);
+        
+        s_rect.set(rect.left, rect.top + adj2, rect.left + rect.width() * 1.04f, rect.top + arrowHeight + (arrowHeight - adj2));
+        path.arcTo(s_rect, 180, 90);
+        
+        path.lineTo(rect.left + adj1, rect.top + adj2);
+        path.lineTo(rect.left + adj1, rect.top);
+        path.lineTo(rect.right, rect.top + arrowHeight / 2);
+        path.lineTo(rect.left + adj1, rect.top + arrowHeight);
+        path.lineTo(rect.left + adj1, rect.top + arrowHeight / 2 + (arrowHeight - adj2 * 2) / 2);
+        
+        float smallOvalAdj = (arrowHeight - adj2 * 2) / (float)rect.height();
+        s_rect.set(rect.left + rect.width() * smallOvalAdj, rect.top + arrowHeight / 2 + (arrowHeight - adj2 * 2) / 2,
+            rect.left + rect.width() * (0.57f + 0.57f - smallOvalAdj), rect.top + arrowHeight + arrowHeight - (arrowHeight / 2 + (arrowHeight - adj2 * 2) / 2));
+        path.arcTo(s_rect, 270, -90);
+        
+        path.lineTo(rect.left + rect.width() * smallOvalAdj, rect.bottom);
+        path.close();
+        
+        return path;
+    }
+    
+    private static Path getUturnArrowPath(AutoShape shape, Rect rect)
+    {
+        int width = rect.width();
+        int height = rect.height();
+        
+        path.moveTo(rect.left, rect.bottom);
+        path.lineTo(rect.left, rect.top + height * 0.38f);
+        
+        s_rect.set(rect.left, rect.top, rect.right - width * (0.28f - 0.14f), rect.top + height * 0.76f);
+        path.arcTo(s_rect, 180, 180);
+        
+        path.lineTo(rect.right, rect.top + height * 0.38f);
+        path.lineTo(rect.right - width * 0.28f, rect.top + height * 0.66f);
+        path.lineTo(rect.right - width * 0.56f, rect.top + height * 0.38f);
+        path.lineTo(rect.right - width * (0.28f + 0.14f), rect.top + height * 0.38f);
+        
+        s_rect.set(rect.left + width * 0.28f, rect.top + height * 0.28f, rect.right - width * (0.28f + 0.14f), rect.top + height * (0.38f + 0.38f - 0.28f));
+        path.arcTo(s_rect, 0, -180);
+        
+        path.lineTo(rect.left + width * 0.28f, rect.bottom);
+        
+        path.close();
+        
+        return path;
+    }
+    
+    private static Path getLeftUpArrowPath(AutoShape shape, Rect rect)
+    {
+        Float[] values = shape.getAdjustData();
+        
+        float upAdj1  = 0;
+        float upAdj2 = 0;
+        float upAdj3 = 0;
+        
+        float downAdj1 = 0;
+        float downAdj2 = 0;
+        float downAdj3 = 0;
+        
+        if(values != null && values.length >= 1)
+        {
+            if(values[0] != null)
+            {
+                upAdj1 = rect.width() * values[0];
+                downAdj1 = rect.height() * values[0];
+            }
+            else
+            {
+                upAdj1 = Math.round(rect.width() * 0.43f);
+                downAdj1 = rect.height() * 0.43f;
+            }
+            
+            if(values.length >= 2 && values[1] != null)
+            {
+                upAdj2 = rect.width() * values[1];
+                downAdj2 = rect.height() * values[1];
+            }
+            else
+            {
+                upAdj2 = Math.round(rect.width() * 0.86f);
+                downAdj2 = rect.height() * 0.86f;
+            }
+            
+            if(values.length >= 3 && values[2] != null)
+            {
+                upAdj3 = rect.height() * values[2];
+                downAdj3 = rect.width() * values[2];
+            }
+            else
+            {
+                upAdj3 = Math.round(rect.height() * 0.28f);
+                downAdj3 = rect.width() * 0.28f;
+            }
+        } 
+        else
+        {
+            upAdj1 = Math.round(rect.width() * 0.43f);
+            upAdj2 = Math.round(rect.width() * 0.86f);
+            upAdj3 = Math.round(rect.height() * 0.28f);
+            
+            downAdj1 = rect.height() * 0.43f;
+            downAdj2 = rect.height() * 0.86f;
+            downAdj3 = rect.width() * 0.28f;
+        }
+       
+        //left
+        float arrowHeaderWidth = (rect.height() - downAdj1);
+        float arrowTailWidth = arrowHeaderWidth - (rect.height() - downAdj2) * 2;
+        path.moveTo(rect.left + downAdj3, rect.top + downAdj2);
+        path.lineTo(rect.left + downAdj3, rect.bottom);
+        path.lineTo(rect.left, rect.bottom - arrowHeaderWidth / 2);
+        path.lineTo(rect.left + downAdj3, rect.top + downAdj1);
+        path.lineTo(rect.left + downAdj3, rect.top + downAdj2 - arrowTailWidth);
+        
+        //up
+        arrowHeaderWidth = (rect.width() - upAdj1);
+        path.lineTo(rect.left + upAdj2 - (arrowHeaderWidth - (rect.width() - upAdj2) * 2), rect.top + downAdj2 - arrowTailWidth);
+        arrowTailWidth = arrowHeaderWidth - (rect.width() - upAdj2) * 2;
+        
+        path.lineTo(rect.left + upAdj2 - arrowTailWidth, rect.top + upAdj3);
+        path.lineTo(rect.left + upAdj1, rect.top + upAdj3);
+        path.lineTo(rect.right - arrowHeaderWidth / 2, rect.top);
+        path.lineTo(rect.right, rect.top + upAdj3);
+        path.lineTo(rect.left + upAdj2 , rect.top + upAdj3);        
+        path.lineTo(rect.left + upAdj2 , rect.top + downAdj2);
+        path.close();
+        
+        return path;
+    }    
+    
+    private static Path getBentUpArrowPath(AutoShape shape, Rect rect)
+    {
+        Float[] values = shape.getAdjustData();
+        
+        float adj1  = 0;
+        float adj2 = 0;
+        float adj3 = 0;
+        
+        if(values != null && values.length >= 1)
+        {
+            if(values[0] != null)
+            {
+                adj1 = rect.width() * values[0];
+            }
+            else
+            {
+                adj1 = Math.round(rect.width() * 0.43f);
+            }
+            
+            if(values.length >= 2 && values[1] != null)
+            {
+                adj2 = rect.width() * values[1];
+            }
+            else
+            {
+                adj2 = Math.round(rect.width() * 0.86f);
+            }
+            
+            if(values.length >= 3 && values[2] != null)
+            {
+                adj3 = rect.height() * values[2];
+            }
+            else
+            {
+                adj3 = Math.round(rect.height() * 0.28f);
+            }
+        } 
+        else
+        {
+            adj1 = Math.round(rect.width() * 0.43f);
+            adj2 = Math.round(rect.width() * 0.86f);
+            adj3 = Math.round(rect.height() * 0.28f);
+        }
+       
+        //up
+        float arrowHeaderWidth = (rect.width() - adj1);
+        float arrowTailWidth = arrowHeaderWidth - (rect.width() - adj2) * 2;
+        path.moveTo(rect.left + adj2 - arrowTailWidth, rect.top + adj3);
+        path.lineTo(rect.left + adj1, rect.top + adj3);
+        path.lineTo(rect.right - arrowHeaderWidth / 2, rect.top);
+        path.lineTo(rect.right, rect.top + adj3);        
+        path.lineTo(rect.left + adj2, rect.top + adj3);
+        
+        path.lineTo(rect.left + adj2, rect.bottom);
+        path.lineTo(rect.left, rect.bottom);
+        
+        arrowTailWidth = rect.height() * arrowTailWidth / rect.width();
+        path.lineTo(rect.left, rect.bottom - arrowTailWidth);
+        path.lineTo(rect.left + adj2 - (arrowHeaderWidth - (rect.width() - adj2) * 2), rect.bottom - arrowTailWidth);
+        
+        path.close();
+        
+        return path;
+    }
+    
+    private static List<Path> getCurvedRightArrowPath(AutoShape shape, Rect rect)
+    {
+        List<Path> pathList = new ArrayList<Path>(2);
+        
+        Float[] values = shape.getAdjustData();        
+        Path path = new Path();
+        
+        float adj1  = 0;
+        float adj2 = 0;
+        float adj3 = 0;        
+        if(values != null && values.length >= 1)
+        {
+            if(values[0] != null)
+            {
+                adj1 = rect.height() * values[0];
+            }
+            else
+            {
+                adj1 = Math.round(rect.height() * 0.6f);
+            }
+            
+            if(values.length >= 2 && values[1] != null)
+            {
+                adj2 = rect.height() * values[1];
+            }
+            else
+            {
+                adj2 = Math.round(rect.height() * 0.9f);
+            }
+            
+            if(values.length >= 3 && values[2] != null)
+            {
+                adj3 = rect.width() * values[2];
+            }
+            else
+            {
+                adj3 = Math.round(rect.width() * 0.66667f);
+            }
+        } 
+        else
+        {
+            adj1 = Math.round(rect.height() * 0.6f);
+            adj2 = Math.round(rect.height() * 0.9f);
+            adj3 = Math.round(rect.width() * 0.66667f);
+        }
+        
+        float arrowHeight = rect.height() * 0.4f;
+        float d2 = rect.height() - adj1;
+        float d1 = arrowHeight - (arrowHeight - (adj2 - adj1)) * 2;        
+        if(d1 < 0)
+        {
+            d1 = 0;
+        }
+        
+        adj1 = d1;
+        adj2 = d2;
+        adj3 = rect.width() - adj3;
+        
+        float ovalWidth = 2 * rect.width();
+        float ovalHeight = (rect.bottom - adj2 / 2 - adj1 / 2 - rect.top);
+        
+        path.moveTo(rect.right, rect.top);
+        s_rect.set(rect.left, rect.top, rect.left + ovalWidth, rect.top + ovalHeight);
+        path.arcTo(s_rect, 270, -90);
+        path.lineTo(rect.left, rect.top + ovalHeight / 2 + adj1);
+        s_rect.set(rect.left, rect.top + adj1, rect.left + ovalWidth, rect.top + ovalHeight + adj1);
+        path.arcTo(s_rect, 180, 90);
+        path.close();
+        
+        pathList.add(path);
+        
+        path = new Path();
+        path.moveTo(rect.left, rect.top + ovalHeight / 2);
+        
+        double y = Math.sqrt(Math.pow(ovalHeight / 2, 2)  * (Math.pow(ovalWidth / 2, 2) - Math.pow(adj3, 2)) / Math.pow(ovalWidth / 2, 2));
+  
+        int angle = (int)(Math.atan(y / adj3) * 180 / Math.PI);       
+        
+        s_rect.set(rect.left, rect.top, rect.left + ovalWidth, rect.top + ovalHeight);
+        path.arcTo(s_rect, 180, -angle);
+        path.setLastPoint(rect.right - adj3, rect.top + ovalHeight / 2 + (int)y);
+        
+        path.lineTo(rect.right - adj3, rect.top + ovalHeight / 2 + (int)y + adj1/ 2 - adj2 / 2);
+        path.lineTo(rect.right, rect.bottom - adj2 / 2);
+        path.lineTo(rect.right - adj3, rect.top + ovalHeight / 2 + (int)y + adj1/ 2 + adj2 / 2);        
+        path.lineTo(rect.right - adj3, rect.top + ovalHeight / 2 + (int)y + adj1);
+        
+        s_rect.set(rect.left, rect.top + adj1, rect.left + ovalWidth, rect.top + ovalHeight + adj1);
+        path.arcTo(s_rect, 180 - angle, angle);
+        path.close(); 
+      
+        pathList.add(path);
+        
+        return pathList;
+    }
+    
+    private static List<Path> getCurvedLeftArrowPath(AutoShape shape, Rect rect)
+    {
+        List<Path> pathList = new ArrayList<Path>(2);
+        
+        Float[] values = shape.getAdjustData();        
+        Path path = new Path();
+        
+        float adj1  = 0;
+        float adj2 = 0;
+        float adj3 = 0;        
+        if(values != null && values.length >= 1)
+        {
+            if(values[0] != null)
+            {
+                adj1 = rect.height() * values[0];
+            }
+            else
+            {
+                adj1 = Math.round(rect.height() * 0.6f);
+            }
+            
+            if(values.length >= 2 && values[1] != null)
+            {
+                adj2 = rect.height() * values[1];
+            }
+            else
+            {
+                adj2 = Math.round(rect.height() * 0.9f);
+            }
+            
+            if(values.length >= 3 && values[2] != null)
+            {
+                adj3 = rect.width() * values[2];
+            }
+            else
+            {
+                adj3 = Math.round(rect.width() * 0.66667f);
+            }
+        } 
+        else
+        {
+            adj1 = Math.round(rect.height() * 0.6f);
+            adj2 = Math.round(rect.height() * 0.9f);
+            adj3 = Math.round(rect.width() * 0.66667f);
+        }
+        
+        float arrowHeight = rect.height() * 0.4f;
+        float d2 = rect.height() - adj1;
+        float d1 = arrowHeight - (arrowHeight - (adj2 - adj1)) * 2;        
+        if(d1 < 0)
+        {
+            d1 = 0;
+        }
+        
+        adj1 = d1;
+        adj2 = d2;
+        
+        float ovalWidth = 2 * rect.width();
+        float ovalHeight = (rect.bottom - adj2 / 2 - adj1 / 2 - rect.top);
+        
+        path.moveTo(rect.right, rect.top + ovalHeight / 2);
+        
+        double y = Math.sqrt(Math.pow(ovalHeight / 2, 2)  * (Math.pow(ovalWidth / 2, 2) - Math.pow(adj3, 2)) / Math.pow(ovalWidth / 2, 2));
+  
+        int angle = (int)(Math.atan(y / adj3) * 180 / Math.PI);       
+        
+        s_rect.set(rect.right - ovalWidth, rect.top, rect.right, rect.top + ovalHeight);
+        path.arcTo(s_rect, 0, angle);
+        path.setLastPoint(rect.left + adj3, rect.top + ovalHeight / 2 + (int)y);
+        path.lineTo(rect.left + adj3, rect.top + ovalHeight / 2 + (int)y + adj1/ 2 - adj2 / 2);
+        path.lineTo(rect.left, rect.bottom - adj2 / 2);
+        path.lineTo(rect.left + adj3, rect.top + ovalHeight / 2 + (int)y + adj1/ 2 + adj2 / 2);
+        path.lineTo(rect.left + adj3, rect.top + ovalHeight / 2 + (int)y + adj1);
+        s_rect.set(rect.right - ovalWidth, rect.top + adj1, rect.right, rect.top + ovalHeight + adj1);
+        path.arcTo(s_rect, angle, -angle);
+        path.close();      
+        pathList.add(path);
+        
+        path = new Path();
+        path.moveTo(rect.left, rect.top);
+        s_rect.set(rect.right - ovalWidth, rect.top, rect.right, rect.top + ovalHeight);
+        path.arcTo(s_rect, 270, 90);
+        path.lineTo(rect.right, rect.top + ovalHeight / 2 + adj1);
+        s_rect.set(rect.right - ovalWidth, rect.top + adj1, rect.right, rect.top + ovalHeight + adj1);
+        path.arcTo(s_rect, 0, -90);
+        path.close();
+        
+        pathList.add(path);
+        
+        return pathList;
+    }
+    
+    private static List<Path> getCurvedUpArrowPath(AutoShape shape, Rect rect)
+    {
+        List<Path> pathList = new ArrayList<Path>(2);
+        
+        Float[] values = shape.getAdjustData();        
+        Path path = new Path();
+        
+        float adj1  = 0;
+        float adj2 = 0;
+        float adj3 = 0;        
+        if(values != null && values.length >= 1)
+        {
+            if(values[0] != null)
+            {
+                adj1 = rect.width() * values[0];
+            }
+            else
+            {
+                adj1 = Math.round(rect.width() * 0.6f);
+            }
+            
+            if(values.length >= 2 && values[1] != null)
+            {
+                adj2 = rect.width() * values[1];
+            }
+            else
+            {
+                adj2 = Math.round(rect.width() * 0.9f);
+            }
+            
+            if(values.length >= 3 && values[2] != null)
+            {
+                adj3 = rect.height() * values[2];
+            }
+            else
+            {
+                adj3 = Math.round(rect.height() * 0.66667f);
+            }
+        } 
+        else
+        {
+            adj1 = Math.round(rect.width() * 0.6f);
+            adj2 = Math.round(rect.width() * 0.9f);
+            adj3 = Math.round(rect.height() * 0.33333f);
+        }
+        
+        float arrowWidth = rect.width() * 0.4f;
+        float d2 = rect.width() - adj1;
+        float d1 = arrowWidth - (arrowWidth - (adj2 - adj1)) * 2;        
+        if(d1 < 0)
+        {
+            d1 = 0;
+        }
+        
+        adj1 = d1;
+        adj2 = d2;
+        
+        float ovalHalfWidth = (rect.width() - adj2 / 2 - adj1 / 2) / 2;
+        float ovalHalfHeight = rect.height();        
+        
+        path.moveTo(rect.left + ovalHalfWidth, rect.bottom);
+        
+        double x = Math.sqrt(Math.pow(ovalHalfWidth, 2)  * (Math.pow(ovalHalfHeight, 2) - Math.pow(adj3, 2)) / Math.pow(ovalHalfHeight, 2));
+        int angle = (int)(Math.atan(x / adj3) * 180 / Math.PI);
+        s_rect.set(rect.left, rect.top - ovalHalfHeight, rect.left + ovalHalfWidth * 2, rect.top + ovalHalfHeight);
+        path.arcTo(s_rect, 90, -angle);
+        path.setLastPoint(rect.left + ovalHalfWidth + (float)x, rect.top + adj3);
+        path.lineTo(rect.left + ovalHalfWidth + (float)x + adj1 / 2 - adj2 / 2, rect.top + adj3);
+        path.lineTo(rect.right - adj2 / 2, rect.top);
+        path.lineTo(rect.left + ovalHalfWidth + (float)x + adj1 / 2 + adj2 / 2, rect.top + adj3);
+        path.lineTo(rect.left + ovalHalfWidth + (float)x + adj1, rect.top + adj3);
+        
+        s_rect.set(rect.left + adj1, rect.top - ovalHalfHeight, rect.left + ovalHalfWidth * 2 + adj1, rect.top + ovalHalfHeight);
+        path.arcTo(s_rect, 90 - angle, angle);
+        path.close();         
+        pathList.add(path);
+        
+        //
+        path = new Path();
+        path.moveTo(rect.left, rect.top);
+        s_rect.set(rect.left, rect.top - ovalHalfHeight, rect.left + ovalHalfWidth * 2, rect.top + ovalHalfHeight);
+        path.arcTo(s_rect, 180, -90);
+        path.lineTo(rect.left + ovalHalfWidth + adj1, rect.bottom);
+        s_rect.set(rect.left + adj1, rect.top - ovalHalfHeight, rect.left + ovalHalfWidth * 2 + adj1, rect.top + ovalHalfHeight);
+        path.arcTo(s_rect, 90, 90);
+        path.close();        
+        pathList.add(path);
+        
+        return pathList;
+    }
+    
+    private static List<Path> getCurvedDownArrowPath(AutoShape shape, Rect rect)
+    {
+        List<Path> pathList = new ArrayList<Path>(2);
+        
+        Float[] values = shape.getAdjustData();        
+        Path path = new Path();
+        
+        float adj1  = 0;
+        float adj2 = 0;
+        float adj3 = 0;        
+        if(values != null && values.length >= 1)
+        {
+            if(values[0] != null)
+            {
+                adj1 = rect.width() * values[0];
+            }
+            else
+            {
+                adj1 = Math.round(rect.width() * 0.6f);
+            }
+            
+            if(values.length >= 2 && values[1] != null)
+            {
+                adj2 = rect.width() * values[1];
+            }
+            else
+            {
+                adj2 = Math.round(rect.width() * 0.9f);
+            }
+            
+            if(values.length >= 3 && values[2] != null)
+            {
+                adj3 = rect.height() * values[2];
+            }
+            else
+            {
+                adj3 = Math.round(rect.height() * 0.66667f);
+            }
+        } 
+        else
+        {
+            adj1 = Math.round(rect.width() * 0.6f);
+            adj2 = Math.round(rect.width() * 0.9f);
+            adj3 = Math.round(rect.height() * 0.666667f);
+        }
+        
+        float arrowWidth = rect.width() * 0.4f;
+        float d2 = rect.width() - adj1;
+        float d1 = arrowWidth - (arrowWidth - (adj2 - adj1)) * 2;        
+        if(d1 < 0)
+        {
+            d1 = 0;
+        }
+        
+        adj1 = d1;
+        adj2 = d2;
+        adj3 = rect.height() - adj3;
+        
+        float ovalHalfWidth = (rect.width() - adj2 / 2 - adj1 / 2) / 2;
+        float ovalHalfHeight = rect.height();
+        path.moveTo(rect.left, rect.bottom);
+        s_rect.set(rect.left, rect.top, rect.left + ovalHalfWidth * 2, rect.top + ovalHalfHeight * 2);
+        path.arcTo(s_rect, 180, 90);
+        path.lineTo(rect.left + ovalHalfWidth + adj1, rect.top);
+        s_rect.set(rect.left + adj1, rect.top, rect.left + ovalHalfWidth * 2 + adj1, rect.top + ovalHalfHeight * 2);
+        path.arcTo(s_rect, 270, -90);
+        path.close();        
+        pathList.add(path);
+        
+        //
+        path = new Path();
+        path.moveTo(rect.left + ovalHalfWidth, rect.top);
+        
+        double x = Math.sqrt(Math.pow(ovalHalfWidth, 2)  * (Math.pow(ovalHalfHeight, 2) - Math.pow(adj3, 2)) / Math.pow(ovalHalfHeight, 2));
+        int angle = (int)(Math.atan(x / adj3) * 180 / Math.PI);
+        
+        s_rect.set(rect.left, rect.top , rect.left + ovalHalfWidth * 2, rect.top + ovalHalfHeight * 2);
+        path.arcTo(s_rect, 270, angle);
+        path.setLastPoint(rect.left + ovalHalfWidth + (float)x, rect.bottom - adj3);
+        path.lineTo(rect.left + ovalHalfWidth + (float)x + adj1 / 2 - adj2 / 2, rect.bottom - adj3);
+        path.lineTo(rect.right - adj2 / 2, rect.bottom);
+        path.lineTo(rect.left + ovalHalfWidth + (float)x + adj1 / 2 + adj2 / 2, rect.bottom - adj3);
+        path.lineTo(rect.left + ovalHalfWidth + (float)x + adj1, rect.bottom - adj3);
+        
+        s_rect.set(rect.left + adj1, rect.top, rect.left + ovalHalfWidth * 2 + adj1, rect.top + ovalHalfHeight * 2);
+        path.arcTo(s_rect, 270 + angle, -angle);
+        path.close();
+        
+        pathList.add(path);
+        
+        return pathList;
+    }
+    
+    private static Path getStripedRightArrowPath(AutoShape shape, Rect rect)
+    {
+        Float[] values = shape.getAdjustData();
+        
+        int adj1 = 0;
+        int adj2 = 0;
+        if(values != null && values.length >= 1)
+        {
+            if(values[0] != null)
+            {                
+                adj1 = Math.round(rect.width() * values[0]);
+            }
+            else
+            {
+                adj1 = Math.round(rect.width() * 0.75f);
+            }
+            
+            if(values.length >= 2 && values[1]!= null)
+            {
+                adj2 = Math.round(rect.height() * values[1]);
+            }
+            else
+            {
+                adj2 = Math.round(rect.height() * 0.25f);
+            }
+        } 
+        else
+        {
+            adj1 = Math.round(rect.width() * 0.75f);
+            adj2 = Math.round(rect.height() * 0.25f);
+        }
+        
+        float len = rect.width() * 0.03f;
+        
+        path.addRect(rect.left, rect.top + adj2, rect.left + len, rect.bottom - adj2, Direction.CW);
+        
+        path.addRect(rect.left + len * 2, rect.top + adj2, rect.left + len * 4, rect.bottom - adj2, Direction.CW);
+        
+        path.moveTo(rect.left + len * 5, rect.top + adj2);
+        path.lineTo(rect.left + adj1, rect.top + adj2);
+        
+        //right arrow
+        path.lineTo(rect.left + adj1, rect.top);
+        path.lineTo(rect.right, rect.centerY());
+        path.lineTo(rect.left + adj1, rect.bottom);
+        
+        path.lineTo(rect.left + adj1, rect.bottom - adj2);
+        path.lineTo(rect.left + len * 5, rect.bottom - adj2);
+        path.close();
+        
+        return  path;
+    }
+    
+    private static Path getNotchedRightArrowPath(AutoShape shape, Rect rect)
+    {
+        Float[] values = shape.getAdjustData();
+        
+        int adj1 = 0;
+        int adj2 = 0;
+        if(values != null && values.length >= 1)
+        {
+            if(values[0] != null)
+            {
+                adj1 = Math.round(rect.width() * values[0]);
+            }
+            else
+            {
+                adj1 = Math.round(rect.width() * 0.75f);
+            }
+            
+            if(values.length >= 2 && values[1]!= null)
+            {
+                adj2 = Math.round(rect.height() * values[1]);
+            }
+            else
+            {
+                adj2 = Math.round(rect.height() * 0.25f);
+            }
+        } 
+        else
+        {
+            adj1 = Math.round(rect.width() * 0.75f);
+            adj2 = Math.round(rect.height() * 0.25f);
+        }
+        
+        path.moveTo(rect.left, rect.bottom - adj2);
+        path.lineTo(rect.left + (rect.height() - adj2 * 2) * (rect.width() - adj1) / (float)rect.height(), rect.centerY());
+        path.lineTo(rect.left, rect.top + adj2);
+        
+        path.lineTo(rect.left + adj1, rect.top + adj2);
+        path.lineTo(rect.left + adj1, rect.top);
+        path.lineTo(rect.right, rect.centerY());
+        path.lineTo(rect.left + adj1, rect.bottom);
+        path.lineTo(rect.left + adj1, rect.bottom - adj2);
+        path.close();
+        
+        return path;
+    }
+    
+    private static Path getHomePlatePath(AutoShape shape, Rect rect)
+    {
+        Float[] values = shape.getAdjustData();
+        
+        int adj1 = 0;
+        if(values != null && values.length == 1 && values[0] != null)
+        {
+            adj1 = Math.round(rect.width() * values[0]);
+        } 
+        else
+        {
+            adj1 = Math.round(rect.width() * 0.75f);
+        }
+        
+        path.moveTo(rect.left, rect.top);
+        path.lineTo(rect.left + adj1, rect.top);
+        path.lineTo(rect.right, rect.centerY());
+        path.lineTo(rect.left + adj1, rect.bottom);
+        path.lineTo(rect.left, rect.bottom);
+        path.close();
+        
+        return path;
+    }
+    
+    private static Path getChevronPath(AutoShape shape, Rect rect)
+    {
+        Float[] values = shape.getAdjustData();
+        
+        int adj1 = 0;
+        if(values != null && values.length == 1 && values[0] != null)
+        {
+            
+            adj1 = Math.round(rect.width() * values[0]);
+        } 
+        else
+        {
+            adj1 = Math.round(rect.width() * 0.75f);
+        }
+        
+        path.moveTo(rect.left, rect.top);
+        path.lineTo(rect.left + adj1, rect.top);
+        path.lineTo(rect.right, rect.centerY());
+        path.lineTo(rect.left + adj1, rect.bottom);
+        path.lineTo(rect.left, rect.bottom);
+        path.lineTo(rect.left + rect.width() - adj1, rect.centerY());
+        path.close();
+        
+        return path;
+    }
+        
+    private static Path getRightArrowCalloutPath(AutoShape shape, Rect rect)
+    {
+        Float[] values = shape.getAdjustData();
+        
+        int adj1 = 0;
+        int adj2 = 0;
+        int adj3 = 0;
+        int adj4 = 0;
+        if(values != null && values.length >= 1)
+        {
+            if(values[0] != null)
+            {
+                adj1 = Math.round(rect.width() * values[0]);
+            }
+            else
+            {
+                adj1 = Math.round(rect.width() * 0.67f);
+            }
+            
+            if(values.length >= 2 && values[1] != null)
+            {
+                adj2 = Math.round(rect.height() * values[1]);
+            }
+            else
+            {
+                adj2 = Math.round(rect.height() * 0.25f);
+            }
+            
+            if(values.length >= 3 && values[2] != null)
+            {
+                adj3 = Math.round(rect.width() * values[2]);
+            }
+            else
+            {
+                adj3 = Math.round(rect.width() * 0.83f);
+            }
+            
+            if(values.length >= 4 && values[3] != null)
+            {
+                adj4 = Math.round(rect.height() * values[3]);
+            }
+            else
+            {
+                adj4 = Math.round(rect.height() * 0.375f);
+            }
+        } 
+        else
+        {
+            adj1 = Math.round(rect.width() * 0.67f);
+            adj2 = Math.round(rect.height() * 0.25f);
+            adj3 = Math.round(rect.width() * 0.83f);
+            adj4 = Math.round(rect.height() * 0.375f);
+        } 
+        
+        path.moveTo(rect.left, rect.top);
+        path.lineTo(rect.left + adj1, rect.top);
+        path.lineTo(rect.left + adj1, rect.top + adj4);
+        path.lineTo(rect.left + adj3, rect.top + adj4);
+        path.lineTo(rect.left + adj3, rect.top + adj2);
+        path.lineTo(rect.right, rect.centerY());
+        path.lineTo(rect.left + adj3, rect.bottom - adj2);
+        path.lineTo(rect.left + adj3, rect.bottom - adj4);
+        path.lineTo(rect.left + adj1, rect.bottom - adj4);
+        path.lineTo(rect.left + adj1, rect.bottom);
+        path.lineTo(rect.left, rect.bottom);
+        path.close();
+        
+        return path;
+    }
+    
+    private static Path getLeftArrowCalloutPath(AutoShape shape, Rect rect)
+    {
+        Float[] values = shape.getAdjustData();
+        
+        int adj1 = 0;
+        int adj2 = 0;
+        int adj3 = 0;
+        int adj4 = 0;
+        if(values != null && values.length >= 1)
+        {
+            if(values[0] != null)
+            {
+                adj1 = Math.round(rect.width() * values[0]);
+            }
+            else
+            {
+                adj1 = Math.round(rect.width() * 0.33f);
+            }
+            
+            if(values.length >= 2 && values[1] != null)
+            {
+                adj2 = Math.round(rect.height() * values[1]);
+            }
+            else
+            {
+                adj2 = Math.round(rect.height() * 0.25f);
+            }
+            
+            if(values.length >= 3 && values[2] != null)
+            {
+                adj3 = Math.round(rect.width() * values[2]);
+            }
+            else
+            {
+                adj3 = Math.round(rect.width() * 0.17f);
+            }
+            
+            if(values.length >= 4 && values[3] != null)
+            {
+                adj4 = Math.round(rect.height() * values[3]);
+            }
+            else
+            {
+                adj4 = Math.round(rect.height() * 0.375f);
+            }
+        } 
+        else
+        {
+            adj1 = Math.round(rect.width() * 0.33f);
+            adj2 = Math.round(rect.height() * 0.25f);
+            adj3 = Math.round(rect.width() * 0.17f);
+            adj4 = Math.round(rect.height() * 0.375f);
+        } 
+        
+        path.moveTo(rect.left, rect.centerY());
+        path.lineTo(rect.left + adj3, rect.top + adj2);
+        path.lineTo(rect.left + adj3, rect.top + adj4);
+        path.lineTo(rect.left + adj1, rect.top + adj4);
+        path.lineTo(rect.left + adj1, rect.top);
+        path.lineTo(rect.right, rect.top);
+        path.lineTo(rect.right, rect.bottom);
+        path.lineTo(rect.left + adj1, rect.bottom);
+        path.lineTo(rect.left + adj1, rect.bottom - adj4);
+        path.lineTo(rect.left + adj3, rect.bottom - adj4);
+        path.lineTo(rect.left + adj3, rect.bottom - adj2);
+        path.close();
+        
+        return path;
+    }
+    
+    private static Path getUpArrowCalloutPath(AutoShape shape, Rect rect)
+    {
+        Float[] values = shape.getAdjustData();
+        
+        int adj1 = 0;
+        int adj2 = 0;
+        int adj3 = 0;
+        int adj4 = 0;
+        if(values != null && values.length >= 1)
+        {
+            if(values[0] != null)
+            {
+                adj1 = Math.round(rect.height() * values[0]);
+            }
+            else
+            {
+                adj1 = Math.round(rect.height() * 0.33f);
+            }
+            
+            if(values.length >= 2 && values[1] != null)
+            {
+                adj2 = Math.round(rect.width() * values[1]);
+            }
+            else
+            {
+                adj2 = Math.round(rect.width() * 0.25f);
+            }
+            
+            if(values.length >= 3 && values[2] != null)
+            {
+                adj3 = Math.round(rect.height() * values[2]);
+            }
+            else
+            {
+                adj3 = Math.round(rect.height() * 0.17f);
+            }
+            
+            if(values.length >= 4 && values[3] != null)
+            {
+                adj4 = Math.round(rect.width() * values[3]);
+            }
+            else
+            {
+                adj4 = Math.round(rect.width() * 0.375f);
+            }
+        } 
+        else
+        {
+            adj1 = Math.round(rect.height() * 0.33f);
+            adj2 = Math.round(rect.width() * 0.25f);
+            adj3 = Math.round(rect.height() * 0.17f);
+            adj4 = Math.round(rect.width() * 0.375f);
+        } 
+        
+        path.moveTo(rect.left, rect.bottom);
+        path.lineTo(rect.left, rect.top + adj1);
+        path.lineTo(rect.left + adj4, rect.top + adj1);
+        path.lineTo(rect.left + adj4, rect.top + adj3);
+        path.lineTo(rect.left + adj2, rect.top + adj3);
+        path.lineTo(rect.centerX(), rect.top);
+        path.lineTo(rect.right - adj2, rect.top + adj3);
+        path.lineTo(rect.right - adj4, rect.top + adj3);
+        path.lineTo(rect.right -  adj4, rect.top + adj1);
+        path.lineTo(rect.right, rect.top + adj1);
+        path.lineTo(rect.right, rect.bottom);
+        
+        path.close();
+        
+        return path;
+    }
+    
+    private static Path getDownArrowCalloutPath(AutoShape shape, Rect rect)
+    {
+        Float[] values = shape.getAdjustData();
+        
+        int adj1 = 0;
+        int adj2 = 0;
+        int adj3 = 0;
+        int adj4 = 0;
+        if(values != null && values.length >= 1)
+        {
+            if(values[0] != null)
+            {
+                adj1 = Math.round(rect.height() * values[0]);
+            }
+            else
+            {
+                adj1 = Math.round(rect.height() * 0.67f);
+            }
+            
+            if(values.length >= 2 && values[1] != null)
+            {
+                adj2 = Math.round(rect.width() * values[1]);
+            }
+            else
+            {
+                adj2 = Math.round(rect.width() * 0.25f);
+            }
+            
+            if(values.length >= 3 && values[2] != null)
+            {
+                adj3 = Math.round(rect.height() * values[2]);
+            }
+            else
+            {
+                adj3 = Math.round(rect.height() * 0.83f);
+            }
+            
+            if(values.length >= 4 && values[3] != null)
+            {
+                adj4 = Math.round(rect.width() * values[3]);
+            }
+            else
+            {
+                adj4 = Math.round(rect.width() * 0.375f);
+            }
+        } 
+        else
+        {
+            adj1 = Math.round(rect.height() * 0.67f);
+            adj2 = Math.round(rect.width() * 0.25f);
+            adj3 = Math.round(rect.height() * 0.83f);
+            adj4 = Math.round(rect.width() * 0.375f);
+        } 
+        
+        path.moveTo(rect.left, rect.top + adj1);
+        path.lineTo(rect.left, rect.top);
+        path.lineTo(rect.right, rect.top);
+        path.lineTo(rect.right, rect.top + adj1);
+        path.lineTo(rect.right - adj4, rect.top + adj1);
+        path.lineTo(rect.right - adj4, rect.top + adj3);
+        path.lineTo(rect.right - adj2, rect.top + adj3);
+        path.lineTo(rect.centerX(), rect.bottom);
+        path.lineTo(rect.left + adj2, rect.top + adj3);
+        path.lineTo(rect.left + adj4, rect.top + adj3);
+        path.lineTo(rect.left + adj4, rect.top + adj1);
+        
+        path.close();
+        return path;
+    }
+    
+    private static Path getLeftRightArrowCalloutPath(AutoShape shape, Rect rect)
+    {
+        Float[] values = shape.getAdjustData();
+        
+        int adj1 = 0;
+        int adj2 = 0;
+        int adj3 = 0;
+        int adj4 = 0;
+        if(values != null && values.length >= 1)
+        {
+            if(values[0] != null)
+            {
+                adj1 = Math.round(rect.width() * values[0]);
+            }
+            else
+            {
+                adj1 = Math.round(rect.width() * 0.35f);
+            }
+            
+            if(values.length >= 2 && values[1] != null)
+            {
+                adj2 = Math.round(rect.height() * values[1]);
+            }
+            else
+            {
+                adj2 = Math.round(rect.height() * 0.25f);
+            }
+            
+            if(values.length >= 3 && values[2] != null)
+            {
+                adj3 = Math.round(rect.width() * values[2]);
+            }
+            else
+            {
+                adj3 = Math.round(rect.width() * 0.13f);
+            }
+            
+            if(values.length >= 4 && values[3] != null)
+            {
+                adj4 = Math.round(rect.height() * values[3]);
+            }
+            else
+            {
+                adj4 = Math.round(rect.height() * 0.375f);
+            }
+        } 
+        else
+        {
+            adj1 = Math.round(rect.width() * 0.35f);
+            adj2 = Math.round(rect.height() * 0.25f);
+            adj3 = Math.round(rect.width() * 0.13f);
+            adj4 = Math.round(rect.height() * 0.375f);
+        }
+        
+        //left arrow
+        path.moveTo(rect.left + adj1, rect.bottom - adj4);
+        path.lineTo(rect.left + adj3, rect.bottom - adj4);
+        path.lineTo(rect.left + adj3, rect.bottom - adj2);
+        path.lineTo(rect.left, rect.centerY());
+        path.lineTo(rect.left + adj3, rect.top + adj2);
+        path.lineTo(rect.left + adj3, rect.top + adj4);
+        path.lineTo(rect.left + adj1, rect.top + adj4);
+        
+        path.lineTo(rect.left + adj1, rect.top);
+        path.lineTo(rect.right - adj1, rect.top);
+        
+        //right arrow
+        path.lineTo(rect.right - adj1, rect.top + adj4);
+        path.lineTo(rect.right - adj3, rect.top + adj4);
+        path.lineTo(rect.right - adj3, rect.top + adj2);
+        path.lineTo(rect.right, rect.centerY());
+        path.lineTo(rect.right - adj3, rect.bottom - adj2);
+        path.lineTo(rect.right - adj3, rect.bottom - adj4);
+        path.lineTo(rect.right - adj1, rect.bottom - adj4);
+        
+        path.lineTo(rect.right - adj1, rect.bottom);
+        path.lineTo(rect.left + adj1, rect.bottom);
+        path.close();
+        
+        return path;
+    }    
+    
+    private static Path getUpDownArrowCalloutPath(AutoShape shape, Rect rect)
+    {
+        Float[] values = shape.getAdjustData();
+        
+        int adj1 = 0;
+        int adj2 = 0;
+        int adj3 = 0;
+        int adj4 = 0;
+        if(values != null && values.length >= 1)
+        {
+            if(values[0] != null)
+            {
+                adj1 = Math.round(rect.height() * values[0]);
+            }
+            else
+            {
+                adj1 = Math.round(rect.height() * 0.25f);
+            }
+            
+            if(values.length >= 2 && values[1] != null)
+            {
+                adj2 = Math.round(rect.width() * values[1]);
+            }
+            else
+            {
+                adj2 = Math.round(rect.width() * 0.25f);
+            }
+            
+            if(values.length >= 3 && values[2] != null)
+            {
+                adj3 = Math.round(rect.height() * values[2]);
+            }
+            else
+            {
+                adj3 = Math.round(rect.height() * 0.125f);
+            }
+            
+            if(values.length >= 4 && values[3] != null)
+            {
+                adj4 = Math.round(rect.width() * values[3]);
+            }
+            else
+            {
+                adj4 = Math.round(rect.width() * 0.375f);
+            }
+        } 
+        else
+        {
+            adj1 = Math.round(rect.height() * 0.25f);
+            adj2 = Math.round(rect.width() * 0.25f);
+            adj3 = Math.round(rect.height() * 0.125f);
+            adj4 = Math.round(rect.width() * 0.375f);
+        }
+        
+        //up part
+        path.moveTo(rect.left, rect.top + adj1);
+        path.lineTo(rect.left + adj4, rect.top + adj1);
+        path.lineTo(rect.left + adj4, rect.top + adj3);
+        path.lineTo(rect.left + adj2, rect.top + adj3);
+        path.lineTo(rect.centerX(), rect.top);
+        path.lineTo(rect.right - adj2, rect.top + adj3);
+        path.lineTo(rect.right - adj4, rect.top + adj3);
+        path.lineTo(rect.right - adj4, rect.top + adj1);
+        path.lineTo(rect.right, rect.top + adj1);
+        
+        path.lineTo(rect.right, rect.bottom - adj1);
+        path.lineTo(rect.right - adj4, rect.bottom - adj1);
+        path.lineTo(rect.right - adj4, rect.bottom - adj3);
+        path.lineTo(rect.right - adj2, rect.bottom - adj3);
+        path.lineTo(rect.centerX(), rect.bottom);
+        path.lineTo(rect.left + adj2, rect.bottom - adj3);
+        path.lineTo(rect.left + adj4, rect.bottom - adj3);
+        path.lineTo(rect.left + adj4, rect.bottom - adj1);
+        path.lineTo(rect.left, rect.bottom - adj1);
+        
+        path.close();
+        
+        return path;
+    }    
+    
+    private static Path getQuadArrowCalloutPath(AutoShape shape, Rect rect)
+    {
+        Float[] values = shape.getAdjustData();
+        
+        int lrAdj1 = 0;
+        int lrAdj2 = 0;
+        int lrAdj3 = 0;
+        int lrAdj4 = 0;
+        
+        int udAdj1 = 0;
+        int udAdj2 = 0;
+        int udAdj3 = 0;
+        int udAdj4 = 0;
+        
+        if(values != null && values.length >= 1)
+        {
+            if(values[0] != null)
+            {
+                lrAdj1 = Math.round(rect.width() * values[0]);
+                udAdj1 = Math.round(rect.height() * values[0]);
+            }
+            else
+            {
+                lrAdj1 = Math.round(rect.width() * 0.25f);
+                udAdj1 = Math.round(rect.height() * 0.25f);
+            }
+            
+            if(values.length >= 2 && values[1] != null)
+            {
+                lrAdj2 = Math.round(rect.height() * values[1]);
+                udAdj2 = Math.round(rect.width() * values[1]);
+            }
+            else
+            {
+                lrAdj2 = Math.round(rect.height() * 0.375f);
+                udAdj2 = Math.round(rect.width() * 0.375f);
+            }
+            
+            if(values.length >= 3 && values[2] != null)
+            {
+                lrAdj3 = Math.round(rect.width() * values[2]);
+                udAdj3 = Math.round(rect.height() * values[2]);
+            }
+            else
+            {
+                lrAdj3 = Math.round(rect.width() * 0.125f);
+                udAdj3 = Math.round(rect.height() * 0.125f);
+            }
+            
+            if(values.length >= 4 && values[3] != null)
+            {
+                lrAdj4 = Math.round(rect.height() * values[3]);
+                udAdj4 = Math.round(rect.width() * values[3]);
+            }
+            else
+            {
+                lrAdj4 = Math.round(rect.height() * 0.45f);
+                udAdj4 = Math.round(rect.width() * 0.45f);
+            }
+            
+        } 
+        else
+        {
+            lrAdj1 = Math.round(rect.width() * 0.25f);
+            lrAdj2 = Math.round(rect.height() * 0.375f);
+            lrAdj3 = Math.round(rect.width() * 0.125f);
+            lrAdj4 = Math.round(rect.height() * 0.45f);
+            
+            udAdj1 = Math.round(rect.height() * 0.25f);
+            udAdj2 = Math.round(rect.width() * 0.375f);
+            udAdj3 = Math.round(rect.height() * 0.125f);
+            udAdj4 = Math.round(rect.width() * 0.45f);
+        }
+        
+        //left
+        path.moveTo(rect.left + lrAdj1, rect.bottom - lrAdj4);
+        path.lineTo(rect.left + lrAdj3, rect.bottom - lrAdj4);
+        path.lineTo(rect.left + lrAdj3, rect.bottom - lrAdj2);
+        path.lineTo(rect.left, rect.centerY());
+        path.lineTo(rect.left + lrAdj3, rect.top + lrAdj2);
+        path.lineTo(rect.left + lrAdj3, rect.top + lrAdj4);
+        path.lineTo(rect.left + lrAdj1, rect.top + lrAdj4);
+        path.lineTo(rect.left + lrAdj1, rect.top + udAdj1);
+        
+        //up
+        path.lineTo(rect.left + udAdj4, rect.top + udAdj1);
+        path.lineTo(rect.left + udAdj4, rect.top + udAdj3);
+        path.lineTo(rect.left + udAdj2, rect.top + udAdj3);
+        path.lineTo(rect.centerX(), rect.top );
+        path.lineTo(rect.right - udAdj2, rect.top + udAdj3);
+        path.lineTo(rect.right - udAdj4, rect.top + udAdj3);
+        path.lineTo(rect.right - udAdj4, rect.top + udAdj1);
+        path.lineTo(rect.right - lrAdj1, rect.top + udAdj1);
+        
+        //right
+        path.lineTo(rect.right - lrAdj1, rect.top + lrAdj4);
+        path.lineTo(rect.right - lrAdj3, rect.top + lrAdj4);
+        path.lineTo(rect.right - lrAdj3, rect.top + lrAdj2);
+        path.lineTo(rect.right, rect.centerY());
+        path.lineTo(rect.right - lrAdj3, rect.bottom - lrAdj2);
+        path.lineTo(rect.right - lrAdj3, rect.bottom - lrAdj4);
+        path.lineTo(rect.right - lrAdj1, rect.bottom - lrAdj4);
+        path.lineTo(rect.right - lrAdj1, rect.bottom - udAdj1);
+        
+        //down
+        path.lineTo(rect.right - udAdj4, rect.bottom - udAdj1);
+        path.lineTo(rect.right - udAdj4, rect.bottom - udAdj3);
+        path.lineTo(rect.right - udAdj2, rect.bottom - udAdj3);
+        path.lineTo(rect.centerX(), rect.bottom);
+        path.lineTo(rect.left + udAdj2, rect.bottom - udAdj3);
+        path.lineTo(rect.left + udAdj4, rect.bottom - udAdj3);
+        path.lineTo(rect.left + udAdj4, rect.bottom - udAdj1);
+        path.lineTo(rect.left + lrAdj1, rect.bottom - udAdj1);
+        
+        path.close();
+        return path;
+    }
+    
+    private static Path getCircularArrowPath(AutoShape shape, Rect rect)
+    {
+        Float[] values = shape.getAdjustData();
+        
+        float adj1 = 0;
+        float adj2 = 0;
+        float adj3 = 0;
+        int len = 100;
+        if(values != null && values.length >= 1)
+        {
+            if(values[0] != null)
+            {
+                adj1 = values[0] * TODEGREE;
+                if(adj1 < 0)
+                {
+                    adj1 += 360;
+                }
+            }
+            else
+            {
+                adj1 = 180;
+            }
+            
+            if(values.length >= 2 && values[1] != null)
+            {                
+                adj2 = values[1] * TODEGREE;
+                if(adj2 < 0)
+                {
+                    adj2 += 360;
+                }
+            }
+            else
+            {
+                adj2 = 0;
+
+            }
+            
+            if(values.length >= 3 && values[2] != null)
+            {
+                adj3 = values[2] * len;
+            }
+            else
+            {
+                adj3 = len * 0.25f;
+            }
+        } 
+        else
+        {
+            adj1 = 180;
+            adj2 = 0;
+            adj3 = len * 0.25f;
+        }
+        
+        float outerRadius = len / 2;
+        path.moveTo((float)(outerRadius * Math.cos(adj1 * Math.PI / 180)),
+            (float)(outerRadius * Math.sin(adj1 * Math.PI / 180)));
+        
+        s_rect.set(-outerRadius, -outerRadius, outerRadius, outerRadius);
+        path.arcTo(s_rect, adj1, (adj2 - adj1 + 360) % 360);
+        
+        //arrow
+        path.lineTo((float)((outerRadius + len * 0.125f) * Math.cos(adj2 * Math.PI / 180)),
+            (float)((outerRadius + len * 0.125f) * Math.sin(adj2 * Math.PI / 180)));
+        
+        path.lineTo((float)((outerRadius + adj3) * 0.5f * Math.cos((adj2 + 30) * Math.PI / 180)),
+            (float)((outerRadius + adj3) * 0.5f * Math.sin((adj2 + 30) * Math.PI / 180)));
+        
+        path.lineTo((float)((adj3 - len * 0.125f) * Math.cos(adj2 * Math.PI / 180)),
+            (float)((adj3 - len * 0.125f) * Math.sin(adj2 * Math.PI / 180)));
+        
+        
+        s_rect.set(-adj3, -adj3, adj3, adj3);
+        path.arcTo(s_rect, adj2, -(adj2 - adj1 + 360) % 360);
+
+        path.close();
+        
+        Matrix m = new Matrix();
+        m.postScale(rect.width() / 100f, rect.height() / 100f);
+        path.transform(m);
+        
+        path.offset(rect.centerX(), rect.centerY());
+        
+        return path;
+    }
+}
+                                                                                                                                                                                                                                                                                                                     !8Êbp+ÖÎ=Ò¥Å  ~º„¥2      Œ   .3   )   !   !|Ô=Çğ.o_OaÏr0º  ~º„¢Ì      ,   .3   )   !   !üÜciN‚uAP¢‚kÅÍ  ~º„ªT      T   .3   )   !   !$ˆfk™Á³ç–$ü¤(  ~º„¡¿      „   .3   )   !   !ùÓ ä€‰\oó°ñl  ~º„¢Ô      ¨   .3   )   !   !ÊğŞE«˜T9‘¡·`ÿ  ~º„       ¼   .3   )   !   !~iiÇË·$³Ï^Î¡  ~º„§l      ”   .3   )   !   !2U;‹dLÍË…D}¡  ~º„¡†      Ü   .3   )   !   !eÖåú`iô=}÷'>ï  ~º„       
+”   .3   )   !   !y²ÉkÓöİZær8ÿ¥  ~º„¡W      X   .3   )   !   !SÖ»ÌJw¡Şçûc;Úe  ~º„¥y      4   .3   )   !   !t¡SÀ¾dÊıŠš`Ãœ  ~º„¦      ğ   .3   )   !   !•,^U¦A¦	îé# ·÷  ~º„¢      p   .3   )   !   !Œârú¿]ÇCİ=ÁÑkl{  ~º„©7      ô   .3   )   !   !#øcj07Ú†5“2]ù  ~º„¬‹      œ   .3   )   !   !ŠI¶’²‹ëØÕ™³ä  ~º„ªÑ      Ì   .3   )   !   !¢Ï†¦ØğÏIy~L2G  ~º„¥      d   .3   )   !   !Üş’°A´Ğÿ}ÎÙ{3J  ~º„¦ä      	@   .3   )   !   !D	§4fªj;¶ñofîyV  ~º„«0          .3   )   !   !¾k3ìÌ?~ŞÔµáu  ~º„ªĞ      H   .3   )   !   !ÙÙœø_ê\.«ªÔùöø˜  ~º„£O      à   .3   )   !   !ú&ÉƒÍ°pwË“Z±5á.  ~º„ 	      Ô   .3   )   !   !œ7ğ\çü2ŒÙÑã²™İ  ~º„¤Ë      ,   .3   )   !   !¯Ty3'à3Á–)xŞ9:ü  ~º„ªR      ¸   .3   )   !   !½ûW•Üceía·»:·¾  ~º„¨V      	˜   .3   )   !   !¨3`Ô}ÑBô>üp‡  ~º„­’      `   .3   )   !   !²öªa‹Ã¥²¹•^w´ºju  ~º„¦Æ      `   .3   )   !   !Ü+»[ÛŠ‡u²§bbÔw  ~º„       ,   .3   )   !   !iWVPº
+ƒL>¢÷I¼šÏ  ~º„©z      x   .3   )   !   !ƒêÑ»ƒ„UUöACÆ  ~º„¢Ç      $   .3   )   !   !cjé-Ã¸!»­uÛ  ~º„®F      ,   .3   )   !   !¤ñ~ŞÉgvp<İë7Äùì  ~º„©ò      @   .3   )   !   !GHÃ¬ÙKö9õ¿!½üã  ~º„£$      L   .3   )   !   !¹PÃ8³ˆÕƒ"E²9ô  ~º„£¨      8   .3   )   !   !c=ŞBùĞÏÓ‡=^¥ ÀÉ  ~º„       p   .3   )   !   !^„éSİŞD„ô>aƒ°r3W  ~º„­      D   .3   )   !   !Wv¬õw›CË—‚œC  ~º„¡      Ø   .3   )   !   !ãÃ'~7*Ğ©ÊşD¹îû  ~º„ º      x   .3   )   !   !ÄƒqâÁõP;Ê«ğKc)  ~º„§è      x   .3   )   !   !è±omÿc^Ê•‡Av·e  ~º„¢ö      T   .3   )   !   !x^8å£gnâkÛ÷ò€*  ~º„¡      ğ   .3   )  AAPT         Tõ      t   Ñô      
+drawable/f7 "cD:\New folder\New folder\8\19 Pencil Sketch Art Photo Editor 6-1.6\app\src\main\res\drawable\f7.png‰PNG
+
+   IHDR         ôxÔú   tEXtSoftware Adobe ImageReadyqÉe<  "iTXtXML:com.adobe.xmp     <?xpacket begin="ï»¿" id="W5M0MpCehiHzreSzNTczkc9d"?> <x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.3-c011 66.145661, 2012/02/06-14:56:27        "> <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"> <rdf:Description rdf:about="" xmlns:xmp="http://ns.adobe.com/xap/1.0/" xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/" xmlns:stRef="http://ns.adobe.com/xap/1.0/sType/ResourceRef#" xmp:CreatorTool="Adobe Photoshop CS6 (Windows)" xmpMM:InstanceID="xmp.iid:C95CC035347B11E7B150E1B4D6F3587A" xmpMM:DocumentID="xmp.did:C95CC036347B11E7B150E1B4D6F3587A"> <xmpMM:DerivedFrom stRef:instanceID="xmp.iid:C95CC033347B11E7B150E1B4D6F3587A" stRef:documentID="xmp.did:C95CC034347B11E7B150E1B4D6F3587A"/> </rdf:Description> </rdf:RDF> </x:xmpmeta> <?xpacket end="r"?>ïÅNZ  ñEIDATxÚì½é²d×u&¶öŞgÈÌ;Ô€Â@‚")
+”Ôâ-\Õ’ACm²IHM¡Z·éH°­Áİ²;ìhÛ
+ÿs8üÃOäpø5º#d% 
+Uu§Ì<ÓŞÛë[kŸ!oÔ/°x[™y¦,F¬éLŒ‘räÈ‘#G1~ş)ı?ÿ÷ÿEÎògcôu¤üÆù#¦áÍhøå@Æò¯éƒÇ,sÍxÂåyÒ9¿·ülŒF_ç“˜t9?.Êûqº/¹|À-ğk&¤[2Ó=†tCÖZ=.xÂâó¹cºEsx¸^zÿ•»:x(÷#w)÷¤ÏbÒqqñË÷—_èâzãq1„Å™ñ¾%¾[| ³î+'Åq¿ŠßsD?óûí¯9É®ÉkrEIT•d†–œÈlîRÛ6dOÆ÷44-mŸ|LEş¿z9rä8ÈÇ)‘Ñ”¦ù9%=¤¸1¦Ä§¤ˆ,(¥4NZs0%¸±¯Aæ éÆ”ÍÁİh²”ä9¦ë”(Cª'¦$’°1gækâÃA’«>Ÿ4'\kÍA!0V&%aÔ_ÙHAa—W‘Ã§[éùµ8ŠË#=3î	…	BîÏÌg4ò®ÍqiÜ—Šï½Rº÷hhÿ¿öFä$?t•|/¡DñQppÌÉŞĞÀI¿=9>Kè[ò|î!9w. räÈ‘#Ç„&Ã)±.´V‡ìøòÁt IÌDº=m)!ê4ñ!	“ğ\9hÅOêÜ§ãÓ½™”p—÷&åJ*@0ÏHÁ§E’w8ìæCš8X$û410RD)‚¢IÉ<˜tMÅÈXiÂŸ“
+ˆ&c1c¦±Eœ"ğÿ¬Œ3õ ß¦{õ¨xøåuù­•3ÅèÏù¹^	}WFNğ‘“;»ÛôüTk~N‡[”‘ˆéöüİUrNß¶şñ1 9räÈ‘ãö NIh[O]í”`çÄ«/™)áMc”_6V‹îxü(¼æü8}f:"uÇr_v<..ú~š
+
+½m3İ»±s2Vcq2é˜´BÆ>7:ÆÄn~À,Ş·R„iB2íhQìŞĞ´Hë-"ùTúX¾—Éßªli_;)Ş~PÓ•¥?¶¶xgè›’‹ >Î¥óœÜ;9ƒ]9Sq†'~ß.Z¹?Ü[..( 9räÈ‘ãVßo´{GşcK”eÉ¤î{±§§¹Ğ©Á¼
+ˆ‹ÉÁrªN\Á.˜3¾&ËeÁ0üSq²H¨q,T¦kîæ²ù”Ãk†Å^ß¢cãZÀLk¼ÆyÁ8ôXŒæéV2vÿó6`ù°c!§c#Ù¦	À Q{~¡ÁœT•{ó¸~ï´ğ?4]÷¾_­ßæó9J>º£¢®¨øùzîêûîî+gåùŠ²&³Úğ¹ø{:ù~q2¥ü7 9räÈ‘ãåƒ€)Å)ùc-{ò¹é¾u„nêuœm¾ ™ÏÓ3v÷©£×ät\.«.ƒkøÄ[L'f İ46i‚æõñìVv÷#ÏÒb{?îİ§Çñ4|
+”0=s\'âx~š.DZ®="½P-Í{•yÀ?ÈİŞ{$mwsôğWN«omb÷ÑàÃ¹wî~ƒ£ÅÈŠúë+Â–¿ëB»ç ¡Ád‹Hß¯w… 9­ç3£ëçH¿C|¹ È‘#G/›Ğ4B7sÖ6Ö,@m)§…”¼ÓR|D­OëZ0	Ædöú´Øùİ²çï!º27sÇO3(q‰ö7f,>pn«Ÿ”û¸Æ°ótı=ºşÔy;ıypÓz#L»üqM1"xÑÉ9•† «ŒôPcíÂè8DcşÇ÷Ã:ÖÙ×OßşÚÍ#jo~ÜwÃ;ü—Æäğ¶/ÉŸãbaÇ—l)rÑĞï/©ç?ã\µ©È®O¸ô{äûƒ ¢ˆ¿Ôç G9r¼Øù”<×™eû:ÆiAÁ[BëfAêòSBœ˜mfÜ—Ï#s=n^=,÷ît¾E§>?%æ8%[3%h}†t-Š¸;!ó#™iz1wğ·i„cç?=ÿâº Ú±àÙ¾™V‚q¸=Dá×zîÔkWÚ7ïŸ¿~\=r¾{|³»9£À½?§ëĞv4T*WrîwT®N¨¹¸¡ĞÜÈÄ¥ßm©o¯ùz–Šõ)œü›aØ† Ep}ßSÛç G9r¼¬ÿOÈ|Zì³cêp5ŸÙ¼ß²»G¾÷	Hˆó„%nù¹%İO' ‹„yk—?uÊ!LÇNõˆ÷ùv1%¸õ_÷§é†$óÃiÆ8 ˜nÆ¤YC\ÎEÒ²c\_Ä0}Ó$âÖ<e|¸x_£Pó¢7Çuí¾zïè½WjûCß·ï·mwšÆ°Àí/Ö©ØŠÔv-®àb`C7»Ÿ¤¡n×Ss³¥’ïİ¼JcZ5ú¡OÓŒ(R×ç@9rä¸ü§|m¦îtê”íÈ±_ÉÍ”CJnB£Kb<@´‹Ğ8âıFú™ºõx€8 š´{ó´£ğ#…t%1¥ŸÖaõ§a@Lè{¥
+÷AÓ
+çrfF7˜tm— ‰¸?‡	ƒqIù(¦á‡¡¿ë¤œ«üf§)Æ Éß½zzòğ×^¹ó­2¶ŞŸï‡‰¸ Sğ}cŸÏ‡ñ
+Mäw©ØÜ!çNiõwü\ÜLGåƒ–ª¾ág-ù˜^¾<?s $ f`9räxYÄ—şšøõšLÇnxŞ•Ç…òİb%°Ø‡Ïüøôî˜‰£ò±ã>ÒŞ”~Nşc7=¢íÍÌ¾›
+“H“Ğ,ì3ëŒŒG“><GŠŞøã},Ù”:ò˜Æ# Å· á#ôáƒÒù¼PîëU¬È~õî·¿öÊé#k†÷½c©,eO>*oåP>!Pöãb£(
+=e]RyïËtıÉß’ßİPÓì©/"­;Nú»ÙÁRp5ëäûëøõq}‘€9räÈñBî7cÒJHù¸Ò<7©Ÿyöéw‘ÌKÉ5Ì	tLè&Ì”»YWhVÌ[—ÚC´`ÎÅAHÉ>Î‚±›'•‹i‚
+üJ,.3!ôÇZ!ŒÓ³ ÎÃ‰Å9íŒcH³g>c 0ô.ùm<Q]ö÷Îß8Ş<âS<îzÆ„ƒT/q7É¿á®?ÚŠÏÇD÷‘õŒ÷|Öß¯¨X­¨^? ç7K77{Z\xtE.ã*+ÊÀÏí€¡=æ G9rÄ¬pG`·0ş‡>ŒyÛOiqîœd€Í¤®·È˜“ïÊ—&‡`CZÜ×TÈ™ß %a³ Œzÿö@¾`ñ°tØi¡ wµøh¡5 ˜ æ÷ÓŠhGu?ù•¤+ƒOÑù@§ueÿÉëwÏOk÷ˆoÿ1g|ˆÃÔ í;¥BúN1\`‡_T5¢€•‡ñãƒ\duïu¢ò>]Şüùj æfG®¾áû©ø¦øÇd˜’¿Ó‰B. räÈ‘#ÇKŠ€ÛèwZ
+ÿ/üÌrŠ¿È¤æ…üºdĞ-¯ƒ÷è°6íˆs_é{DêBIK NÒ=IÑæğ¬‰?%ít¬M*}Ò­/Œ|&ğ àF}€ñÚQtâäF…¢§uO@0º JæÕMå~ı•£÷N*úa?„÷ƒ5g¾m(z®ZQQ–Ô7[>Ôf¡¥#|~Ë×ô¾×%|6îô{¾ÆzCÇ÷ïWtsÓS»ï¨jzÎıgz/÷‡ç±Nq8G. räÈ‘#Çõ!!ö–`¿/Š¸ÜÏâ>èÀÍ-ÓŸ‰fG.{s%1c FTÿ4£Ğ¸†0‡Šƒ6İb Ûj}ËéÄˆ38,z¼ˆ^¤ñ‘5ŠG—ÃeÑ"…€Mç
+º>Aò—û
+îÍÓ£‡_½³şVíÂGm×Ÿs{ßxH€ìü‡fOÎ”|^Ë]~G?ªøwW“å‚ rïhÈ4€OI¿Ÿ_ß¹K«£{t¹ÿ¥LP9áïÎ£°(øœj 1šús#G9¾(KZ³ö@“çq³P¿3ÆÜš!$Y€FœCŒÁ,’7ïïUpºFöM‰wT)œhŠqJÈ3XñÖı§bB\ Ñ'Ş8©I<ÄICÀL…E’DçÓ‰•©ªş‚?àş_øıœ­¿~÷äí7ª¸—ÿãv0ïØJQ%´¥Ş£öô2®7EMßZ×64øFÕ¥¢Ñg³ÒÍ[ŠbJh©<:¡Íİ»ôlû”ºfÄo¹Ó÷²Jà{®*¹goyÄ\ äÈ‘#GbäÚOİï"}.yóSêt`¼œš%zÍäh¦„½”÷÷õJó4A<€â„AĞ$R×?£õ'ÿi]]I?¤fq/”{–B@s›¯:”Xú9îÑ…ê'*"<¤«„Şæîºv¿zÿä½Wjú¡oöï{W¾m¢q±ïD$Éqg•>¡øñ9øŠ\ 8ªÈ•5wılüˆJ':ş8?¨€Ş(İÑZÇ?•«šîpğéÇí¶-t™¶%[®« 1<~CÖÈ‘#G/ëıG°93Î´9ZîşÉ<N²şSA ¸Á%¼@˜:øp0Rˆ¦`&MZŒŞc8p%œÎsàZ<‘™j„¸×s›¹`Q“‘¥x(X4<#8ÒS°ZŒ^ßCBàK'«‡ß¼wò­ue?jwíyßõ÷ÎÂÅcş¾§ØuälÍÉY=„A ó¬>¸Ë÷ƒç÷­Ü£çBH#¡#ÀD¹cK:>¾Ã%íaû‹uÿ û‡µp0ªå«ºŒÈ‘#G_4¸57×©€=ğºŸ?­‰úğe“¬}5“š”´Í¸Ó§yôOIö¢Ÿt D&¦B@§²oŸØ&uúsÓ>]Ã$CŸåÎü½N†õf„.´fšáT Ä™]Àıº^“Ó)¨zÖxj“şÑ›w7oóŞæQ1´?n®šw¼—å>ENîB”jiĞõB½ b³¢VºşXVTT.†´6‰rIÜ_éœ²*¯FG¸şPutDU}LÛîŠ¸Ø ÊcĞ
+ \È\3„q>’#G9rÜ*°g¶³iYºØÑa"T~ˆ]ğ"hûÇqf`A‡…G|gx ËK³öÀ5îM„‰/HÛJœ4…RÑ‚.>$ú ÆñãçÌRã7iXQô²éÈ>{X)´^Tì×ïŸÿú+GŒ7íğîâKBô‰a @ä‚Ê•@Ü¯tìÀ#@0~0ıéUÊW(|ü£ÎˆIšY„…
+™
+ÔÇ² M/¢?¾ü‹éœĞˆ²>ÈB@9räÈ‘ãåÙ?­ìéÍD\ÙñrĞÙ—qç§ÔoÒJ ¾` dÌh:”Fú£*À$å;Kû¸ı…¤ãOã~i.4‹Ä¥¹QæŞÒª×N’¾jè3I"B43tÒ3èÉp}+Ékuk6µs_½·yïõµû¡õáızş¾wàßSÛğ÷ÂwöbÄİ;”ş"ºyXú‚Şùà¢”â {zë¸c/¬ú Pğô^áì' ?/f?–€êä˜ÖwOé“§‘vû=.Qzœg H‘çcMA>ÛçÈ‘#G—æôOÈôyŸnGnüâ5“2ø¤Œ·˜ÄÅ®–ÕM9£7ı¨¡gâ¡Ë_4=qá?0aìôñC\~ZŒ3k.}1á(=kšL„0ùÔpòP!òç\TşB«{÷æõÃ_¹³úÖÊ††®=Úö~ìgÓ:%ôHÂ‘J. Ô…˜_äù>>mS`~àdïû†û ÷\Ô+ù¼ÒøŒ$}7ô ÚÓƒeI÷_}@ÿá?tyuCw_i(•L7œ+UÉªc. räÈ‘#ÇKK 
+”øÑÏg¢ÑE:”Èu#kà‘·ó¡…cŸ±t–Ó¢EA'ĞŸYàd…>iôÏ›zI¦ò§¸°	Ö)‚O|\º¦b@0  ï‰‘Qº&&q,FÖ€âÅ‚—ß/µ_>­ßşêİõeŒÜíöïğq¥o±Ëo¨²œ€}+^Y;´='úBî>öÂéwÆ	hOh€Š…$zù,
+÷KÆ—©t‚L^ğ¤ß?öûİ9=¦ãõ]. S³»¦ºª)öN¾‘”Ã$Õœ€9räÈñÒüO·¨x»úg©^š×&Ñó4çÎ¨~kÍA?Óo-ûgq‰
+0ø—â„Ká¸¸§89
+zß‚é^ÇÅ@nXMÇ}ò½qXíœeµa%ùã9ù³*÷õ»«÷^«ËÒßïüğ¶:‡çÅ^†ŠèòóAØåˆ¬JùšjÄw&ñç¬—BÊHü#KÁ6 N†.™áŒÈ3[Y(g+Ë’V›cº¸xFÔ ›VüJ¾>Š‹`Y!ä G9r|A0óô™ÿp’µ¡ä'›>Òîı¶nÀ¢ëÉ;t‹j¸<Åä8xPÌûs0ÏoM"â¢¾¸D4‡Ïn“³Ÿ2¬²8!û`Üéº~ø“Í·íğQïÛsëí}z‡äŠÕIÉİvÄØ}èeµ Új	}åâ|êBüÖÀ` Q'µvû’üÇu	ôL’âsãw)
+¸ph½âŠÒÒæäˆşş—†¶»VG‹ª¢”	AÏgò
+ G9r¼<â€ÿx †³|}l•íaí°¬hıOM~<”æ]:QMœĞ÷úé) ,@² ´	“€˜võ1ñ­9%¨Ã^\èıÅ…C¡|Ö¥	'¯[ûêÑúí¯ŞY?ZùîÇİnû«ÊRÖ¡S ¡æ¿•u„-V
+2ì{r®çÄo„“_@šz©|İiğkmOŞüºS?Ôı8X”æ¯²X<§•„~\íè•{w)pñÙÅŞ»CU×Sg;*Wé4>+æÈ‘#G—¦ºå~·P Gó‡Bú‰V·ÔçÓ~}6Ëıû<Ì·Æ,šÿxPt˜;^³p'<äç/Š8ÚßºAkâÍx'aÄÌŠ@‰ÍÅİOät9KéäøüË§å£"øÇ}ßEœñ	èd>Öø÷Ã€K€üÂ@ßÛ$vøş	?Ÿ»xC öE)@$ßzW˜ „(;ÿ¨ÿc€:r±–B ˜ˆşÄ¤@
+GwîÓñjCW7²(¸‚
+NĞ!È: 9räÈ‘ãÅä¿Í™4 	y™Wgpßˆ–òÏ(p«á¦—™	MRÀÓõšf¤ÿ™Ù`,JD:×˜i?p¨'vşqr0ŒS¡²ô2ùÅÈû7á–ŞA”}á¬}ëÁó¯VL·}<ôÍYzAùc?ï‡.Ùìbœ?Èı‰aJß€9‚têÇPFöºëm#f?”ÀDˆ
+´8g˜ÕñÜÑˆÃ`ä÷çÀ{~=RM.
+êuI'§§œü#ÿ´2ò ¾ïEG. räÈ‘#ÇA,4o&¥¾97/öù·nJ•“¾şRÎW…sè@C`yTş?zc³	Ğı7_ïĞµ`âõëÿ&!ßôT`Ä[âA1ÌGóÿ:ş½¶Î¾uïäüÕ•yÔï¯]}ï‚ïTƒÀ«å0ºkîµEhghNÈé=ˆñ Èà¿¬×¤œ?'LàÜÏ‰:^“<
+ìü»–,‘dÀ>Aá €¸¿!ÃŸ1`DıÁàäŞ]ò¾ ív/{ÈcJ0ô½4ùÿê9räÈ‘ƒ^’ÊÇÌ|ÀÍ?ĞPõû°ğµ„*Ÿ’lH¤ü°ŸeœÄudf`èÀ2ø‹Š³4üi‚Q†Ã=géu£ìŠpà¨S¥sLLÁÌèb0G•s¿zgóŞı"şpØíŞüpÆİ¶ƒŸ‘$:?öı*åzîÄkKeY˜bÜßñ/¶°Ò½t÷¸u«”<tíàøZA(ƒƒĞüp^'¶ÂV:ıtäœ
+a &?^Ñ§u¦w6kq|¶½¡;mÇÇÔØQ¨œ²É@9räxé ÒBPOUñÒ˜”Ó	iÏ®;å8uòfLÓ"³•U—DtFl@wAõìb´¿”î5‹iCŒqÑ™/,xM’û9P ^ŠÅKp W¬	?ÈÜB6ïÒ=#Ec:ß‘w'eù“ÿ·+ú¨köçfîsW20æA¢vŞÉ9=mQJEã­
+Ia°ŞıNè'ò¢â$¸Ë/	zø¾Jh#DİñËŠ@*‹ jĞ@e¹(ˆ|jÅç«Ô€HÀ‰QÂ'õÆ‚Šã£ßKE—ÛÚíP àX¬2
+YOä G9r¼X˜„œ_´íŸYšW¥ñ|&³ŸùÕI2x<6ÉwÎò!Yñ˜…DğÈÙáöd N»û%pp4ş™ª‘øpšp`ŒªŒ dEäL/…
+Ôı ¸ïÉÙ;Uùö×OÊGÇvøqßøwœue0Œô/€í¿±ÉÄ‡S1«ğò‘ôõA|Î¨H°:şo×ğ1¥"%ŠV;ş~O®®øó¥¡ô'T¿‚<wş1ôr^c“ö¦ âZ½aJ‡6×üsJ¿üüsÚïvT×5¿K#ÎÂ#G9b©©?!äIÇôáöh>.‘ú)A§Lüís¾¨û£´ ‘Û¥yŠ03îöçŸø¢¶€YZÑÂ¹0íüyù£Õ'šôıñZPàßÀqo¬½[šóoWŒÜvûïp²,ujèz2QÌƒïÁ©+U„¨(R7®kõ*€ wÿ°æmùÇı¡»o;Y (ØßlEşW¾Ë`åµ€Â¡â$ Nê¸™šÏYPz™2ÁD-
+PĞp1ƒ¿«UåèŞÉ†šÎĞ³í5m›õ—â¢Ï€9räÈñB÷¿Èã‡"<úÂ8úŸ“oBÖO;ù8¡öc¸Eü_^å‹ğ…ß‡'ŠŞŒC8*2‡MÿAQ0q2ûµ)…˜«E§ÚWkwş¥Ê<ªÍğ¸ïû3ˆúÑĞrBn%¡KİI.ÉÓ HCÈgğÜa—âú'÷çŒĞõ`Ï+Sƒ¡ĞÂLLDş·âKğùıNô0Xi}Gd|ıè èE Èògƒ$|h”“j#
+€`A™˜xÁfÜ?9¢‚†çW7tçäD4	ÈôTd! 9räÈñbzşÔğ.“µM­şm½˜8ù!ıÙÌ”}İ]/‡Ë$½`L|º5(0ªÈ7<ıjFwAš• |$ÁOŞ "ZOÉXñ©}D×ğÙ×Wåù—Wö‘‹ş1wÊg&Hôğ±©<àïÇyDaÅ
+ãö(6»pŞóĞÙ^ûHQ  ×I´¨JÙÇË,~ p+“ˆù?Ğ ì £FApì­Ê‚Ò×"^ ƒ<?¸ iV+]ÇèxUS½:¢ëí5í›=Ù²æÏÖ‚sÈ@9rä8Œäú';úd»;½±H¶3Üo¡ÌG‡vÁ“YÏhg6ß"“Ï	=uè³ß‚…°PœÇıÉß/&óùœMÒƒãaQd|‘ÄUr7ª]î¤·Ñpò/Î_/ã#ücÎ¾g.öÖÃjPa!¼HÄßq ëÕ…væ]Ë‰ß¨
+`¢øÄ'«äx¬p[ ù¡`èuüÃûVİQ<x¾·ª^X"lcò€ä/@~qìòşâßi±ƒ‚Şó½@ê…KÁï¬ÖôÙ¥¡‹]G«z Şòõí€9räÈñÂ`’Ïq qêšGª^Œ·1³æ~œ}‚ÓnßN&fV÷]ØôÊâ[€ïKÿY90Îè>“mTûŞ‰’¨×é3³À°Ug@N çjX„ÓyÑööÒœ¿VºGÖpçO“tH¶ öEß
+EÉ;e¯P=°úN‹.ĞåŠ|ÓPQEä#áQ-°îA®Ê÷•‚ £: BxèZå—Ü©C-0
+ÕòÂA
+$(2<˜ƒ—o3Š!èu¤`  0 ø p„ĞK××İ_C‚¸¤ÿÉ@9räx±0MôAG®ï›ùCcÂ#ıÏĞ÷HRŞÂû	‡ª³ƒàL\Š-ƒ&Œ‚tÛq9DP$<-<Œ_f:$Ïâ´;Á> şü-Yò¹£>«zy/"<Ô²ŞM‡ölµ!5Gíœ¡Érâ‡ğ·çTp‡?ƒtãb$ÄEBYUü¹^Ö½P£L†8ˆûŠÜwU@¬ ĞrQ€a}ßoõ™¸pèaÄ÷c ÌpkÓd%ÈW9 ìÙ`şg½YQY”´ßïißbPQ30G9r¼,"‘9ÀïéÿÀÎ×„	¥¿LÊËÑÀa'ñ€Læ¾ãuÌa1²8Y/ÊÏÖÁú;®–+’M€Hæ¢Ü(ù×W8ù¿RÒ#NÌ}ôgÖ‚xN1Iâ×Aá3­—ÎßˆKùVĞıa{Ev5ãâ t…ºæã89÷`xáÜûf/Éİ¼¬:DÔ'ˆ4¯Kßõ±÷/ôÏ²N0~a„}#_Š)ğpU™Ä—‚j‘‹]xèısrÄŸYkºnoèŠŸÌƒe`9räøGŠ€©i)ëŠ¥Qè…DÿÂáÉÉoúoš™!p((§YÁ”Ã[’¾‡ÂáäA¦îÉIo2*J~À¸sğ>0ÍùİÂ<²¶zúı'yWBØ‡»k ü…Û1{·—q¾5•ãî×{Ğî°û/ë´º 7¿æF¿€4
+4ä\@) :MÖ`"õ1	ÁzAV"üzz>ŸÕq¿ˆüTœª-¢àéû6Ù.D±¼Zû‘ÆØ{}mHÖÂ|5Ç«5=¹1´ß÷´)µ6¯ räÈ‘#ÇKBà}’@Ã”d¡#/µ“ıoœvıšƒÍ\(,ï¬Å¯{K“¡¹€)}&©Úi§oµ{“*a˜ŠŒQg–k•¥:¡Rÿ<gÚ#ìß¹øˆ_{Ì™ùŒS¦Ãv>ì÷œ¼£NĞ¥9ÏÇx›öì£u$æ’
+L÷{îÚùúU]IrvÀpnj#‹ò»¸ePıôIÿ"Îò9;²ï‡ Ÿ_€zp;ÁÉ“Aî× ºÒ¾Kºşİ “PETXhô(.‚°Ö?5Ô6ù£Ú¾Ì@9räø‚î_UeuÔF^š¹ôñğó³mï-£ …à4¶Á„q!4.c`P_‹³rß¢j0#!Î÷o!ÄUwâN8ööÕşæü¨,CÍĞŸS)ş¸ÿôİ‚ ú­ÜËĞv4˜;ó5Ù,ùÏÆs·. >tŞ7dŠZ<~¬`äA’fqÂ=@@=|tÁ¾K‚?Ü±·š¸alÄõc}•K(FÒôÃ§éÈ Åˆ0 ¼çôë`Œë*øÓñ‹«ºı€ç\ĞlÚ†Äµ0G9räøÂ* uÒ£V¿¼â&¥@ùï8âeuéP›üìÔÄOm¹I²Àaú¼™€…š@õw›PK?ùşÆÉ‚Y¸†ÄZÀîÒ·@ûSgÛójèÅ²xÌYòŒ»x@ïÅIO5wÕ'úöùuİ%Ç÷dràZà¶Üu#á èsîåµªŞÈDÀ÷(BZ3 •ïÄ+ ||±ôÅuŒ‚ÿPH€5!SR?„¢rÔîİUÉÇêÈ×êz(öÉ|IÿÄ' « Hÿ&%@xà ûAÁ„˜ÊTÖQÉ7}Ùz…€Úf€9räÈñE {ËŒ¨wqÀ‚pŸiv	0¸ğ	ˆq1çº>0´ÌŞq"5äQ²`zßk„¸P¤…ş Më‚ñşh$Bâ'5(Â»û¯ÉÛ7|sîzNş…ylãpVã˜Ôô"
+ÃbÄ©°¾ó*5Ÿs÷üü¹£QY	¸Îp’‡0O74ä±ØíˆªJüx ¡â‡;±‰yÀçè› ‰ûŸ×ÂÅ:íı ¢B¯ká:hí#ĞşXôúy\Tä†aHèIt	0¹€ÖÀœÁBDPH™x&Ü_¿'jø½Ï€9räÈñÒ NB>S³nÇ	|ÚÃpü¸ è-fF˜ õ!e0¦"`4Æ®=$3¡IDhq/‰~œ,Ğ¼ëOŸ80,Bw]Æh_çÎ¿ÚGœ;k9ùG':ò?Î¢5’w);ü~ÇÉ»ğT¾òù§–úíùz/;vk+µ2æB¨^€®Èõ6zìçW+mÁ!dt”1¼à T”šøF?`	à»êı ß‡-Aõ÷ı çğ‚À7SÊ·ŠBa½Cpºï; cˆÉü8âB%P×«)QU•ÂØ¶6U^äÈ‘#G—ÄDó³Öş!½/¹ùE•é5q”^ìôÃBöoâ¦$=Š¥Êbìîg¡…b ™I‘˜‰Ÿ†In(ñCL DşóöæázØ}À)ÿ±­Ü™åÌ	%¾h;,3È* >Ü=æŞËX~ıÚW¨ÙİPù„ºë'T®•§w)´Ü­»ù~G~I«Í±n÷×T—kqñC‘„µ€Í€1áªÃb×Z¨ô=ofÕe¨ûa·/Ó¾ù®m„’×#ÒÃ Š ÿ{"îüIº~øÔ€Ÿ¯&@ "
+‡J‰Ú¯…\ äÈ‘#GÒ?f±H}ZŠ)KÀŞrğ“df$ş”œ§• MIŞx«BŸŠúÃ‚cá—êD,‚‘@26Ç.¾å„¼n®‹£ıÓ³XÖXëÎŠ®u²__s7İí(‚—Tˆ®‚<0âálêVHîÆ{´9y•¼9¦í³_Ğ*ŞPUT"Ûğ òóv{IÕúD&C7p§ï…Ã/Nè $^Õü09ÁØ¾á  ~	26IüFj††Š²–D4?Ôı 4pôrJê£&ø˜ÜÇó¶(:ğ»W ¥	zª¹ (MA7os#G9^Lÿ_!º3Yú.J"³°6³oª –V¾&ûMêÒ§š¸9“,t£vû£4Ğl6oe{£ª>£Z€ÑóOÅTõ¸U>m¯Ş«bøY{ncpr>¸è/À?YEˆ’_)#v#İ7‰-/Pÿ8¥•Ç%|íkdNÈşKîà·œ`·‚‡°N~ıÍ%
+§|œ£–;÷2}y‹xøQÿ@´z¹Ö`ŒßQè•jˆè¡G 	ŞèÚ€O ğàÄ€PˆD±¬iŒğÿ[è ` Lƒ¬¼|P´~¸×y#G9nÅ”˜½êóOr¼q!ÏkÆí|P[wõ‡Ş¼fi¬2oü˜„W	‹ÄO·›ı6p,â( fn  pÇíÅÃÓĞşÿømg¨tb¨ƒc9}6½ĞùŠ	· 0`…¥¹XêšºNö¿•LĞAE ãûê«¯ĞpñŒúÏvüñk¢•£Â®dzĞ\o©\ñ¹êŠº]«º	àëÃ8hƒ¡Ü€®¾~¡×Ëş>1*Dl‰;õaˆ"ç‹é€€ùˆÅä3Ğó¹dª€_FûŠü—bë~o@-¨‹X¶màÇÏ+€9räÈñs $ö¨âúºSŸÄvè ¤7vöcwo‚90œ'³xK™<ÒLÙSº‘èÕ~wª%¦æ?N	¬‚Xı&ì€ÑC(o¾+¯yVÄö¶ÚÜƒ2Ÿ3%wĞƒÊó½_ˆøXQ6´"ücë™–ì»ûJGüÎ©™Ï~mã¨^¿!Ïß}êhyÁG_Òúäˆªú”º}G¶í¨¬Kº¨Ò¾˜T m‡ä/X AWú<VÌ…Pà Ûßr’îºwòğàú·ğ3¢H(u<¸ş(øó(.ğw5™´ƒêôÂDN¸ã C{Ÿ' 9räÈ‘ã…ÔOÒ¥Æ1«Æåè÷/ùÉá/íúÍl!<ióÛ±0i=@3À/%îÙåO_Ê=ÄQßé<âµ}/RqáMäÚÇÍå»«n÷3[—ïÎ•wòFÜE`—“ºÌ.Vv÷<ßË¾>kAÛ[×©Â'Pæ­Vª¦çZZùÿyCá>£›_ş-Ÿ¿á¤¿’uB·İsßRutDı¶|Oõööú=Zõ=àNßwAÆÿâ{Iè(Jz™Œb?F|’Ø›^åŠÁHP¤¿~^W
+
+Ğl±À´CTZ•Nş.h˜ÿ¯#G9–S>&Ü@ñ Ğ7fà1 ÄÁW8û‹ZıØ["#Ÿ_øê©2ËBa|]O’Ò^ —î
+|‘“\éûò¤¿zkS¯Î8£–TòY‹Y7$³!¡ß©„>õàísAPÁÎ{xş`ÉÉ]? xº¦åóT­*û)î–tZ¾I¦.¨}ò÷´{zÍï—r|ÓxååÛšº–_p^A€ì;#8)x ÜÛ`ìï{íE€Àˆß'Œ€ìöîú1êïÇÂ'è ¼R°éµ‡¡§.v²@C&É‡l”#G9¾`0êéO:Ñ$Ë»´ñ™,xâ„Ø›~!üKÅßQÌgZŒ.~vd˜CÖàôÛŒ/0qÄ%xÙ÷CC`¼æIËİ¿ï>ŒUõ`U×‚c°©¸ˆ çÅA²nL;xtââĞö¢¸g¸fpØıGÅºÎ>
+S;òíOÇ~Uğg£XürÍ@wß|•.ÚgÏ¨¹~"…Õ+ş}ƒL†„ú½Šò@ê_ŠÖË@Âœı^@‚Jë¸` ¡¯°¦ì3"
+Ô£Ó@´HÀ(P€7Œ"0£ÕÀ(kŒÈ‘#G/¤~’Deoéxq6İ=€òÂgÇä­#î™ò—
+“?òÙ'&ÀˆĞİÃ¼vHú¸˜$Pœ]½4ÒNQòH¬ÎQİ\—ÇÛÏßâ.÷!gêîÅ-fhh“2á F:£§ zğÏ e`ÒéúåzU% <¡ÑÛ@ıõ5gßkì’ uÄi}·&W¿JCKÍ³É¼çjê÷•÷áï¼};èîÒ*¿Â4?$sã]zù&1	é âƒú/À~(¢jÿ÷\	tHü½òÿ1PÓ¢ ]Gú¼µ0†¿'€s#G9"IzÔñ±fA½7sÇ>Uf!Ì³ .úv3&ğô'UÀÓ5B<°V¤>z29°“z0eƒ|F‹$e™Kp¼sıäİºÛ7J ü"'\[ÊØ_´ô4ˆ±¾!àG#¯–ºwî
+ûŠÕŠ;r#½é« ª¬©İ·Ôµ7œL#ëñ‚[ØÜ»KÍóºxòŒêãk€Rd|ªDb¹bÁ8(ÎuBL, ¯í¾
+øè÷ù}~FÏIÅC—d‚£h0 ‘{jÚN™üg°º¦l&¦Q)à(Èru¥€säÈ‘#Ç–3ÅÎŒö»qDûÏéİ¤òˆÎãˆßğ—r€†æN&¯>Õˆq±Z°av”k¥‚!± àPDp2­ÛËò¨¿~‹oöaaí
+àıĞî8£;*Š•€íBTÚbHV‡B'–ºÂ(+IÆ²ƒç®Œ;ôêU i_Ññ7T“¿\ÜPQâ6‘„±»·TŸ¬èèKoĞ–ó÷ÓË'To*ª«Z%‡{ÅX¾'kÔòØc§¯T	ù¡)@iZ½>t¦	#ĞKÍÒ˜_	¦ \ÀĞ‹¥b ÿ/ ¦€×©şıürOç¿ñ•\ äÈ‘#G[‘Fñ²ëŸvínêğÍb+`ÇTmiÏ/gSÚ¼(£õå{´4ó‰ã;3hĞÜ*£‚”È•óbà¸¹z·rô¡µÕjAé«Íï‡=Y¿ã„[¨Tn¯,€’3uêÉ”|^>	ìş0Àç]¼ˆ[ßò¹JZ¯NÔuow!4>Ìä¦|Sõ)÷éó›+Úï;º‹)	¨xAíQ´ˆ£`ß+(_à8@¢3@PÿêĞ4$qe¨
+`÷B÷ÁíĞĞª†‰5¡º0ş‰²î(øŞ÷üÙ¿{rE_}ãı/õ_å G9r¼,\êöãò£y”?&h¾´@YŒ~”ş¦D/ºI]t
+Ü3æ6¢`f(!Î…AÒÕ§D9”@ok¯ÊÓa÷VY-VRpÀ‹ ?W“Ç8ß¢Ú%YCş—‚f/@B€
+Ñ½ñOÅO…
+^¯Õ¯°o/ @È ºª¨İWÔì/DÂ¸Úà«ÛH_m,İyå=»¸ ë-!Ü;à€/àÄ9át*¡ÒAÆûB}p:qûR õÆ¤Ÿ¨|àôcòĞA‰0*ŒA0F‚àıâ³zãş)ıÍ_ÿ×ôğ·ßÎ@9räx1€w4ƒùD€'­àe¨<ÉıšäfC³³ÍÄ'³@ ãdö£…Ál$d’XĞ‚¸xÚ ƒ€õšQÆò§»Ïß-ÃîC_º»qÜ‰sf”n >*Öœ9[¼R¨aŸ`J¢„k€°ùL€,°p Ü“„|B¯wÓ ‘ñí¹KïiurJ>:j®>¥nxFT5zµâ]W´iOéâ	_»¿¡:”ü¼˜Õ:]‘Hİü ş£û+@?tı  «€Ì–»ü^
+(«k¾7hÿÃ
+³±©_£Rñ ?»¦¯ÜİĞÿúïş”~ëw~›>½¸É@9räx1û›QÆ×,ìxg–Ÿ&ãy5¯“‚0Ìf»à—^,Øw¿8ş;rc4Äx>Ñ£MwSúİ[œQ†¶[îF¦¥ã»8’q¾«×d;¨äõäŠZ^Óe
+N…ƒ‚ø€ÂbÅ%@y$¥A0ÜœÑ…‹VTÇAlÚQœÜ½CívKÛË_ò=Ş‰íoÅ÷ïèädE—Ï*j>[;Pá"ÿXìÁ9h²Î°ò<bê#I<ÊOHÀÉ‚´Á®?&¾?%‰à šŠ™Àª4Aì>}~CëÂÒÿøoÓÛ¿÷]ú‡ÏÉgs#G9b!ø›Æì³5¯±óø_eØñX«‰q,Æn^‹‰xp31\DÇZ„8›÷b0†b°ã¸¿³ÿü]NÎ’)”¸7Næ±Ùq]±¢PFr•—İ|Q®Ä§İï¨>>•½­Uç8î9¹šBEx‚Rõ<'~h!ÑƒfX¨’_3¦É…1Nìza´S­hû¼&¿ƒRà@wùvğ¸[Ñ0q°“äŒ‰Êá/Èhd"…dd/¨}ìWwùüLPRÑÚ`ø>l* Ô%Éß‰ˆèÙ3mOÿÍÏLßùŞ»ôñó=µ|¶*r#G9^¬ Ì¢
+ı4?OËùYgR
+¥ãdüƒ×L&wÀÑ$(.Ê€IKhDû/[şI`Æ#Èh»ÿİE¹Şşò-»9~Èí>gü‚J{Ì~OÃ~+}ìÉíº¾½³µğ÷‘dxş¢8S tAÁ(ö­PèÀ³‡
+h~ Ú…Ø«]°Œ<ê¡Ã†>@÷¿ÒÑÑ;ôärG»ëkªOHì{±«‡ÀÑé1]m›K*ùœe³˜õ@½½~Ö‹ƒ>µˆñÏŞ«œo„ÆıiĞóóAÇtAİEÊ˜oñù5¿ÇïÿÛ?ıCúàÑèù–ßo´¨ÀŠ  9räÈ‘ã¥UÀ´§OI{”îQº^”®ûlUşKì€¼µ
+Ø“L¦f;“ö{T#‰u”£Å¯™ÅL"!;R:¢WU²~ Íöów÷öûİƒ²Úğu+À¡bCÕÉ‘|¾ïZ½ĞÉ=ë5õr)«À?îÆMyD•«ä³¸M<z(	‹¶>ØFzPØƒ“ ´€ğA»wÈîV\TT'z¾ßÑ°ë©¤­Ğ÷àá[ˆ‘¥]¨äÏÖ‹3JÙ¤L\œ%ğ¿Æ”IšxÂ Ò¾¿uşü,ø» èğòÙ5ıåO~@òG|?P
+l!Ìg !æ G9rÜÉügaï;¿•Ì~TÄf¢ë%-€ÔO=ÆQ¿m«Ç?˜y @£óp\¸&€4ò÷év´ü(©Ş?/«æê-2õCNÔ«j~¸§NÍpL}$Ç–wô}ÇI»ÕQ{EO¼øı¢,Dª—È¢;@ëc }~Aé£+¢^À{‰ËÏÅAn>4úÁ¿o÷²ƒ?:©©¾>¢Ï}N›Ğëw3íğ‹ö-ér·çbÁÓª¬ uRœ,úğ„½(şE‘€V >šìƒL5€‡#’ÏqqİÒó§×ô'ÿü·é'?ùcº*Úï®ä½vh¸pÂÊ!åÈ‘#Gd
+0ı6¢÷Çaüä7i÷æ@à¸
+0ÚnãÀ$1Ÿ0NâÂY`úó‰]àB²
+HzöPø»Û>·4æCWVŠº&Enßm…½ûhcÌsQq²]q‚æÜ5ªØ'S„BõŒ&÷^Ä€Œtş@ñGÈöFÕ NPhzHè¨q¬rş­ÿ]>oOÏqàÖÇ+¢‹‚nnöTW…L	Ú¦…Ş LF:¯XƒºÜµ· -bĞ%ù_R·?tü
+6D!ĞJâWÕÂ„ØOoÒôÀròoèÙ³+úğß¥û×JasJ7O®dRĞ@|ß’D}. räÈ‘#Ç¢.=,şáH`\ıà}ìçgìz¢
+Şö‰IĞ,
+Œ‘U0›ÿÚd#ì'f¡ğà9utÏËc¿{Ëî¡­Ê•Õ©­¨u—n¿Hß*¥.â=û8>~·%P¡D`_»zAüsw z#+	I¬("€à_mg„äÁ¼ĞùÄfë  ¹ˆ€ÔpUñ¿>ãdìEÒ×
+°£}Hcõ€ßU‰à!v|n‚Sàì÷I½€À>i ÁçàˆßP2@	ğùõš›–şüÃïÓÏş/©/×ôüÙ³ôYœ¿çû*¤Àj·™˜#G9¾(d,m&S©G§aÔûi‚‹‰A´& %	ŸÀg–Â©X0ŠüOÜøQiØ˜$ÿ##ú I¹àÄ{tóô]†ëUõ >÷ñu"í›°£`Iİ:©Ş¿«WÜµcÇŞŠoÁÅ‚·•$\ŒÈÑ)+ S‹ÂÊí@ù[-H°œ¨kP÷ø0Æw…øÜìöÔd™á{O«²”„Ş¶½øD¾ß¦óÂ¨ŠH¿ß%vdˆ¡u€AÜ}‘ô£šı ğ©~øfº$ƒüìjGû›=ıÕ¿ú>}ôÓè‚ïqûìREÎ9îeôŒÅ¨£€9räÈñ…À„É·Ú¡‡©?§C£ÀQ/`‚÷™ƒ?zõEBöÁqZ1˜ä%i6Âøç9i¯Šõ°}Ë@óß­WàÚÜ¡`“œEO7ea»Ë€…?/IÜÈ”€“x¿ãËïÈ­øµ²’î_²,:ò º¢©ïœÛN€Nøı^§ ^GñA”ùì¤Lˆÿİ\liÛ¶²Š¸Şr÷dŸùÀB€¶`ÛôÔÈ4!R%ÃüD—Œšøî[Ò1ò(I{İ‰`=ñìº¡İÍ–şœ“ÿŸşéÑÅ`hÛBuA]Ò”+2«9.BÊ»«\ äÈ‘#G[afËßqö®y:N?ãŞLò#•Ï¤(ÀR¹_kÔ>³ô
+Í†Æ@£  şœ¬…G$ÿ2{¼{ş^IÃ‡Æ•0i€±~„¡ÔPh‹À
+X•Ş5#È ÷ ,äÜ…öÈ^]TşŒ$XÜ¼Ãˆ^¤9\©ºıÃÀ?$^$gaµİõ]'{u|k«
+Œ-íöÍTúì8Ù+3BÁ“Ø@`š †@7Iø¦I (D•ğíğ§E’‹/\~îçW{zşlKñ“ïÓÏÿì_Òe7Ğv¿§ÕæTtºĞ…Pa+YÎØºâ& 9räÈ‘ãÅ ˆt«ãwpÏ5Ÿ¼¤æ;F;lAş/¥lÒî3¿)ĞNZcaa¦ã]êÖÇ	ÂH?DÃë‚Üà“ã+û‹‡GıÍ«¿SÕ
+lÜ´õ#wÁè¦1NœcìA¸ şUÀ¯ç[òí  ?Jb8,7YJÇ,.„²JàgwŠ#°^×Â Àx_hŒA$‡ıĞÉy€ØÇd`U×¨h»ÛNP	‹²¢^Ì{€A¬(ráİş @—d“I×^\ü†é{}€„É@aóì²¡cÿ¿O?ûéŸP*ººüŒ_÷â»™¾Ñë[\@Ù
+¸ßìr#G9n…äa;‰ú¸ä8ÊşšEç¯B?‹CıŒ
+ß‰ TA{ ú#> !Q UYH?—öÿ( ´÷@ÖMq¿yvVZ÷Î÷J(ùeòíá®zu$€»ÀÉØ`Ÿ.JzVğ`î9Ñ6@ßJ¢—tÛõ’E›ˆêèW«º_BÄÊûhÇáo”‡ßêK€¤¿ïhh±ÀÚ€;÷Ş§bÈW_$’eMQ	 OÎË_jQTúRŠ¡
+h1Š°^¿>ùş:1
+ŠUà{‚Âßn·§?üÏè_ÿô_Ğ_óúúŠª²’¯±ín¸Ğ8É;¥/Šh± `ÏÅ(‹¹ È‘#G·ÚÿTEôS¢ïÅÈ3`!	¼4ô[º÷BfAøŸU~’ `T´şXxh5 Ó†˜œÆìƒæÙ{ehfªúg\)]4’©WĞ•F’lô0ûáÎ¿ieä>ë0Êb¬£¸ õ9Pú]è‡¾‘¤n¾±µL;Hô ø¸ ûàáãó˜*mG]ÛJQú ÷G? úä«‹".L¶äx<"˜(¬j$€Ç²?HQÂ_ùıØıc­ª~òìš6uIÿÓ_ı	ıàû¿O—±$wÌ÷Ûìi|': ú®!Sx)H„ÂVCYæ G9r¼8Ä»)4ù$!í­BA9ûq‘üGU¿äéw`tX`Ì3#OÀŒ¬£Ô:ŒÁ‘ ùº÷ûë‡wıî‡¹oÑ–Öh¡€
+«¦AAÖ	 Î{éöÁÓG¢…ã8XNŠeM¥xöö;íâèCÒDbæNÀG5ò ¯Ÿ,Œ­tùFvõVœû¼°H^î:ì¨]»]~¢õë 1¦zµæÎÜS[êÈ$ã$-®
+ãÒŠ_z®(L°BŠ¤'×tŸı¿ÿ‹Gô½?x—oƒ0Êã#¹^4ÕU-œÿöúJ& E:_¨—0¸E9räÈ¡)ylÆÅ÷&Ñ˜ö÷“şÿ˜ÈÇ!AÂĞÈû7‰2˜:XLÓ gAåtÀŒ&)"¥¯BW>h.Îøò?(ŠÕ=YI OòÂÁ¦Bãÿ®ã.Ÿ8é˜J€E)–À’Ğ!ÛëUÊêèÊ¥h±QGğğÀ	¹›—5€×•ÂÀ	´“1ƒ•Æüø^,Ö˜.$$d Ë»ƒèPÄúÄI"®«J>‹5Å¤Ü'(şB¾2Pû|L8àø?zÊg1IøäÙ• 1ÿı¿şCúÏŞı.ııÓúh¹À€Aöıõ2Å ˆ HÇ¾'¿ßóó´‚)€æ†<È‘#G·Ãè¸xr3©/.tú£ªæÍ´~ğ©ÀREĞÒRŞG'‰p@%œ­µ<°²xÕß¼[›ø³`Šw¬	¥ ù0Æ~¯çDÂïx½Ğ­ºø¡Ç/*Ø%]ÿÀİ7jK¥ØÿâwÏ	¾àb fA-Š$TŒû±2(8‰¯Wœ@uÊ ÁhóO¢E"$¤E
+Ytƒ¬V«•$w+’Æ–ºaPÁ!a+ÌÓ•3 =–¯-n€ãÔ…ßüìémè¿ÿ³?¢ïüîïĞgW{q7tÉl«PeµÀÏë`ÄÏéÊŠşÈC"‚Füc2 G9r¼˜ş5#Å1¹ÿ^s¶ŒÁ‘šÊ~’øÈ,½™D~nŸ™Ò NÒ¾³¾¿tÖ8ÿˆàÎù¤»*N‡«·‚«Î¬³¥é·2²7 Ô¡wÜYuÃ@¡/“ “ou§uô„`ƒã1`èíºù='ºú“î züèÚ½ˆöxu!jUÓ_Dzd×¯’ÀÚMwz-$m¬‚êô[~–Íf%’¾¨M 4¬øøÿ€÷liùŸ`/ã{
+Áıo‚Ğ§O/èWïÓßü·Ò;ßù'ôôr¯TFãE~ß§+p“N°ÿ=€®è}+M	ŠÁú˜¯1“Jˆ`:ä G9r¼8X.ê')ß8îGá?³0Ò•IR@‡yÂŒ/Y3ÉÇ4öG÷«È{İûW¡µ÷âş=GæÃhÍÎœ2ŞG÷/#lçÕQ=¦bƒë”g¯œ¿(‰gPOd…«BDŒ5İ8'ùĞI‚ÄmÓì¡÷:E¡
+|C’ÿ%R: 0‚ô/˜ ]'^Æûº]¯
+0jj‡(R¿`- ñB/ ÷b{åçnø5ß¢èä9¸Ö¡]3ĞÇŸ?§ßüúô?ÿåŸĞo½ıôéç×b^Tq„nßÂ$5LEî GŠ{Á3H‚IG°*ø¢~»£~ËçXmr#G9nGœÍ~„~F3uoä÷ püüxümÓ€¹H 4îY
+¬CÙP@-Opd_óíù:?
+Á}Ç™aé^ìÂÅ|'Ù¿OºåRtM/.Aè‹@Â«ãŸW'>¨ìy$ÙJÄtŒ×Ò¥lÒØßN:	ĞÈ×Å¾^¨€IìEA×u¢e>° Û®§¶WÛa 1•¨¸ˆ¸iZ¾–Ò!‘ˆCè¥»m}Û.$|„Ûßë¦§ç——ôşï¿MşÓ?¢×ß|ƒì8‘haùãdx¿é¡uĞS‰UE—vüõJÖ§èõÙ<Æ,E-”É\ äÈ‘#G[éŸ¦.>NÉŞİK’J²·ãß¦|<~vb‘=ïp¤şÙ4ò7Q‘ÿĞåy5îÎïşÑË÷}ÛŞ+‡F‹NÂ"ä*½U?ºrQ¼a‹¢Oî6{¢h$±mËIx Àü GÂÅ×±¿FWÙH cï/Sˆ~r,Ä~_$„	lÁ€„úE@¦W<‡
+Nê¸Ë¯Wµ|Oû^%€Qì´A]¡è89?¿ÙÓó«Kú³?ü}úë?ÿWëš.¯w´^o&j Kš	øQ? <7ğõl’4Æº¤¨+.6)Ì
+Ş…®EòÿÕsäÈ‘#Ç24ç[MâÉî×$ÀZLûÒĞŒŸ1ó„à¶m°Òİâ„ôWª`ÒÏOĞü¹çcPÿğKÆĞ÷ÍãhŠ³j}äâ®“dC#B:ŠØ ü1î&á
+‚¢ı¥ prİ(IÓÉØÜKÁÂ‰²iT.¸rz(ĞÇÇ9½©ˆÎšï·GÑ€÷¢&|tØıĞK‡’í°˜ö?I‹pT£5'şË›-İğ%Lşv}ÂÈúâ:Ÿ<çÏ4;úé›şò£A0ù©d•á…×/¦EV§ ÒáC¡Ñ"Éw¢G ì V#İõV †)lFÖØ1ƒ säÈ‘#Çj0vï©ÃG’D§øa1é:àÅo´H¨;		8îÿ“ğîë‹/¹şÌyûÁàª³"W¬doßoŸQÜî(bß?{Nt®^¹J8ÿêĞëSÑad.7ç9Q¼'ô¿d7 u<ÙëÑˆ:8û*]o»uAHÏ?õ	yï½îìñè²£a•áà2ÌÉ}Ä¾á.|Ë÷}yÕê³r‘Ñt-í»Ö|ŸÏ¹ øÿ<§×NOéÿ³ŸĞ¼wF}±¢¾éåûnùŞjSS]–ê@èÕº;ÿ¡,¤ ‘âF¦ƒàºË+*O£€ÅÈ. ÊóÃƒ  9räÈ‘ã%yÁÍ·:ş×QÒõOI?ÄIÖïÏV¾faLÚ¹G“|ï&& `ìUÆÛ×h÷‹ág¦,ÏWöØÉ‡àfçjîÆˆšA­wE…{Ñ©ã:z1òâŞg€…À1;@|€àäÙ§¤oÓ.Ÿ,M£Üß ¤?˜	ìgÒ4@qZªáˆşÇ{Xø‰2áä‹AW!ëúˆ.lC77W\œà;-©âäıÉóKúŸ_ĞÛo¾FÿçÿğSúîïüı¿ÿ’\çùı’:>»}ÑÀ’Ä­ 7(GÆ¨F ŠPşD²¸»á"¦¢°Z«rŒBc ßw'EL. räÈ‘#Ç¡à5MÒè5±[«>cşWªŞİ/cøD½‹4):V·óçe	€ä/ô:g¿lÛó£8üˆLõmW¥ÈôŠxO'wWÕ€š/ šÇ	®ßòÙoÃô‡ì­îûùC¢ë/Ç kæYCˆì/)[ ¦? ßñ9Ğ•KâÄ_:fË]z§EPú"9l¤` mãwLÚ¦¡¦å{4q.$ŒhR‡‚'
+pÑ G;..VÉ„âo?~J¿¸º¦Gçß¤ÿíßı„¾ú›ß¤øå3¡DÖ«’Š¢ú"ø‹ï«Ó!&¼×ì®Åôgµ¹ÇŸ3B-+]~±®E¡æ@$Â4B4	0±°E. räÈ‘#Çíö?iÓC#ßÒ´ïW 5¤Fz Mİÿ¸ßŸÇµ  rÖ¨8høCÈWì€ıµç÷mÿh â}çÌ=ãTAIIÜváÍs'v[µï 0ğOƒQ~¯k
+öãh*¤Ú88ş^drG= ›vôVÀ{(r,Ö]‘;èƒPÍ‹é8tÿbØÃïõ½ºêá2Bìµ P¬ZàŸ‘~Ğ.1¨‚tşP&Üóñÿñ“ešò|ôıôOş€ìÉŠ~ñéîäW´¾sG\!Bt´ŞHñÑ\_Èw‚ı>Šï®öT–|ÏÕV(‡(Ø |¤ã/J€d€ö V(Ş÷¹ È‘#GÿØ0 i ğ£’_<4ÿYşÄ¤03üô³Nh~cg¬´:/ÉØÙû¦9®…Á>vëõ™µ¥Cuƒ ê{^Ğtş!·ã„¬;mìÁ]Pñ(ıQ,ÔŠ˜“/:tš °tõ¢-(ÅvçbL(ç´"Ô7mšğ}q’¤ tHYø ¬Ùéåñ±&Øo÷$‹‘ÂRè¼|b³óC Éş ½P=m»şöÓ§ôö¯< ¿ù7ÿ%}÷÷Ïéù®£‹'—Btu!ÅŠˆc|úbÉÉ~]»—ädstÄEN7ÊúXqeĞƒ‰EË…M#Ï(kÊ@9rä¸ô'l ëÃ-J¿IÆ=Sî¹€ã®ßÎE‚Y¨ÿ!ñû´ g¾|÷Bsşj|ş(¸âqQÔgœô¹IöJtKø ’¤%f¶JÄd@\ú¼Ü˜b#ÀiáN}ìË©°* ”öß8»}¸ôa$Şï÷œĞ]3`ìßõÒ½£ënÄJ—“9Tôü©kºÄ~ˆÔr²nD@Eˆààhúóu’dñ¾méŸ]Ğóç7ôóïÿ.ıw?ÿCºû•7é“§—²Z¨ïò}\‘¶w×]‰`Ï°oôA)aŠšJ|¿üL?“Ú(å/„VÏ.lƒAPK,Vêà¬²/r#G9^^¤ŞÆÉêoõÊ~ê°8$%øãl"¨$£+½¿Ÿ†îákıÓJs::³&8¹£ğ°µ øP4`De0ÈXÁTqâEğ?Œ¼ÓÔAéq*´#>FixPéu<WJòP 
+pHãq¯šÿã¾bA1©¶İ šûİ¾‘It0!À“à9~­A‹/šÁZtçpDQĞ«ÏÀç77ô‹?£7ïİ§¿ùÙéßÿ.í@ûûìšÖ#\Àt|\µÙPáVÔpAÒìvt¯Ş¨ ƒ:.>\G¥Û&`€S`Ğû„àQsóŒ¯î©^İP¤«FÛãVş°¾‚:Â! 9räÈ‘ãå#€¸pêK´½Qx,BRÂßÀ¿tŒÂâ,¨å¤T_Üo¹¡ù`(Ê³²ˆNºÖnh~n¾·‚ª5ì!ôƒé‚ `­òv(`u+A*Âe<¡½ÉÍZñPşb‹Ş’8Lyàò‡İ< €’DI"F,":*ìƒd	©_S­V´ky®¯Ñhøƒ5àe• Ÿ.‰(…àh×´ôñÓÏh×yúƒïœÑ_üäGôkoÿ'şKÚm÷œ¬WœØ[q<YoTz˜¯[sBoÛ–¶»=¯ÔÌ(&ú"8}CvsD%×˜J`âĞ\^P}z,÷ÀŠ`,ÄŞØjá…¯€Éñ¯$ 9räÈ‘ã0~Ó¾?ıL]ı¦¡ÀD¤J4BKC
+JºI¹ÎØÓ¸¯Œşg«Î1´—Ä¼^mÄ‰¯ßo9A9U»ãoA®÷$n{ »YÛ¹ÌÆ)Uqáõ[µş•{ô;‰&@gÆnİJ·ïTbGÄ~ cÄ³]~Nò&è²;¯E ‚û¦Á!q,¡ô‡]?#EI×û†~ùôŠn¶;úÕ¯~™~üŞwé{ßû®ˆıİ/> ßúøXôúı65¾¸`ÀºÃqrßÜ½Gıö’†ı5ßSIUµ¦X¬¨½¾"ß^Ia ¢o;º¹ÙµmN”Åàùû1£"J±€é†Ê[¡Iv}—€9räÈq{  Rº/¨ù§Î…A˜Ü Í¬ÿŸLƒFÜ€ĞåE
+8¨,¯îîí½îòüÈï4ØúÛÖ†×Â^šdìnßAS¿İQÙ=0«J®e½Øê	èÀàâ±OC«÷,@étè€ä›`¬ °³Ç±V² 'ğ^LxÄ”W@}F)rx6)&HŠ¬Ú}'eMßw2>Gq0´AFêx²4!_kèú_î:úüù5}ùÁ=z÷Çß§ßïŸÒƒûºà$}ñéSYeÔG*W%m¯[ş³ç†½‰bGµ®,:H÷zZa²á[ÁL`¥Q`µÁß¦îúRV Ğ
+À÷[qÑ`lE±¹QÎ?‚‡À÷Š¢=¿ªûÌÈ‘#GÿX-„~Æ`¼ä“©`×V…†ÆÑª¹z¸Ş}ösÅûvut¼{$ÀR‰ñş€%Â ÀjC¦İ+"ßïUĞ‡R1!ÅA¥{QZÀÈ‹L°æy$ÔĞõB½Ãˆ^ÇüFÀ0Ò†“û^™ Â‹·IİO¥ŠÔå¯—c}ì•.¬x@¿ ßK—è’wßŸ£ãoötÌÉıÃ÷ÿsúŞ?—^yã5j¶-}~uE=wêåz£bHıp\¬j\¹HVÀàJW’‚ìf#ŒÓĞ¯¬kŠëJ¦CÓÈ®ÿx½ææ$ŠÕé¾ta<“õhàËA¡“€9räÈq+Ä§nx·¾Y¦ûDó33@r
+,Òg@ˆ‹Ü!—İ¾8Ş>9ã4ş)Š‡ˆÒRYqGÚéÒ­¦+"1s2µ¿ ¯ÁÎ‹Ê‹¾=Õ¥€ı
+IÌÚÁ‘ÙŞ±xAô@ĞËôTïä:È	MNı ª‡éUÆOÆÿ8.ŠşÿÀÉEGA'Qx§Nƒ|ıË«Kº¸ÚÓÑúˆ~û;¿E¿÷îwèWŞú:AşçêêšNÜ( °—‡Ù«¨¿h¨çã Ğ#W,
+ªùü»íEZ=àş;™T8:JöÆÜÉ—'TT )nE´> ö¹»ÜI‚/ª•
+‰O:¢¨òø>“©h‘¹ È‘#G/tóÿb0¢ÿS¶ŸPşÓçGZ %ºŸtëœü‡ÎŞ¹yòŞ:ö?s«õ¹­j'"=Pç#$°’lÓ«Ÿı¨BhUÏV+‘ò;şìMÏeÃêÜ3W5µ»ŒÏUVÈ ÛëîÛÔÃ,E, B+ö½8¿e@¥Êc€	9vû'a ÿz.606ï@¡ã¤[ÕÙø¿èú#'ìËë†®®·´â"âİß{‡~÷½J¯½ù†$Ş«gÏ¨­°¬eEP+>¾K2ÊP,äû»¹–Âß‘/Ú˜Q”ÕšŸ±âÂáŠBsÍ~…
+£fDfÀdcK/Ãt(b=ÑˆXQ{sÃE“Uó#è"Ø’º½×É	,“Á8èUé0 9räÈ‘ã‹ “öúË—Ehg9	HSIx2‚×PÕ7vsóä¼êw?²EñmëD­_’—åÄF-T¯ö¼eAÆš\ˆQ`÷_¸&³‡9Îâõùº“Q¾ï8¡7{I˜@€W
+N ‡Ta?/{ıA˜}çe]A/A^\½5*cÌŸ¡¨WÔ"ñó1@å÷ıºŞsræó½Eß}÷÷è+o}ƒï±¢ı® À}‘ï³í·Tºšo©k¯ieOùw!WR½:å„ı<Ñ(…ÄÈï„ö‡EG•A>WP#Ôÿ8qc?€…à¢¬?ºn'	AÀÈZ BAüL…ƒ 0±®°I+oaø³¹ È‘#G‡1¡ş_^|€’È¯Œşpıhìñşâ|İïÙÂ½oËê=ì±¯ğb}¢ô7ğëPêsB‡‹A…~|Tp^±ªÈp²çF{EqwCÅ	 †–<'>»Z‰nË‰À<QõYAÅ„®Õu@p2âÇ¹‘±#ïúVÈıPÖ[‰eo·oi»oèùMKû¦£Š‹_ÿæ7é[ß=£/óTİ¹KínKİ“Ot
+ÂÉãvPÀñwåZVÍpM=ß³³G\óô´ŞœPÉ÷"LŒÖÔğı	üyÕ_°T¼BÅæ>
+W
+j4qÖçgD©ÕñwÑÉ˜Œ„¢*¨Şl¨Ãdßu+ÜL+æ‡Á2Á”ì‰• säÈ‘#Ç‹É<.Õ}5İ? ¤Ñyœcú¦öƒãZtvƒ=é¯Îãî‘«W1gEQ8Ğä¤ëæÄÆ rQ?y•éÅ–—	jï+«nÈ¬ æªÛ††N˜#œù‹´0ÔùŠA“]š ¿-ÿ ¨}páƒo)¨Q¨{Ä~¸pÀ#{€ò¶Û-m¯ZºÙïiutDo}ë7é›g¿I_ùõ_#W9IÚ×ÏŸÊu-tÄw€lT)_¨ï¹jÅ÷ÖÓæ˜ùîRvû¨–Ü$’ñ=.† …PW´By,«R!4Â„•Cş¾º¦ºã
+ß’;$õz¥”D¬5¬22 0ÄdH6ÇâpèÁ:h¸ Ê€9räÈñ’v>FzaôhAı£ü7jˆO]š píœ]ïŸŸïŸ?2Ö>¶¥;«ÊÂAòÖ$×@ùhTM{«"zêÜ‡ì6*,<~/{ğ("6^“\û®[jŸ|NñUîv×k>/(pZ‰ÙO»^,&dçOÒáC4À>í‚$°èÂ}H“Nìİ~şœ“í@'¯< ï~ï]zã×¾J÷^½KåæXÔw»½*âÉ1º·kÎÚª€‹„¦AÉß(U]SN¨o®©â‚’ÄĞ)ğ|ÏxÜÒ€ëÌ×Üòñ^A}Kñ’;ú¢–K?x)LÄ˜¨o…’hË‚ÜßSiÅ^ş† \8ˆğ :¶ÂßN/:R\Ù8G9r¼1áûÌÁ`òÿ	:ì7I-’ì¯Pş&Y×\?<¾yòAéÜcëŠ3kÅw¬%ÄHøó‚ø’ˆO!úş‘;d(û	2?*İ‰²¶Ñ(ı®8^QùÚ+Ô¼§aôûJöÿA˜ F(pÁëaĞã’`Q?´‚a]PŸ<C©ŸT·—»şkz~sEw_{ƒ~ó÷Îèëß>§;o¾)Ïİ]]Ğöâ’»sNº"'¬ØEÜéJËÉãûÕõí–Úı'ùu¢Ã_K†S!™j»kÑ3€¸Q[*VÇ„M~{óTœ1µ …,zZ¯å;T°€ Q|È´ÀRÜ{-Â4	¸Ğ{(ª¼ø/Â’I	¹ È‘#G/ h‡§Å¿]È‡´ˆÓğ?ÕÜõí¶¸{óÉ§ L½:ã´,~{B¤4Û¥…!Î3D0ÈŠ4oÊ(rı 6½”ìƒ­L:.8é´~ıUj®p‚²&À±â8Ä]1Î!ÆA|ÚıÉ @I†øœQe?·İµ´ß÷Tß»Cßù}ã3:ıÒ+4p2o|LvPöâ3Næ{qtõZV¼ ¸ë.ÖGT•Úq	Äª:âsî¸HÙRh99Ÿ¼ÎŸÛğ= İ¨(aĞÓ²_¦œè+("¢ˆæA/‰|Í…îFE¶°r\·åâ¢ßÓš¿ƒà%¸¨áäïÓ_ u:QÁyDZ
+vÆm. räÈ‘#ÇKJ€Dñ33ÜŸ–?ª´ *ì#{{Ú\¼wDæg¡¨Îcèºyì·Mh¥[•| óC—+ò½ à9ìa†ï!‚óÿ³÷¦½–×•Ø~w>Ój"Y”)R)ŠR‰¶l‹’­F·ZVwº¥@ €ò©“üÏOò‚$@4:pCHÒF¶ŒÄêvä¡5P’Å©êVİsÏğÎCöZû½%I €??»pY·Î=ç.µ‡µ×ÂÕj”ÍjBöZ‡9¸^[\d’§2öµôÇJA³›“‰«nİd| ¶Úx˜T.Æ 8Ş  
+1 Ã~/ñé©|ú÷Ş’OşöïÈF
+ÛëkKèÄ’pßR®¸¿¬5©¸¿Ã •î°\¢¿÷2‰ÀÄÇú#dˆAŠŒAL¬®%Í–
+üKi5aá/]Ñöx{ù}	0	iGÚ$K‡C	Iä•<l†éîG>ÆÀ‡V—åÌÀ$©|ğ*fÅf¨/&š”@É¸]X"Dˆ4™¬ª~êüç~µò7ûİğ&ÚCzY/?¿Ëoø4~¢¼ @¯àyı^«Õˆ[F<¦<7¦>Vİ*óÎ” Q©Bş İ* Æ¨¶Ê
+I¬ŸéÛ*ƒQ™R@³1à’˜¹Øé¯oGÅÁšsq$!”ÇZ«õZn}â¾¼ùí*ç¯¿¡HªÀZî8›wƒÑ¢Çµ9I¤8¹éäÄÛÇt,LŠµtš\¿ûª&Å½OŠkjŠy­Ô‘|dÅF“‚Rª«‡’,oY×I‚fCgÒÂĞï‰±ÖØ™
+!»&TJcvO¸YAİd	ƒ;”6zsù³İGİ¬˜¾õ Ñ±zT>"Dˆ!>¾`•şÍ¬”§]›&»§bAØÈšc|Ò^¿ùşëZòŸ%‘Ö¦`Ã»Ä3 2õîiì3š¿»±29àR·¬Á¹"}GÓj¥­¯§
+Âƒ'A¯+k®ÂÅò-•ğ,Dy&.M¥Ùî$‚;_­A4&¾ç 8BâW~½½&ËşõßK^ı_—äìTê«Ç2B€gèŒ#^Äsœ&/ØJŒ’…[¿÷
+êç§z¼QúÔK~ï¾Ôlü\\ü®°îG‚vcšq²–Ãõ}œ{à0ˆuFŸ²¾sOÚã–IÙ‰à¸ŒÚşY­Où»è3Têx}1İ	áRˆ.
+$A€l ¬÷€m‹$áùÛZd€!B„ñ1å¿Iø›(Î¯³÷P…Îf?ä`öÚ\}-vıwû¾ı¢V®	»¨÷Uè$ÌQuÏñ³4©@5 …³éî| r!¨ƒõ: b]OÔ	 [lhdÉ<˜Œ¸XÈt}œgŞĞırú®!Aƒğ²,åXåâÅûò¹¯şÜıÜÒ+ØŸ<©JVÚPÍ{]
+Ÿ¯µrn4§©™ô4uI%Á|uª Ÿò!¹<’‹Ï}A¦éq.&Ì~¢v:¸ª7p¯O'÷4¡Ñ¦9šò R…LŸÁriê~
+Ğ±“: ‰£{à@/‚‘ÒÃx–œ €ğá Mª²4ãó­ëÊä¡­Øì€GÁH&iæˆã! !B„ñÑºÿFÛÿéøÿ×¦ÿ /sKz$À+ˆùåşƒ‹©úƒ)NßtnJâ¡‘şğD«tšt¥È\˜êŸKh¤ƒn u~@|Ó
+syÛ  WĞwp‰/2q€0´ï£™‘ñØ±Úå¿‘”hB€İûêûî5öÁ/ÀÚªÿjWI;yù·>/¯½õeIÏÏä°;ğzìšzŞåv÷;éìéG0¡M¯ í5¡É’.rMBJ‰N«ğµ‚·kËÉ‹¯H½ßJ½}&M@0ÕŠ¡÷Øˆ/–
+ØÙ?~—È²Bgmz1¢@—#ÆÈAŸóBÏ]ï>Ú3c IŒOc®\Péz ~v]D2R"¬’ñô ‚ˆqW4ÌZã$O!"Dˆi ˜ûÕ “@L³é¬~'ùşáç‹rû­!qßŒ||–û…‚ì{S­h4ÁrÇn[œK¤¯ú÷ûÉ0€÷ éõ¦Q?F¿:):Ğğ,3°½}Œôûˆj½4eEğ‰KnX‡Ck¾­jZî‚Qß”­ì{É6Kyğ{¿+ŸøüëÒêı®®%-
+Îù›ıs®ğe—ê‘%zŒqªpc=ß‰´ª*I!ôù]ò|u!·_~]Şù;©¶W
+øk*BàÛT;Y_ÜW ¿#»GoËXÔúWâÑÁk¢ÀM†®’$=¡@Û´5š DÙıŞ[ÂÓrN2'`^¤ğ‘è3Õajm…ÒEó$¢ËØ2	@ˆ!B„ø¸`šÒş9ÕÀX {ü ğ´ÙÇYùşš|K$ù¼QÓ&Úæúl%13ûÂ8PìC-ù$³Q‚ ‚c}_iê}Üö„ël4îéø‡™ùÔ:Ì½aü“$1«ûN=&(ŞxL_ÚQÊ²–C[ÊíO¿$oüŞ—euqª¯í)ª“åKÊc÷çÆê^±:‘T¿0*_Å#†n·¯¯¸7 T!"¤ç vu#MgkuS·—üôTÎ_z]>øÉ¤İ?‘bsK\çÙQÁ³¨ê¤ë¥¤×+}ÿh¾ĞP§Õ¯¯>4e=É€è"tĞDĞ/U’4²1Hg#
+$, l¢[‚Àè-IƒçuLF‘–ÈÈà•¤‰SH B„"Ä‡âWV¿îFú÷f0ûşö
+æi_ûõáƒ¯Å“ûnš|’D1gâ£Ì@_ $2[³gë•4Ìú õOõ@ @h¥`
+ 6·:4ßIœäd·ƒ”‡µ@&Ì<­{aæCÅ?ÌÉ;[kcùS­o·§€ùÚ[¿%ŸzëK-×R^m¥;n%^,É1èÚŠ[ÔîÏR¬óTófåz¾zûˆ`-OÀå“T“t@FŒ/bg‰		…¿½ì¤8=‘åé]9n!ùâDÆxA†Tp{x"‹ó{’¬×ZèïÈo ICİtJpÂ¬X’kuD*"ò8=I`÷»8â¶Ÿ#=Ì“ßãY¢ÃÂkëÌ<	›P:	@ˆ!B„øø4àf`œ‚?€Ïq¿½÷«ıû}ıc’¿éEgs{|&.#@ªyÑZ†ê¨%iCv>€q`ë;Ò/pô}±§@jj€
+lp´ëJcÂ+`±ÆÀS#Àºîƒu( ş`ÀÃ"â;WW9¹{"o~í·å¹Ï¾*-,‚ËJÒ-÷^ªR«şaGÎtû›¤z¨Ê‡ñ(éÒIy½•ıöJÒÅJïÙqƒahki»kM–ì‚Lpékz3.K®àåë;úu!Û‡oëµ¥Xßâj $(¶õ<½ vG&l<@è‰Ç˜Pü+Ğñ‰Š\êÃÖÄË<g‡ m~£x>;ú<!Ô9cmŒnÖD€§&+>6‚fRÀ!B„âcêÛıWÀMæ– VåğüZÁ?/{ÊVßTP;£[æÊØM÷ÖîÆ\ß“²®_
+LèÌÇÎ ÛnØÇ§RôÆ¹6È€¶¥†¿g— 8€,fŞ \0Ü¹V(¶M@-Bgº ¨Æ»R:M
+^~ó3òé/½.§÷ŸWÀs¼ŒTÏ½ü)Ò
+»j¤|Œ½ü¬n=¯	À	Õü¸…§`½{ø®µ¢÷©­‚‹À³wõ
+¨°ú­Y¹ÇiÎù<FóíØq.N¥¼º”(_óÚ“¢ĞÄ’kkfp£ÂÚüš‰µbyË.Æ =.´GM2À	˜åmc¶<¦òüºŸÅ¦a¢8¢‰UÂIŸñÈ„)$ !B„â™¸ñ÷ãŠ«~# ÀâÖ)R­Ê«Euõí$N¾%É‘ƒØ_DÁŸS ÚüBç;z“‰=ß]|Ïµ=Oe?£şkÛ´ém}
+ö`Ï^¤>€Zıøš¨#`ÀIÄÕŸµò¿zx%Ëe.¾úÛòÂë/kõ¼„8¡^÷DS!ÌÔÑ†‡d1*ôú¸ÕÄ¤!’ÖèP ¤!#¬ ^•ì4Ww2 »‘¬´ëãçì¼:)HÇ	W}×H¶Zjbñœ<üéC‰ ‹³;då³=¯	FÑŸ±g’•äš˜°eß>]Ãt”EnIpÄÏ‡6¥™-ñAB…s;xL³®Ö,'O>Æ&\Í|ª9¡È"Ó`À5† Dˆ!B|L0˜°©7²µos÷U³ı|q¸üV:¹ïø8}CØ?KË&S‹Ö>I‚suŞ¨ğ6ÚÊŞX[U‰^S­s
+n­ô`ÕÆğç¼¤7ú×cC`4Û ;îW{Ìàå£ÊÃAvõ^ÎîŸË¾ôE¹uÿéà! ©Ós[ f?ãÔje®•~¤€>]H¯@|¼ú%€’•—(¥­:íäË+øëËw´j,ıĞ’È8dZÍOz·-öóÍ¸†?‚*æõP/ìaÔ£`›.”ÿ«JÑ?G‚Ñ”{Í‡&îğãŞ[oúl~a«]˜Qº n–]“xPèè~ğùÆìt€#€çã˜˜ªc‡¶¿ë9èƒpˆ!B„øXücİİH£õŸÈ¢«âMyùFìÆoEIşF¬hÎ•4¬ßõµtõÁZùZOÎ€?çù$°ô¬bµí 5şãcgb@;€W;ïãû¢×
+½6¶ûÿ‘ 8èû®Ê-Ç¯|á3òê›¯K±>‘¾X3Ä{Qıê÷…uÛWÆ8è˜·¾ı¼TûÇ
+øzí‹=^g{ób‚q^Èù¯Êã_üìù¶«•¬6˜h¬9[‡O/ô{îğOØ×G%¯çìwW
+Ú‰‚şZ/£1F’™"şNâœ÷Óƒã ycœspr)’ŒÉO§÷åÃ$I¤†šŸg _ ?šp´£{Bù`§÷oª‡HBàBhtnzèùZH B„"Ä‡áßşò¦ºâ]4~İ^~-™úï&éòÁ4LÑä²Å| ×Ïê¬óÑ´øÁ¢§2‘ko€íîÈ¤ i‚Úu’¤…mhÍD -zV­£´u/‘gœÌ¡°£…¯ç^{§€»}²•ÅÅZ¾ğµ/ÉıW?­×¢ 7š3f÷F…l
+ÿ«fTÚƒùÀA/Y,hÛÛê“ñä9uF¨ö%¹¤ës9<zW†„¼{}ÿÕ8ªû	„½:’*‚~6†z¡>“4Ïx-õa''›s}ï	 îq¯ã¬ß/×!¡ Üú Fˆ>÷úÁäwtN†H¯>Šéò7ÌIÒÔOæ¢¨÷Y+è§©—j°B¦Ï±.k½Ïã˜ „"Dˆâ?0šù.æùfØ>ÈûæqŞÔÂ4¡d==æıgñZ™ú4g«]°×(8éëuô{“¶e2ÑQ4‡6¿&?5çü u°Óm>­ ‰ù·~ßà8-õ Í¢êwhaÃ¾wÛ/?'oşƒß£¬oUÕÜ§Ğbc sy0õÑ-˜­uã,×ó6tÈk{iv½#FZÍg›S=G/õî1×ñ}?|âdi­ö®‘¾ª¸¾—BG >ĞÈR»‡'ù~hıC×ƒÍ‚ãõ#©êJòl¥ \PhªƒÔì(RbûşyªÏ÷ÄŒÎ8ğBè‘éóJ°j9Ù:&8LX –Èí$ƒ‡Ãì—© Ï#‡®íÉ@‚€!B„ñ¡˜åæİÿu_~~Ù\+òÑ7µB=ƒÀ~ìağ!éŒaë­t×ˆ	
+‘ä70{¬õág½ñ ¢yUğ¦íïF#÷•eÅy»W >ÖÕì`VÂ ~Œ&>ùà³òÚW~K§§ü,V@ªC‚€ÑD4WØø€3ƒĞ
+»‚¦@in|
+ªP-¬O¤X®ÈÜwq"İa¯Õò^­îÁ`"£ÉDÛ–Rî¯ôú½&=“wWL^¢<åõµ‡[òQ¶áóèë£ôÜ^È4Ù8Ğ‰/+N%ÉÒéñiŠäFI¼¹-A¬'Ö$`<z¶í1óOÕCıŞ¶9@Õ o¿Ş£ÓtÒèsn©- ¹d}&ÍÍ³1õDtú„"DˆÂG@$ÙPÅ§íÕÙ4}K«èÏ+,i7`2­€é¦ÍôgïŞVî¦-ıF«W3Â¼ŞM–\ bö4p$ç¡6æÓ[ä,âM4H?S÷=ÛêÇë­§yı«¿+/¼ñ*Epú²åe“|×Ö¦ Ş•ıè°ªWÃö·ä8¡F¢­Üµ²?9“x}NÈğ¢]_¯ÆÅBs¶‘æPi2p$`£j¢\²åZï«`‚Ó ²ó¿z®®$á:cd‰³D²õFª'õéA¹¯7)eøLeˆ…€&-G»£'#aBÀÚ  ûqîÌäf³£$¿I¬ö?¶ `VÉc&³3Æ“„ Dˆ!B|ÿ'¶àó±÷İõ×2?|w§ÑØFò°Æ=§¹å?˜ò[Ğ˜ócU(6 FXuK2¶®äÃÍ.{?Ğ1ïf5Õx;4ÔÈÓÄ²€AAùz'Mw_}E>óÕ·äÖo¼(MU‘mŸ(<v“UÏÒèqeß0	A•Üö%·Ğúnz­Èû†×âkVÌËÍÏ. ã+Õş	«êŒšü#+èüäBÿ\ŞûÉåğä½0ûo5©@ÔµÖ](ÖkLò¥a¥_q§I 8x^GıY
+¡d­ÌÑeà¹»NùÂÄ}ôúGÊıbŒÁT‹z Ø5t½9B8	€Ït‰×4qí¯ál²D	‘t¼F?Å´v±7çÄ)$ !B„âCAhw£?ïŠ®ıƒ(ŠŞœ†:Á=eg»–óe€ôø½ykµ<p×ÄAÌó¹ÔMÔèï¼nvÿ‹'ˆçõ$õÅús ~Õ	˜PËóåUğ®•\?¹”ÈwòúW~S^ùÊW%]¯¤:¯[j4Z78&¬o}¤?+)HYß©‹_Ë*;^ld8ì4µêÎsé«ÁÛ%9A ÕaGò®„E®'ê=gš,Ü~áèõ8GG²Úÿér¥çÖ„%î9·/w$˜»/¬Â1ÃÇõôZõ'šøäë=×V“˜’*ƒÖ=Ğd§÷ìŒØ×Gİ?ıJ–ÛH"x%ôx&ƒŒ6	’p&¸“	I¼ÖGD>bâ51YçnIH B„"Ä‡ÂO£»h¯,§úÛnì¿éÆîŒ«€h!÷6oFm)
+ŞìúS{ÌÀ‘óo
+ø ‡9ÛñÇì]…¦¡ÙÚš˜VÓj­¤+ü ×ÛÑ°‚×”úúõVç‘|ú«¿/w^Àövµ/Ù] ø€§‚óÚã2´Çú9z "²À~â&‚H«_ŒÖ§ú¾3­Ú·zí™‚ñ†-ıãvk²Çœjä+@àäö}y÷ç%iz)Y¶¤yO™àY‰pâúİ@®‚KZq—$>=?VşzM>l
+â™” ‚	„Š¬1H91	3%v|ÄéJ7Ô’Qmp´¤ ï¿w6g~9;1Ÿİã‚«€-„ „"Dˆg"wV]½š$É?Q4ş‚–Ğíe½şœU©
+¦Ù'`­0üÓíïºş¡LçÛ¸0š Ï,_W¿õƒVÇÇšª6è4Ç#yw>ó‚<÷[¿-ëçî3yÀñã¹KAõ@|~²vxU—F,ÄˆB“Œ&l P•ĞÑ†Ô9 ôĞ×
+èKñ
+â@ßĞŠ>)N¤ĞâşxuI®@
+á²îÍjx¹Zq$.ÃbsÎy}×Ñ‚GŸMÇ–¾ÏrÎş‘àz!<`à«‰€‡±ÏˆõG÷$ÆX½R@ªÔ÷ƒ+ ‚ vùi „Ä`°N€8™E—Fr	|PwIÏ“$$]ÓL†Ä˜¿ŸÆ»l7„ Dˆ!B|8XLùo|öØğöÊƒŒ
+hÕŞœçÓ–¤<®åÑ(ÈdhaÜ3rÑêãŠÉõ)øŒ+`øŞbÎİ£­÷Bø¦®¨Ğ!yÓ›ª<Jz²–¿ğšÜ}õ3¯Î8CÇù}™:à¡1Í à êMç ‰íDÿÀV9'æQjàL÷¼D’dÍ÷À gĞà¸¿’,]èµGRA@\‡(Ie€ÇF‘›õ"¹~r%+xœø§ÚûCczü);HPz¶åÑˆSÇ„ $?pœÂo?[.M+-ì¬Œt(Ä
+aScK@-)ê Ç5à}\ç›ÌÁ ¾å5B›<›ÛH6¤'Ar W2'‰şğÿ0üß"Dˆ!öáÇõ½ë))’ñp9j)½VL_zhğ÷•¾£§¿<ªU®ıaŞO›^Tı5gıH &V§ÖªÆ …Š½`GÎî¡°j{âœ|ò%yù­ß•‹—_—,ğ&VÍ“˜	ƒ
+êyHZÓÈãO˜ƒ7-™ÿñbÅxk]2ç£¹
+èX—°>2‰pzßH*}}ÄÆ‚L¦"ÈDBÏ1…&'hËo¯÷R¯e}ºaÇã…¦:ğ\ØB`‡¤{ˆ!á9a&#|Ş[k0é‰(æc«””?¦çB,]U2YŠMôçM]Üqı¸gZ)“ñßØH +ƒ%0CèŸ0qÌ‚¤mà8Á› S!B„â×€3éèƒÕ§~óè–ùOÛïÿïÿißÿa”­/@ªC%9HŞF@ÿÁş>Ôï°ş†–ú,Õ;Î[ £ Ç=üv"7€;~hãWµëA¢e.·~ó<ÿ™ÏJšÀÁN;Y%s¦Î[ë¶2‡=~§çhj­ û–;‚ÂCpÒƒ(Pš²+ ÁTŞ°††Õy]îh	|zqWÒ|-US›¶>„,UÀ/¥TÏâŒÇV±OòÜ+Ÿ’üôB~ò—ÿ~î˜#oI¯À ‹ÌZ÷iÔI‹Ö4Q GIõÚj>‚ARıÀ~¤üòÜî‡/æõb N¢"È“ú>Ìúã$[wøÙ•¡æ€#92†HøO&3O2ud3$ !B„â™p´”ÅÊYû~şâçşÈ—õ¸û·ÿ›“êúëq¼¸€Î…>°Ñë#m‘¥Ÿµüoˆhà‡¶÷0o
+4Z•
+%»^Á¿W-îŞ‘ç÷-9î>õPuG‰©İQö	[~TémİP(•1„z˜\Ìè6v	Uşñ`³xf6BĞ,!ò³¿b¢gK}1eWÀ¡ªÆé"'Y´bÂõÀÅzÍÍt+Dqzë¶ÿ…¼ó‹¿•{Ïwô€Ó€9­€åÈa°ä~ ûÅèŒ£K&“<NA ¤±á(‰×BÅÃÁîŸ§ŒrÈáJÍ®€0ŸŠèˆù?oÉ ºp4$iĞS¨ÍL)$ !B„â£6µTödúä¿—WGşİÿêú¦ÿFT,O±ç@Úü:«B{Êúv&X"\ü†;şWæ OM?0Ô{­dµ‚oK¹ıÆkòÜß’bsJÃ Œ ”ğºŸX®öœßs=õr×“o0²áŒ7E”íí¡! •vš&šœ˜a–ŸHë:)€è
+P¬H$_œ‰WP?®IlL!ß›e’ieÎªí÷„*~wğæ BÒw!'g·äç?ı‘l¯¶z…{èsKhAàƒú Óc¡]ÏçĞÖâ“ˆÏKP!¤º¡W`lEoš	~ä¦í†>Ãƒ7? vh©,ÒÒxY“c;p¼a ¬jö3Id@}>mÛPL¿ „"Dˆg‚Õ»aWâÒ4}œñ÷¾w¨÷gİ¿ùçoJ[Œü`UşH5@±¶õh²³|«|Ü˜X…Ã"Î¯¤«kYmäşWş¾œ|ê³‚bß+°³a2¸™?`íu®ö9Óù‘)aµŒN„m Èç râèĞÁ6ì€ò¾¬µ¿få»ÔD•7gót*Î“IJ«ŸšÒ\5À½Aˆ¨õ;JéÆùR:ßÊéÅ¹Üºû¼¼÷ËŸ‘q~û¶IóóØ¢Çõ6³8’9¦¾°q	ÖçJŞS/!f‚Ã¥?ä Ü¸ˆ¬™Hæ‚AêDü]q‹b6oj™‰%xLhıfÑŒ5Lt†|Š˜o		@ˆ!B„øHŒ½ÉÊ,"îò»ÇÙoşÁ?ïßÿÅíşÕ/VwGgÛ B¡Ÿ•:ˆ¨.°4¬“„+oö:üGÆ£Ü~ùEyîK_‘³{/Hßo Å9KZ8ı1‘ä Õ	ÜqV@E‹N@ƒñCJq0á±Šˆ·f(	ªÓhcˆX¡JÇ¾VÃ‡İ–	KeRµ­ì·2ä-µ )ìãÈ<}ö¤+5qIÍ±ÆBYšËs÷Ÿ—íãÇòğıGô¸u7gõo	À`ÒÁÜÇw|ÔóG O¹º‡dÁEVÍ÷œ=8ÎìoVı¢ÈÍ	ÃDÑ$´÷1nÁï^ıxsÏMˆŠŒÎ4úyô5D0‘ MÆ`ÿ$l„"DˆgÀûù`–vpÎce.-vşîKñøşOO‡ËŸ=¯@´˜Øê·¶ı¤lV?q¦ŞæØËh\Kš9¹ûà<ÿåß—åù-™*ıXë~A«|=ÁD:´şÑo±*ØÛZ!Ô÷ğ:¾GÀ0¨Áøa0óp¨“Ï>ù0ëô;jå`BÇ@^5GjL3p&šTtzœÃagÉDt`Œ]|ğ0wO"ø€m†¦e…~që6ïñòÑ§ûığK 
+ãç˜÷ÃK [ä’æ¹¹B« vÇ b@¯¯.K^ˆ‹µ6TÙ˜–F&C;~lğş¬rÃ³@G£Áósl;;õæÏa,: !B„â™ ˜ 4é¨‡]}€0^«’\Üıs÷ïWÿãOŞû†¢Ú) ®³~Zñœ­u­¬n Õ^–·OäŞ›oÊêÅWlø¶2[ûÆ°—Î˜şØºÚÖÖ&Sïc.Ñ×V5+èÓ‹ -ùbE]şê°—:Èşêß$ŞÈPñÙT+ö®s
+º•‚´cåT°wc¥‰I&YVè›r&0»ëÇ¬òó¼8Şpµš -t$"Zµså«¥¼ø©W¤ù«FŞ{ç!¥„—›:&‚q,œÃç›•±gÂ4ê5 ²h§5;;Ü ;ãMt TÂ$	æJìŒ¦ºèM— }ğ" 	Œµ? |İB¹Ğvıú0ˆu$f)a|¢£8Rˆ!B„ñ¡@C÷Ò½"œ}c eé¥»ÿ™ï¥ï?ÿ?º¶¼ì¸÷J–mf¬ü˜(ø£@v¬¥9\ÉæwåîWŞ’õ/ÁdH\ß×ÍO&Œñ@:úÇ£T
+šmU“´Ö(X¶ÍÎxĞ(€Iwé¡m!­ê—Ë…µÜõ½‹ba/ÜaA•¿ŞôÀ¢oô˜eµ%¸ç´íÉ_¨ëŠÀºZŸH¡ÉÀ~·—«'[©´ij‡-Mwf^p æ´õ£Ü¹w—Lû«'×T!äÌ÷Sj‚‘³ışƒI'¼OJÿŒ³Î?^Ÿ»à<LäR•®;Î#¬N~Şè˜´71n]7Í³†ÔrUwüyÓôüy„"Dˆg‚#€¶}ú}&¼‚Èx#†*yş•÷Û÷ßÉwıg¯¶>^œ =«ç`4Iw€¹Ï(ç¯}Jn¿ñYœĞÈE¦Š†>@â?Ú©Ò”{Šö´GM ôo€5‘-u–¾¬ûÉğQJp¬×l‘§QN%A´Ô=xlõbA~ÖÀ¡°ˆû*4i€U°¹òµ&<Ëè‚€—gKÎÚ¹v§×Úa+ Éw0Âõ ÂüÊY “íÕ•1ï5i:ìL8™ša’f¼î¦¬LBBú\KM4HlÄ:ßÍzßL
+øÃç§HÚn2ÄŞäA¶ì@¶œ;1H*ğ:É™ƒ½—É³›{ÿ«‡"DˆKP1»™ÀFA›aŞÏGå¿Ì¿ñ_ıñ“ŸüÅ§Ê·øâóçN'ÌéÁÂ÷:úÅf-g¯}FÖ/Ş—„³ïÀê¹ß±Eß³E=’2?h^ôQù+pbæpœrÌşš#ÙñæD¨€&…a=^‘¯$+–
+ğ×’¯N	è ìÕ
+´‘‚.~†®DšdLHôó°fwÀ ÷«ƒ¹\œ¯Å„‹ZÙí.ôÑ‰è˜P€K0åÂ‡‘õûEÁñÃãÇ—$í¡‘/r~Oæ}39˜¸ÖëßTb(bmo¦ïc,€÷ÉL"”™å­Gä_à$ À1ç'‚ü KĞğEç?™#ÿ"sjõ9ÕH‚pˆ!B„ø8ğ‡CŸÌâ2"Ûº?Õö¸B§`XÜ½»ëÒåò½ïÿ__ìªæ\ Öls’Êù?'g/<ÇJÓEP³õ³©7½€®«¤kèõï¶‚*ßj«§îHh¥‹B]HğÛÁøzmĞèºšÛ˜µ£Õ™8[—{­Ä!Ç;±cÀƒ6*o¬Â*—Ü¨B¼h–-ï I*å$Ï(¹KW?ˆ"¡Ã U<>½İi’Q±{A¤W"fŞ ^?hrÀ=ÙœšwÁ`k$BÖk‰*Nz °›àÄü“íVô`ñCI"Êøâ ùdoŒRUµ
+Æqš;4I,ãYh2ÖM¦Ç@‡F^ ”TB"Dˆ! À)+~o:öO–¡ ìuåâŞKï—ûcşîşäUQÀKvq.÷¾ğ†œŞ>gÛŸÃ~¤ëŞ^„ƒVú×Rî¯¨Ÿ_íP÷GŠuğÉO6²¹w_A,RÀ7RÊßà­€éãŒínÎøÇYt"D¨àaA¨æa;Á›èÚüĞ!0m=ÏDÀM^³áÏPé—
+ÜøL{HÃ2¸Òk„­ğŒßG˜CŸUë@|È*q‘ºÒähµ–8Í™\ q Éî~Ğ@ËŸï×«ĞkD¢A`£ó“9Î÷öÉ~”UvRw½%“ZĞÎg‚0š$rA¬3Ÿaƒ„¡ì@ˆÔä¨í8. Q0Œ B„"ÄG Óö·•±~fÃmóeTŞ¨bfâyñËÏ~çŸıñááû¯<ùÁ¿şGwïß>»óÚ§ey¶"±›	ù-«üóıê¨_XT „İnqW+î”ê~<ƒ†ól´âW/Ş—üü®ìßù[‘fÏ™9˜÷}~¬íuuúá2¥¿…/Ë´NõuŸÅ’ÄpìËdwuIÓÕéÛö úìÿ"—ëë+VÏâìşMTà®‡^úd³ttĞšôxq†Ÿ€èÙÒ·ÎÆ
+¥æ‰¬Ökv% 28Œ©¤H$fR²!}œµé=º½¹¢»ÂçwEÊú‰­"ê?ÊV¿=gúPú£-3TçßxUg%ÆÎº­~¶eâ0Ñº¸OC?€!B„ñqYÀ,Fcâ5X3ÙânIÆ‹8g¤Ûoeqrñç¯}ó¿øôOÛë/Ÿİ;?[¬4îQ„F¿@+ü£~îÈÖ}Çİùˆ _Ü¾#q±áì|HrIPÑ*8˜ÑÔÛ‡Ò÷8¾DÛ•[Kıì%YL”Õ¥“ØHş v˜WÇDùÒÆZí/´*?nwÒê9òxÉª¹W0,–‰EÁÏ‚¸Ò#”÷‡ÊVå†¢:Q¢ ÙÅ–¨d©&™m/ 30
+“tLÖ›S&˜œè91—ßcÀÛüÕydñgID0‡å Æ$”ìEsŞzO´üiıÛ‰8÷Şöı±æ8:J#qµoâHÃ	¼†jÿ€g¶€K(‚™e(	† Dˆ!B|¤ ğHQñß€?ZíØÑG' „2´ÌH—Zq7üòrÿöŸïÎ¿5eËŒ»ò~®¤­ô±£àòi!Å©‚şâ\¢Å™(ŠÀÁä†û÷Zk)Ö+Îİ“Õ©”ïıŒ²¼éÉFW©ËR’¦‘ÜCäwÁùöi/Ë)÷H–’D¹”»­¤š$ù‚Š„ f}Ïñ @ë™4miî€š% Pu+wh,0g/+&AhÓ”±¢Õ½<3Å> 
+„¹ºş½X-õ F¤ç‰‡^ÑÏ ë’PãKõ9Œ´&fşÀÖÖ‘4DYÂ× FØ¸bŸííSÖ··BŒ8È* €p½A- ´I¦Â?U…ÁØŒ’ „ˆLo›!"DˆÊ ¬€/T¡#zz  úƒuTÑ4ñ÷{ÿğÿù—šwÿêµâì4Å¼ê*2üZZæËÛ¥'
+ÌkM2iõ;BÊçI[ê´ÓÕÊ{uzj68ßúBŠº“v÷¤
+¬Åé-9TïWœÿC³õT+rŒ<±Õ$bÍYüÕ“'Zá×²ÖÏBphŠ<«àİ~'M8ÖÀŞüdr»I–óŞ ˆ$`½YRµÔ×«cENC§U9’¨ö¡-¥‰¤‹+øÙÎ€†£~	8 uu a0ÓyÔ1yàûa~„æ}o¾	½3õDœ§Ÿ• {p 0íù€ ÏA$0è€àyv£ÙC&ùØš¥p¬ç“Él…Gğğ„»À"Dˆ
+«L{² \Ì.À@3š¾nXÅv×Wşİ?ù¦«{uvöObİË#çòQV(ğŸ+pŸ‹/6
+–¹À~¦÷ñS«Ş‰f¹Ó\"Væ–K[ek:éÓA’[÷¡p”Åé…Ôêû{¶Í'½¾\+zŒ&*Mâ8—€Œ1E"rû…OÈğÈa­ÉA©Ç^p~/Vìfìw;Yj¥Yò4!Ò #€º:êWÍµEú@7 /8r8èçj¸ê¹Iâ1%“ 
+û°?°óéÏ0N@ÀP	>†Ø€‹ •ù0¸€"¾0²&ïz3+„V¿Éöš' uæ?èPpƒapÒiµqŸØYùƒ¦
+|ˆn ?!QğçæºĞÌA0ñqH B„"ÄG; ~Ö–§V½›Õè¨ó?Hª@Øş}ÿáò§ßŞ\ÜúNâüC}ˆ fÉú–ägw%F›ßeZÍZ[:šqÆÉlmÑÒîg-~‚”9rP˜ÓŠc”I´¾ê‰¼‚}´ŞÈp„-oDa\l/¤Úé¼—æ;ÇıV–ë¹sïyI®ræ+4ºH0°ûßúZÇƒ,£•d©¸1×¾ Ôñïº1IŞlJ½õ3ÍZ9==#— •7ÆM]ËÉª hV©2ØÖ’irk `›ÁR?[ş"5Š¤¹oÖöÇó¸ÎÜ[®föLœ	'ò5£üEš/š¨µRéuõ ø%GÂVªŒ<  €¦oB"Dˆ!>ÔğBö{£•~„÷È‘T`CK¹«JÿÎ÷ÿÅƒñıûìöùw"¯àL[œHº>“\{ò)[Ö4òS"4érÆf}Zá* +0ÇZE{êâ‹ÙüN¶¾ç—…øjO;)îÜ“æçe½2TÚ©‚5>ÕkUŞbı/9o”í£dqr*'çg¬¯¯·²ÚlØ†¯»ZËµ”ZéCªCIâéX•¿IKq¬Ë$™YòB¹~ÜDĞ"MÆw»İR¹İ‚ˆZÂy~<Yà‹5ÈD“Œ!Àø‡yTıhó‹kB£ÉOÿÔŞ—ŒTPÁsë@?çl÷Ÿ™ YşÉ~G	o}4°ò÷£u(YŒt!q„ Dˆ!B< ;´²±f‡Ş2wËµ‚Eå>ƒ÷ÏşèAóó¿øö­³‹ï$ÙâŸDQ”æ$íI¶&+„>ÌÔYíO3­ >ö$ëæa#|Céİœºú”Ö™· Z7I¾–nÿH’e.éÙ…ì¥ti 
+0ÄV öîğ$-¤ªjÙoK¾ÔÄA+rx
+wõ¥xØÇØXÉÕåyòx+›Íší|ğà>X×Ğø¨ˆˆYş"#á<hû#I€ Î…ÕÈ<Cqß>IªBÄÒÄf§ã>Çö<ìyñ'Öf…H@ìë»‰Fm‘ñ›ñ–ĞDHhëcû4Øğ	›Ş<'F¦- ´IÂè«™!"DˆÏ„©Æë€¡€Õ˜Šœ¿ü÷ÿæÁî?şÙ·o~')Š7ÜrEÅJÁ°))ô`­Ó±	@ËÍ»ê` ÓÍ.6¶:Amd 3	S»cÛ{ş¹ú~6Èòô\W×R÷-7 DÎÛ¬>2kß4[ğšÚ¦$¿óVüK­î·²Û^ÉæâŒ÷°/Kyôè‘tM''§
+Ó4ãêtÆÈ´õ¸iËrµ”<7ı_m äL»ÀUc†ZÿÅÇÎ©İ½â–I‹¦DXÙÃ‡"Û¸àæ÷³3¥•)æ‡m ¯@İÿy§]‰¶cA`ü×S¾É~]†}B?K8ÃRÆœ‚ „"Dˆg‚.wØ‡ç¼“²,©È·}û‡Ÿßÿåë$K¾“ÆùS¾Œ|±HÁv*–û‰®{f;+³¬í4::âd5“ÃÙ!Gy:ÍìıF%Á$9g¬}¬bDĞí÷L$ò¥‚û!QĞ®Í¶e.èò- ç:ó üÇ„dÎuwô@(‹…dE*KM=ÇQßw9“…rÀ0@lA´Î b@	ö÷áPö–p¤©u4aˆhIœò  #oRÁ¸=Ïñ@g.ŞóÀĞ¯Töšè³G»¤òŸ9Ú¸ÄQÀ§i©á ØOt_Äsi‘Ï2Àuo×‚µES/zÊ±°än°oàŒşW"Dˆ¿œKƒe¯`	M{êÎ_?‰wñÇoä2|+[ÜfåŸ­7’¤æÜfÛƒUó Gõ¼3kì¬IAò»ií>R‰-á* ›ìPòBÏİ(ãâ½
+ÀØ©o¶—¬œóU!Õ6	]ÌËµzOõøQ ±¹ qÈÅ¦_€Š§ÕŸ-7+½Ÿ¶;v& ÕÙ`‘‚… ÉQ³?NXAZİc§Ş^‹g;ßÎØşX+ÄÌ‚<Ãp³=iïCÒÑÀw½×`<x™»+‘­%šô ôügV¾H, ìÓLèğ§onôû¦¯¥¥£PğütUp.È3à‚¡Ae;0Øˆ@EwÀÉ¶pJ…ÿÕC„"Ä¯‡Íé')›†Uæ%~ûWßÿZ´ÿà»ÅÉùƒ$[DÉéJD—hJ `W€¢^7“û³ì%‚ä©ÓÍZ÷3ô™¿=şô­8|aVN[ŞJynî™O
+tq^H¢{[v\×ƒÛ`©@ÜTƒô
+œXËa®#¶Z‡UAêd-ut Î—½tQHçAıòßÀÃg`A`G•N™^‡ “8˜dL­‰ï aÁ<;öqâÈ™ 1^È~èI`îî„&QPfƒb2³!$#¦9öõóóÀ¶ø Ôú0i™ÜZ’QÖ-yŞiB”ÆÔ@ÀsO!Š­ë‚6“½vPhhälÕQf’ç€!B„ñá`şÂ¾¿$¹;üâGŸïşö/¾q¶Ù¼ç‹Ä-’…–ÎZù£-u5T¿Pò#>FìŒÎÍàoÀg”?€\7ûhÒ·x­Q0ÍF)ÚØÎó˜0R°M©{‚—Û_Áv(KÎ¹1 îVåpÇ	qœ	w'R”&@ƒíŸk2¥¿Û¼ùş±e¬–Ù­àµzv!Êã‘U5‰‰iFî?¯å7t°9Ñjâä‡XâY¢£Ìù¡ÉS°S@Ğ÷dü³Ç1M”í%ùI‚‚?Vûjl¡Õ¯¦ãÏ9ïw–€`¬ï8ş×„§vZ@LœZ3JrÔp<¿c2`¡„Pˆ!B„ñ¡hªÆÖÓêZ¶ù'Ÿ[Äã×“åúÌkåíO–ÜÏ]Ì*sj$G°qViNlóÊÍ}ò³tÌ™8‡(¹˜ ¨'ó<àø”Èæö¼7·ß1nHâLFù(àË•t
+âø‚¢_¿ëY#Ó Ã>‡<pÛp1¢ ‘“v‚c ?(¨Ã8İ‰à®ŸçÜ÷2&…<#AH´–zO°÷‘IîDz¾œ÷FKŞy†‘BË@Ï]Ó­ĞÑ lÍ
+>>ù„?t('Ìm ´ı{9Ì0ó}¬ñOÂR*p%Œ<i–Â0S!<hî7oc0ñU„ Dˆ!B<à `îíşÃ/ş2“ıÃ¿¿8½xs]ìX‰Ç< "€Ø ç 7Úö;«é)"“Ÿ+ë´ìL‰.1a :ğ<õ˜½VÎN+ó	"@ õa– LAAL+àTšràüçg}¯ŸƒÌ-¤smsÛ +r7-r‡Ï£c0væúç‚1uıQÕcãlôÒ™]°›œ ¨j2 ©XdÛWe-ªıyÖĞÏôìVŒp*4İı‰CÛ„ˆÌÎP&M$&Mhª4x:ıµZ±Sùg²5¿Zïe¯‰MUƒµÍ<l8n¸ÌÆªˆˆn¾Ùâ¥DbKt8‚íÙ@C n€!B„âCÁ9½& MytÍÃŸ}U1íË
+â1 ,Á»³¹şw½±ëÄªù¹Òä öŞAzëØGıëA˜Ûá˜“;“½Æ–„AÌÕqHZö‘9İé±±—­VrÜ=‘©)‘¯Uw¹?Ìî…¶ˆ„¸!På|GÉ\Û\-}ld>arÑjE
+Uv]•óŒ?f…¬ú!IÀÜ¾î=ªl:$Î£lt´¶ù{‹¤‡17Ê®™	)«{È+Ã!Ğõ•?F •ÿPAÙo$àÓ‰0ò¼v7Ğˆu1Ü<f™- ù:ˆ€^oDXI¤Á“³îÇQH B„"ÄG: 6O¯ö×Ò}ğóßXÅ~MÆ{®r±`50Cƒ~t¶§Ö¿›M„Ğ ÛÉ6÷§¼­X'ŞöPøëaqëŒ+@²Z7+ÜaÙÜÉæö„7Ò¿úoğ›39\–
+ş©¬n]¼÷}ÇóÂ ívä/ZòlánÔâHhº#dÓIïz3 Ê 	@§BÜ¾çˆƒ«t#Ï…*;áZ½	AÚ×²K`ú±VPŸxß£ù>ŒEøÔğY˜zJ—};w\œ)*pÊZvÇšd¿XA<ÏŞZıHŸĞú§à˜?ƒmJqs"Ûß™ØĞ`’KLŠz3N¢Õñh	AH B„"Ä³ @{”Jõè½¬ßo¿Ÿ/c›^«_ÌÀ§™ä•:´ñYÒBØlnÔç&ş\8ã‡´-Ûÿ3˜³K0µ4Ú€N¦Z/R)0"	ØœĞ4ˆ¨Z±e€U;ó(p&ÙB±–ºşùbI)àêh•{?WïPïGEN¾Zë½‰”‘& õ±Ñœ#“u¾âê£L3Ÿb=z°
+D]7ûKúqæô¼q‰Ğ?­¶Ñmà}øŞfïzÏPÜëWÕvÜJÀ1ıáq_q› ã\¿O9» vtEĞmÁÖ’$ü.˜üh¨	Fìè6ÈßË¼á€û/ º
+S
+"Dˆ	­ª©]ûè¯¦ñø–×l F@	-n#“¡œÇÜİÍÿğé^7ùP„U: Äm s;¯Nã¼Wï½U÷`€ùßväÁî~ºÙ`æÀŸ|`‡
+_ &ÕõQ
+­¡ÿïÒX†Ês\0°åí©8iN½gä¹jh¨€.ZåpÄıÀøÇ)Ğçú…ñAÍügLzTĞ…uæ{÷ùyßbŠ{hß÷íÀv»§ñÏ0õš:“¦¤ïìƒĞ­ôõ ]ÕÈUU“{±À5$±æí”­22‰I51“›„‹"I2ó lÄÁföySV6Ygã%`ôg€!B„ñL ŠÜ?¹tRï^Êòd½®i%#€¹ïÆšÉ Ü¿q–ó÷ı¹JÈê´ ØZŸgâ@® wı±ŸİxˆAá¯××{+]ˆ§,ïdÄ·™c€–6:#ğ‰M |j×@Ğ3Aœ8‰È²Gâ1U?·€ç8«ï sü¼™j~¿X¶¾G«àÙõèG’ü„B=ñĞeĞ×iÖƒûvÛÿ¸I»Gû${ñ³¶­(å÷?¬N¶z×µ&>zm‹4‘,‰ø¾ëˆÎæøSF"³¡ÒÄÍtŒ„‰‘ 5Æ0‚Ü/¨Œø]$šhtjÀø#ö³2`H B„"Ä‡•x[bßU¿£Hù\WU
+6­tÍ¼‡º³³l/†û#ØÔÿzJÎHgş(™} ÆyóİQÍãxíq¬XOœí^Ú¦—b³ÑJ8¢ Î¨¯ƒqÊz˜÷ö‡Z–ËœÒ½ Àîƒ=Ùî¼WÿPõcÓòy'>7p~np°oÆ8›;ø9“xªÜK_t0†€Œo3¶BÕİ¸ŞŒ|hŒ4¯îéuTH4¡Â¿e%×Ç†‰ÉJ“˜XÀt¶¦—Ì~)C=vÉzOX_4­½N´ÿ]Ä*Ÿº“q¢Yš™<ŠØ³óÂÕFü¾Æà"Dˆ!> ½T‘¢»û
+ºi<¢İ™v}Û‘İÏ™º‚ 5æ¢‰órªÏ	‚1æàhwV¹OD´Äª×Áä‚AÒ!~Á‡n°1zz­îûê ÙrEĞcû²–¾	æÂªx¤=pÌQÀB¢v˜•ŒF²äQ£ÑÈqCDÓ ™-ïL„ˆD?ğ’„
+€ìSÁ¸ñÖÙ`óë…è`à:F=‚¢I³#ˆûhr67“)MŞØS¿¿Ôë¤ê_ÓÉNŸå5¬ˆõÚş)˜ş‰Jàã5ĞÍöÏ•>E’œÉ3éšLu‚@7#x¸Y¯ Ÿ;pKœª†@ˆ!B„øP Åí)?Ûi2ÙÊ^«ÕlY+ˆ¤¢ƒ¾½ã {VıóÓMúÀy½Öğ
+Ò±m (Øn ij<^Mğç+ĞÓwú¾FD¢€„ãˆªùXI±^I’¥Æ-èfI\TŞ
+ÜXÛ[®2Y¬7Rê÷ĞèFsÎK5yI#sêAÆ)>4š¦?ZúÑ%ÁÊ…^Œ0’€ò O#«¾'³5FVĞv¹Uƒ6şğ´‹ÒsëÑ€a(Da}6ü¹:ÖšÀI0•¥s
+ñ!ğ&Ü¤¹ÄzÍì~áXB nøöœé‘€}~$³Æ’”qŞ
+ Áà©ÀÄ!ÂïÁ¸ĞI	@ˆ!B„x&P±÷×
+À­ìLdC­Õ+×ø¦„s{îõä±’TÒü¸Ó¯@ƒÎ@Ís{}?ªa1Ö<¥pÅæå~Ö­gàaŞ0:ªÚğ ø×—Wå¶³Ï>H¨À³%Wöz}ª•4Úş25³¦±›y	ÎV±¥  åv‚ã{GJ°;#Î!ÉA’1ÚÂ4k|¨îıx#jl¢IÖ[Û÷yÿTtíÿ®nE³
+í›F¶»£4úú2-d¡çJR­Æ#[İƒØ˜úlß³!án–&ØÀFª,ê1#—¹0šW1eÖX 3ĞQúØl€F¦4Ilœˆ „"DˆgbºYknVöLÀGf&ÿÔTĞ#€ÃÅï'±ÌæÿÑd3l2ı“üõh‹ÃLlŒ„Gç<1·;’Úºa% |ü"oU-’‡Z -«kâ9Ğ´šM5	¨›ƒ$¨àµZ.K±Ô¡ã¼£u8&óÚ†³~sçs7ªü&ÿëLG1šøïÉŒŠF´÷;{4xDxÿÓŸ˜OÃÓ€ÿãıQ¶eMÃÉ2S`Ö§¨ŸI!ÊĞ§€q)œ‰°3ò ÜÑ% îÀˆ‘‰mpBÓ!™…ˆôxÜ~˜GIÄç€Ÿ-ˆİì€!B„ñl 7seoî±Øw×
+’¸´ô¡ÍL‡J•ô´ÙÂ× ‰,81ÿah¬zhnO2\×Ö¶VÇÆ@Ä½ıöÆ §ï	¨n¶$ÂL»çÜß6È ®­ ¢úre]Êªğ’-2ñÇDº"Y‘`®ƒ3€:H|³D‘©èÈ¾ÔjÅ>Öáà#î+¢8±Éó'İÀ÷ó^q-ÜèÉĞ‡±O]÷rlzyxØËãİ#"Ëd‘'úw¢çóÔ!ˆ´òOÑÉÀ˜"šy“É,¬#''SşstøªâÊ1®0!¥‰âF\Ì@§`ö0ã0ÃÜDŒã€!B„ñl0Ù:ZÒ”‘ÅŸöº¤­çlâ2­rÌÅSv ÖhE‘àîgğæ]x{˜æV¹‚yWA¶<ş=Àx§ï`¶Á³µçã­&¨°[úvhõûNúl”Å*µ-(ğE FÇU¾¸‹¸8N³ÑD€À˜Ÿ#2şM°È#Ax‡DF¬ÔyßÁ¤G8&À}£Â‡v@­÷‚Üsşwö{yo»§ØO¦ ¼Ê3Y-SŠú¤šl ôØĞÀ³À³C‡Ê¶9a³{, Ë‚„ÌÔ€Íiûüú}jù‹)êßà!Äì&xiÆY‚‰Ìn˜Ëáõ!B„ñL€j9Î¥Õ²7Qpõ0ĞQPl÷WågĞ[âFÖ3âŞÔdÂO³ùÇÒ”æmQ¥FÆX‡ş=ltYIÖîæ¬æ™7† »Ù¦wæô¶A0İ>Q°í{½®Ã¡–(u¼J¯'Ğã0	 ²‹1>#Â6 EĞ!píteÖ3@'Ü®,jõ}h*&5 ­ğ;t4ÀĞûA· Ô¬`¯×ğ‹«ky¸;ÄO‹\Á?•\“6ÂšP% |1£§Ø™&İ®1bf"WA¯Ğ±Éä’Ù@u›Y> Ü–˜æÉ¿§Ë 7)4!·!$ !B„â™@‹Ù§¹t>ºv,JYñ«JÒa¡ D
+±Ìûnv¼¶ï);«ÓÅt¡5¯€)19Z?·ÉL‚7aÍ*ña²¶;€{÷ ßx:'¦´GY_VêF†«º£YïöÆÖ‡Î}7¿Ş »…w æìYÄ±·:“÷•Ëb¼N»á„­rû¬u¦É6Pé÷
+îf¯‹€è¹G[ÉÃøB“ìóÿøò‰¼¿İI­çİ$©œ.
+É³˜óş,‰	ÖHŠH@¼Yëƒ@Pl\t'PÉã^ç9ßç6AN$:*†@3¹Qdö)˜m%^Óh«H0He`5Ùs	0Dˆ!B|(ÆÎCRüÉp¾*ƒÜ€¥4ÇR²ÅÒ$e'cüG ÒÑ¢Ö¸æ\{Ÿ¨¬`3J‚êZ«Sì¾£úÄĞ‚ö$¸õÜU§-	x#;Ó‘ÍŸ9Î¯é3 B!FĞ$ €+¨b
+Q£
+Wğï"+°¦˜ÔÑJw6CÇ¹AäD?šõHkˆHŒCWbèg©"z\ßëŸŠTù+›’ÃÚÿÇJ~ùä(ıèJ.GYh¥+Ë%KµâOï­}t í›&ÉSc#HLÜ³C¢ŸL[€ÉÊQ2‰l# ã—Ø’<˜9Gàµ±³!ö‘$d‘¿³câLÓÍæÆH€!B„â£›"…¶åÉÏêGãuÚv·`€JôğøškeÓ ÂÛ~¤-Ø`êl¨%dáÛºšµë¡—/T¼‚QK íÇ­{~™B`Íö58 ´M
+úœÿÏ+zVÈ;ªÿAêmvıyM@ê[,³(cÕo_~^ô6ÃÇ%@´§ï–¯eä5£º·“òíš‘³~$.HB~qµ“Ÿ(ğ?:	®§Y"›|Af¿æPzm&’Äõ;Øsä`cy¬ âzğà|àD3wÂªxüÌÏ‰‚x‚çÍ]¿ÈîÁ[bÄ®Í8Í›³[à8º$ÿ	>*€!B„ñá€ë÷İ(ë[Ú¸üçm_¿Å™8­^«]%ñÕµ,NÖ
+Ä-è®¯©IÏ¶Á—)æ90ş§y}pdUŠF}Gu@‘™×®ÿît'	`­Í‰Iç’Å9]õ6×æU½¤ÂïãlœÆ?­Ô‡F+ïDÖ«	wyQ˜®ÏÈüŠCÀÖ>¯Í±«Ò#¤ƒ‡Ù2—[ƒ£ĞN?‹íÔšÄ<Ùä¶òîõQz?J¡ç[F‰ä@]¨R¸Ğï—InÂA¸³ÈH…¸^d.HL8Jq6êˆc#ù¡ƒBb"U [İãU{`D0ïÏ8†aÒ8Ìî‹G2T/œqN:œIr[ IPH B„"Ä3Áâ¸ë$Ê—o'wÿe³ıÙƒ…ï/ ¿Û*¢l/·’d™ )€^>7äİÌd8Íî¶?/œûhV´MhÈİ¬ø1i°½w¼ŞÍ2ÁTé#ö÷ä€ q ³!Æ¬¼ŸIzšPô¥ô0Øi[ªùnVrqv® ëg9]±®Bk<²&3éÜJöÖòG¥Ï×in$Ò6ÆòoºZJ=ÏûûJ~úèZ¿ïdU¤²‰­î­rØG`ñO¦4ˆd'‡Z¸"Ü H¡ 7pjïçñ·/d®øevó‹Íb™«}¨ş)€€.¾—4s•ğ¼IÌN-±µ€åMf |DËf*'vm,k€!B„â£= VÛ./ütöÜÏ~q™GÃ…Ï"–¥ÛUrıd'ç÷ÎÉÀÓ`ÆM)wàŒ6Ğ‘.Ó¥%?`æ‘ÑzY?a¶~ã
+8Ü$üOõÀ~gËŞXìğ
+ )°mKÚàn–kY-nÉê¤àì¿£ 9õá [÷æ6è&3BU-t!˜\´ƒ´àÌ	öùe-U¿RU¥\j&·72úSxDV•³âÉ³”òÈäÑ{^j²”D‰ññ)Ä3Ô“ÈÏ>sy
+Í*ƒıñ¶5¾¼
+Ø…Ìì‡„ÄñàAöcr…®@³ÛÑB|Éâƒ89ÍŠÍm„ Dˆ!B<ÿ,@ıFÙ\üÛfuş¿TåÃÿ6K’[°æ3ÅıQ¢<–““Š‘7Àµg›{ì@´û“v3èŒ³/fÖ3›í°ª¼›EFë ôÓXåúN©ÊƒÔÕ‘¼ƒE‘ËúäLVË…‹bÖ0ğ\ÿƒm0Fæ=€½i)Ö3z9Â¿éÍS`l{’MBvx_×RÛÊ}UÓpŞĞ¤àqSkÉBŸl{cozD%¾„³z¯É¸&ÄcÜÚïÆ¶nÈëÃŒ‹Î¶úèü#oÉ ·FñAwŠ‚”ğœ$TSŒØ¶A4oFĞn PÛÚvÿÇqö
+¸Lì„ Dˆ!B|$<×È ¡ı­î“ÿ~÷£«Ç›¶¿¥^â<%™o÷pÇÊuµXˆÇ.¾şœ9şq¯İY¥I ÒkÛ-Ÿ®ş÷0²u;SÿÁó67‚5¨ø'Óÿ!ƒ`h¥®÷š %×ë¸uz¡à¿–b³âù<øÑôĞ(«Zšªep£ĞN¶m`’Ã¨ ;g!Ÿ}İËV€FA¿Ö¿ëÉ˜ö¥æµ‚?HtØë/ ºƒ™>şTóæı¬ì‘8^÷0ÅwÜµjoÙ˜¤H#&!Ql¶ÂèZÄbàù¹[‚¤)2ñ"|E³hU µúïãS úŸf#¦®3ÎÅäçö
+V$;ã60}êm0$ !B„â#àŸ§é\•÷’ŞıwõÙÿsyùãÿz/ïFĞ°/éËAö—[q'Z…kõİO¿bíSPşô“yÖÓJ`°u¶ñ•óhYÓ=-şywß,Lõ¢; êut°nkºFÎN×rçŞm=ïêéL ×–M„L4­Vñu¥ ß³
+§.º˜ówÖJ‡8PÙuZårT€ßéû1Š¸é•c„±Óë»Ò×Aê;_,l=¥w©v¨'ÏpŸ™ ìdÜL0É^HÿâŞĞEhëF
+ùe’I¥‰V÷ò,Ñ„dk‚ núØXÀ<
+ü¬ˆèÍÈˆ®„¶aÑKªÀÏ·]K{`$ b3 ãH%#¢²"ÌŒFÜoMnEH B„"Ä3A#Tš ¬¨ÇÛ¿ğÊ¿ªv^Nw»ofëÅ¹Ó$À	×ò?¾’RÁm¡ Lvº*€Ç˜ÌR—$7oD4Ó°0íèà Q¯¯³2¦Ã©R;@ªí‚>4ÿ!èszqG.nKšg4Ì¹±´0ÖÔU£ ßÑx-óvN.0§©No›u½€‘¿£&û~V¼Ñ" IqÒª¿Òê¿•UšÈÅ¢ ?Tø¨–8BgÀTüÀT€lq
+$(ıaÂß!KRÉøÑa 	o™:¹È–ì`°‚”2ÎímEÑÍ†1¼ PéC¶wvZD'A¨ğçççìg#[e¼Ñ/À©ú$˜QS;{*ôX£Äè£	@ˆ!B„øø,Àlw±¿ÿøÕæÏå¥7ÎŸüõ÷ıêzÿóõæ"^ •ï¤©G¹z²—òXI¾XH¦@ÉÕ¾¶! ûo4«¨Æp < .™é½	·}zöé VšLœnäd³–årI{TÔƒ}YÖ´âm«–F>PÄ6 FĞÅçZ#E|l±ì!ÙÛ’ì×u¦å?ºyc 7ö}5Œ²­*é§^N©œ.õ¾òTRïX•;Û×7óÇŠ<ñfî¦§IEy2ılšÉ±®d¯_wONy<t) ÄcÆJ.ˆäØ/Â¸)m¿?âó4éb’$gbß0ÚØ„]lô‘>‹F¯ÁºÔ`è:~flC"Dˆ!iîLšE%‹ÀM—ëç?ñ½½‚úÕßüßns<~=É‹%çZ¥ï;¹Ş–²ßUrr¶‘b³à±H\sıS‚Du†ÙŒ‡¢;àAu:ö$ë´"V@¯K&Xi[/r9==•Å²àÕ¡S@>A?*ø7¬ú1ÇÇ¬¿¡]°µÈw«‚…•/H†•V¿5~šMÄÀtĞ’JArÛ4İÛ«B6E.¹‚7öñcgŠ|A„Úá0‹ùeifŒ~1²Ÿ)ÿ9É¢œRÅà9,51Âùv¥&zÍ'«3šëZ–Y4“$áU`k€Ãd3{|Ç‹Óœ×GµÀÈF³à¼F9°+„ dJNÄŒ‹zZ;=o/W»½ş]… Dˆ!B|´ú‡Ü,ÀUhŠÿ8Ããôîß¨núCÉËİ×ã"¹ÈÓDŠ%šìĞêäòr+©Våë“+_°ıb¦úgÂ;=:`ù÷fnÓhã·”÷2÷{­9İœÉz½"ÓU<ªW¶ÒÁÔo{Îğ[M2üáĞ’/€SuíHÅ@´ûìòSG«t°èiğÙªƒ½UØ¥¾«~­äïhÕŸ‘‚n–ÀÓÌè«ÄéÁ#öÖ¹©şã„7*uÌãS}M×p¯ÈóVt:Y-sò@XÌ‹˜ÜXü’$INEGÍH1ãøıhm~‚úh OÙd1$$Xà7T¸gMlË	ÇöXÉq_ÁyA>qk€!B„ñ!üÇWÑ¼¼~%OZ‘+>^âÓß+],åÿ\’òğõ)_\$q*Y1hÜÊQ«ÌúPÊØ¶
+^©,×'¥©tÎÚÏ$¦Qı¯'	{úeSIWW’(ˆ-ğÖë~n­IÀ‚mízWq†À²*;Vı »@TÆ3ñTÎµçHñcÜ»)æ(BoÉfë“ØgFSûÃg
+˜û
+Õx"·×¹şsç>w#áë,AŠÉò7!U?ˆz i|E=@5@~pê²•b“Èİ‹3¹Ş^K«U¸+RnQl‡¥ˆqï2w`Ådy>Ÿ×ñÜèôMCÜ'Zü-'×%<µüˆ$èñ¾”íaKß‚{§kyîüTÎOÖ!"DˆÏ€¬ˆ[%s¦ËIİhvókšæñê¹¾ç´ò?üøÿ•nÿèëEä. ½ï/ËI9u
+J£\ïöúud%ûÛ¸Èg‡½}ÌØÁî‡ÔïBÁîL«ıõz¡uÆä <îmvY÷ì$X7š´ƒ%­m	`¶ß`×¿3“ïÑÍö»Ñ‰c‘z#åz)0ÄÿZv}%‹E¦•¡•zDV=ˆ} õa O÷>ˆöÈh‰M"ú`şÿtE’ÀšdEÆQA	 ^ùxÛçg’œ¯åp<J[Öç™,—¹>×Úä|£Ø¼ôùs“Ÿ	•M:Y„(ñŸÁQĞ¨n++›º•í¾–'û½&XÜ^jâqv!‹Í†‰5Âÿê!B„â×UôÔö³^OĞCÅÎ~£€«•ëùÇéúä{‹×¾4]¿÷“«úı·ÿé¢lŸ×j×¡å€ĞT°á*_oŒşúúš³ètü‰¬şe±”ìÄ*aŸ˜P;Ù
+ôAípŒšnb»ÿ¦{@å>ˆøèë™üÁD< 8×áÉŸ·û<´&SÔÏ_)hµú?Q ¾­	HÄä,@·jÂhËÏà +{¤E“9û§Æ)‹³'>¡7À€
+Åê¥·©jIW¹Vï­ŞW)­ÀG=Y–²ŒD
+=/Ä}jMÒ9¡ÀÖY ³ˆ˜ÿ + 1«y¿q)ğ,ôXuÛÈ÷Ròèº”ƒ‚ÿIîäSwÎäÖÉ©¤ù¿7½6ópÓ.`ˆ!B„¡Q×µì·×7´ßY/O¶ƒ>¦Ú‡xôğ¡üñ÷şÏ³1òÕáú¿,ßyû÷Ç‡ï|±èêÛËX«îÌñ !+ÒÓµ ¨Œ‡ıy,¸Í>`ğ÷”î…o¥ ¯à^w\[CK»šW±HØv˜ùœ¥ƒq5:úØ’‡ÙÎdzÛ™Ÿ8ÆÀ><¾Ø&×ãí€Ë±–Vıw…‚Ê¾Ÿ™ıpê£*¢·ã2¨äçØ!È³‚Ê€‘‹¥ã_?·È:óÅiDÕA¬ i&‚3öÕ‘ü†(Îe·»¦ Vá€.t–šMOÙıIHĞy ç¡ÃÊc=sì~ö”)>Êåã3çÎWúµ–õr¡×ŸĞ› ÍŠÀñ€!B„ñLäy.ù½üÿ÷}hqÇŞ]i¢p•\ü÷Q²øQ¹¹û÷š'ïÿãfûè~TíZ0æšœ˜Àİï¼£T-Øühå“Ù?™’_ÇU5ìğkµÜƒÉuC­ˆ“ŒZÅ–×Oôk‡ ô.€szÏ«x;™½çnuÌı2ÅH(kµ7¾»«•œ,2Yå°ãMÍq®|HD&sğ£¨Æ³Ín¢÷¦é<û7ı8J¨È—bå£—fö '–Î÷{= >·ßé¿×"ç§Ò–­´•VóE,™¾§m{!ƒ¿ÀØ±€Îˆ…TQDë¢IxnM%¾¼=vòh»—'ûk=——o_ÈÉfÃ.:Y*$zMêĞIÀˆ"$ !B„âï¨¨ó´ ªß44ï/“øV÷_üÓîöÿé¸¿şfwØıF¿{ò;Çë'/ŒÕÑKßø˜5&JpÂ&=xíwô{êŞS<öQ6Œi:úÅZòb%«xës)ÎÎä½¿ùaRşéŸøzù‰' EÎÈxŞGGÛÑCÕÛGntrhZ‚¿ó“ÜYoäL«m z‘8Jøbœà{lùÃİĞ³‹A»^ÏtŞÃèCº€. ‘äàu‡u‚ÙŠ·/ñ©gÇ`„Ã¢ş•ÂAó+ÌüOWkñÙ¨ïkÉæ§: ş?¯Õ:i¥¬ÇnÚ†²ÆMÛÉaşşúØÊÏ_K]åù³•Ü¿{Ê.Í‡F—€I€„M\YÄH!ü/"Dˆ!ş.–4ˆjX¦Ã¸`‡+Å½«zŞN/nÿwëŞÙĞ÷Ï×õñ\+úßmÇ—´´ÿ®©_p}7M\-l¹
+ˆû<I†(Ëş4Nó·µœÿ¾~ı²(~dë{Ò
+½˜–Ë<J†î?¹üËşgrÜİ¢,¯Älù£B¦._qUBç0Æ@{{òVş{VôwÎNå´HõÚ=Á’Khİ{rVı‘7v?Úı¨9bHeò£É»Y©k€|&¸éı$ÒÕêu#@Má5æ'±µê?ö’-MrrÚ÷›ÂcbIVíQ×¦vX*øüòò‰”ıQ^¾wK^º}‹œ‡±Wq#ôz\¯	ù"	@ˆ!B„ø»ôê‹EnNuØóÇ6ú¬¼§ÉÀ¥âËÎM?JÓ0íÿu¿>=õŞ½ •øF«ê‰íxE#¶èÔòr-’Û_ê‹ÛÄGï(÷à`]Z`Û§
+À/|â¥¼ó‰—|ğW?øgIäoÇÎtøa¤ãé><šŠ¾ŞQc RÂZ)ƒMÿ<‘»›¬™Íö‘BÌ~ \:íaÎ¯?»±ë" ıÿÇŞ¹Yv^õ}í}î§ïÓ==3šÑh®f$Y–lÉr0`;IŠJ¥*Ä$)H%•˜ÊC’‡àŞSä)nRE…%€XX#[–e#ldË²¤‘4#Íµ{¦¯çœ½ÏŞ;ß}{·*’æ‘ßÏÕésİçŒªÖ­o­ÿ
+‚ÇG	İ>(ù2üÄ†=ï-(½¼ßò~†ÊG eL¤ûut  ®²¾š÷tÿÂüÀöööCv_ÚÒÂ¼MÂµÉ¹OŸW×5õı…Ÿç—Êúİ!QËöm4ÊìÎîØŞÜØ×œÛÃ÷®ÛÑ•5ozì¸QÏ«#~L‘¶|³¢ï0Mdş¹   pHx€Ñ~ZÊiˆı4ÆU>:×Ñ†{nu;í[!~O‹k|{ï´ï„ÀÙ‹}”é×VÁÊ˜}¯@VıŞ\¦m?&è†ÇÏ-.½qÿãßÿÍW¿»ÄÑV·å†<U5­¯,zùçîÿŸ»o€ÖúîN'¶8×·£ËK6ßÕY}Ì´Õ×‹íş>[¯¹}o"p/ó*G¯]şTİï´5ßŸú,~t4l×r‘PyÖ®~‡AG€æê¢[¯ôUÃb²ıDçüáû“8±^éÙúîş^|]*(½Š 1½Ş~{!ğïÇvmkË;ı‡AŒœ=vÔÖü[qr¯›º`êÔ=	>šè»¦î# oõX    àPTUQSvÛÇûX</wC›º^*3¡ao•*5¸û
+ÛzBÀšiUĞÓ8ƒWå½aM“ığÚİşÀw\øÀ}õk_yâÆËßş©ªİ_S œı,ˆ€´ˆ£Ş)?	™òhä…ë‹s¶º´h=uî›zRô íY~êÙºqZ¯T®÷†Ï×m§µ÷úª„kJ}¹ĞTJÂŸ×ná¢ECIaÒ~,Æïiê+z£e¯ûö‡€Şítı»ÔzãA¯o}õ+c_¢Tñ3
+×¯‹”‹áş(·­}{ëÎİğ™öm5ˆ•ı—æü»íÄ—©‘P½ßMİe}PLã”DĞµ1   KâÍqØ muã‘gÏ<%4N§Ç$u9[Öµ!õCoHÓÙºVó¦­8ªWÕŞ÷²ıUÆÚ«ºnƒ;Uâ`8z»^ûÈúÑ+÷ä#/l¼úÊFxÑ5L%Ú*sç>JfÈoíí†÷*íÔúŠ-ÏÏÛ°Ûq‘"‚¡ÆâB V“ŸJüİ4®÷Ug¿F÷Ô€'›àTóşÚô§ Ú‰K€\
+ÈK@ŠaÏ'¼ß`Z¸#Ÿ¦tù´Âã
+o–Œ"‚£›½aQ3• ÛA”¶‹* £,s£#í5ØÜRÉÃò*³ëGìä‘eë÷ƒ0	¢Cë›5v©êD¯§:İğ>õZgkì}lP½sı>   ‡JşÊ¦èUÒ×ÚÛ–ï±W×”^÷ÒO•õaĞîD/ıªò’¾ºòU¾W‹{ü{ÏËæ2¶ñl\İò*û‡Çü}o4ÂQ`=÷ÈûŸı‹§>ÿÄŞõ·*éö×¦Ù¾Û«ë};dıwÇc[víØÊ¢-Î/x†ŞÒk+ ¶u>Ş¶¹p[¥c UTÆW5@U
+56†ÀÚIÚŞĞ­Çıô¾-ïè¯<‹×ô€&ºrEÜ×R¢2N7¤Q TqÉ`½=°ô“`wÈï@bG¯â»ÏÿK,È–X»t$1	ŸA••›;#{ksË!¨?pü„­.¯˜v0´ÔdØêù„‚„T/|:®zÑ¿K’Æ&FŸ"ÈÕàØñ
+…&$   phĞíu<[—}­‚JêjÓ&=d:èÕİñjf«¢É*ı‡¿«<ß©²V7õ	·}¼Ş+Ğ	÷… §x-ÚÉµC ÑõS§¯¼çñ¾ğìoşÆFkÊ e|{4vW¼õ…y;±¶âF;jóÜ½Î¾ÛíØ çK~ÔÍ_¦±§!¼OâF?¿M;õœn§Ô Øî“IÜÊçõu†€,—?5Ü¹uo½İOBÁü(!õàûñˆE£"JmË³Â=š…šûWö¿±³gwöF¶;!3´óÇÖíÈpÑ¿oU$$ ô:Û—QOCÚI¼G¡İî†»Úşï¤åIš*P‘%|V¦   84I,-ks`½7şfÃÁ¼Ÿu·5’¦±<ÏnUyO< !S—°ÿ‚®Ì‡TÖ¨ÊÖ½†W*:-w±“ÿ~¯ÛòŒºeÑèGAğüĞ³ßüü“Oìßºõ©¢Û9zcßGïN]³ãKKÖk'ÛñÂõh~?µ¤ÛiÌì…üt^…Lê%ñ	úø£Ì?QE@R¢]ùgNtTĞîxåB§ùU¿ë{ôú@Sïm¨¼’kë`íİ¯
+ƒ2x…Á_Ë‰ö2-HšøÎ€ıqfWïÜµë››¾%ğ=§Ù¹cÇ¼Z ½!»b½~Ò‰Ç/?RHüz4‘ Ç¥şYZq[ GşÔ	T)Jz   àğñ?d½}_`ã1T|ÈZ{½~ôÍAGgÒ:÷ÀŞıXÀ—ç„€M*/õ§uv¬&:=7uFÇÁÄCjÈÔ4}^¿ğ@ú÷^¹ïáG_øüÿøm[œ;:îÔÊ²­..úÚß¶²ûv<ëï6+{-ÎØ»ã_+fÏîjèşÚŞ¥¯koE'şX>WÒêÅUÂiœÉoJïú\ò2Öxv¨Ü/Ñc:"p„Ê¦ûSï(Ã÷¥ î
+ÇÏ4Ì 2-Zò.ÿÌınnİµcGì='OØ1•ü[]>•}W@ÇGÕü§ê‚6/&>EQïPw÷OÔ“¾)ö%t»   Ï’[îçÖ¾…Ÿ­w< ê,^%ö2:ßÔA0î½o‡@å÷…`Ø¶=;×Ô€®µcXR‰_NƒZ3¬à­2º„œŞ§3ˆkrs{ïìë_üƒÏ¾1L‹ó*‘Ï‡`§C•í“ÕßS÷€ßñ¾¬­‚5¥ cuÑ«³¿ãnyæeu¯à'±Z¡ŞoxÔ‚AÀ„l_.‹8~˜´ªØø'Á0-=Ç~H}î© êïÚJ´CøÎâQ‰¶ÃıÚfx{kÇŞŞÜğUÅİwÊÎ­µ9-ñQCb¥ëS‡‘D×A	¯r¨:Æc?>ñ£‹Éõ±‹¶	I@Éƒ   ‡C[êÜ?Î·ëw•ò•·ÜœÇÜËŞo³x8 Ç;_©kqŠ –ÚKÏÌ›ò»}Ë^Ş^\hûş=µ§î“²élbÿàG.ôûÃk_ıòÃ+ƒÁªæí•™÷Âk¶¼TÆ’¸{ü·ë±ÃØ‹Ğ¯EG½}¼DºoêÓ 8Ù4Ü–. ô™T!ğÊ@í2(!cVüVóóß’t³\kŒ'ViÇAø¬Ş¼WYÜhî‡ôo’ÛõÍ-»±¹iƒnË:qÒV–ãÎvOTÿşÀJÊÊ—(éZô]HŒx?B+VfÚŞƒ *J\Yì^õ4€(Ò+`  8$
+ÖÊäÀÕ4§ÌRæ3*q—JŠCàúV»ÊƒµFÕbŸ@lÓh_ÚÕ*‰¾–÷„¬x8˜ó,V[ëÊ"®Ö™¶2v¯>„L¶”ÉNxÅ¥Õ£éãÿG_ÿÒËß¹Şau>ˆÏ”İÉ¯]Çµ<hª,® ©ÆD_R$g?ıN¨¥Û÷ÔH§Ê¾Ä‰{hRÁ#R¯le=± #Íù7÷‡ï`R„`_N½`š×.|>0“!6ïhµrxƒıÉØnÜ¹k[Û{vreÉî;ºjƒI¸/A»ãŒÒ×›3”íÊ¯Äÿ4}Ñ‰cˆ	’®Keşª¦¸ÈQO‚ö'hƒ/øO  ]P¶¯L¹Š]òĞ³8kŞ|>Wöìóû…=^QÛüä»?-*dªs+ˆõC6ëBÀâêŞ\™nxÎpnX—Ü‹ğĞ².k·,Ÿäåù÷?ş•WÎ_|bïêŸ
+Ï?ªıä´Ş·Gù¢QU/öiyPwÛ]-èé÷BPNüØ¡UÆƒª:x©=›ø"¤İ¼òC„x½ÊÀ]Ä¤|û<bÑX¥öğz…˜*ÿ¹À0gYü™İİÙ·[[[áñ¥?±jëGØP• HÔ”(ëá(–ŠƒEGiİ?à‡/r(tC£¶‹+âD‚ ªQÂ@,ˆ¤ßò‘G	–¤g   økT’Xš÷{Ùï¹gš_BÓöØÚuS²Y•ø•WM§}ô­¯¼¤z&«lª¹|Ëëyı—ô½W@ÂÁ3îÂ§ŠóñÈæÖ_9ûşG_xíæ•í~»uT•ˆ~;)&zxzàQ.y*…«Á	µ!¯ß÷?EûŠ"ö ´Úu`­êİ Ó²åGz¼?V‡ô¥ÄOéMÓiá“~ş¯#ÍŞWqÌoÑîdb··wlkw×æ=;wÏº­-.¹Õ±Üûz:ªĞgU /]jYKöÀİ(dô]k½¯ª~Ô¢*L+UZy_†®kZÕ
+mT¥#ö7°   üC>Û‰]î¾F75_ 2eUtÆ­€Ô4*˜Şoş<He·jŠS0UÆíÉ«FÛİz½orĞ•¯çJT~Æ­¹÷®7ĞéxAbâô‡¾ÿëwŸævQïõãv¿’Øô×ÒxaúŠİZÔ#'>C¯`$±šÏÔ[ŞÌÅêEéã±WAô…²ëÈ=ÀJ„X=Q£_&‚©ß<¯ÜIp<Éİ{¿H|Á6wFág+|'S;{dÅN;jÃùùhç^lĞëx§~®í}E\%,Áãïİ‰×ê>gª:H¢§€ºü;ÖD‚Åİ
+n^TW¤†TyA   À¡ğóüVÌ&àª:0©|Ÿø’¤öµIê¦´ÔŠ4Zöúó+¹ØÅóóªŠêš™W¹¿éPE@%ÿÔÍybéÛ÷ô¤uÇ»2]•¹İóÀ#—o\zğÉ»ñüû:íşšDI?éÆkèµ¬;?çApÚ%~/ã'Ñ4§ÉóŒİ_[övå¥|	•BÖ=et(T¶/a EC²şUÕC–…Gå¥7DªÜ?.ÔİŸ»©L~öÂco…ŒwÇÎõìÌÑãîè×í÷buD£|hR¤kéºKÅï¤äæQtIÄxÿ„®7IUæ¾z-ÉI1©;ÿ«z­°œŒ)   8,ií›¯Œ³9woû$ÊeêÑô§¶ÿõ5n	”xğÑ;eçµK Ç¯4f÷z¨Îêãü[ıû½ĞŠÇ
+!“íöÚÑvWY¼/šO—xèÍìåonõ;­5UR¯"´â¾‚Vâ™}Úîx±šPÆîÿ´íº9#—}±74&•»z%Bgï’eô HSuŞOm?dôzŒ7üyĞ5oŒçü›L¦¶½?¶[Û;Aävv}Ù.œ8ê»	*%…ëôŠêuĞÇÔÑB¿»ƒ¥CŞ\-”U‘ğI
+™
+¥qlQ¿KtˆèDEN)ïÿ"VHR·<ı >)ÀÂ  pÜ1¯îëwKÚ¦=‹ö4IÌõ5û¯ ¬¬UÇjô®tKfÕıµÂ_tÆïMzí(Jrv½+^·ÆêÔ¨×ŸTY\âS¨YpZ®\|à¹½Å¥7Ò¢<ßîv},¯åÖ·-?Rh«ÙO“I§qa]èXì´×Ù4è‰¶¼i«Ó"ú¨™Qw{cßÔ¬
+ŸQ•
+ÍïO5¡#¼²Ñ¸´Ûw¶íÆş¦-Ìõí¡c'íÔÑUÌ|2¡å†H=ÏîËñÄÓºñÏ§Òx­ª´}¡O/ü¨jR&¾°È |£eyùçqc%OÔwWÇ*@ø|~´0  ü5* 
+:ÍÂ™²ª-g«˜iz3~ºÑê×¥‚m+ºî™WâÎ€¤şÊdÕÜççØ^¾N}ÎÍxësî¡ùu|ë_«U[‡—›q18qêòÜÉ3Oæ¯ç}½ng­TUBGë“§@+ı–ÜÇYıÄg/=„ì¾ôq?_öWW2â_;I=ş§ß³ÕOÇ™•Êşë%DE‘øÙ½|üÕáıö†íe{vïÚŠ]8yÜÖ–—mĞëúÔÎö=¨ËU0<_Ù~+éô&HT>]QyÏ„·ÈêW—¥±H­VuD#ª€TUı‘Rÿ|êÀ›İ!şû¨aQ”   ‡® ÈŸ¿gY-n[u€T«>“VÖŸ†`—”qU¯äùù¾yŸ|t®®Ò¹óÚ$¨,ã˜[»¾_Ï­¼$ª*Î»ëµ*+œzp¬¬¦+¼ïÍÍË±òÿµªİ·B'iésùÕ4V+<«W†ŸÔÛúÔ»TñÚe5 m…ùzUÆÛS¯X„`/ÛŞÉØ
+-Ml¬ÿ$üGf›{»vùÆµ Ævÿé“vñ¶Ğí‡ÏÓ¶Ş°ë&E>ú¨ˆ®»§eJ½Ø«uÅ³ùÄÏñ% *¹4Q.RÔ7aÑß·ª§Ü£ ˆ’¤ˆG+ú³,ªú;«¢0   8´ °˜}f{cÊ¹W1èT^¾/­²n²")êŒ:\/ı{ L›ãÿü=ËObÀíD~Ud]Ûq/zåBû<°¹w¿oï+;ç.=g‹GßÈ³ü|«›úÌhnö£1Ä–7ÏEïœx­>âç± Wøšwàû`xÜ4ûL]ı“‰Ïü«0­´Ù0N)Œ§™İ™ÿ7¯‡kØûÏœ²‹'NX¿;ô½Z€Ôõ…B« îáû
+”å'!«÷ÅÁeî51èD·¿ªÙ‡PDáSÄ‹;p.ôë¬{‚*³I–ûgk¥­¡ÓŠÇF   Íë«4ßÓ`;vë—^sóúÚê—Ö·+‹¶:¸Çóv‹çïuiÚ,6¯Y½µ.©ÅÀÔËëM_@Û3[×I<—w·@½TSU¹{âôåÁùKOî¿úí÷…h¹–¸©O×~«*bW¼ÎÅ[±÷ÀÍŒ’*–âåá_úÄ™Ó‘À4ó œå™_Œ¦*ù—1³V—DÀ½Ì^¿şvxÌ={Æ.[;äK0ÁĞ‰M‹íÔ~QYíè…ˆúÊVc0Ô¶¤›÷ö¯|šÂõœÚ’¸rñc£’U¸	¢´®\h!‘–±‰!®pN° €C¢½ö
+@½èÕ˜&»_Ø!è©¼¯€]Ôgûñì½« M©ß}bƒŸ^ÃƒÇÔâYvœYo†o¬=*7z'Œ¹)ÏxbıåÕtğûßÌ^i+™VkeZøúŞ´^ò£ -îIêæ>­âmÎ÷ÍÃ5MUU(ıwu÷ûÙyxŒóÑ$V’øLÃmã\‹|öìÕ×¬.é‘3ìÂ‰ãÖQ£ßµ^;€n\Ñ«=í'(“æ¨¤p(â½?FÕ€  ¬İø´¼*¡™		šiœÿs£JK†táâåLßÈh±š¢ã}ŸjˆÎŠ   8Y–Å³:¸ËM/©³xŸi¸_Ùi§[s1 À^[«o@A_ûÌ¢¯@c'\Õ…êĞÑ‚x™ÉÜ&„
+‡¸(kW>eãİn§\¸ğàs[Ï}ñéİíóíöBè™ÏòÇ&ºÂ—yç½²n]‡70f~&¯cyç“yOx]øéhìÙº²ği¦eE¥í…û5ê7gvk{ß^»ñv*…=rîœÕVÂù¡µ}è1†Ç=‰®Ü¿7ùõ«‰Ğgıë„ŞğW‹•N+®JVe¥jö	h‚AMj¬²lâO‘PÊ“Zx…%üLµ4©ğç)êë³%ø   ÀaOÆvçÎ;yâD=‚‹Å²ºĞ4¯îó”Ù+@WÕ;eÿ$võwêÕÀû£ÑÁv@~-5²)K?ó®÷V†õ\ûA%"â¦²0ÎY™­½~ÏåşÅŸÜıÊŞ[æ½ueÜ*{
+òUËëÊ4Œ{É=+<PVi,¯+Ø!¸»ƒß¤°L?*ıOã±‡'!ğÂí[;c{ãÆuÿôï»ï^;}lÍó},†àßDS!Ÿ|ˆ›½c¿G %X:İW3âşáÊ›]$izÁb“_4'²8éU‘¶‡Z\T„Ç»·>‹ö.Ô†IÓbâ¥o§
+$]!øŞ<˜òŸ0  †í»|ù²;Ùõ ÿÔ[ş¼ÙÏÏì«|ê _Ö÷ëïı^?Õğ˜ë)‚f†]sZÅqAßĞ§1AÍ÷×Ï÷‚zâ ™0ïí‡€ØO>şÑÚ+k_(÷÷ïZõ–€­Ä…—ş«iéÓt*÷«¬?É|Ì/ß›øy¿\şÔ ãÊ‹ ÊèçÍÛ6-3{ßé“ù‡ëcğWV¯€ìN²7Y»¯*VµDk}“_ø„Ï®ÍŠòGĞ™¿ôŒÄ¬Û~•µ`,?>‘sa³]QÑs»­ğg½8¨®Î”íØp©	U$p   p(v÷ví+oZ§Ó­tlÜKko€²>
+ˆ%ïä={•‡}x¾¹Wê&¿hÂSÄõÁ
+è
+¹Ç~Í„@,İ—b@÷ùÁÁÀ3b—yVvOŸ{~ñ¡Çş¤íÜ.&£ÍgáõeØ2cuñ+ÃO¬­]:û×˜`üeÈì=6¼Ÿ}W&1øOƒ…ÇŒsÿMíö-Û
+úâüÉU;wÏqÎÏ…Ÿ¡µƒ°©’–/åQhnªmLë
+¾Á=
+‚pÑg!ĞB@A>ß“^'ö$&õBt ôJ€õ5ıAHµ[şï—P“¦¾_y,¨?À»'5(Ÿ   €C‘…@øæÕ«Œ;­Ô­Îü=ËOcÆ® M
+(Xû?í°ïG3ïª÷Ç&î]oõòùÜO5vç{ j€™i&ëOfü|‘kó,¾(«Û‹ßÿÑÏ&‹‹¿Yîß½ŞÀılÏòÉØ'¦ÙÄ&ÓÌß+.Nmî›¨ã¿’³ŸyÃç<û—a–»ÑÏ­í=»¾½i'×–ìBşss‡!ûZ'îvİÏàÅÌÏıë–¼èÉßŠGi;–è%Œ|}¯Û÷Ãw¿Sÿ>%~Ô· 3ã+ö.Dƒ¥ÄEDåSUı«G£1“2¶âã¼×‚ÿ„ à0BÆ­`yw{Ûw¾™/şxù9üø¤€İĞ§U/Ô©ÿÂ}º_ßÇøBĞowŸû˜­vjo½–W	êf¿N½	¯©,$u%A³ùmù""ÜÅ“g®®<şCßÊF;­rleÈÜ§û!¸v­˜ì{¦¬.ÿÉh/}™øTğõ>cYóVÓh¶SÆ†Á‘Êÿá1[;™½~ófÚ•;qÜV–<ğææ|ã ïh·ëECæÙx+â&ÚÆ²}<òˆİùI³LIÆGjU¬½|‘R-BÊzY‘{”Uí–mƒ%´²ñÈÆY0ºN-(’õr™»èğ	}—.è  €C²ººj½é^½råÀÄ§ª{ZõÒß:W;üY;ù­™W¯Å€Ÿ‡×‚¡Y¤×jFü*	§d+<ü1 ×U•¡ã™µ’ä©÷Ì}øÏÚ‰ÓOä;wo«/ÑYşDÀÈŠ,÷ã ?óWõ ŠõDGq‡‘›ùb`¥Âû^½½iûãm»pì˜_^óã‡ÁÂĞ’n½ÈÈ-Šc7¿:ıû~¬’$Ñ€H3şê;ğCïŸ3b·Ö•TªWB†?	r!”PPó¢^Ã}‚hÑëäõkiTA>ªn¨iq2É½û?fÊqI
+C   Àá8räˆ-//ÙíÍÖM0oÆòÜ ¦— ™wàÇõ»eÑ+ÓõÌUÔYütÖ7Àì ûoÎşõ£®ë–Ñµš}±NÈ¾Ø+_ök“İ=ŞsúÊ‰ıÃF;ûÓıpßÔ3é|Şo?dÈ²ïU“ß$ÌõöÇVä•Ÿ›O|ä/·Q¨#Ÿd0ÛØÙ·Û»wm}eÉîY]³áP<ÛW–­L=÷£†©ïh¼¢š1á“kŸ¦’*š•~dQÔÆBæM•Ñ8.SReCåıi J9S·7Öúa=&gŞ³à[	µšX"&¦Eit’è9 Š   ÅÜÜœ:u¯³‰7Éô&­ÇûÜ&Øƒ|ÜøWÔ£gU]×™{®f¶ÚÉ®	ö
+–M@o~— Ğ„@ÜGñt›„…<$Fõa‘Ë?vûûÊaeà!øıĞ']øÀßş_»×o(øÅ-itÅ­b_&ò\eó©yûOBèˆ /m?¼ÏVWnİ°n§²3kÇÂuu­İKıšİ:Ø½ƒj³4:òùHa=¾×XûÈ¡$Š¾ƒ"×<µô‘¶jôĞ+$Sï‹¨²¸ÉOÏµú¹
+èşµ%­ÚxâóıY§\dÉD¨“FÁã†GñHA†A   84÷_ºß®½}Ínİº²ùn½Ş7v¬«1Í—ÓØ;óÿM¦ïÕ4–É›ß=A®3å¦¹OõæÍ›öÒw¿ëóTÖ¯à/Qpùòkö™Ï|Æ¾ùÍo†L}â…n=Î›ç¼W.±|<²j0¸râÇşÍŸtï{ğ{·6ıíÔ€¨¢»hÿOecLãr#uú&#¿mTä¶7Û›7oÙİİm;¾0gKƒ¡õºšçï‡´¾t;n:”{_»×‰çõr¬ÅwàWyœtp”Ç%D•ö(“‡€>ÇDÇã &¾)P–šdØÛÕ5Lª1QÍŠy[ŒÇyô.¢ÁÛ1«hU\Y¬ˆècke°„   …²Ô³gÏØæÆ†½±[Öj™7°U©io6À7gúM°¯ê€f¼o6ó÷Ùşğçç>÷¤ıAøQ&¬ÊCoĞ·?~úOìW~í×la~Áyä‘•w½«¾åÎ{ÑÇ×õ¨2°¿kK'îıÆùú©ß©G>¿uíÚFæ€¹ÃI˜ã,dù“ÂöB0İÁw$§?­öt?ü}óîÈ®mlÚbìG–-­­}}Q°Jû¾–7|ŞVås÷:†P‚fö½
+‡à^ÄRü4‰çûòÿÑù½{òğ¾ùhlÙŞ{d¾j8÷]¥‚öH£Œã(høƒ ÈÂçëñãIø»7Aå+ÃwšÇ*HZ§”IÜ6¨µÅ“ "Z?÷s?ÇÅ  ğÿÎá÷Bğ¹s÷½ùæ›véû¾Ï3sseîn g§¶òmÊö¾ôç]4gşÍãšª€ÊıËËËvîÜ9ûÒ—¶_|ÑÖVWí‹!ø?ıôÓöãÿä“ö?ğb£yßDXûøkzA¶¿xêÜõöòjöÆ×Ÿéïln/{Ã¡6ø@C­’¿¤F	] „à>
+úÎö®½ööõ öìÕ;º°hKÃæ‡AŒôÜÑĞ½,
+–;ù”õÁø£\#‰—±ŸÔŞ*ãû¾<ZÇyıX¶Wó^=¾ÛÒÿäR8ñæEù—Í•Zû«Š@YWš7gšœimÅ,Õ¡#   ŠíímÛÙİµ“§îµ?xòsöàƒÚ‘••º«½:hæKê%@
+şMÃ`Q[úL¼«áo¶7àèÚšŒW^yÅ>÷‡h×®]³ı/ÿ•=ôĞC¶¿¿Ğ0û¾h^ß»æËjtôâ¥ëíÁÜäå¯|i°¿»wrÚJû™:éu~"­l~G™ÆèB¦nWéÿÚí»veó¶-;vÏÒ’-„à¿87´n¿cı¹¾uÛ·äõ# ]GQÖÇæ£zîò›Æñ?Õ{°.§n¤óúª¾-õ²}]a)ãb"¯Œèqª"L
+ïsPåB^ÍŠòcˆŸ\(}ŸqéïéÕñÔ·JHxŸ@cı;ğŸ0  †—¿÷=û…_üEû©Oı[ÛØØ´ï~ïe;{æÌAÙ?©Mp[ß¼îDo‚{3ê×4b`vÄ¯9*ØÚÚòJÀOüäOÚŸ~ãÏìÄúzx¯³ü!Ñ€ÆnX¯ÓTrošSöë³ñÿÁ=µswkåÿåçßŸfÙro~Á¼V2t¯H,„ğ¬™úİ½‘İÚÙó2ÿĞİ	[V¦-÷P ÏG¹Ûüªç@kÛı—ö½!öıù‘ˆ2zoğQÇi½ı0ñ‘@™ş(àW¾š0zèı4¶èY¿z4Ö7Î¼Š Ïâ“µŸÀd¢¦ÃÂm‹26`V…Õ«#ª:¨Ÿa@V±  É‰ãÇíê•«Aü‚mooùj[w¦«3÷YûŞ&CoFõ£yşæ˜ 	üMÖŞdî
+àY½UPşúóñ~0dÙ-›ŒÆÇ	³ÍƒÍmM•Á³y´cğííÙthò_|öúõë'Ÿşï¿ü©ùiyln~ÑòlbS‘çš ˜Ø(ü~gwÏîlm[«kÖëc6úAæÓÊ”qKtäÃ“&ñ8 Óò¬ÜGÿBP·ÔM€•7¶Ò*–÷£•¢mŸÚŸÖS×ùjDQU _—ì£|±² ºÎiUsáMZÿ›¸™e¥ÆËº/!á   ‡2ry LB–ü³?ıÓvé=—¼_4™w“é7Á¼	ĞMs_ÌÌßÉô›&ÀÏ’í¾€æ5‹Ú/ ÉøĞÿ¦'à ² úºéÏ+Ó<Şö¹G?ÔŞÙŞ^~ék_="ë@ ¹j”n£U¿oolVkgOWËëG¦éş^²67ŸtCÆßÕ4‚¯÷çì‰ÛÇé‡¦Ñ®Õñ¯?öâõh`Ò¬Ög	ÿËÕÅ¯À¯ûİ~8Ûgû¿ö¤^£ì£•õ¸£*ş¾¬(›FQP»ªjP„Ÿ,¼Î(¼î¾&*o‹ŒvË   8,!ˆÚïışïÙc=jçÏ·½½ıƒ3şÙsıæL¾YüÓT1ĞïÙ³û¸89¸¿U;
+ÆE7ÅAoAlõøæ1³Ç ¾tÈm‰sµÄ[Gâ£®T´úƒí³ø`6Ùßé~ûkÏÏj¯Æö´ôçêõëÅÊ™û¾õÉÿïş¨ÓiÿòÍï|{maaş”æÿ5gïUí¯Sûó+p»·¿î3«søzrUøB¢x=û}Íp–GŸ5!æµ¹Où‘„²ÿ|œ,Z*êJ?6_AVÔŞ÷&TÅ‚'îoPxàŸúcZ~?G   p(t}éÒıvÏ='í=ñ¿íşKØ ß÷ÌV4{#šÛšÀ<ëñßÌ6ÿÍï&à¿»¹ğİ‡ÍÃ¬°ï·iLĞıôzŞUŸØşÎÎíŞ`ğÔ?ú?kãI|ş×~åã+ëGWuÿ­;wËï{à[ıñOşîé‹wûæ­o¿:·ø±qĞó²äï/Ï}ş¹WÛUÜ÷kPcˆøÆàïÿõL¾Wñ•ùËÊW¾Óğzù8~?E³É¼lï!hUæİÿ•ùÒçÕŠÉ$ö;„ÏêMáÓ$
+©L6Æzœo3”›`Ë+yÅ   /a‡Ø´¼²b¿şß~İ>øÁÇíŞS'½1¯	Ê³şş³‹}ft´›Ì¿©ÈègV44™şì€Ù
+ÃlASh*	Íã“¦ZPLëc÷Ğæ®_xô±É+WúßxæéK{—~ø_øÄOüóß]=¾şF[Û/ô†Ãâöë—ÏMîl>27;,22Ò2£DÁß¼²Px¥£r3Êß?:û¹)\Uö—›Ÿ‚ş4.0òÎşz9RY¯íõ€]¨BPÚ8‹6Áº_c÷.p<ĞÂ4‰}•V6I¢“à´J‚¨âë•š Ø·ı<+©   À¡P0Ó,ú{|ĞNİ{Ê>ÿÔçÃß8(ñ7]øMi~vL¯|×VÀ¦Ğ	Ì	Î6ú5Á}öù³"¡9bhÄ„hªÍ{ÌVÒ4¾Ïxwocqiå©ö?m·nßÚHç‡‹?øÉüJÿşŞÖö‹­4­‹éÑ‹^¿|õÍ­J×4Ó(Û.S·)ÎÔú¯Ï&Á!ĞV¯‚b_@)1TÙ(÷²¿TqtÏµè/\“oQ´ªÎòµ((1ø(ŸŸãGOÿƒ>‰*./Ê5a 	3Qó`wÈØ¨H«ª377=rîÜg¨   Àá€ÖÏf™ÏNûw~ÛşŞü][\\òæ¾F4AY6£€üìñÀÆâw¶´ß<¿¹mV4†³ƒ³=³f@ï>bh]Pè¢ë£¥å#×.~ğ±ç‡«_,óüÏŠIöz™$¹ÆóZ­veîŞÍË¯şP9™œM:]ëÈÎXKZízã^½ìÈ/3øÔkã:ß2ûl|4	à™½tmºÖ"zú—µW6VÃc;üUúŸJDi=±/<ªÜQ°ôÌß|A@Q$>É°;ÒãM‚Zë92]ïƒ_:û¡ñäış   8
+»;;ÖïõìÑGßoÿõ—~Ñ¾õçnıáéF4Á¼ùi²öwŸİÏó¦b0›áÏš
+u3àìh*ğlÕ ©ÌN¨S_\ü²<ß¼çÌ…ÍÍÛ7ìµï}Ûºıwö§etè;rêÔåã—.=ùöW¿şŞ~¯\Ÿ¤S_úÓVW½–ñÈŞMˆƒ(ğsş¢öİ×h_t,ë?_ñëfæÕ˜ ûX<Ğ1‹¯ªÒhğã‡QjÈ0Õaš¸P¨êeFåT;öm/ŸX¥UÄ'ïÍ_¼ğÌ=Î¿Ú[^~"¼Â‹I>½   €CW T†ŞÛß·¹şĞ§ şìßt0ëĞœı7æ>M_Àl6ßÜŞçÙÂæöÙ= ™½}¶RĞˆŠY!Ò¼gs|Ğ</©›ô´~W^Ûï9{Ñ®¾ıº…4İÒnÏ
+èpıİv'=ûèc/l¾öÆíÜÙş‘´3¤RoBV­uµ¢8©ÇÓX†o‡çvÔYVq0)}Æ_ÂBÙ¿÷ç»	Ql”F8hòs‘İ Zi;Ú'Ñ'@/¬ƒ‚L%~UÆSÛ—ˆ	¿´æª#gÏekgï{vùô½¯çŸz±Ì‹EULtV€   €C£y|í†LùÄ‰!h^­‡ŞÌÏ±ÿªÒıì’ Ù*€Ï¸×ƒÙ?ÿw-j*h©Ğì{4kDÂ_e7ìÃzU¼-ËÇ¶¼|Äî½÷œ½úÒŸ‡ ®­~‰gßÓñ¸<râÔó?öÑåo}ö³éîîîßi§‹«¥ú´BĞîvÃû'îá¯HîŞÿeÇòšz-´RåÓ¶?		İ¬¿—õı¶Ä¯ËÍ{ªzÔ Ğò¡è,¨qÁÉhb¹6Ğ=¶¯Ÿ½ï™£§ï{mquí«í~ï¹ğo´]N²kUYLÜh0›   p(`·¶·|æ]³/½ô]»ÿşKÁ¶kÿİF>ú™
+˜uœ-ı7A¿y^SÆŸı«f6êw5ı5ÇúÑ4AÓØ4U‚ÆhHæ;ñ¶ÔÏğ{­¶=÷}ví­7moÇºı¾µ4È§÷Í²Ûgzè©lgÇ^yêÉÆİ­/.Ì­öÇáıtÌà}S_
+Ô	Y³ø
+ŞšpaîoKTï|¶ØöoĞ¬îæ@º±vşó	‚ÒwäZ%,áØ.T‹!Û_=şÙ•'^ÎÍ?>ğ‹!ğ¿ÇS/ÔøÉD´&Š   ‡DÁS.sİ4õWÙ®½ı–}úg~æÀ±nvóß_µ¨Ñk7›¹7åû¦Ğüy°Ø§>×on›}ì»áÙ£ƒÙ•Ã³"Äê%:ƒùe;}æ¢½ôâóq«ŸÚüZIıùlãÂßúğSI™ØËOÿ±mnİùøüüüj7{gıé¢#Ñw+!šåOüÚâF¾±Ïú§.üû,cÀ¯Ü¹7qOY*?˜–ymU\XÒTİÕ£Ó¥{Ï<³vşìkk!Ûou¯¿®ïZ1í·’èwPº%p¬„x€#   8,
+ª_~æûò—Ÿ¶·Ş~Û>ı³Ÿ¶K÷_r~ÒæÜ]4ŸmækÊı³4Û›s{	eğ³Íƒ³U€f\°éèŸµnÄ†®S4b "³"¢éĞ8‚¬~:½¾<}Şn½ı¦İÙ¼em5V1-
+nm\øğ‡Ÿê.ÍğEÛ¿uóãÓ^oµÓi‡À_ú¾7ı‰6q{@]Öw ı¯ÑN£moÇûÜ$Ğb¿€}ï´ô Ş›_´¥“'ó#gÏ<säÔ©Wû‹OTUùb5-Ş.²É´¬+Iô:¬+å;™]qĞ½   8×®_·ßú­ÿiï¹xÑşóúy{ô±Gmwï ÌŞdâ³gúMf>»­o67Ö¿
+è“şÜñxü—¶6¯«×iö	4¯5{„ĞÜŞ<·	şÍx`sô ? T½÷Bo…Ë,-Û©³ï±ÍÍ7êÔA]{:×Tv6î}èá§VÖOTo~óù;×_şöfw¶î)[iÒÑò¡4*êè@=í:øª„ +áJeş"‰¿üV{øû†`­
+Bdxl¥\9y*;ræÌ³ëë¯u{½'Ê¢x1ıeUNß˜ø8 ±M°ş’:îW¾ŞF8»t  àÿ•Ûö—¾cxäı>
+¸³³co‚k¹?@¤g€f¼nkÎë›¿{°œ³ë‚gÏïgƒ|ó¸¦Éov\ğİMç€{ø«á/\gzßÜ{ Lı¨AG!ˆ&{ö§_ş‚moŞ´vøœe•ziİ;ò•Ñ‡_:½şJR%k7¯¾ñÉ[/~ëáW_ùĞxkûŞVx˜H|¬¯²wF!%†ÒØD™Öÿ›ª6¯íİ~ÈôçËŞÒ‘bşØ±|~mí¹á‘•×‡óÏUò\•O·Ëlz­L“‰7\VÉApOU>H¢ak ^H-öJøLA…   €¿!„Œ'cÏÖg}ı›ÀÛœÙ7İøMé½)õ«¼?àëŞÙ	¦|¯÷i€sŸÙ²Óø§ ?»øİ×Ğˆ¦0O¢ï»×¥W!Şºúš=ÿÜ}D0muÜtGåü²UŸÓ—•{	$İÎÑ¢¨lß¸öc×/¿òğÖõ«;;'«<sW ¤Š[úd!Üît-?İáœõæÂÏü’uæ‹ŞâÒsƒ¥ÅËí~ïk­NïJ’&o…k¹[•Å[ÕTÂuÜN’¸\PŸİûJ?n¨j3"¿¿Š#ƒ­ÆOAŸK{4ñ€   €Ãàºui~v¤®9‹ŸÑk*Íï³å|ıF<4Bbv°ynã# à>;Z8;â7k,ÔˆŒY7ÁÙkjD‡ë˜™#ƒYC¹÷õú}ãS3àİ[·ÂsºD›óïØiïQßn¯‡ç,e“ñÉ|<Z,²¼ÒìRé}5Ğ¶ÜÃãºÖîuUÂğ>!€+Š_aûn©€_”Ó85aÍ»ÔÁ¿Iç«ƒ›bY?şÚ´VTe•½3aÔ}   €¿¤|       @             €                       @             €                                         @             €                       @             €                 €                       @             €                       @                 @             €                       @             €                  €                       @            
