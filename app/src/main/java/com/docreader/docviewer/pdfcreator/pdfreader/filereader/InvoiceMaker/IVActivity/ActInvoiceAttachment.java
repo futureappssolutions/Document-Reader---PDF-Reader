@@ -23,7 +23,7 @@ import androidx.core.app.ActivityCompat;
 
 import com.bumptech.glide.Glide;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.facebookMaster;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Database.InvoiceDatabaseHelper;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVGetSet.Attachment;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
@@ -74,17 +74,13 @@ public class ActInvoiceAttachment extends AppCompatActivity implements View.OnCl
         SharedPrefs prefs = new SharedPrefs(ActInvoiceAttachment.this);
 
         FrameLayout fl_native = findViewById(R.id.fl_native);
-        FrameLayout native_ad_container = findViewById(R.id.native_ad_container);
         if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
             switch (prefs.getAds_name()) {
                 case "g":
                     Advertisement.GoogleNative(ActInvoiceAttachment.this, fl_native);
                     break;
-                case "f":
-                    facebookMaster.FBNative(ActInvoiceAttachment.this, native_ad_container);
-                    break;
-                case "both":
-                    Advertisement.GoogleNativeBoth(ActInvoiceAttachment.this, fl_native, native_ad_container);
+                case "a":
+                    AppLovinAds.AppLovinNative(ActInvoiceAttachment.this, fl_native);
                     break;
             }
         }

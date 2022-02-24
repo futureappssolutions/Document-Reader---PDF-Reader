@@ -21,7 +21,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.facebookMaster;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.SharedPrefs;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.PDFViewWebViewBase;
@@ -80,11 +80,8 @@ public class CSVFileViewerActivity extends BaseActivity {
                 case "g":
                     Advertisement.GoogleBanner(CSVFileViewerActivity.this, ll_banner);
                     break;
-                case "f":
-                    facebookMaster.FbBanner(CSVFileViewerActivity.this, ll_banner);
-                    break;
-                case "both":
-                    Advertisement.GoogleBannerBoth(CSVFileViewerActivity.this, ll_banner);
+                case "a":
+                    AppLovinAds.AppLovinBanner(CSVFileViewerActivity.this, ll_banner);
                     break;
             }
         }

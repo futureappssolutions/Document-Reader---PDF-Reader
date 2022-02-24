@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/colorPallateLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffe5e5e5"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:visibility="gone">
+
+    <HorizontalScrollView
+        android:id="@+id/hsv_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="40.0dip"
+        android:layout_toStartOf="@+id/cancelLayout">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/_2sdp"
+            android:paddingBottom="@dimen/_2sdp">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/colorNone"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="@color/lowWhite"
+                android:text="None"
+                android:textSize="@dimen/_5sdp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/color1"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="#fffaebd7" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/color2"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="#ff00ffff" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/color3"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="#ff7fffd4" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/color4"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="#ff000000" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/color5"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="#ff0000ff" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/color6"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="#ff8a2be2" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/color7"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="#ffa52a2a" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/color8"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="#ff5f9ea0" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/color9"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="#ff7fff00" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/color10"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="#ffd2691e" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/color11"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="#ffff7f50" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/color12"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="#ff6495ed" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/color13"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="#ffdc143c" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/color14"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="#ff00008b" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/color15"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="#ff006400" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/color16"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="#ffbdb76b" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/color17"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="#ff8b0000" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/color18"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="#ff2f4f4f" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/color19"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="#ffb22222" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/color20"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="#66ffeb3b" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/color21"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="#ffff69b4" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/color22"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="#ff4b0082" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/color23"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="#ffadd8e6" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/color24"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="#ffe0ffff" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/color25"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:background="#ff90ee90" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:id="@+id/cancelLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="0.5dip"
+            android:layout_height="fill_parent"
+            android:background="#ff9e9e9e" />
+
+        <ImageView
+            android:id="@+id/iv_cancle"
+            style="@style/ActionImageView"
+            android:padding="10.0dip"
+            android:src="@drawable/ic_close" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dip"
+        android:layout_below="@+id/hsv_bar"
+        android:background="#ff9e9e9e" />
+</RelativeLayout>

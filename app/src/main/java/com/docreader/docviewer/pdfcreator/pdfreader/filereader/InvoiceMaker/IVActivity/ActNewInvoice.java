@@ -31,7 +31,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.facebookMaster;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvActivity.ScreenCVEdit;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Database.InvoiceDatabaseHelper;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVAdapter.IVItemsListAdp;
@@ -113,11 +113,8 @@ public class ActNewInvoice extends BaseActivity implements View.OnClickListener 
                 case "g":
                     Advertisement.GoogleBanner(ActNewInvoice.this, ll_banner);
                     break;
-                case "f":
-                    facebookMaster.FbBanner(ActNewInvoice.this, ll_banner);
-                    break;
-                case "both":
-                    Advertisement.GoogleBannerBoth(ActNewInvoice.this, ll_banner);
+                case "a":
+                    AppLovinAds.AppLovinBanner(ActNewInvoice.this, ll_banner);
                     break;
             }
         }

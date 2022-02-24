@@ -53,8 +53,12 @@
         tools:targetApi="p">
 
         <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-6447655601926357~4679614799" />
+            android:name="applovin.sdk.key"
+            android:value="TciuTRecze8TdoQOCTmS6GmCcq0HvwyOq4Ouk36w6gJGPza8XenJg8I2PTUZhnyfezBfTwArn-hDwFWWEGwcyp" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.AD_MANAGER_APP"
+            android:value="true" />
 
         <activity
             android:name=".Ads.ActivityPremium"

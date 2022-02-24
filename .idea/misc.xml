@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Application/Future Apps Solution/Document Reader-Pdf Reader/app/src/main/res/drawable/ic_selected_image.xml" value="0.22135416666666666" />
+        <entry key="..\:/Application/Future Apps Solution/Document Reader-Pdf Reader/app/src/main/res/drawable/invoice_background.xml" value="0.3416666666666667" />
+        <entry key="..\:/Application/Future Apps Solution/Document Reader-Pdf Reader/app/src/main/res/layout/activity_all_files_converter.xml" value="0.36666666666666664" />
+        <entry key="..\:/Application/Future Apps Solution/Document Reader-Pdf Reader/app/src/main/res/layout/activity_invoice_attachment.xml" value="0.36666666666666664" />
+        <entry key="..\:/Application/Future Apps Solution/Document Reader-Pdf Reader/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Application/Future Apps Solution/Document Reader-Pdf Reader/app/src/main/res/layout/activity_resume_home.xml" value="0.36666666666666664" />
+        <entry key="..\:/Application/Future Apps Solution/Document Reader-Pdf Reader/app/src/main/res/layout/ad_applovin_view.xml" value="0.25" />
+        <entry key="..\:/Application/Future Apps Solution/Document Reader-Pdf Reader/app/src/main/res/layout/layout_document_files.xml" value="0.36666666666666664" />
+        <entry key="..\:/Application/Future Apps Solution/Document Reader-Pdf Reader/app/src/main/res/layout/layout_invoice_maker.xml" value="0.36666666666666664" />
+        <entry key="..\:/Application/Future Apps Solution/Document Reader-Pdf Reader/app/src/main/res/layout/layout_resume_other_tool.xml" value="0.33" />
+        <entry key="..\:/Application/Future Apps Solution/Document Reader-Pdf Reader/app/src/main/res/menu/add.xml" value="0.20520833333333333" />
+        <entry key="..\:/Application/Future Apps Solution/Document Reader-Pdf Reader/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20520833333333333" />
+        <entry key="..\:/Application/Future Apps Solution/Document Reader-Pdf Reader/app/src/main/res/menu/menu_create_pdf.xml" value="0.20520833333333333" />
+      </map>
+    </option>
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />

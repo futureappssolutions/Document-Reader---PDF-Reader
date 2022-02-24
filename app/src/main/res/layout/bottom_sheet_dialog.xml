@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/titleTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font_bold"
+        android:paddingStart="@dimen/_12sdp"
+        android:paddingTop="@dimen/_12sdp"
+        android:paddingEnd="@dimen/_12sdp"
+        android:singleLine="true"
+        android:text="Title"
+        android:textColor="@color/app_color"
+        android:textSize="@dimen/_13sdp" />
+
+    <TextView
+        android:id="@+id/detailTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font_medium"
+        android:paddingStart="@dimen/_12sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingEnd="@dimen/_12sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:singleLine="true"
+        android:text="Title"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_11sdp" />
+
+    <TextView
+        android:id="@+id/addNewTv"
+        style="@style/ActionItem"
+        android:drawableStart="@drawable/ic_add"
+        android:drawableTint="@color/app_color"
+        android:text="Add New"
+        app:drawableStartCompat="@drawable/ic_add" />
+
+    <TextView
+        android:id="@+id/editTv"
+        style="@style/ActionItem"
+        android:drawableStart="@drawable/ic_edit"
+        android:drawableTint="@color/app_color"
+        android:text="Edit" />
+
+    <TextView
+        android:id="@+id/cancelTv"
+        style="@style/ActionItem"
+        android:drawableStart="@drawable/ic_close"
+        android:drawableTint="@color/app_color"
+        android:text="Cancel" />
+
+    <TextView
+        android:id="@+id/deleteTv"
+        style="@style/ActionItem"
+        android:drawableStart="@drawable/ic_delete"
+        android:drawableTint="@color/app_color"
+        android:text="Delete"
+        android:textColor="@color/black" />
+</LinearLayout>

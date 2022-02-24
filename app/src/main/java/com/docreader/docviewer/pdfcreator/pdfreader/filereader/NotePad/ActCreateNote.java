@@ -18,7 +18,7 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.facebookMaster;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvActivity.ScreenCVEdit;
@@ -66,11 +66,8 @@ public class ActCreateNote extends BaseActivity implements View.OnClickListener 
                 case "g":
                     Advertisement.GoogleBanner(ActCreateNote.this, ll_banner);
                     break;
-                case "f":
-                    facebookMaster.FbBanner(ActCreateNote.this, ll_banner);
-                    break;
-                case "both":
-                    Advertisement.GoogleBannerBoth(ActCreateNote.this, ll_banner);
+                case "a":
+                    AppLovinAds.AppLovinBanner(ActCreateNote.this, ll_banner);
                     break;
             }
         }

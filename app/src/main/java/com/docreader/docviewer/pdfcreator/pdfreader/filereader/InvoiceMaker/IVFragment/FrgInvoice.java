@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.facebookMaster;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvActivity.ScreenCVEdit;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Database.InvoiceDatabaseHelper;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVActivity.ActNewInvoice;
@@ -84,19 +84,9 @@ public class FrgInvoice extends Fragment implements View.OnClickListener {
                                 IntentInvoice();
                             }
                             break;
-                        case "f":
+                        case "a":
                             if (Advertisement.adsdisplay) {
-                                facebookMaster.FBFullScreenLoad(requireActivity(), () -> {
-                                    Advertisement.allcount60.start();
-                                    IntentInvoice();
-                                });
-                            } else {
-                                IntentInvoice();
-                            }
-                            break;
-                        case "both":
-                            if (Advertisement.adsdisplay) {
-                                Advertisement.FullScreenLoadBoth(requireActivity(), () -> {
+                                AppLovinAds.AppLovinFullScreenShow(() -> {
                                     Advertisement.allcount60.start();
                                     IntentInvoice();
                                 });

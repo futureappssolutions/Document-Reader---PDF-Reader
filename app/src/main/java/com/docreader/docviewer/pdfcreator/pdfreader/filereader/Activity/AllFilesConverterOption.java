@@ -12,7 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.widget.Toolbar;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.facebookMaster;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CSVFileViewer.UI.CSVFileViewerActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.GetSet.UriInfo;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
@@ -72,17 +72,13 @@ public class AllFilesConverterOption extends BaseActivity implements View.OnClic
         prefs = new SharedPrefs(this);
 
         FrameLayout fl_native = findViewById(R.id.fl_native);
-        FrameLayout native_ad_container = findViewById(R.id.native_ad_container);
         if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
             switch (prefs.getAds_name()) {
                 case "g":
                     Advertisement.GoogleNative(AllFilesConverterOption.this, fl_native);
                     break;
-                case "f":
-                    facebookMaster.FBNative(AllFilesConverterOption.this, native_ad_container);
-                    break;
-                case "both":
-                    Advertisement.GoogleNativeBoth(AllFilesConverterOption.this, fl_native, native_ad_container);
+                case "a":
+                    AppLovinAds.AppLovinNative(AllFilesConverterOption.this, fl_native);
                     break;
             }
         }
@@ -119,19 +115,9 @@ public class AllFilesConverterOption extends BaseActivity implements View.OnClic
                             IntentFileList(i);
                         }
                         break;
-                    case "f":
+                    case "a":
                         if (Advertisement.adsdisplay) {
-                            facebookMaster.FBFullScreenLoad(AllFilesConverterOption.this, () -> {
-                                Advertisement.allcount60.start();
-                                IntentFileList(i);
-                            });
-                        } else {
-                            IntentFileList(i);
-                        }
-                        break;
-                    case "both":
-                        if (Advertisement.adsdisplay) {
-                            Advertisement.FullScreenLoadBoth(AllFilesConverterOption.this, () -> {
+                            AppLovinAds.AppLovinFullScreenShow(() -> {
                                 Advertisement.allcount60.start();
                                 IntentFileList(i);
                             });
@@ -174,19 +160,9 @@ public class AllFilesConverterOption extends BaseActivity implements View.OnClic
                             IntentImagePDF();
                         }
                         break;
-                    case "f":
+                    case "a":
                         if (Advertisement.adsdisplay) {
-                            facebookMaster.FBFullScreenLoad(AllFilesConverterOption.this, () -> {
-                                Advertisement.allcount60.start();
-                                IntentImagePDF();
-                            });
-                        } else {
-                            IntentImagePDF();
-                        }
-                        break;
-                    case "both":
-                        if (Advertisement.adsdisplay) {
-                            Advertisement.FullScreenLoadBoth(AllFilesConverterOption.this, () -> {
+                            AppLovinAds.AppLovinFullScreenShow(() -> {
                                 Advertisement.allcount60.start();
                                 IntentImagePDF();
                             });
@@ -211,19 +187,9 @@ public class AllFilesConverterOption extends BaseActivity implements View.OnClic
                             IntentMergePDF();
                         }
                         break;
-                    case "f":
+                    case "a":
                         if (Advertisement.adsdisplay) {
-                            facebookMaster.FBFullScreenLoad(AllFilesConverterOption.this, () -> {
-                                Advertisement.allcount60.start();
-                                IntentMergePDF();
-                            });
-                        } else {
-                            IntentMergePDF();
-                        }
-                        break;
-                    case "both":
-                        if (Advertisement.adsdisplay) {
-                            Advertisement.FullScreenLoadBoth(AllFilesConverterOption.this, () -> {
+                            AppLovinAds.AppLovinFullScreenShow(() -> {
                                 Advertisement.allcount60.start();
                                 IntentMergePDF();
                             });

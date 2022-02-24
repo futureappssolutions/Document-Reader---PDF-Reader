@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.facebookMaster;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvAdapter.CvHobbyAdp;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvGetSet.Hobby;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvGetSet.Resume;
@@ -80,11 +80,8 @@ public class ScreenHobbies extends AppCompatActivity {
                 case "g":
                     Advertisement.GoogleBanner(ScreenHobbies.this, ll_banner);
                     break;
-                case "f":
-                    facebookMaster.FbBanner(ScreenHobbies.this, ll_banner);
-                    break;
-                case "both":
-                    Advertisement.GoogleBannerBoth(ScreenHobbies.this, ll_banner);
+                case "a":
+                    AppLovinAds.AppLovinBanner(ScreenHobbies.this, ll_banner);
                     break;
             }
         }

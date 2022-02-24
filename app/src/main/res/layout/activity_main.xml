@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinateLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/color_light">
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:fitsSystemWindows="true"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="?actionBarSize"
+                android:background="@color/color_light">
+
+                <ImageView
+                    android:id="@+id/navigationDrwer"
+                    android:layout_width="@dimen/_26sdp"
+                    android:layout_height="@dimen/_27sdp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_3sdp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_navigation" />
+
+                <TextView
+                    android:id="@+id/scaleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_toStartOf="@+id/imgPremium"
+                    android:layout_toEndOf="@+id/navigationDrwer"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/font_bold"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="@string/app_name"
+                    android:textColor="@color/app_color"
+                    android:textSize="@dimen/_14sdp" />
+
+                <ImageView
+                    android:id="@+id/imgPremium"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/icon_premium"/>
+            </RelativeLayout>
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipeContainer"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <ScrollView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:background="@color/color_light"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_20sdp">
+
+                        <LinearLayout
+                            android:id="@+id/llSearch"
+                            android:layout_width="match_parent"
+                            android:layout_height="55dp"
+                            android:layout_margin="@dimen/_10sdp"
+                            android:background="@drawable/shape_search"
+                            android:gravity="start|center"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:padding="@dimen/_3sdp"
+                                android:src="@drawable/ic_search" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:autoLink="all"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/font_medium"
+                                android:gravity="center"
+                                android:linksClickable="true"
+                                android:maxLines="1"
+                                android:text="@string/searchHere"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_11sdp" />
+                        </LinearLayout>
+
+                        <include layout="@layout/layout_document_files" />
+
+                        <LinearLayout
+                            android:id="@+id/chooseFileLoadingOptionLayout"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_10sdp"
+                            android:background="@drawable/rounded_btn_trans"
+                            android:gravity="center"
+                            android:onClick="onClick"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/_8sdp"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:id="@+id/fileLoadingMessageTv"
+                                android:layout_width="0.0dip"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.0"
+                                android:fontFamily="@font/font_regular"
+                                android:text="@string/takeLongTimeToLoadFileMessage"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_9sdp" />
+
+                            <ImageView
+                                android:layout_width="@dimen/_18sdp"
+                                android:layout_height="@dimen/_18sdp"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:background="@drawable/circle_color_primary"
+                                android:src="@drawable/ic_arrow_right" />
+                        </LinearLayout>
+
+                        <include layout="@layout/layout_resume_other_tool" />
+
+                        <RelativeLayout
+                            android:id="@+id/rlAd"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:background="@color/iv_bg_color"
+                            android:visibility="gone">
+
+                            <FrameLayout
+                                android:id="@+id/fl_native"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                        </RelativeLayout>
+
+                        <include layout="@layout/layout_file_manager" />
+
+                        <include layout="@layout/layout_invoice_maker" />
+
+                        <include layout="@layout/layout_notepad_table" />
+                    </LinearLayout>
+                </ScrollView>
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </LinearLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/color_light"
+            android:visibility="visible"
+            app:headerLayout="@layout/nav_header_drawer" />
+    </androidx.drawerlayout.widget.DrawerLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

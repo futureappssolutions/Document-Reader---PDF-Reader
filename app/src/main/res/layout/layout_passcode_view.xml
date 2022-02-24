@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/app_color"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="84.0dip"
+        android:layout_height="84.0dip"
+        android:layout_marginTop="60.0dip">
+
+        <com.docreader.docviewer.pdfcreator.pdfreader.filereader.View.CircleView
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_80sdp"
+            app:circleBackgroundColor="@color/app_color" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_lock"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/lock" />
+
+        <ImageView
+            android:id="@+id/iv_ok"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_centerInParent="true"
+            android:alpha="0.0"
+            android:scaleX="0.0"
+            android:scaleY="0.0"
+            android:src="@drawable/ic_arrow_white_true"
+            app:tint="#ff66e75d" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_input_tip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/_15sdp"
+        android:fontFamily="@font/font_bold"
+        android:gravity="center"
+        android:text="Enter Your Password"
+        android:textColor="#ffffffff"
+        android:textSize="@dimen/_14sdp" />
+
+    <TextView
+        android:id="@+id/tv_forget_password"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/_5sdp"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:text="@string/forgetPassword"
+        android:textColor="#ffffffff"
+        android:textSize="@dimen/_12sdp"
+        android:visibility="gone" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="18.0dip"
+        android:layout_marginTop="32.0dip">
+
+        <View
+            android:id="@+id/cursor"
+            android:layout_width="2.0dip"
+            android:layout_height="fill_parent"
+            android:background="#ffffffff"
+            android:visibility="invisible" />
+
+        <LinearLayout
+            android:id="@+id/layout_psd"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:orientation="horizontal" />
+    </FrameLayout>
+
+    <Space
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:layout_weight="1.0" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/_250sdp"
+        android:background="@drawable/lock_bg_white"
+        android:padding="48.0dip">
+
+        <TextView
+            android:id="@+id/number1"
+            style="@style/NumberInPasscode"
+            android:layout_alignParentStart="true"
+            android:text="1" />
+
+        <TextView
+            android:id="@+id/number2"
+            style="@style/NumberInPasscode"
+            android:layout_centerHorizontal="true"
+            android:text="2" />
+
+        <TextView
+            android:id="@+id/number3"
+            style="@style/NumberInPasscode"
+            android:layout_alignParentEnd="true"
+            android:text="3" />
+
+        <TextView
+            android:id="@+id/number4"
+            style="@style/NumberInPasscode"
+            android:layout_below="@+id/number1"
+            android:layout_alignParentStart="true"
+            android:text="4" />
+
+        <TextView
+            android:id="@+id/number5"
+            style="@style/NumberInPasscode"
+            android:layout_below="@+id/number1"
+            android:layout_centerHorizontal="true"
+            android:text="5" />
+
+        <TextView
+            android:id="@+id/number6"
+            style="@style/NumberInPasscode"
+            android:layout_below="@+id/number1"
+            android:layout_alignParentEnd="true"
+            android:text="6" />
+
+        <TextView
+            android:id="@+id/number7"
+            style="@style/NumberInPasscode"
+            android:layout_below="@+id/number4"
+            android:layout_alignParentStart="true"
+            android:text="7" />
+
+        <TextView
+            android:id="@+id/number8"
+            style="@style/NumberInPasscode"
+            android:layout_below="@+id/number4"
+            android:layout_centerHorizontal="true"
+            android:text="8" />
+
+        <TextView
+            android:id="@+id/number9"
+            style="@style/NumberInPasscode"
+            android:layout_below="@+id/number4"
+            android:layout_alignParentEnd="true"
+            android:text="9" />
+
+        <ImageView
+            android:id="@+id/numberB"
+            style="@style/NumberInPasscode"
+            android:layout_below="@+id/number7"
+            android:layout_alignParentEnd="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/backspace" />
+
+        <TextView
+            android:id="@+id/number0"
+            style="@style/NumberInPasscode"
+            android:layout_below="@+id/number7"
+            android:layout_centerHorizontal="true"
+            android:text="0" />
+
+        <ImageView
+            android:id="@+id/numberOK"
+            style="@style/NumberInPasscode"
+            android:layout_below="@+id/number7"
+            android:layout_alignParentStart="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_arrow_white_true"
+            app:tint="#ff8a8a8a" />
+    </RelativeLayout>
+</LinearLayout>

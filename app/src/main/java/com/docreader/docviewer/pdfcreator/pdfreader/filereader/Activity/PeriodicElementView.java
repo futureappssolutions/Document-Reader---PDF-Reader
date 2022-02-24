@@ -12,7 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.facebookMaster;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.GetSet.ElementModel;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.SharedPrefs;
@@ -78,11 +78,8 @@ public class PeriodicElementView extends BaseActivity {
                 case "g":
                     Advertisement.GoogleBanner(PeriodicElementView.this, ll_banner);
                     break;
-                case "f":
-                    facebookMaster.FbBanner(PeriodicElementView.this, ll_banner);
-                    break;
-                case "both":
-                    Advertisement.GoogleBannerBoth(PeriodicElementView.this, ll_banner);
+                case "a":
+                    AppLovinAds.AppLovinBanner(PeriodicElementView.this, ll_banner);
                     break;
             }
         }

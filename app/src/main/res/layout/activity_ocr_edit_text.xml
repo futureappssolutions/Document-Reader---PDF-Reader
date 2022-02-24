@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_content"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <EditText
+        android:id="@+id/ocrTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@drawable/shape_edit_field"
+        android:fontFamily="@font/font_regular"
+        android:gravity="top"
+        android:padding="@dimen/_12sdp"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="@dimen/_10sdp" />
+</LinearLayout>

@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Adapter.CreatedDocumentFilesListAdp;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.facebookMaster;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Database.DatabaseHelper;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.GetSet.DocumentFiles;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
@@ -66,11 +66,8 @@ public class CreateNewPdfFile extends BaseActivity {
                 case "g":
                     Advertisement.GoogleBanner(CreateNewPdfFile.this, ll_banner);
                     break;
-                case "f":
-                    facebookMaster.FbBanner(CreateNewPdfFile.this, ll_banner);
-                    break;
-                case "both":
-                    Advertisement.GoogleBannerBoth(CreateNewPdfFile.this, ll_banner);
+                case "a":
+                    AppLovinAds.AppLovinBanner(CreateNewPdfFile.this, ll_banner);
                     break;
             }
         }
@@ -102,25 +99,9 @@ public class CreateNewPdfFile extends BaseActivity {
                             startActivity(intent);
                         }
                         break;
-                    case "f":
+                    case "a":
                         if (Advertisement.adsdisplay) {
-                            facebookMaster.FBFullScreenLoad(CreateNewPdfFile.this, () -> {
-                                Advertisement.allcount60.start();
-                                CreateNewPdfFile.selectedFileSource = "";
-                                selectedFileSourceId = 0;
-                                intent.putExtra("sourceFileId", selectedFileSourceId + "");
-                                startActivity(intent);
-                            });
-                        } else {
-                            CreateNewPdfFile.selectedFileSource = "";
-                            selectedFileSourceId = 0;
-                            intent.putExtra("sourceFileId", selectedFileSourceId + "");
-                            startActivity(intent);
-                        }
-                        break;
-                    case "both":
-                        if (Advertisement.adsdisplay) {
-                            Advertisement.FullScreenLoadBoth(CreateNewPdfFile.this, () -> {
+                            AppLovinAds.AppLovinFullScreenShow(() -> {
                                 Advertisement.allcount60.start();
                                 CreateNewPdfFile.selectedFileSource = "";
                                 selectedFileSourceId = 0;

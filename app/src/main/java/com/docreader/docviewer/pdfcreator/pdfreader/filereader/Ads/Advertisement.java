@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -36,10 +37,10 @@ import com.google.android.gms.ads.nativead.NativeAdView;
 import java.util.Objects;
 
 public class Advertisement {
-    public static InterstitialAd mInterstitialAd;
-    public static MyCallback myCallback;
     public static android.os.CountDownTimer allcount60;
     public static boolean adsdisplay = false;
+    public static InterstitialAd mInterstitialAd;
+    public static MyCallback myCallback;
 
     public static void GoogleFullScreenCall(Context context) {
         SharedPrefs sharedPrefs = new SharedPrefs(context);
@@ -82,25 +83,7 @@ public class Advertisement {
         try {
             if (mInterstitialAd != null) {
                 mInterstitialAd.show(activity);
-            } else {
-                if (myCallback != null) {
-                    myCallback.callbackCall();
-                    myCallback = null;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void GoogleFullScreenCallBoth(Context context) {
-        SharedPrefs sharedPrefs = new SharedPrefs(context);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        InterstitialAd.load(context, sharedPrefs.getGoogle_full(), adRequest, new InterstitialAdLoadCallback() {
-            @Override
-            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                mInterstitialAd = interstitialAd;
-                interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
                     @Override
                     public void onAdDismissedFullScreenContent() {
                         mInterstitialAd = null;
@@ -108,7 +91,7 @@ public class Advertisement {
                             myCallback.callbackCall();
                             myCallback = null;
                         }
-                        GoogleFullScreenCallBoth(context);
+                        GoogleFullScreenCall(activity);
                     }
 
                     @Override
@@ -120,26 +103,18 @@ public class Advertisement {
                     public void onAdShowedFullScreenContent() {
                     }
                 });
-            }
-
-            @Override
-            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                mInterstitialAd = null;
-            }
-        });
-    }
-
-    public static void FullScreenLoadBoth(Activity activity, final MyCallback _myCallback) {
-        myCallback = _myCallback;
-        try {
-            if (mInterstitialAd != null) {
-                mInterstitialAd.show(activity);
             } else {
-                if (myCallback != null) {
+               /* if (myCallback != null) {
                     myCallback.callbackCall();
                     myCallback = null;
                 }
-                facebookMaster.FBFullScreenLoadBoth(activity, facebookMaster.myCallback);
+                AppLovinAds.AppLovinFullScreenShow(AppLovinAds.myCallback);*/
+                AppLovinAds.AppLovinFullScreenShow(() -> {
+                    if (myCallback != null) {
+                        myCallback.callbackCall();
+                        myCallback = null;
+                    }
+                });
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -164,6 +139,7 @@ public class Advertisement {
 
             @Override
             public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                AppLovinAds.AppLovinBanner(context, ll_banner);
                 super.onAdFailedToLoad(loadAdError);
             }
 
@@ -173,43 +149,6 @@ public class Advertisement {
 
             @Override
             public void onAdClosed() {
-            }
-        });
-    }
-
-    public static void GoogleBannerBoth(Context context, LinearLayout ll_banner) {
-        SharedPrefs sharedPrefs = new SharedPrefs(context);
-        com.google.android.gms.ads.AdView adView = new com.google.android.gms.ads.AdView(context);
-        ll_banner.removeAllViews();
-        ll_banner.addView(adView);
-        adView.setAdSize(getAdSize((Activity) context));
-        adView.setAdUnitId(sharedPrefs.getGoogle_banner());
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
-
-        adView.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-            }
-
-            @Override
-            public void onAdClicked() {
-                super.onAdClicked();
-            }
-
-            @Override
-            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                super.onAdFailedToLoad(loadAdError);
-                facebookMaster.FbBanner(context, ll_banner);
-            }
-
-            @Override
-            public void onAdOpened() {
-            }
-
-            @Override
-            public void onAdClosed() {
-
             }
         });
     }
@@ -229,7 +168,7 @@ public class Advertisement {
     @SuppressLint("InflateParams")
     public static void GoogleNative(Context context, FrameLayout frameLayout) {
         SharedPrefs sharedPrefs = new SharedPrefs(context);
-        AdLoader.Builder builder = new AdLoader.Builder(context, sharedPrefs.getGoogle_native()).forNativeAd(nativeAd -> {
+        AdLoader.Builder builder = new AdLoader.Builder(context,sharedPrefs.getGoogle_native()).forNativeAd(nativeAd -> {
             NativeAdView adView = (NativeAdView) LayoutInflater.from(context).inflate(R.layout.ad_unified_new, null);
             Google_viewNative(nativeAd, adView);
             frameLayout.removeAllViews();
@@ -246,35 +185,8 @@ public class Advertisement {
         AdLoader adLoader = builder.withAdListener(new AdListener() {
             @Override
             public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                AppLovinAds.AppLovinNative(context, frameLayout);
                 super.onAdFailedToLoad(loadAdError);
-            }
-        }).build();
-
-        adLoader.loadAd(new AdRequest.Builder().build());
-    }
-
-    @SuppressLint("InflateParams")
-    public static void GoogleNativeBoth(Context context, FrameLayout frameLayout, FrameLayout native_ad_container) {
-        SharedPrefs sharedPrefs = new SharedPrefs(context);
-        AdLoader.Builder builder = new AdLoader.Builder(context, sharedPrefs.getGoogle_native()).forNativeAd(nativeAd -> {
-            NativeAdView adView = (NativeAdView) LayoutInflater.from(context).inflate(R.layout.ad_unified_new, null);
-            Google_viewNative(nativeAd, adView);
-            frameLayout.removeAllViews();
-            frameLayout.addView(adView);
-        });
-
-        VideoOptions videoOptions = new VideoOptions.Builder().build();
-
-        NativeAdOptions adOptions = new NativeAdOptions.Builder()
-                .setVideoOptions(videoOptions)
-                .build();
-
-        builder.withNativeAdOptions(adOptions);
-        AdLoader adLoader = builder.withAdListener(new AdListener() {
-            @Override
-            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                super.onAdFailedToLoad(loadAdError);
-                facebookMaster.FBNative((Activity) context, native_ad_container);
             }
         }).build();
 
@@ -291,21 +203,6 @@ public class Advertisement {
         adView.setIconView(adView.findViewById(R.id.ad_app_icon));
         adView.setStarRatingView(adView.findViewById(R.id.ad_stars));
         adView.setAdvertiserView(adView.findViewById(R.id.ad_advertiser));
-
-        mediaView.setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
-            @Override
-            public void onChildViewAdded(View parent, View child) {
-                if (child instanceof ImageView) {
-                    ImageView imageView = (ImageView) child;
-                    imageView.setAdjustViewBounds(true);
-                }
-            }
-
-            @Override
-            public void onChildViewRemoved(View parent, View child) {
-
-            }
-        });
 
         ((TextView) Objects.requireNonNull(adView.getHeadlineView())).setText(nativeAd.getHeadline());
 
@@ -329,6 +226,14 @@ public class Advertisement {
             ((ImageView) Objects.requireNonNull(adView.getIconView())).setImageDrawable(
                     nativeAd.getIcon().getDrawable());
             adView.getIconView().setVisibility(View.VISIBLE);
+        }
+
+        if (nativeAd.getStarRating() == null) {
+            Objects.requireNonNull(adView.getStarRatingView()).setVisibility(View.INVISIBLE);
+        } else {
+            ((RatingBar) Objects.requireNonNull(adView.getStarRatingView()))
+                    .setRating(nativeAd.getStarRating().floatValue());
+            adView.getStarRatingView().setVisibility(View.VISIBLE);
         }
 
         if (nativeAd.getAdvertiser() == null) {

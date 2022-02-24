@@ -1,13 +1,18 @@
 package com.docreader.docviewer.pdfcreator.pdfreader.filereader.Main;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
@@ -16,11 +21,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.SharedPrefs;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.Utility;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManager;
@@ -82,12 +89,18 @@ public class Splash extends BaseActivity implements OnSuccessListener<AppUpdateI
                 prefs.setGoogle_native(dataSnapshot.child("native_id").getValue(String.class));
                 prefs.setGoogle_open(dataSnapshot.child("app_open_id").getValue(String.class));
                 prefs.setGoogle_reward(dataSnapshot.child("reward_ads_id").getValue(String.class));
-
-                prefs.setFacebook_banner(dataSnapshot.child("fb_banner").getValue(String.class));
-                prefs.setFacebook_full(dataSnapshot.child("fb_full").getValue(String.class));
-                prefs.setFacebook_native(dataSnapshot.child("fb_native").getValue(String.class));
                 prefs.setAds_time(dataSnapshot.child("ads_time").getValue(String.class));
                 prefs.setAds_name(dataSnapshot.child("ads_name").getValue(String.class));
+
+//                prefs.setAppLovin_banner(dataSnapshot.child("al_banner").getValue(String.class));
+//                prefs.setAppLovin_full(dataSnapshot.child("al_full").getValue(String.class));
+//                prefs.setAppLovin_native(dataSnapshot.child("al_native").getValue(String.class));
+ //               prefs.setAppLovin_rewarde(dataSnapshot.child("al_reward").getValue(String.class));
+
+                prefs.setAppLovin_banner("3b997405cd6433ed");
+                prefs.setAppLovin_full("f2f732f71d0a6c9e");
+                prefs.setAppLovin_native("67ba5142ec7b3d52");
+                prefs.setAppLovin_rewarde("13eba7c924b56b40");
 
                 prefs.setRemove_ads_weekly(dataSnapshot.child("weekly_key").getValue(String.class));
                 prefs.setRemove_ads_monthly(dataSnapshot.child("monthly_key").getValue(String.class));
@@ -95,23 +108,53 @@ public class Splash extends BaseActivity implements OnSuccessListener<AppUpdateI
                 prefs.setBase_key(dataSnapshot.child("base_key").getValue(String.class));
 
                 new Handler().postDelayed(() -> {
-                    if (prefs.getAppLocalizationCode().equals("en")) {
-                        startActivity(new Intent(getBaseContext(), ActMain.class));
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                        if (Environment.isExternalStorageManager()) {
+                            if (prefs.getAppLocalizationCode().equals("en")) {
+                                startActivity(new Intent(getBaseContext(), ActMain.class));
+                            } else {
+                                setLocale(prefs.getAppLocalizationCode());
+                            }
+                            finish();
+                        } else {
+                            Intent intent = new Intent();
+                            intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                            intent.addCategory("android.intent.category.DEFAULT");
+                            intent.setData(Uri.parse(String.format("package:%s", getPackageName())));
+                            startActivityForResult(intent, 100);
+                        }
                     } else {
-                        setLocale(prefs.getAppLocalizationCode());
+                        ActivityCompat.requestPermissions(Splash.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                     }
-                    finish();
-                }, 2400);
+
+                }, 1700);
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(Splash.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
+
+    @Override
+    public void onRequestPermissionsResult(int i, @NonNull String[] strArr, @NonNull int[] iArr) {
+        super.onRequestPermissionsResult(i, strArr, iArr);
+        if (i == 1) {
+            if (iArr.length > 0 && iArr[0] == PackageManager.PERMISSION_GRANTED) {
+                if (prefs.getAppLocalizationCode().equals("en")) {
+                    startActivity(new Intent(getBaseContext(), ActMain.class));
+                } else {
+                    setLocale(prefs.getAppLocalizationCode());
+                }
+                finish();
+            } else {
+                Utility.Toast(this, getResources().getString(R.string.permission_denied_message2));
+            }
+        }
+    }
+
 
     @Override
     public void onSuccess(AppUpdateInfo appUpdateInfo) {
@@ -196,6 +239,16 @@ public class Splash extends BaseActivity implements OnSuccessListener<AppUpdateI
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100) {
+            if (prefs.getAppLocalizationCode().equals("en")) {
+                startActivity(new Intent(getBaseContext(), ActMain.class));
+            } else {
+                setLocale(prefs.getAppLocalizationCode());
+            }
+            finish();
+        }
+
+
         if (requestCode == RC_APP_UPDATE) {
             if (resultCode != RESULT_OK) {
                 UpdateAvailable = false;
@@ -218,10 +271,10 @@ public class Splash extends BaseActivity implements OnSuccessListener<AppUpdateI
         if (Build.VERSION.SDK_INT >= 23) {
             window.getDecorView().setSystemUiVisibility(window.getDecorView().getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.app_color));
-            window.setNavigationBarColor(ContextCompat.getColor(this, R.color.white));
+            window.setNavigationBarColor(ContextCompat.getColor(this, R.color.app_color ));
         } else if (Build.VERSION.SDK_INT == 21 || Build.VERSION.SDK_INT == 22) {
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.app_color));
-            window.setNavigationBarColor(ContextCompat.getColor(this, R.color.white));
+            window.setNavigationBarColor(ContextCompat.getColor(this, R.color.app_color));
         } else {
             window.clearFlags(0);
         }

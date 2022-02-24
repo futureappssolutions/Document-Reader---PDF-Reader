@@ -15,7 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.facebookMaster;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvGetSet.ResumeEvent;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvTemplate.TextChangeListener;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
@@ -156,11 +156,8 @@ public class ScreenCVEdit extends BaseActivity {
                 case "g":
                     Advertisement.GoogleBanner(ScreenCVEdit.this, ll_banner);
                     break;
-                case "f":
-                    facebookMaster.FbBanner(ScreenCVEdit.this, ll_banner);
-                    break;
-                case "both":
-                    Advertisement.GoogleBannerBoth(ScreenCVEdit.this, ll_banner);
+                case "a":
+                    AppLovinAds.AppLovinBanner(ScreenCVEdit.this, ll_banner);
                     break;
             }
         }

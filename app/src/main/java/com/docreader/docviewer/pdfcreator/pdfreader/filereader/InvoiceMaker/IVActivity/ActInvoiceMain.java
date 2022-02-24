@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.facebookMaster;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVFragment.FrgInvoice;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVFragment.FrgInvoiceClients;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVFragment.FrgInvoiceProduct;
@@ -54,11 +54,8 @@ public class ActInvoiceMain extends AppCompatActivity {
                 case "g":
                     Advertisement.GoogleBanner(ActInvoiceMain.this, ll_banner);
                     break;
-                case "f":
-                    facebookMaster.FbBanner(ActInvoiceMain.this, ll_banner);
-                    break;
-                case "both":
-                    Advertisement.GoogleBannerBoth(ActInvoiceMain.this, ll_banner);
+                case "a":
+                    AppLovinAds.AppLovinBanner(ActInvoiceMain.this, ll_banner);
                     break;
             }
         }

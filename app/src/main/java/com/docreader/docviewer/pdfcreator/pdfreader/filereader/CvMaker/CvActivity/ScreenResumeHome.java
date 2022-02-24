@@ -13,7 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.facebookMaster;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.SharedPrefs;
 
@@ -36,18 +36,15 @@ public final class ScreenResumeHome extends BaseActivity {
         prefs = new SharedPrefs(ScreenResumeHome.this);
 
         FrameLayout fl_native = findViewById(R.id.fl_native);
-        FrameLayout native_ad_container = findViewById(R.id.native_ad_container);
         if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
             switch (prefs.getAds_name()) {
                 case "g":
                     Advertisement.GoogleNative(ScreenResumeHome.this, fl_native);
                     break;
-                case "f":
-                    facebookMaster.FBNative(ScreenResumeHome.this, native_ad_container);
+                case "a":
+                    AppLovinAds.AppLovinNative(ScreenResumeHome.this, fl_native);
                     break;
-                case "both":
-                    Advertisement.GoogleNativeBoth(ScreenResumeHome.this, fl_native, native_ad_container);
-                    break;
+
             }
         }
     }
@@ -75,19 +72,9 @@ public final class ScreenResumeHome extends BaseActivity {
                                 IntentHobby();
                             }
                             break;
-                        case "f":
+                        case "a":
                             if (Advertisement.adsdisplay) {
-                                facebookMaster.FBFullScreenLoad(ScreenResumeHome.this, () -> {
-                                    Advertisement.allcount60.start();
-                                    IntentHobby();
-                                });
-                            } else {
-                                IntentHobby();
-                            }
-                            break;
-                        case "both":
-                            if (Advertisement.adsdisplay) {
-                                Advertisement.FullScreenLoadBoth(ScreenResumeHome.this, () -> {
+                                AppLovinAds.AppLovinFullScreenShow(() -> {
                                     Advertisement.allcount60.start();
                                     IntentHobby();
                                 });
@@ -113,19 +100,9 @@ public final class ScreenResumeHome extends BaseActivity {
                                 IntentLanguage();
                             }
                             break;
-                        case "f":
+                        case "a":
                             if (Advertisement.adsdisplay) {
-                                facebookMaster.FBFullScreenLoad(ScreenResumeHome.this, () -> {
-                                    Advertisement.allcount60.start();
-                                    IntentLanguage();
-                                });
-                            } else {
-                                IntentLanguage();
-                            }
-                            break;
-                        case "both":
-                            if (Advertisement.adsdisplay) {
-                                Advertisement.FullScreenLoadBoth(ScreenResumeHome.this, () -> {
+                                AppLovinAds.AppLovinFullScreenShow(() -> {
                                     Advertisement.allcount60.start();
                                     IntentLanguage();
                                 });
@@ -163,19 +140,9 @@ public final class ScreenResumeHome extends BaseActivity {
                                 IntentSkill();
                             }
                             break;
-                        case "f":
+                        case "a":
                             if (Advertisement.adsdisplay) {
-                                facebookMaster.FBFullScreenLoad(ScreenResumeHome.this, () -> {
-                                    Advertisement.allcount60.start();
-                                    IntentSkill();
-                                });
-                            } else {
-                                IntentSkill();
-                            }
-                            break;
-                        case "both":
-                            if (Advertisement.adsdisplay) {
-                                Advertisement.FullScreenLoadBoth(ScreenResumeHome.this, () -> {
+                                AppLovinAds.AppLovinFullScreenShow(() -> {
                                     Advertisement.allcount60.start();
                                     IntentSkill();
                                 });
@@ -201,19 +168,9 @@ public final class ScreenResumeHome extends BaseActivity {
                                 IntentResume("7");
                             }
                             break;
-                        case "f":
+                        case "a":
                             if (Advertisement.adsdisplay) {
-                                facebookMaster.FBFullScreenLoad(ScreenResumeHome.this, () -> {
-                                    Advertisement.allcount60.start();
-                                    IntentResume("7");
-                                });
-                            } else {
-                                IntentResume("7");
-                            }
-                            break;
-                        case "both":
-                            if (Advertisement.adsdisplay) {
-                                Advertisement.FullScreenLoadBoth(ScreenResumeHome.this, () -> {
+                                AppLovinAds.AppLovinFullScreenShow(() -> {
                                     Advertisement.allcount60.start();
                                     IntentResume("7");
                                 });
@@ -243,19 +200,9 @@ public final class ScreenResumeHome extends BaseActivity {
                         IntentResume(str);
                     }
                     break;
-                case "f":
+                case "a":
                     if (Advertisement.adsdisplay) {
-                        facebookMaster.FBFullScreenLoad(ScreenResumeHome.this, () -> {
-                            Advertisement.allcount60.start();
-                            IntentResume(str);
-                        });
-                    } else {
-                        IntentResume(str);
-                    }
-                    break;
-                case "both":
-                    if (Advertisement.adsdisplay) {
-                        Advertisement.FullScreenLoadBoth(ScreenResumeHome.this, () -> {
+                        AppLovinAds.AppLovinFullScreenShow(() -> {
                             Advertisement.allcount60.start();
                             IntentResume(str);
                         });

@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Adapter.SearchableFilesListAdp;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.facebookMaster;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CSVFileViewer.UI.CSVFileViewerActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.GetSet.FileModel;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
@@ -73,11 +73,8 @@ public class SearchFile extends BaseActivity {
                 case "g":
                     Advertisement.GoogleBanner(SearchFile.this, ll_banner);
                     break;
-                case "f":
-                    facebookMaster.FbBanner(SearchFile.this, ll_banner);
-                    break;
-                case "both":
-                    Advertisement.GoogleBannerBoth(SearchFile.this, ll_banner);
+                case "a":
+                    AppLovinAds.AppLovinBanner(SearchFile.this, ll_banner);
                     break;
             }
         }

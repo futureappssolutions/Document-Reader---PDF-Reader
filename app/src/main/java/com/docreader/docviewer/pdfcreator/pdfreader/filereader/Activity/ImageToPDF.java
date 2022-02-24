@@ -24,7 +24,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Adapter.ImageToPdfAdp;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.facebookMaster;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.GetSet.ImageModel;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.CoroutinesTask;
@@ -121,11 +121,8 @@ public class ImageToPDF extends BaseActivity implements View.OnClickListener {
                 case "g":
                     Advertisement.GoogleBanner(ImageToPDF.this, ll_banner);
                     break;
-                case "f":
-                    facebookMaster.FbBanner(ImageToPDF.this, ll_banner);
-                    break;
-                case "both":
-                    Advertisement.GoogleBannerBoth(ImageToPDF.this, ll_banner);
+                case "a":
+                    AppLovinAds.AppLovinBanner(ImageToPDF.this, ll_banner);
                     break;
             }
         }
@@ -256,9 +253,9 @@ public class ImageToPDF extends BaseActivity implements View.OnClickListener {
                                     dialogInterface.dismiss();
                                 }
                                 break;
-                            case "f":
+                            case "a":
                                 if (Advertisement.adsdisplay) {
-                                    facebookMaster.FBFullScreenLoad(ImageToPDF.this, () -> {
+                                    AppLovinAds.AppLovinFullScreenShow(() -> {
                                         Advertisement.allcount60.start();
                                         IntentPDFView(str1);
                                         dialogInterface.dismiss();
@@ -268,18 +265,7 @@ public class ImageToPDF extends BaseActivity implements View.OnClickListener {
                                     dialogInterface.dismiss();
                                 }
                                 break;
-                            case "both":
-                                if (Advertisement.adsdisplay) {
-                                    Advertisement.FullScreenLoadBoth(ImageToPDF.this, () -> {
-                                        Advertisement.allcount60.start();
-                                        IntentPDFView(str1);
-                                        dialogInterface.dismiss();
-                                    });
-                                } else {
-                                    IntentPDFView(str1);
-                                    dialogInterface.dismiss();
-                                }
-                                break;
+
                         }
                     } else {
                         IntentPDFView(str1);

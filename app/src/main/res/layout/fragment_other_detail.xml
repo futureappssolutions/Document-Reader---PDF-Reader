@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/txtHint"
+        android:isScrollContainer="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/_15sdp">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/font_medium"
+                    android:text="@string/achievements"
+                    android:textSize="@dimen/_11sdp" />
+
+                <EditText
+                    android:id="@+id/achievementsEt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Achievements"
+                    android:background="@drawable/shape_edit_field"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:textColorHint="@color/hint_color"
+                    android:fontFamily="@font/font_regular"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:padding="@dimen/_12sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/font_medium"
+                    android:text="@string/website"
+                    android:textSize="@dimen/_11sdp" />
+
+                <EditText
+                    android:id="@+id/websiteEt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_edit_field"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:textColorHint="@color/hint_color"
+                    android:fontFamily="@font/font_regular"
+                    android:inputType="textCapWords"
+                    android:padding="@dimen/_12sdp"
+                    android:hint="Enter Website"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/font_bold"
+                android:text="@string/socialLink"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/_12sdp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/font_medium"
+                    android:text="@string/linkedin"
+                    android:textSize="@dimen/_11sdp" />
+
+                <EditText
+                    android:id="@+id/linkdinEt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_edit_field"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:textColorHint="@color/hint_color"
+                    android:fontFamily="@font/font_regular"
+                    android:inputType="text"
+                    android:padding="@dimen/_12sdp"
+                    android:hint="Enter Linkedin url"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/font_medium"
+                    android:text="@string/facebook"
+                    android:textSize="@dimen/_11sdp" />
+
+                <EditText
+                    android:id="@+id/facebookET"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_edit_field"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:textColorHint="@color/hint_color"
+                    android:fontFamily="@font/font_regular"
+                    android:inputType="textEmailAddress"
+                    android:hint="Enter Facebook url"
+                    android:padding="@dimen/_12sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/font_medium"
+                    android:text="@string/twitter"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sdp" />
+
+                <EditText
+                    android:id="@+id/twitterEt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_edit_field"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:textColorHint="@color/hint_color"
+                    android:fontFamily="@font/font_regular"
+                    android:hint="Enter Twitter url"
+                    android:inputType="text"
+                    android:padding="@dimen/_12sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/font_bold"
+                android:text="@string/reference"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/_12sdp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/font_medium"
+                    android:text="@string/reference"
+                    android:textSize="@dimen/_11sdp" />
+
+                <EditText
+                    android:id="@+id/referenceEt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_edit_field"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:textColorHint="@color/hint_color"
+                    android:fontFamily="@font/font_regular"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:padding="@dimen/_12sdp"
+                    android:hint="Enter reference"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/txtHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#f6f6f6"
+        android:fontFamily="@font/font_regular"
+        android:padding="@dimen/_15sdp"
+        android:text="@string/leaveTheFieldEmptyMessage"
+        android:textColor="@color/Red1"
+        android:textSize="@dimen/_9sdp" />
+</RelativeLayout>

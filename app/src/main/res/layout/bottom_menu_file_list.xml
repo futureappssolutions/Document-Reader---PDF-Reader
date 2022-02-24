@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/readTv"
+        style="@style/ActionItem"
+        android:drawableTint="@color/app_color"
+        android:text="read"
+        android:drawableStart="@drawable/ic_read" />
+
+    <TextView
+        android:id="@+id/renameTv"
+        style="@style/ActionItem"
+        android:drawableStart="@drawable/ic_edit"
+        android:drawableTint="@color/app_color"
+        android:text="rename" />
+
+    <TextView
+        android:id="@+id/deleteTv"
+        style="@style/ActionItem"
+        android:drawableStart="@drawable/ic_delete"
+        android:drawableTint="@color/app_color"
+        android:text="delete" />
+
+    <TextView
+        android:id="@+id/shareTv"
+        style="@style/ActionItem"
+        android:drawableStart="@drawable/share"
+        android:drawableTint="@color/app_color"
+        android:text="share"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/infoTv"
+        style="@style/ActionItem"
+        android:drawableStart="@drawable/ic_info"
+        android:drawableTint="@color/app_color"
+        android:text="info"
+        android:textColor="@color/black" />
+</LinearLayout>

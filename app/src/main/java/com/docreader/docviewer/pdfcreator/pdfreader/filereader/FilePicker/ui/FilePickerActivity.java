@@ -23,7 +23,7 @@ import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.RTFView;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.TextViewer;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.facebookMaster;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CSVFileViewer.UI.CSVFileViewerActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.EBookViewer.EPubFileViewerActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.FilePicker.filter.FileFilter;
@@ -81,11 +81,8 @@ public class FilePickerActivity extends BaseActivity implements DirectoryFragmen
                 case "g":
                     Advertisement.GoogleBanner(FilePickerActivity.this, ll_banner);
                     break;
-                case "f":
-                    facebookMaster.FbBanner(FilePickerActivity.this, ll_banner);
-                    break;
-                case "both":
-                    Advertisement.GoogleBannerBoth(FilePickerActivity.this, ll_banner);
+                case "a":
+                    AppLovinAds.AppLovinBanner(FilePickerActivity.this, ll_banner);
                     break;
             }
         }

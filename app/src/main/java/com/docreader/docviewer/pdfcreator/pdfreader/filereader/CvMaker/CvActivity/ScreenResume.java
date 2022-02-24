@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.facebookMaster;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvFragment.FrgCvEducation;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvFragment.FrgCvExperience;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvFragment.FrgCvOtherDetail;
@@ -48,11 +48,8 @@ public class ScreenResume extends BaseActivity {
                 case "g":
                     Advertisement.GoogleBanner(ScreenResume.this, ll_banner);
                     break;
-                case "f":
-                    facebookMaster.FbBanner(ScreenResume.this, ll_banner);
-                    break;
-                case "both":
-                    Advertisement.GoogleBannerBoth(ScreenResume.this, ll_banner);
+                case "a":
+                    AppLovinAds.AppLovinBanner(ScreenResume.this, ll_banner);
                     break;
             }
         }

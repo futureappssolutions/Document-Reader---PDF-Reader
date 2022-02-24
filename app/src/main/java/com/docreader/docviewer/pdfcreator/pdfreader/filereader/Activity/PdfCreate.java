@@ -35,7 +35,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.facebookMaster;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvActivity.ScreenCVEdit;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Database.DatabaseHelper;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.GetSet.DocumentFiles;
@@ -102,11 +102,8 @@ public class PdfCreate extends BaseActivity implements View.OnClickListener {
                 case "g":
                     Advertisement.GoogleBanner(PdfCreate.this, ll_banner);
                     break;
-                case "f":
-                    facebookMaster.FbBanner(PdfCreate.this, ll_banner);
-                    break;
-                case "both":
-                    Advertisement.GoogleBannerBoth(PdfCreate.this, ll_banner);
+                case "a":
+                    AppLovinAds.AppLovinBanner(PdfCreate.this, ll_banner);
                     break;
             }
         }
@@ -412,19 +409,9 @@ public class PdfCreate extends BaseActivity implements View.OnClickListener {
                         startActivity(new Intent(this, PrintPreview.class));
                     }
                     break;
-                case "f":
+                case "a":
                     if (Advertisement.adsdisplay) {
-                        facebookMaster.FBFullScreenLoad(PdfCreate.this, () -> {
-                            Advertisement.allcount60.start();
-                            startActivity(new Intent(this, PrintPreview.class));
-                        });
-                    } else {
-                        startActivity(new Intent(this, PrintPreview.class));
-                    }
-                    break;
-                case "both":
-                    if (Advertisement.adsdisplay) {
-                        Advertisement.FullScreenLoadBoth(PdfCreate.this, () -> {
+                        AppLovinAds.AppLovinFullScreenShow(() -> {
                             Advertisement.allcount60.start();
                             startActivity(new Intent(this, PrintPreview.class));
                         });

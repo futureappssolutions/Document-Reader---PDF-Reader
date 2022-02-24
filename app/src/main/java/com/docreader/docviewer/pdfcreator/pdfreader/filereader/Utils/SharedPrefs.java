@@ -13,9 +13,11 @@ public class SharedPrefs {
     private final String Google_native = "Google_native";
     private final String Google_open = "Google_open";
     private final String Google_reward = "Google_reward";
-    private final String Facebook_banner = "Facebook_banner";
-    private final String Facebook_full = "Facebook_full";
-    private final String Facebook_native = "Facebook_native";
+    private final String AppLovin_full = "AppLovin_full";
+    private final String AppLovin_banner = "AppLovin_banner";
+    private final String AppLovin_native = "AppLovin_native";
+    private final String AppLovin_reward = "AppLovin_reward";
+
     private final String Ads_time = "Ads_time";
     private final String Ads_name = "Ads_name";
 
@@ -219,29 +221,38 @@ public class SharedPrefs {
         editor.putString(Google_reward, value).apply();
     }
 
-    public String getFacebook_banner() {
-        return prefs.getString(Facebook_banner, "");
+    public String getAppLovin_full() {
+        return prefs.getString(AppLovin_full, "");
     }
 
-    public void setFacebook_banner(String value) {
-        editor.putString(Facebook_banner, value).apply();
+    public void setAppLovin_full(String value) {
+        editor.putString(AppLovin_full, value).apply();
     }
 
-    public String getFacebook_full() {
-        return prefs.getString(Facebook_full, "");
+    public String getAppLovin_banner() {
+        return prefs.getString(AppLovin_banner, "");
     }
 
-    public void setFacebook_full(String value) {
-        editor.putString(Facebook_full, value).apply();
+    public void setAppLovin_banner(String value) {
+        editor.putString(AppLovin_banner, value).apply();
     }
 
-    public String getFacebook_native() {
-        return prefs.getString(Facebook_native, "");
+    public String getAppLovin_native() {
+        return prefs.getString(AppLovin_native,"");
     }
 
-    public void setFacebook_native(String value) {
-        editor.putString(Facebook_native, value).apply();
+    public void setAppLovin_native(String value) {
+        editor.putString(AppLovin_native, value).apply();
     }
+
+    public String getAppLovin_reward() {
+        return prefs.getString(AppLovin_reward, "");
+    }
+
+    public void setAppLovin_rewarde(String value) {
+        editor.putString(AppLovin_reward, value).apply();
+    }
+
 
     public String getAds_time() {
         return prefs.getString(Ads_time, "");

@@ -11,6 +11,7 @@
     <dimen name="default_row_header_width">55.0dip</dimen>
 
     <dimen name="text_size">12.0sp</dimen>
+    <dimen name="banner_height">55dp</dimen>
 
     <dimen name="dgv_overlap_if_switch_straight_line">16dp</dimen>
 </resources>

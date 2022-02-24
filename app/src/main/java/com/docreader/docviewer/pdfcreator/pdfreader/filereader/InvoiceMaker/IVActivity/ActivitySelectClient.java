@@ -26,7 +26,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.facebookMaster;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvActivity.ScreenCVEdit;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Database.InvoiceDatabaseHelper;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVGetSet.Client;
@@ -66,11 +66,8 @@ public class ActivitySelectClient extends AppCompatActivity {
                 case "g":
                     Advertisement.GoogleBanner(ActivitySelectClient.this, ll_banner);
                     break;
-                case "f":
-                    facebookMaster.FbBanner(ActivitySelectClient.this, ll_banner);
-                    break;
-                case "both":
-                    Advertisement.GoogleBannerBoth(ActivitySelectClient.this, ll_banner);
+                case "a":
+                    AppLovinAds.AppLovinBanner(ActivitySelectClient.this, ll_banner);
                     break;
             }
         }

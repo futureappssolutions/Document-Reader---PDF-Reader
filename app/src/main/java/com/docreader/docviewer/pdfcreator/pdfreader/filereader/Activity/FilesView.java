@@ -21,7 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.facebookMaster;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Main.ActMain;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.SharedPrefs;
@@ -180,11 +180,8 @@ public class FilesView extends BaseActivity implements IMainFrame {
                 case "g":
                     Advertisement.GoogleBanner(FilesView.this, ll_banner);
                     break;
-                case "f":
-                    facebookMaster.FbBanner(FilesView.this, ll_banner);
-                    break;
-                case "both":
-                    Advertisement.GoogleBannerBoth(FilesView.this, ll_banner);
+                case "a":
+                    AppLovinAds.AppLovinBanner(FilesView.this, ll_banner);
                     break;
             }
         }

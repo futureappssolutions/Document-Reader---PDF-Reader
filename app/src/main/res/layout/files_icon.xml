@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/item_file_image"
+        android:layout_width="48.0dip"
+        android:layout_height="48.0dip"
+        android:padding="@dimen/_8sdp"
+        android:src="@drawable/icon_allfiles"
+        android:visibility="visible" />
+
+    <RelativeLayout
+        android:id="@+id/allFilesLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="48.0dip"
+            android:layout_height="48.0dip"
+            android:padding="@dimen/_6sdp"
+            android:src="@drawable/icon_allfiles" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/xlxFilesLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="48.0dip"
+            android:layout_height="48.0dip"
+            android:padding="@dimen/_6sdp"
+            android:src="@drawable/icon_xlsx" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/pdfFilesLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="48.0dip"
+            android:layout_height="48.0dip"
+            android:padding="@dimen/_6sdp"
+            android:src="@drawable/icon_pdf" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/docFilesLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="48.0dip"
+            android:layout_height="48.0dip"
+            android:padding="@dimen/_6sdp"
+            android:src="@drawable/icon_doc" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rtfFilesLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="48.0dip"
+            android:layout_height="48.0dip"
+            android:padding="@dimen/_6sdp"
+            android:src="@drawable/icon_rtf" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ebookFilesLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="48.0dip"
+            android:layout_height="48.0dip"
+            android:padding="@dimen/_6sdp"
+            android:src="@drawable/icon_book" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/codeFilesLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="48.0dip"
+            android:layout_height="48.0dip"
+            android:padding="@dimen/_6sdp"
+            android:src="@drawable/icon_allfiles" />
+
+        <TextView
+            android:id="@+id/codeFilesText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_13sdp"
+            android:fontFamily="@font/font_bold"
+            android:text="@string/code"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_6sdp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/pptFilesLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="48.0dip"
+            android:layout_height="48.0dip"
+            android:padding="@dimen/_6sdp"
+            android:src="@drawable/icon_ppt" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/txtFilesLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="48.0dip"
+            android:layout_height="48.0dip"
+            android:padding="@dimen/_6sdp"
+            android:src="@drawable/icon_txt" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/csvFilesLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="48.0dip"
+            android:layout_height="48.0dip"
+            android:padding="@dimen/_6sdp"
+            android:src="@drawable/icon_csv" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/epubLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="48.0dip"
+            android:layout_height="48.0dip"
+            android:padding="@dimen/_6sdp"
+            android:src="@drawable/icon_book" />
+    </RelativeLayout>
+</LinearLayout>

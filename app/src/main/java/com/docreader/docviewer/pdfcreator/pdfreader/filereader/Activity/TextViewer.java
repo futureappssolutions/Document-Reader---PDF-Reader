@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.facebookMaster;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.SharedPrefs;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.View.Code.CodeView;
@@ -58,11 +58,8 @@ public class TextViewer extends BaseActivity implements CodeView.OnHighlightList
                 case "g":
                     Advertisement.GoogleBanner(TextViewer.this, ll_banner);
                     break;
-                case "f":
-                    facebookMaster.FbBanner(TextViewer.this, ll_banner);
-                    break;
-                case "both":
-                    Advertisement.GoogleBannerBoth(TextViewer.this, ll_banner);
+                case "a":
+                    AppLovinAds.AppLovinBanner(TextViewer.this, ll_banner);
                     break;
             }
         }

@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.facebookMaster;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvAdapter.CvSkillAdp;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvGetSet.Resume;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvGetSet.Skill;
@@ -82,11 +82,8 @@ public class ScreenSkill extends AppCompatActivity {
                 case "g":
                     Advertisement.GoogleBanner(ScreenSkill.this, ll_banner);
                     break;
-                case "f":
-                    facebookMaster.FbBanner(ScreenSkill.this, ll_banner);
-                    break;
-                case "both":
-                    Advertisement.GoogleBannerBoth(ScreenSkill.this, ll_banner);
+                case "a":
+                    AppLovinAds.AppLovinBanner(ScreenSkill.this, ll_banner);
                     break;
             }
         }

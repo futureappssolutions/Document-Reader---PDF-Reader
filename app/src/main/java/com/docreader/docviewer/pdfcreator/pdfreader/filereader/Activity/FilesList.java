@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Adapter.AllFilesAdp;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.facebookMaster;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CSVFileViewer.UI.CSVFileViewerActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.EBookViewer.EPubFileViewerActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.GetSet.FileModel;
@@ -78,12 +78,10 @@ public class FilesList extends BaseActivity {
                 case "g":
                     Advertisement.GoogleBanner(FilesList.this, ll_banner);
                     break;
-                case "f":
-                    facebookMaster.FbBanner(FilesList.this, ll_banner);
+                case "a":
+                    AppLovinAds.AppLovinBanner(FilesList.this, ll_banner);
                     break;
-                case "both":
-                    Advertisement.GoogleBannerBoth(FilesList.this, ll_banner);
-                    break;
+
             }
         }
 

@@ -20,7 +20,7 @@ import androidx.core.content.ContextCompat;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.facebookMaster;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvActivity.ScreenCVEdit;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Database.InvoiceDatabaseHelper;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVGetSet.Product;
@@ -63,11 +63,8 @@ public class ActInvoiceProduct extends BaseActivity {
                 case "g":
                     Advertisement.GoogleBanner(ActInvoiceProduct.this, ll_banner);
                     break;
-                case "f":
-                    facebookMaster.FbBanner(ActInvoiceProduct.this, ll_banner);
-                    break;
-                case "both":
-                    Advertisement.GoogleBannerBoth(ActInvoiceProduct.this, ll_banner);
+                case "a":
+                    AppLovinAds.AppLovinBanner(ActInvoiceProduct.this, ll_banner);
                     break;
             }
         }

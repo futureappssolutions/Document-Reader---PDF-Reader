@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.docreader.docviewer.pdfcreator.pdfreader.filereader.View.SquareFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_2sdp">
+
+    <RelativeLayout
+        android:id="@+id/fileLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/fileIcon"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/videoTimeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:background="@color/transparent_black"
+            android:paddingStart="@dimen/_2sdp"
+            android:paddingEnd="@dimen/_2sdp"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="@dimen/_6sdp"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/iconPlay"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/circle_color_primary"
+            android:padding="@dimen/_2sdp"
+            android:src="@drawable/ic_play"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/viewImage"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="@dimen/_7sdp"
+            android:background="@drawable/circle_color_primary"
+            android:padding="@dimen/_2sdp"
+            android:rotation="45.0"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_enlarge"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/checkedLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/transparent_black"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:background="@drawable/circle_color_primary"
+                android:padding="@dimen/_3sdp"
+                android:src="@drawable/ic_arrow_white_true"
+                app:tint="@color/white" />
+        </LinearLayout>
+    </RelativeLayout>
+</com.docreader.docviewer.pdfcreator.pdfreader.filereader.View.SquareFrameLayout>

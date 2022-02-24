@@ -1,5 +1,7 @@
 package com.docreader.docviewer.pdfcreator.pdfreader.filereader.Main;
 
+import static com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds.retryAttempt;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
@@ -11,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.storage.StorageManager;
 import android.provider.Settings;
 import android.text.Html;
@@ -40,6 +43,11 @@ import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesUpdatedListener;
+import com.applovin.mediation.MaxAd;
+import com.applovin.mediation.MaxError;
+import com.applovin.mediation.MaxReward;
+import com.applovin.mediation.MaxRewardedAdListener;
+import com.applovin.mediation.ads.MaxRewardedAd;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.CreateNewPdfFile;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.FilesList;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.FilesView;
@@ -54,7 +62,7 @@ import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActi
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.ChooseFileLoadingTypeActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.ActivityPremium;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.facebookMaster;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.BuildConfig;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CSVFileViewer.UI.CSVFileViewerActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvActivity.ScreenResumeHome;
@@ -92,6 +100,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 public class ActMain extends BaseActivity implements View.OnClickListener {
@@ -104,6 +113,7 @@ public class ActMain extends BaseActivity implements View.OnClickListener {
     private Singleton singleton;
     private String fileName = "";
     private RewardedAd rewardedAd;
+    private MaxRewardedAd rewardedAdLovin;
     public boolean isLoading = false;
     private boolean isFilesLoading = false;
     public int fileType = 0, AdsType = 0;
@@ -167,33 +177,31 @@ public class ActMain extends BaseActivity implements View.OnClickListener {
             ex.printStackTrace();
         }
 
-        loadRewardedAd();
-
         checkActiveSubs();
 
         RelativeLayout rlAd = findViewById(R.id.rlAd);
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
         FrameLayout fl_native = findViewById(R.id.fl_native);
-        FrameLayout native_ad_container = findViewById(R.id.native_ad_container);
+
+        if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
+            Advertisement.GoogleFullScreenCall(ActMain.this);
+            AppLovinAds.AppLovinFullScreenCall(ActMain.this);
+            loadRewardedAd();
+            loadRewardedAdAppLovin();
+        }
+
+
         if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
             switch (prefs.getAds_name()) {
                 case "g":
-                    Advertisement.GoogleFullScreenCall(ActMain.this);
                     Advertisement.GoogleBanner(ActMain.this, ll_banner);
                     Advertisement.GoogleNative(ActMain.this, fl_native);
                     rlAd.setVisibility(View.VISIBLE);
                     break;
-                case "f":
-                    facebookMaster.FBFullScreenCall(ActMain.this);
-                    facebookMaster.FbBanner(ActMain.this, ll_banner);
-                    facebookMaster.FBNative(ActMain.this, native_ad_container);
+                case "a":
+                    AppLovinAds.AppLovinBanner(ActMain.this, ll_banner);
+                    AppLovinAds.AppLovinNative(ActMain.this, fl_native);
                     rlAd.setVisibility(View.VISIBLE);
-                    break;
-                case "both":
-                    Advertisement.GoogleFullScreenCallBoth(ActMain.this);
-                    facebookMaster.FBFullScreenCallBoth(ActMain.this);
-                    Advertisement.GoogleBannerBoth(ActMain.this, ll_banner);
-                    Advertisement.GoogleNativeBoth(ActMain.this, fl_native, native_ad_container);
                     break;
             }
         }
@@ -280,7 +288,7 @@ public class ActMain extends BaseActivity implements View.OnClickListener {
         super.onStart();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             if (Environment.isExternalStorageManager()) {
-                Log.i("Permission", "Granted");
+                Log.e("Permission", "Granted");
             } else {
                 Intent intent = new Intent();
                 intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
@@ -417,19 +425,9 @@ public class ActMain extends BaseActivity implements View.OnClickListener {
                             IntentFileList(i);
                         }
                         break;
-                    case "f":
+                    case "a":
                         if (Advertisement.adsdisplay) {
-                            facebookMaster.FBFullScreenLoad(ActMain.this, () -> {
-                                Advertisement.allcount60.start();
-                                IntentFileList(i);
-                            });
-                        } else {
-                            IntentFileList(i);
-                        }
-                        break;
-                    case "both":
-                        if (Advertisement.adsdisplay) {
-                            Advertisement.FullScreenLoadBoth(ActMain.this, () -> {
+                            AppLovinAds.AppLovinFullScreenShow(() -> {
                                 Advertisement.allcount60.start();
                                 IntentFileList(i);
                             });
@@ -467,19 +465,9 @@ public class ActMain extends BaseActivity implements View.OnClickListener {
                             IntentFileList(i);
                         }
                         break;
-                    case "f":
+                    case "a":
                         if (Advertisement.adsdisplay) {
-                            facebookMaster.FBFullScreenLoad(ActMain.this, () -> {
-                                Advertisement.allcount60.start();
-                                IntentFileList(i);
-                            });
-                        } else {
-                            IntentFileList(i);
-                        }
-                        break;
-                    case "both":
-                        if (Advertisement.adsdisplay) {
-                            Advertisement.FullScreenLoadBoth(ActMain.this, () -> {
+                            AppLovinAds.AppLovinFullScreenShow(() -> {
                                 Advertisement.allcount60.start();
                                 IntentFileList(i);
                             });
@@ -683,6 +671,68 @@ public class ActMain extends BaseActivity implements View.OnClickListener {
         startActivity(intent);
     }
 
+    private void loadRewardedAdAppLovin() {
+        rewardedAdLovin = MaxRewardedAd.getInstance(prefs.getAppLovin_reward(), ActMain.this);
+        rewardedAdLovin.setListener(new MaxRewardedAdListener() {
+            @Override
+            public void onRewardedVideoStarted(MaxAd ad) {
+
+            }
+
+            @Override
+            public void onRewardedVideoCompleted(MaxAd ad) {
+
+            }
+
+            @Override
+            public void onUserRewarded(MaxAd ad, MaxReward reward) {
+                if (AdsType == 1) {
+                    startActivity(new Intent(ActMain.this, ScreenResumeHome.class));
+                } else if (AdsType == 2) {
+                    startActivity(new Intent(ActMain.this, CreateNewPdfFile.class));
+                } else if (AdsType == 3) {
+                    startActivity(new Intent(ActMain.this, ActInvoiceMain.class));
+                }
+            }
+
+            @Override
+            public void onAdLoaded(MaxAd ad) {
+                retryAttempt = 0;
+            }
+
+            @Override
+            public void onAdDisplayed(MaxAd ad) {
+
+            }
+
+            @Override
+            public void onAdHidden(MaxAd ad) {
+                rewardedAdLovin.loadAd();
+            }
+
+            @Override
+            public void onAdClicked(MaxAd ad) {
+
+            }
+
+            @Override
+            public void onAdLoadFailed(String adUnitId, MaxError error) {
+                retryAttempt++;
+                long delayMillis = TimeUnit.SECONDS.toMillis((long) Math.pow(2, Math.min(6, retryAttempt)));
+
+                new Handler().postDelayed(() -> rewardedAdLovin.loadAd(), delayMillis);
+            }
+
+            @Override
+            public void onAdDisplayFailed(MaxAd ad, MaxError error) {
+                rewardedAdLovin.loadAd();
+            }
+        });
+
+        rewardedAdLovin.loadAd();
+    }
+
+
     private void loadRewardedAd() {
         if (rewardedAd == null) {
             isLoading = true;
@@ -721,7 +771,9 @@ public class ActMain extends BaseActivity implements View.OnClickListener {
     }
 
     private void showRewardedVideo() {
-        if (rewardedAd != null) {
+        if (rewardedAd == null) {
+            showRewardedVideoAppLovin();
+        } else {
             rewardedAd.show(ActMain.this, rewardItem -> {
                 if (AdsType == 1) {
                     startActivity(new Intent(this, ScreenResumeHome.class));
@@ -731,6 +783,12 @@ public class ActMain extends BaseActivity implements View.OnClickListener {
                     startActivity(new Intent(this, ActInvoiceMain.class));
                 }
             });
+        }
+    }
+
+    private void showRewardedVideoAppLovin() {
+        if (rewardedAdLovin.isReady()) {
+            rewardedAdLovin.showAd();
         }
     }
 
@@ -745,7 +803,14 @@ public class ActMain extends BaseActivity implements View.OnClickListener {
         });
 
         inflate.findViewById(R.id.startWatchAds).setOnClickListener(v -> {
-            showRewardedVideo();
+            switch (prefs.getAds_name()) {
+                case "g":
+                    showRewardedVideo();
+                    break;
+                case "a":
+                    showRewardedVideoAppLovin();
+                    break;
+            }
             bottomSheetDialog.dismiss();
         });
 

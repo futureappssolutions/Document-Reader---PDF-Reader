@@ -25,7 +25,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Adapter.RearrangePdfFilesAdp;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.facebookMaster;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Interface.MergeFilesListener;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.GetSet.FileModel;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
@@ -124,11 +124,8 @@ public class MergePDF extends BaseActivity implements View.OnClickListener, Merg
                 case "g":
                     Advertisement.GoogleBanner(MergePDF.this, ll_banner);
                     break;
-                case "f":
-                    facebookMaster.FbBanner(MergePDF.this, ll_banner);
-                    break;
-                case "both":
-                    Advertisement.GoogleBannerBoth(MergePDF.this, ll_banner);
+                case "a":
+                    AppLovinAds.AppLovinBanner(MergePDF.this, ll_banner);
                     break;
             }
         }
@@ -302,21 +299,9 @@ public class MergePDF extends BaseActivity implements View.OnClickListener, Merg
                                 dialogInterface.dismiss();
                             }
                             break;
-                        case "f":
+                        case "a":
                             if (Advertisement.adsdisplay) {
-                                facebookMaster.FBFullScreenLoad(MergePDF.this, () -> {
-                                    Advertisement.allcount60.start();
-                                    IntentPDFView(str, str2);
-                                    dialogInterface.dismiss();
-                                });
-                            } else {
-                                IntentPDFView(str, str2);
-                                dialogInterface.dismiss();
-                            }
-                            break;
-                        case "both":
-                            if (Advertisement.adsdisplay) {
-                                Advertisement.FullScreenLoadBoth(MergePDF.this, () -> {
+                                AppLovinAds.AppLovinFullScreenShow(() -> {
                                     Advertisement.allcount60.start();
                                     IntentPDFView(str, str2);
                                     dialogInterface.dismiss();
