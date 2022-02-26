@@ -80,8 +80,6 @@ public class Splash extends BaseActivity implements OnSuccessListener<AppUpdateI
         appUpdateManager = AppUpdateManagerFactory.create(Splash.this);
         mNeedsFlexibleUpdate = false;
 
-
-
         FirebaseDatabase.getInstance().getReference().child("doc_data").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -96,10 +94,6 @@ public class Splash extends BaseActivity implements OnSuccessListener<AppUpdateI
                 prefs.setAppLovin_full(dataSnapshot.child("al_full").getValue(String.class));
                 prefs.setAppLovin_native(dataSnapshot.child("al_native").getValue(String.class));
                 prefs.setAppLovin_reward(dataSnapshot.child("al_reward").getValue(String.class));
-//                prefs.setAppLovin_banner("3b997405cd6433ed");
-//                prefs.setAppLovin_full("f2f732f71d0a6c9e");
-//                prefs.setAppLovin_native("67ba5142ec7b3d52");
-//                prefs.setAppLovin_reward("13eba7c924b56b40");
                 prefs.setRemove_ads_weekly(dataSnapshot.child("weekly_key").getValue(String.class));
                 prefs.setRemove_ads_monthly(dataSnapshot.child("monthly_key").getValue(String.class));
                 prefs.setRemove_ads_yearly(dataSnapshot.child("yearly_key").getValue(String.class));
@@ -121,7 +115,6 @@ public class Splash extends BaseActivity implements OnSuccessListener<AppUpdateI
                 }
 
                 GoogleAppLovinAds.preLoadAds(Splash.this);
-
 
                 new Handler().postDelayed(() -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -145,7 +138,6 @@ public class Splash extends BaseActivity implements OnSuccessListener<AppUpdateI
 
                 }, 1700);
             }
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
