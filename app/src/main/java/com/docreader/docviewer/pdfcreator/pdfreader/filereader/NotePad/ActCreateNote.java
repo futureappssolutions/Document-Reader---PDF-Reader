@@ -17,8 +17,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvActivity.ScreenCVEdit;
@@ -61,16 +60,7 @@ public class ActCreateNote extends BaseActivity implements View.OnClickListener 
         prefs = new SharedPrefs(this);
 
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-            switch (prefs.getAds_name()) {
-                case "g":
-                    Advertisement.GoogleBanner(ActCreateNote.this, ll_banner);
-                    break;
-                case "a":
-                    AppLovinAds.AppLovinBanner(ActCreateNote.this, ll_banner);
-                    break;
-            }
-        }
+        GoogleAppLovinAds.showBannerAds(ActCreateNote.this, ll_banner);
 
         titleEditText = findViewById(R.id.TitleEditText);
         contentEditText = findViewById(R.id.ContentEditText);

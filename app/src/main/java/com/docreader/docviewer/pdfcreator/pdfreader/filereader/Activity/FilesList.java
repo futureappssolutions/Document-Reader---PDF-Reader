@@ -20,8 +20,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Adapter.AllFilesAdp;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CSVFileViewer.UI.CSVFileViewerActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.EBookViewer.EPubFileViewerActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.GetSet.FileModel;
@@ -73,17 +72,7 @@ public class FilesList extends BaseActivity {
         prefs = new SharedPrefs(this);
 
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-            switch (prefs.getAds_name()) {
-                case "g":
-                    Advertisement.GoogleBanner(FilesList.this, ll_banner);
-                    break;
-                case "a":
-                    AppLovinAds.AppLovinBanner(FilesList.this, ll_banner);
-                    break;
-
-            }
-        }
+        GoogleAppLovinAds.showBannerAds(FilesList.this, ll_banner);
 
         progressBar = findViewById(R.id.progressBar);
         recyclerView = findViewById(R.id.recycler_view);

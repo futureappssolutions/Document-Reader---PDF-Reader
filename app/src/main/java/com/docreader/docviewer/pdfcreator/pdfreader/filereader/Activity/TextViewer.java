@@ -10,8 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.SharedPrefs;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.View.Code.CodeView;
@@ -53,16 +52,8 @@ public class TextViewer extends BaseActivity implements CodeView.OnHighlightList
 
         SharedPrefs prefs = new SharedPrefs(TextViewer.this);
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-            switch (prefs.getAds_name()) {
-                case "g":
-                    Advertisement.GoogleBanner(TextViewer.this, ll_banner);
-                    break;
-                case "a":
-                    AppLovinAds.AppLovinBanner(TextViewer.this, ll_banner);
-                    break;
-            }
-        }
+        GoogleAppLovinAds.showBannerAds(TextViewer.this, ll_banner);
+
 
         String stringExtra = getIntent().getStringExtra("path");
         ((TextView) findViewById(R.id.toolBarTitle)).setText(getIntent().getStringExtra("name"));

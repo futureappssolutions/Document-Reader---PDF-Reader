@@ -19,8 +19,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvActivity.ScreenCVEdit;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Database.InvoiceDatabaseHelper;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVActivity.ActNewInvoice;
@@ -72,29 +71,11 @@ public class FrgInvoice extends Fragment implements View.OnClickListener {
             recyclerView.setItemAnimator(new DefaultItemAnimator());
 
             root.findViewById(R.id.createNewInvoice).setOnClickListener(view -> {
-                if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-                    switch (prefs.getAds_name()) {
-                        case "g":
-                            if (Advertisement.adsdisplay) {
-                                Advertisement.FullScreenLoad(requireActivity(), () -> {
-                                    Advertisement.allcount60.start();
-                                    IntentInvoice();
-                                });
-                            } else {
-                                IntentInvoice();
-                            }
-                            break;
-                        case "a":
-                            if (Advertisement.adsdisplay) {
-                                AppLovinAds.AppLovinFullScreenShow(() -> {
-                                    Advertisement.allcount60.start();
-                                    IntentInvoice();
-                                });
-                            } else {
-                                IntentInvoice();
-                            }
-                            break;
-                    }
+                if (GoogleAppLovinAds.adsdisplay) {
+                    GoogleAppLovinAds.showFullAds(requireActivity(), () -> {
+                        GoogleAppLovinAds.allcount60.start();
+                        IntentInvoice();
+                    });
                 } else {
                     IntentInvoice();
                 }

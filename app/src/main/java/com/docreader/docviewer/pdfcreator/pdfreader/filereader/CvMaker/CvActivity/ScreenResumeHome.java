@@ -12,8 +12,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActivity;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.SharedPrefs;
 
@@ -36,17 +35,8 @@ public final class ScreenResumeHome extends BaseActivity {
         prefs = new SharedPrefs(ScreenResumeHome.this);
 
         FrameLayout fl_native = findViewById(R.id.fl_native);
-        if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-            switch (prefs.getAds_name()) {
-                case "g":
-                    Advertisement.GoogleNative(ScreenResumeHome.this, fl_native);
-                    break;
-                case "a":
-                    AppLovinAds.AppLovinNative(ScreenResumeHome.this, fl_native);
-                    break;
+        GoogleAppLovinAds.showNativeAds(ScreenResumeHome.this, fl_native);
 
-            }
-        }
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -60,57 +50,21 @@ public final class ScreenResumeHome extends BaseActivity {
                 str = "4";
                 break;
             case R.id.action_hobby:
-                if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-                    switch (prefs.getAds_name()) {
-                        case "g":
-                            if (Advertisement.adsdisplay) {
-                                Advertisement.FullScreenLoad(ScreenResumeHome.this, () -> {
-                                    Advertisement.allcount60.start();
-                                    IntentHobby();
-                                });
-                            } else {
-                                IntentHobby();
-                            }
-                            break;
-                        case "a":
-                            if (Advertisement.adsdisplay) {
-                                AppLovinAds.AppLovinFullScreenShow(() -> {
-                                    Advertisement.allcount60.start();
-                                    IntentHobby();
-                                });
-                            } else {
-                                IntentHobby();
-                            }
-                            break;
-                    }
+                if (GoogleAppLovinAds.adsdisplay) {
+                    GoogleAppLovinAds.showFullAds(ScreenResumeHome.this, () -> {
+                        GoogleAppLovinAds.allcount60.start();
+                        IntentHobby();
+                    });
                 } else {
                     IntentHobby();
                 }
                 return;
             case R.id.action_language:
-                if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-                    switch (prefs.getAds_name()) {
-                        case "g":
-                            if (Advertisement.adsdisplay) {
-                                Advertisement.FullScreenLoad(ScreenResumeHome.this, () -> {
-                                    Advertisement.allcount60.start();
-                                    IntentLanguage();
-                                });
-                            } else {
-                                IntentLanguage();
-                            }
-                            break;
-                        case "a":
-                            if (Advertisement.adsdisplay) {
-                                AppLovinAds.AppLovinFullScreenShow(() -> {
-                                    Advertisement.allcount60.start();
-                                    IntentLanguage();
-                                });
-                            } else {
-                                IntentLanguage();
-                            }
-                            break;
-                    }
+                if (GoogleAppLovinAds.adsdisplay) {
+                    GoogleAppLovinAds.showFullAds(ScreenResumeHome.this, () -> {
+                        GoogleAppLovinAds.allcount60.start();
+                        IntentLanguage();
+                    });
                 } else {
                     IntentLanguage();
                 }
@@ -128,57 +82,21 @@ public final class ScreenResumeHome extends BaseActivity {
                 str = "6";
                 break;
             case R.id.userSkill:
-                if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-                    switch (prefs.getAds_name()) {
-                        case "g":
-                            if (Advertisement.adsdisplay) {
-                                Advertisement.FullScreenLoad(ScreenResumeHome.this, () -> {
-                                    Advertisement.allcount60.start();
-                                    IntentSkill();
-                                });
-                            } else {
-                                IntentSkill();
-                            }
-                            break;
-                        case "a":
-                            if (Advertisement.adsdisplay) {
-                                AppLovinAds.AppLovinFullScreenShow(() -> {
-                                    Advertisement.allcount60.start();
-                                    IntentSkill();
-                                });
-                            } else {
-                                IntentSkill();
-                            }
-                            break;
-                    }
+                if (GoogleAppLovinAds.adsdisplay) {
+                    GoogleAppLovinAds.showFullAds(ScreenResumeHome.this, () -> {
+                        GoogleAppLovinAds.allcount60.start();
+                        IntentSkill();
+                    });
                 } else {
                     IntentSkill();
                 }
                 return;
             case R.id.settingDetail:
-                if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-                    switch (prefs.getAds_name()) {
-                        case "g":
-                            if (Advertisement.adsdisplay) {
-                                Advertisement.FullScreenLoad(ScreenResumeHome.this, () -> {
-                                    Advertisement.allcount60.start();
-                                    IntentResume("7");
-                                });
-                            } else {
-                                IntentResume("7");
-                            }
-                            break;
-                        case "a":
-                            if (Advertisement.adsdisplay) {
-                                AppLovinAds.AppLovinFullScreenShow(() -> {
-                                    Advertisement.allcount60.start();
-                                    IntentResume("7");
-                                });
-                            } else {
-                                IntentResume("7");
-                            }
-                            break;
-                    }
+                if (GoogleAppLovinAds.adsdisplay) {
+                    GoogleAppLovinAds.showFullAds(ScreenResumeHome.this, () -> {
+                        GoogleAppLovinAds.allcount60.start();
+                        IntentResume("7");
+                    });
                 } else {
                     IntentResume("7");
                 }
@@ -188,29 +106,11 @@ public final class ScreenResumeHome extends BaseActivity {
                 break;
         }
 
-        if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-            switch (prefs.getAds_name()) {
-                case "g":
-                    if (Advertisement.adsdisplay) {
-                        Advertisement.FullScreenLoad(ScreenResumeHome.this, () -> {
-                            Advertisement.allcount60.start();
-                            IntentResume(str);
-                        });
-                    } else {
-                        IntentResume(str);
-                    }
-                    break;
-                case "a":
-                    if (Advertisement.adsdisplay) {
-                        AppLovinAds.AppLovinFullScreenShow(() -> {
-                            Advertisement.allcount60.start();
-                            IntentResume(str);
-                        });
-                    } else {
-                        IntentResume(str);
-                    }
-                    break;
-            }
+        if (GoogleAppLovinAds.adsdisplay) {
+            GoogleAppLovinAds.showFullAds(ScreenResumeHome.this, () -> {
+                GoogleAppLovinAds.allcount60.start();
+                IntentResume(str);
+            });
         } else {
             IntentResume(str);
         }

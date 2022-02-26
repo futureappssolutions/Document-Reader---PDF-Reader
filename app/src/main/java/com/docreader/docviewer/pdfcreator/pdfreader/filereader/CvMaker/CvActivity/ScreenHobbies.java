@@ -15,8 +15,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvAdapter.CvHobbyAdp;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvGetSet.Hobby;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvGetSet.Resume;
@@ -75,16 +74,8 @@ public class ScreenHobbies extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-            switch (prefs.getAds_name()) {
-                case "g":
-                    Advertisement.GoogleBanner(ScreenHobbies.this, ll_banner);
-                    break;
-                case "a":
-                    AppLovinAds.AppLovinBanner(ScreenHobbies.this, ll_banner);
-                    break;
-            }
-        }
+        GoogleAppLovinAds.showBannerAds(ScreenHobbies.this, ll_banner);
+
 
         ((TextView) findViewById(R.id.toolBarTitle)).setText(getResources().getString(R.string.yourHobbies));
         ((TextView) findViewById(R.id.txtName)).setText("Add Hobbies");

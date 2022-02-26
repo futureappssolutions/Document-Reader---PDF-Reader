@@ -19,8 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Adapter.FolderViewAdp;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Adapter.PickImageVideoAdp;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Interface.OnFolderItemClickListener;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Interface.OnPhotosLoadListener;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Interface.onRecyclerViewItemClick;
@@ -71,16 +70,8 @@ public class SelectImage extends BaseActivity implements onRecyclerViewItemClick
 
         SharedPrefs prefs = new SharedPrefs(SelectImage.this);
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-            switch (prefs.getAds_name()) {
-                case "g":
-                    Advertisement.GoogleBanner(SelectImage.this, ll_banner);
-                    break;
-                case "a":
-                    AppLovinAds.AppLovinBanner(SelectImage.this, ll_banner);
-                    break;
-            }
-        }
+        GoogleAppLovinAds.showBannerAds(SelectImage.this, ll_banner);
+
 
         initFolderViewRecyclerView();
         initImageVideoRecyclerView();

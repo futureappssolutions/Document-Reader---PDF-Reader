@@ -1,6 +1,6 @@
 package com.docreader.docviewer.pdfcreator.pdfreader.filereader.Main;
 
-import static com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds.retryAttempt;
+import static com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds.retryAttempt;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -11,7 +11,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.storage.StorageManager;
@@ -24,7 +23,6 @@ import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,8 +59,7 @@ import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.AllFiles
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.ChooseFileLoadingTypeActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.ActivityPremium;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.BuildConfig;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CSVFileViewer.UI.CSVFileViewerActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvActivity.ScreenResumeHome;
@@ -162,49 +159,22 @@ public class ActMain extends BaseActivity implements View.OnClickListener {
 
         prefs = new SharedPrefs(this);
 
-        try {
-            Advertisement.allcount60 = new CountDownTimer(Integer.parseInt(prefs.getAds_time()) * 1000L, 1000) {
-                public void onTick(long millisUntilFinished) {
-                    Advertisement.adsdisplay = false;
-                }
-
-                public void onFinish() {
-                    Advertisement.adsdisplay = true;
-                }
-            };
-            Advertisement.allcount60.start();
-        } catch (NumberFormatException ex) {
-            ex.printStackTrace();
-        }
 
         checkActiveSubs();
 
-        RelativeLayout rlAd = findViewById(R.id.rlAd);
+
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
         FrameLayout fl_native = findViewById(R.id.fl_native);
 
         if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-            Advertisement.GoogleFullScreenCall(ActMain.this);
-            AppLovinAds.AppLovinFullScreenCall(ActMain.this);
             loadRewardedAd();
             loadRewardedAdAppLovin();
         }
 
+        GoogleAppLovinAds.showBannerAds(ActMain.this, ll_banner);
+        GoogleAppLovinAds.showNativeAds(ActMain.this,fl_native);
 
-        if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-            switch (prefs.getAds_name()) {
-                case "g":
-                    Advertisement.GoogleBanner(ActMain.this, ll_banner);
-                    Advertisement.GoogleNative(ActMain.this, fl_native);
-                    rlAd.setVisibility(View.VISIBLE);
-                    break;
-                case "a":
-                    AppLovinAds.AppLovinBanner(ActMain.this, ll_banner);
-                    AppLovinAds.AppLovinNative(ActMain.this, fl_native);
-                    rlAd.setVisibility(View.VISIBLE);
-                    break;
-            }
-        }
+
 
         String stringExtra;
         if (!(getIntent() == null || (stringExtra = getIntent().getStringExtra("activity")) == null || !stringExtra.equals("Resume"))) {
@@ -413,29 +383,11 @@ public class ActMain extends BaseActivity implements View.OnClickListener {
 
     private void startActivity(int i) {
         if (prefs.isLoadAllFilesAtOnce()) {
-            if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-                switch (prefs.getAds_name()) {
-                    case "g":
-                        if (Advertisement.adsdisplay) {
-                            Advertisement.FullScreenLoad(ActMain.this, () -> {
-                                Advertisement.allcount60.start();
-                                IntentFileList(i);
-                            });
-                        } else {
-                            IntentFileList(i);
-                        }
-                        break;
-                    case "a":
-                        if (Advertisement.adsdisplay) {
-                            AppLovinAds.AppLovinFullScreenShow(() -> {
-                                Advertisement.allcount60.start();
-                                IntentFileList(i);
-                            });
-                        } else {
-                            IntentFileList(i);
-                        }
-                        break;
-                }
+            if (GoogleAppLovinAds.adsdisplay) {
+                GoogleAppLovinAds.showFullAds(ActMain.this, () -> {
+                    GoogleAppLovinAds.allcount60.start();
+                    IntentFileList(i);
+                });
             } else {
                 IntentFileList(i);
             }
@@ -453,29 +405,11 @@ public class ActMain extends BaseActivity implements View.OnClickListener {
             }
             mFileResult.launch(Intent.createChooser(intent2, "Select Files"));
         } else {
-            if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-                switch (prefs.getAds_name()) {
-                    case "g":
-                        if (Advertisement.adsdisplay) {
-                            Advertisement.FullScreenLoad(ActMain.this, () -> {
-                                Advertisement.allcount60.start();
-                                IntentFileList(i);
-                            });
-                        } else {
-                            IntentFileList(i);
-                        }
-                        break;
-                    case "a":
-                        if (Advertisement.adsdisplay) {
-                            AppLovinAds.AppLovinFullScreenShow(() -> {
-                                Advertisement.allcount60.start();
-                                IntentFileList(i);
-                            });
-                        } else {
-                            IntentFileList(i);
-                        }
-                        break;
-                }
+            if (GoogleAppLovinAds.adsdisplay) {
+                GoogleAppLovinAds.showFullAds(ActMain.this, () -> {
+                    GoogleAppLovinAds.allcount60.start();
+                    IntentFileList(i);
+                });
             } else {
                 IntentFileList(i);
             }

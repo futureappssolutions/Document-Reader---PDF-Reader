@@ -11,8 +11,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.widget.Toolbar;
 
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CSVFileViewer.UI.CSVFileViewerActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.GetSet.UriInfo;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
@@ -72,16 +71,8 @@ public class AllFilesConverterOption extends BaseActivity implements View.OnClic
         prefs = new SharedPrefs(this);
 
         FrameLayout fl_native = findViewById(R.id.fl_native);
-        if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-            switch (prefs.getAds_name()) {
-                case "g":
-                    Advertisement.GoogleNative(AllFilesConverterOption.this, fl_native);
-                    break;
-                case "a":
-                    AppLovinAds.AppLovinNative(AllFilesConverterOption.this, fl_native);
-                    break;
-            }
-        }
+        GoogleAppLovinAds.showNativeAds(AllFilesConverterOption.this,fl_native);
+
 
         ((TextView) findViewById(R.id.toolBarTitle)).setText(getResources().getString(R.string.allFilesConverter));
         findViewById(R.id.csvToPDF).setOnClickListener(this);
@@ -103,32 +94,15 @@ public class AllFilesConverterOption extends BaseActivity implements View.OnClic
 
     private void startActivity(int i) {
         if (prefs.isLoadAllFilesAtOnce()) {
-            if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-                switch (prefs.getAds_name()) {
-                    case "g":
-                        if (Advertisement.adsdisplay) {
-                            Advertisement.FullScreenLoad(AllFilesConverterOption.this, () -> {
-                                Advertisement.allcount60.start();
-                                IntentFileList(i);
-                            });
-                        } else {
-                            IntentFileList(i);
-                        }
-                        break;
-                    case "a":
-                        if (Advertisement.adsdisplay) {
-                            AppLovinAds.AppLovinFullScreenShow(() -> {
-                                Advertisement.allcount60.start();
-                                IntentFileList(i);
-                            });
-                        } else {
-                            IntentFileList(i);
-                        }
-                        break;
-                }
+            if (GoogleAppLovinAds.adsdisplay) {
+                GoogleAppLovinAds.showFullAds(AllFilesConverterOption.this, () -> {
+                    GoogleAppLovinAds.allcount60.start();
+                    IntentFileList(i);
+                });
             } else {
                 IntentFileList(i);
             }
+
             return;
         }
         Intent intent2 = new Intent("android.intent.action.OPEN_DOCUMENT");
@@ -148,56 +122,20 @@ public class AllFilesConverterOption extends BaseActivity implements View.OnClic
         } else if (id == R.id.csvToPDF) {
             startActivity(10);
         } else if (id == R.id.imageToPdfLayout) {
-            if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-                switch (prefs.getAds_name()) {
-                    case "g":
-                        if (Advertisement.adsdisplay) {
-                            Advertisement.FullScreenLoad(AllFilesConverterOption.this, () -> {
-                                Advertisement.allcount60.start();
-                                IntentImagePDF();
-                            });
-                        } else {
-                            IntentImagePDF();
-                        }
-                        break;
-                    case "a":
-                        if (Advertisement.adsdisplay) {
-                            AppLovinAds.AppLovinFullScreenShow(() -> {
-                                Advertisement.allcount60.start();
-                                IntentImagePDF();
-                            });
-                        } else {
-                            IntentImagePDF();
-                        }
-                        break;
-                }
+            if (GoogleAppLovinAds.adsdisplay) {
+                GoogleAppLovinAds.showFullAds(AllFilesConverterOption.this, () -> {
+                    GoogleAppLovinAds.allcount60.start();
+                    IntentImagePDF();
+                });
             } else {
                 IntentImagePDF();
             }
         } else if (id == R.id.mergePDFLayout) {
-            if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-                switch (prefs.getAds_name()) {
-                    case "g":
-                        if (Advertisement.adsdisplay) {
-                            Advertisement.FullScreenLoad(AllFilesConverterOption.this, () -> {
-                                Advertisement.allcount60.start();
-                                IntentMergePDF();
-                            });
-                        } else {
-                            IntentMergePDF();
-                        }
-                        break;
-                    case "a":
-                        if (Advertisement.adsdisplay) {
-                            AppLovinAds.AppLovinFullScreenShow(() -> {
-                                Advertisement.allcount60.start();
-                                IntentMergePDF();
-                            });
-                        } else {
-                            IntentMergePDF();
-                        }
-                        break;
-                }
+            if (GoogleAppLovinAds.adsdisplay) {
+                GoogleAppLovinAds.showFullAds(AllFilesConverterOption.this, () -> {
+                    GoogleAppLovinAds.allcount60.start();
+                    IntentMergePDF();
+                });
             } else {
                 IntentMergePDF();
             }

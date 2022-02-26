@@ -20,8 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Main.ActMain;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.SharedPrefs;
@@ -175,16 +174,7 @@ public class FilesView extends BaseActivity implements IMainFrame {
 
         SharedPrefs prefs = new SharedPrefs(FilesView.this);
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-            switch (prefs.getAds_name()) {
-                case "g":
-                    Advertisement.GoogleBanner(FilesView.this, ll_banner);
-                    break;
-                case "a":
-                    AppLovinAds.AppLovinBanner(FilesView.this, ll_banner);
-                    break;
-            }
-        }
+        GoogleAppLovinAds.showBannerAds(FilesView.this, ll_banner);
 
         if (getIntent() != null) {
             filePath = getIntent().getStringExtra("path");

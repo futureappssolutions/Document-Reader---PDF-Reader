@@ -34,8 +34,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvActivity.ScreenCVEdit;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Database.DatabaseHelper;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.GetSet.DocumentFiles;
@@ -97,16 +96,8 @@ public class PdfCreate extends BaseActivity implements View.OnClickListener {
         prefs = new SharedPrefs(PdfCreate.this);
 
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-            switch (prefs.getAds_name()) {
-                case "g":
-                    Advertisement.GoogleBanner(PdfCreate.this, ll_banner);
-                    break;
-                case "a":
-                    AppLovinAds.AppLovinBanner(PdfCreate.this, ll_banner);
-                    break;
-            }
-        }
+        GoogleAppLovinAds.showBannerAds(PdfCreate.this, ll_banner);
+
 
         ((TextView) findViewById(R.id.toolBarTitle)).setText(getResources().getString(R.string.newPdfFile));
         if (getIntent() != null) {
@@ -397,29 +388,11 @@ public class PdfCreate extends BaseActivity implements View.OnClickListener {
             return;
         }
         data = str;
-        if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-            switch (prefs.getAds_name()) {
-                case "g":
-                    if (Advertisement.adsdisplay) {
-                        Advertisement.FullScreenLoad(PdfCreate.this, () -> {
-                            Advertisement.allcount60.start();
-                            startActivity(new Intent(this, PrintPreview.class));
-                        });
-                    } else {
-                        startActivity(new Intent(this, PrintPreview.class));
-                    }
-                    break;
-                case "a":
-                    if (Advertisement.adsdisplay) {
-                        AppLovinAds.AppLovinFullScreenShow(() -> {
-                            Advertisement.allcount60.start();
-                            startActivity(new Intent(this, PrintPreview.class));
-                        });
-                    } else {
-                        startActivity(new Intent(this, PrintPreview.class));
-                    }
-                    break;
-            }
+        if (GoogleAppLovinAds.adsdisplay) {
+            GoogleAppLovinAds.showFullAds(PdfCreate.this, () -> {
+                GoogleAppLovinAds.allcount60.start();
+                startActivity(new Intent(this, PrintPreview.class));
+            });
         } else {
             startActivity(new Intent(this, PrintPreview.class));
         }

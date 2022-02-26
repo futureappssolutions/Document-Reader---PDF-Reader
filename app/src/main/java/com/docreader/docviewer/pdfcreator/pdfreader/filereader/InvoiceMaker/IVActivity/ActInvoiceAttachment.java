@@ -22,12 +22,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import com.bumptech.glide.Glide;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Database.InvoiceDatabaseHelper;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVGetSet.Attachment;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.SharedPrefs;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.Singleton;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.Utility;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.office.fc.openxml4j.opc.ContentTypes;
@@ -71,19 +69,10 @@ public class ActInvoiceAttachment extends AppCompatActivity implements View.OnCl
         descriptionEt = findViewById(R.id.descriptionEt);
         additionalDetailEt = findViewById(R.id.additionalDetailEt);
 
-        SharedPrefs prefs = new SharedPrefs(ActInvoiceAttachment.this);
 
         FrameLayout fl_native = findViewById(R.id.fl_native);
-        if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-            switch (prefs.getAds_name()) {
-                case "g":
-                    Advertisement.GoogleNative(ActInvoiceAttachment.this, fl_native);
-                    break;
-                case "a":
-                    AppLovinAds.AppLovinNative(ActInvoiceAttachment.this, fl_native);
-                    break;
-            }
-        }
+        GoogleAppLovinAds.showNativeAds(ActInvoiceAttachment.this,fl_native);
+
 
         if (getIntent() != null) {
             invoiceId = Integer.parseInt(getIntent().getStringExtra("invoiceId"));

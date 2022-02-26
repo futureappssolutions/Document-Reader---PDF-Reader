@@ -165,21 +165,23 @@ public final class DocumentUtility {
             }
             if (cursor != null) {
                 while (cursor.moveToNext()) {
-                    String str2 = "",str3= "";
+                    String str2 = "";
                     if (cursor.getColumnIndex("_data") != -1) {
                         str2 = cursor.getString(cursor.getColumnIndex("_data"));
-                        str3 = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DISPLAY_NAME));
                     } else if (cursor.getColumnIndex("_display_name") != -1) {
                         str2 = UriUtils.getPathByUri(context, contentUri);
                         assert str2 != null;
                     }
+
+                    String filename = str2.substring(str2.lastIndexOf("/") + 1);
+
                     long j = cursor.getLong(cursor.getColumnIndex("_size"));
                     long j2 = cursor.getLong(cursor.getColumnIndex("date_modified"));
                     String fileSize = UriUtils.getFileSize(j);
                     if (((double) j) > 0.0d) {
                         isSelectedFiles(str2);
                         FileModel fileModel = new FileModel();
-                        fileModel.setName(str3);
+                        fileModel.setName(filename);
                         fileModel.setPath(str2);
                         fileModel.setFavorite(false);
                         fileModel.setModifiedDate(j2);

@@ -9,8 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActivity;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvFragment.FrgCvEducation;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvFragment.FrgCvExperience;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvFragment.FrgCvOtherDetail;
@@ -43,16 +42,8 @@ public class ScreenResume extends BaseActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        if (!(mPrefs.getActive_Weekly().equals("true") || mPrefs.getActive_Monthly().equals("true") || mPrefs.getActive_Yearly().equals("true"))) {
-            switch (mPrefs.getAds_name()) {
-                case "g":
-                    Advertisement.GoogleBanner(ScreenResume.this, ll_banner);
-                    break;
-                case "a":
-                    AppLovinAds.AppLovinBanner(ScreenResume.this, ll_banner);
-                    break;
-            }
-        }
+        GoogleAppLovinAds.showBannerAds(ScreenResume.this, ll_banner);
+
 
         Gson gson = new Gson();
         String cVData = mPrefs.getCVData();

@@ -19,14 +19,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActivity;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvActivity.ScreenCVEdit;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Database.InvoiceDatabaseHelper;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVGetSet.Client;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVGetSet.Invoice;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.SharedPrefs;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.Singleton;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.Utility;
 
@@ -67,19 +65,10 @@ public class ActInvoiceNewClient extends BaseActivity {
         TextView textView = findViewById(R.id.toolBarTitle);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        SharedPrefs mPrefs = new SharedPrefs(ActInvoiceNewClient.this);
+
 
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        if (!(mPrefs.getActive_Weekly().equals("true") || mPrefs.getActive_Monthly().equals("true") || mPrefs.getActive_Yearly().equals("true"))) {
-            switch (mPrefs.getAds_name()) {
-                case "g":
-                    Advertisement.GoogleBanner(ActInvoiceNewClient.this, ll_banner);
-                    break;
-                case "a":
-                    AppLovinAds.AppLovinBanner(ActInvoiceNewClient.this, ll_banner);
-                    break;
-            }
-        }
+        GoogleAppLovinAds.showBannerAds(ActInvoiceNewClient.this, ll_banner);
 
         invoiceDatabaseHelper = new InvoiceDatabaseHelper(this);
         clientNameEt = findViewById(R.id.clientNameEt);

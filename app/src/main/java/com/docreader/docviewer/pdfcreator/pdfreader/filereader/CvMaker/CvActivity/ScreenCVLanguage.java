@@ -15,8 +15,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvAdapter.CvLanguageAdp;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvGetSet.Language;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvGetSet.Resume;
@@ -79,16 +78,9 @@ public class ScreenCVLanguage extends AppCompatActivity {
         ((TextView) findViewById(R.id.txtName)).setText("Add Language");
 
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-            switch (prefs.getAds_name()) {
-                case "g":
-                    Advertisement.GoogleBanner(ScreenCVLanguage.this, ll_banner);
-                    break;
-                case "a":
-                    AppLovinAds.AppLovinBanner(ScreenCVLanguage.this, ll_banner);
-                    break;
-            }
-        }
+        GoogleAppLovinAds.showBannerAds(ScreenCVLanguage.this, ll_banner);
+
+
 
         String cVData = prefs.getCVData();
         Gson gson = new Gson();

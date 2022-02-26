@@ -17,15 +17,13 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVFragment.FrgInvoice;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVFragment.FrgInvoiceClients;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVFragment.FrgInvoiceProduct;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVFragment.FrgInvoiceSettings;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVFragment.FrgInvoiceTutorial;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.SharedPrefs;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Objects;
@@ -47,18 +45,10 @@ public class ActInvoiceMain extends AppCompatActivity {
         toolBarTitle = findViewById(R.id.toolBarTitle);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        SharedPrefs mPrefs = new SharedPrefs(this);
+
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        if (!(mPrefs.getActive_Weekly().equals("true") || mPrefs.getActive_Monthly().equals("true") || mPrefs.getActive_Yearly().equals("true"))) {
-            switch (mPrefs.getAds_name()) {
-                case "g":
-                    Advertisement.GoogleBanner(ActInvoiceMain.this, ll_banner);
-                    break;
-                case "a":
-                    AppLovinAds.AppLovinBanner(ActInvoiceMain.this, ll_banner);
-                    break;
-            }
-        }
+        GoogleAppLovinAds.showBannerAds(ActInvoiceMain.this, ll_banner);
+
 
         ((BottomNavigationView) findViewById(R.id.nav_view)).setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {

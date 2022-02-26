@@ -14,12 +14,10 @@ import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActivity;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvGetSet.ResumeEvent;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvTemplate.TextChangeListener;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.SharedPrefs;
 
 import java.util.Objects;
 
@@ -149,18 +147,9 @@ public class ScreenCVEdit extends BaseActivity {
         fromDateEt = findViewById(R.id.fromDateEt);
         toDateEt = findViewById(R.id.toDateEt);
 
-        SharedPrefs mPrefs = new SharedPrefs(ScreenCVEdit.this);
+
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        if (!(mPrefs.getActive_Weekly().equals("true") || mPrefs.getActive_Monthly().equals("true") || mPrefs.getActive_Yearly().equals("true"))) {
-            switch (mPrefs.getAds_name()) {
-                case "g":
-                    Advertisement.GoogleBanner(ScreenCVEdit.this, ll_banner);
-                    break;
-                case "a":
-                    AppLovinAds.AppLovinBanner(ScreenCVEdit.this, ll_banner);
-                    break;
-            }
-        }
+        GoogleAppLovinAds.showBannerAds(ScreenCVEdit.this, ll_banner);
 
         titleEditText.addTextChangedListener(new TextChangeListener() {
             @Override

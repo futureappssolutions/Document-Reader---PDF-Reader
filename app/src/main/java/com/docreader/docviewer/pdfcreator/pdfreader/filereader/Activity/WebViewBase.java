@@ -10,10 +10,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.SharedPrefs;
 
 public class WebViewBase extends BaseActivity {
     protected WebView f801wv;
@@ -25,18 +23,10 @@ public class WebViewBase extends BaseActivity {
         setContentView(R.layout.activity_webview);
         getWindow().setFlags(16777216, 16777216);
 
-        SharedPrefs prefs = new SharedPrefs(WebViewBase.this);
+
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-            switch (prefs.getAds_name()) {
-                case "g":
-                    Advertisement.GoogleBanner(WebViewBase.this, ll_banner);
-                    break;
-                case "a":
-                    AppLovinAds.AppLovinBanner(WebViewBase.this, ll_banner);
-                    break;
-            }
-        }
+        GoogleAppLovinAds.showBannerAds(WebViewBase.this, ll_banner);
+
 
         f801wv = findViewById(R.id.browser);
         f801wv.setWebViewClient(new MyClient());

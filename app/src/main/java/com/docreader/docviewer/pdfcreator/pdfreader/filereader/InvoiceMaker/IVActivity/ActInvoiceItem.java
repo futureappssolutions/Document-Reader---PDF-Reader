@@ -20,8 +20,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActivity;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Database.InvoiceDatabaseHelper;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVTemplate.InvoiceHelper;
@@ -29,7 +28,6 @@ import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVGe
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVGetSet.Invoice;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVGetSet.InvoiceItem;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVGetSet.Product;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.SharedPrefs;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.Singleton;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.Utility;
 
@@ -86,19 +84,11 @@ public class ActInvoiceItem extends BaseActivity implements View.OnClickListener
         singleton = Singleton.getInstance();
         businessInfo = singleton.getBusinessInfo(this);
 
-        SharedPrefs mPrefs = new SharedPrefs(ActInvoiceItem.this);
+
 
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        if (!(mPrefs.getActive_Weekly().equals("true") || mPrefs.getActive_Monthly().equals("true") || mPrefs.getActive_Yearly().equals("true"))) {
-            switch (mPrefs.getAds_name()) {
-                case "g":
-                    Advertisement.GoogleBanner(ActInvoiceItem.this, ll_banner);
-                    break;
-                case "a":
-                    AppLovinAds.AppLovinBanner(ActInvoiceItem.this, ll_banner);
-                    break;
-            }
-        }
+        GoogleAppLovinAds.showBannerAds(ActInvoiceItem.this, ll_banner);
+
 
         invoiceNameTL = findViewById(R.id.invoiceNameTL);
         invoiceNameAutoCompleteTextView = findViewById(R.id.invoiceNameEt);

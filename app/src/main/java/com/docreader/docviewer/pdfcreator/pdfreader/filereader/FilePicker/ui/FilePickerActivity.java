@@ -22,8 +22,7 @@ import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.PDFViewW
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.RTFView;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.TextViewer;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActivity;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CSVFileViewer.UI.CSVFileViewerActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.EBookViewer.EPubFileViewerActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.FilePicker.filter.FileFilter;
@@ -76,16 +75,8 @@ public class FilePickerActivity extends BaseActivity implements DirectoryFragmen
 
         SharedPrefs prefs = new SharedPrefs(FilePickerActivity.this);
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-            switch (prefs.getAds_name()) {
-                case "g":
-                    Advertisement.GoogleBanner(FilePickerActivity.this, ll_banner);
-                    break;
-                case "a":
-                    AppLovinAds.AppLovinBanner(FilePickerActivity.this, ll_banner);
-                    break;
-            }
-        }
+        GoogleAppLovinAds.showBannerAds(FilePickerActivity.this, ll_banner);
+
 
         initArguments(bundle);
         initViews();

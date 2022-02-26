@@ -25,6 +25,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActivity;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.SharedPrefs;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.Utility;
@@ -91,21 +92,36 @@ public class Splash extends BaseActivity implements OnSuccessListener<AppUpdateI
                 prefs.setGoogle_reward(dataSnapshot.child("reward_ads_id").getValue(String.class));
                 prefs.setAds_time(dataSnapshot.child("ads_time").getValue(String.class));
                 prefs.setAds_name(dataSnapshot.child("ads_name").getValue(String.class));
-
-//                prefs.setAppLovin_banner(dataSnapshot.child("al_banner").getValue(String.class));
-//                prefs.setAppLovin_full(dataSnapshot.child("al_full").getValue(String.class));
-//                prefs.setAppLovin_native(dataSnapshot.child("al_native").getValue(String.class));
- //               prefs.setAppLovin_rewarde(dataSnapshot.child("al_reward").getValue(String.class));
-
-                prefs.setAppLovin_banner("3b997405cd6433ed");
-                prefs.setAppLovin_full("f2f732f71d0a6c9e");
-                prefs.setAppLovin_native("67ba5142ec7b3d52");
-                prefs.setAppLovin_rewarde("13eba7c924b56b40");
-
+                prefs.setAppLovin_banner(dataSnapshot.child("al_banner").getValue(String.class));
+                prefs.setAppLovin_full(dataSnapshot.child("al_full").getValue(String.class));
+                prefs.setAppLovin_native(dataSnapshot.child("al_native").getValue(String.class));
+                prefs.setAppLovin_reward(dataSnapshot.child("al_reward").getValue(String.class));
+//                prefs.setAppLovin_banner("3b997405cd6433ed");
+//                prefs.setAppLovin_full("f2f732f71d0a6c9e");
+//                prefs.setAppLovin_native("67ba5142ec7b3d52");
+//                prefs.setAppLovin_reward("13eba7c924b56b40");
                 prefs.setRemove_ads_weekly(dataSnapshot.child("weekly_key").getValue(String.class));
                 prefs.setRemove_ads_monthly(dataSnapshot.child("monthly_key").getValue(String.class));
                 prefs.setRemove_ads_yearly(dataSnapshot.child("yearly_key").getValue(String.class));
                 prefs.setBase_key(dataSnapshot.child("base_key").getValue(String.class));
+
+                try {
+                    GoogleAppLovinAds.allcount60 = new android.os.CountDownTimer(Integer.parseInt(prefs.getAds_time()) * 1000L, 1000) {
+                        public void onTick(long millisUntilFinished) {
+                            GoogleAppLovinAds.adsdisplay = false;
+                        }
+
+                        public void onFinish() {
+                            GoogleAppLovinAds.adsdisplay = true;
+                        }
+                    };
+                    GoogleAppLovinAds.allcount60.start();
+                } catch (NumberFormatException ex) {
+                    ex.printStackTrace();
+                }
+
+                GoogleAppLovinAds.preLoadAds(Splash.this);
+
 
                 new Handler().postDelayed(() -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {

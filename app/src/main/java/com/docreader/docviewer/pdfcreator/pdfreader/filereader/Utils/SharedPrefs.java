@@ -249,7 +249,7 @@ public class SharedPrefs {
         return prefs.getString(AppLovin_reward, "");
     }
 
-    public void setAppLovin_rewarde(String value) {
+    public void setAppLovin_reward(String value) {
         editor.putString(AppLovin_reward, value).apply();
     }
 

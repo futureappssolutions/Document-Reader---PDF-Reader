@@ -21,8 +21,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Adapter.SearchableFilesListAdp;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CSVFileViewer.UI.CSVFileViewerActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.GetSet.FileModel;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
@@ -68,16 +67,8 @@ public class SearchFile extends BaseActivity {
         prefs = new SharedPrefs(this);
 
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-            switch (prefs.getAds_name()) {
-                case "g":
-                    Advertisement.GoogleBanner(SearchFile.this, ll_banner);
-                    break;
-                case "a":
-                    AppLovinAds.AppLovinBanner(SearchFile.this, ll_banner);
-                    break;
-            }
-        }
+        GoogleAppLovinAds.showBannerAds(SearchFile.this, ll_banner);
+
 
         if (getIntent() != null) {
             int parseInt = Integer.parseInt(getIntent().getStringExtra("fileType"));

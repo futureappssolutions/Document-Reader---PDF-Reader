@@ -18,8 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Adapter.CreatedDocumentFilesListAdp;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Database.DatabaseHelper;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.GetSet.DocumentFiles;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
@@ -61,16 +60,7 @@ public class CreateNewPdfFile extends BaseActivity {
 
         SharedPrefs prefs = new SharedPrefs(CreateNewPdfFile.this);
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-            switch (prefs.getAds_name()) {
-                case "g":
-                    Advertisement.GoogleBanner(CreateNewPdfFile.this, ll_banner);
-                    break;
-                case "a":
-                    AppLovinAds.AppLovinBanner(CreateNewPdfFile.this, ll_banner);
-                    break;
-            }
-        }
+        GoogleAppLovinAds.showBannerAds(CreateNewPdfFile.this, ll_banner);
 
         toolBarTitle = findViewById(R.id.toolBarTitle);
         progressBar = findViewById(R.id.progressBar);
@@ -81,41 +71,14 @@ public class CreateNewPdfFile extends BaseActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         findViewById(R.id.createNewDocumentBtn).setOnClickListener(view -> {
-            if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-                switch (prefs.getAds_name()) {
-                    case "g":
-                        if (Advertisement.adsdisplay) {
-                            Advertisement.FullScreenLoad(CreateNewPdfFile.this, () -> {
-                                Advertisement.allcount60.start();
-                                CreateNewPdfFile.selectedFileSource = "";
-                                selectedFileSourceId = 0;
-                                intent.putExtra("sourceFileId", selectedFileSourceId + "");
-                                startActivity(intent);
-                            });
-                        } else {
-                            CreateNewPdfFile.selectedFileSource = "";
-                            selectedFileSourceId = 0;
-                            intent.putExtra("sourceFileId", selectedFileSourceId + "");
-                            startActivity(intent);
-                        }
-                        break;
-                    case "a":
-                        if (Advertisement.adsdisplay) {
-                            AppLovinAds.AppLovinFullScreenShow(() -> {
-                                Advertisement.allcount60.start();
-                                CreateNewPdfFile.selectedFileSource = "";
-                                selectedFileSourceId = 0;
-                                intent.putExtra("sourceFileId", selectedFileSourceId + "");
-                                startActivity(intent);
-                            });
-                        } else {
-                            CreateNewPdfFile.selectedFileSource = "";
-                            selectedFileSourceId = 0;
-                            intent.putExtra("sourceFileId", selectedFileSourceId + "");
-                            startActivity(intent);
-                        }
-                        break;
-                }
+            if (GoogleAppLovinAds.adsdisplay) {
+                GoogleAppLovinAds.showFullAds(CreateNewPdfFile.this, () -> {
+                    GoogleAppLovinAds.allcount60.start();
+                    CreateNewPdfFile.selectedFileSource = "";
+                    selectedFileSourceId = 0;
+                    intent.putExtra("sourceFileId", selectedFileSourceId + "");
+                    startActivity(intent);
+                });
             } else {
                 CreateNewPdfFile.selectedFileSource = "";
                 selectedFileSourceId = 0;

@@ -24,8 +24,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Adapter.RearrangePdfFilesAdp;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Interface.MergeFilesListener;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.GetSet.FileModel;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
@@ -119,16 +118,7 @@ public class MergePDF extends BaseActivity implements View.OnClickListener, Merg
         changeBackGroundColor(100);
 
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-            switch (prefs.getAds_name()) {
-                case "g":
-                    Advertisement.GoogleBanner(MergePDF.this, ll_banner);
-                    break;
-                case "a":
-                    AppLovinAds.AppLovinBanner(MergePDF.this, ll_banner);
-                    break;
-            }
-        }
+        GoogleAppLovinAds.showBannerAds(MergePDF.this, ll_banner);
 
         toolBarTitle = findViewById(R.id.toolBarTitle);
         btnSelectLayout = findViewById(R.id.btnSelectLayout);
@@ -285,34 +275,15 @@ public class MergePDF extends BaseActivity implements View.OnClickListener, Merg
         if (str != null) {
             AlertDialog.Builder title = new AlertDialog.Builder(this).setTitle(getResources().getString(R.string.fileSaved));
             title.setMessage(str2 + getResources().getString(R.string.fileHasBeenSavedTo) + getResources().getString(R.string.app_folder_name)).setPositiveButton(getResources().getString(R.string.openThisFile), (dialogInterface, i) -> {
-                if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-                    switch (prefs.getAds_name()) {
-                        case "g":
-                            if (Advertisement.adsdisplay) {
-                                Advertisement.FullScreenLoad(MergePDF.this, () -> {
-                                    Advertisement.allcount60.start();
-                                    IntentPDFView(str, str2);
-                                    dialogInterface.dismiss();
-                                });
-                            } else {
-                                IntentPDFView(str, str2);
-                                dialogInterface.dismiss();
-                            }
-                            break;
-                        case "a":
-                            if (Advertisement.adsdisplay) {
-                                AppLovinAds.AppLovinFullScreenShow(() -> {
-                                    Advertisement.allcount60.start();
-                                    IntentPDFView(str, str2);
-                                    dialogInterface.dismiss();
-                                });
-                            } else {
-                                IntentPDFView(str, str2);
-                                dialogInterface.dismiss();
-                            }
-                            break;
-                    }
+                if (GoogleAppLovinAds.adsdisplay) {
+                    GoogleAppLovinAds.showFullAds(MergePDF.this, () -> {
+                        GoogleAppLovinAds.allcount60.start();
+                        CreateNewPdfFile.selectedFileSource = "";
+                        IntentPDFView(str, str2);
+                        dialogInterface.dismiss();
+                    });
                 } else {
+                    CreateNewPdfFile.selectedFileSource = "";
                     IntentPDFView(str, str2);
                     dialogInterface.dismiss();
                 }

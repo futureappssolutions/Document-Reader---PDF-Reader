@@ -23,8 +23,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Adapter.ImageToPdfAdp;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.Advertisement;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.AppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.GetSet.ImageModel;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.CoroutinesTask;
@@ -116,16 +115,7 @@ public class ImageToPDF extends BaseActivity implements View.OnClickListener {
         prefs = new SharedPrefs(ImageToPDF.this);
 
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-            switch (prefs.getAds_name()) {
-                case "g":
-                    Advertisement.GoogleBanner(ImageToPDF.this, ll_banner);
-                    break;
-                case "a":
-                    AppLovinAds.AppLovinBanner(ImageToPDF.this, ll_banner);
-                    break;
-            }
-        }
+        GoogleAppLovinAds.showBannerAds(ImageToPDF.this, ll_banner);
 
         init();
         initGridView();
@@ -239,38 +229,18 @@ public class ImageToPDF extends BaseActivity implements View.OnClickListener {
             if (str1 != null) {
                 Singleton.getInstance().setFileDeleted(true);
                 new AlertDialog.Builder(ImageToPDF.this).setMessage(getResources().getString(R.string.pdfFileCreatedSuccessfully)).setPositiveButton(getResources().getString(R.string.openThisFile), (dialogInterface, i) -> {
-                    if (!(prefs.getActive_Weekly().equals("true") || prefs.getActive_Monthly().equals("true") || prefs.getActive_Yearly().equals("true"))) {
-                        switch (prefs.getAds_name()) {
-                            case "g":
-                                if (Advertisement.adsdisplay) {
-                                    Advertisement.FullScreenLoad(ImageToPDF.this, () -> {
-                                        Advertisement.allcount60.start();
-                                        IntentPDFView(str1);
-                                        dialogInterface.dismiss();
-                                    });
-                                } else {
-                                    IntentPDFView(str1);
-                                    dialogInterface.dismiss();
-                                }
-                                break;
-                            case "a":
-                                if (Advertisement.adsdisplay) {
-                                    AppLovinAds.AppLovinFullScreenShow(() -> {
-                                        Advertisement.allcount60.start();
-                                        IntentPDFView(str1);
-                                        dialogInterface.dismiss();
-                                    });
-                                } else {
-                                    IntentPDFView(str1);
-                                    dialogInterface.dismiss();
-                                }
-                                break;
-
-                        }
+                    if (GoogleAppLovinAds.adsdisplay) {
+                        GoogleAppLovinAds.showFullAds(ImageToPDF.this, () -> {
+                            GoogleAppLovinAds.allcount60.start();
+                            CreateNewPdfFile.selectedFileSource = "";
+                            IntentPDFView(str1);
+                            dialogInterface.dismiss();
+                        });
                     } else {
                         IntentPDFView(str1);
                         dialogInterface.dismiss();
                     }
+
                 }).setNegativeButton(getResources().getString(R.string.cancel), (dialogInterface, i) -> dialogInterface.dismiss()).create().show();
             }
         })).convertToPDF(this, imageToPdfAdapter.getItems(), str, uri);
