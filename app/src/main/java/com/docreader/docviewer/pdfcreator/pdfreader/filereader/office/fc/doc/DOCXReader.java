@@ -2783,7 +2783,7 @@ public class DOCXReader extends AbstractReader {
         if ("tile".equalsIgnoreCase(str)) {
             return 2;
         }
-        return TypedValues.Attributes.S_FRAME.equalsIgnoreCase(str) ? (byte) 3 : 0;
+        return "frame".equalsIgnoreCase(str) ? (byte) 3 : 0;
     }
 
     private int getRadialGradientPositionType(Element fill)

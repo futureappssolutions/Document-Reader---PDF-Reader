@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Adapter.NotepadFilesListAdp;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvActivity.ScreenCVEdit;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Database.DatabaseHelper;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.GetSet.NotepadItemModel;
@@ -54,7 +54,7 @@ public class ActNotepadList extends BaseActivity implements AdapterView.OnItemCl
         prefs = new SharedPrefs(this);
 
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        GoogleAppLovinAds.showBannerAds(ActNotepadList.this, ll_banner);
+        GoogleAds.showBannerAds(ActNotepadList.this, ll_banner);
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
@@ -64,9 +64,9 @@ public class ActNotepadList extends BaseActivity implements AdapterView.OnItemCl
         setNotes();
 
         findViewById(R.id.createNewNoteBtn).setOnClickListener(view -> {
-            if (GoogleAppLovinAds.adsdisplay) {
-                GoogleAppLovinAds.showFullAds(ActNotepadList.this, () -> {
-                    GoogleAppLovinAds.allcount60.start();
+            if (GoogleAds.adsdisplay) {
+                GoogleAds.showFullAds(ActNotepadList.this, () -> {
+                    GoogleAds.allcount60.start();
                     IntentNote();
                 });
             } else {

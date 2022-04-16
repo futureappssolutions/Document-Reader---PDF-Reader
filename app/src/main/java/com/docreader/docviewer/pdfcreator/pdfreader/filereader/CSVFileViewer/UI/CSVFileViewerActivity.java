@@ -20,7 +20,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.SharedPrefs;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.PDFViewWebViewBase;
@@ -74,7 +74,7 @@ public class CSVFileViewerActivity extends BaseActivity {
 
         SharedPrefs prefs = new SharedPrefs(CSVFileViewerActivity.this);
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        GoogleAppLovinAds.showBannerAds(CSVFileViewerActivity.this, ll_banner);
+        GoogleAds.showBannerAds(CSVFileViewerActivity.this, ll_banner);
 
 
         if (getIntent() != null) {

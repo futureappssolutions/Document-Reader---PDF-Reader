@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.GetSet.ElementModel;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.SharedPrefs;
@@ -72,7 +72,7 @@ public class PeriodicElementView extends BaseActivity {
 
         SharedPrefs prefs = new SharedPrefs(this);
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        GoogleAppLovinAds.showBannerAds(PeriodicElementView.this, ll_banner);
+        GoogleAds.showBannerAds(PeriodicElementView.this, ll_banner);
 
 
         toolBarTitle = findViewById(R.id.toolBarTitle);

@@ -12,7 +12,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActivity;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.SharedPrefs;
 
@@ -35,7 +35,7 @@ public final class ScreenResumeHome extends BaseActivity {
         prefs = new SharedPrefs(ScreenResumeHome.this);
 
         FrameLayout fl_native = findViewById(R.id.fl_native);
-        GoogleAppLovinAds.showNativeAds(ScreenResumeHome.this, fl_native);
+        GoogleAds.showNativeAds(ScreenResumeHome.this, fl_native);
 
     }
 
@@ -50,9 +50,9 @@ public final class ScreenResumeHome extends BaseActivity {
                 str = "4";
                 break;
             case R.id.action_hobby:
-                if (GoogleAppLovinAds.adsdisplay) {
-                    GoogleAppLovinAds.showFullAds(ScreenResumeHome.this, () -> {
-                        GoogleAppLovinAds.allcount60.start();
+                if (GoogleAds.adsdisplay) {
+                    GoogleAds.showFullAds(ScreenResumeHome.this, () -> {
+                        GoogleAds.allcount60.start();
                         IntentHobby();
                     });
                 } else {
@@ -60,9 +60,9 @@ public final class ScreenResumeHome extends BaseActivity {
                 }
                 return;
             case R.id.action_language:
-                if (GoogleAppLovinAds.adsdisplay) {
-                    GoogleAppLovinAds.showFullAds(ScreenResumeHome.this, () -> {
-                        GoogleAppLovinAds.allcount60.start();
+                if (GoogleAds.adsdisplay) {
+                    GoogleAds.showFullAds(ScreenResumeHome.this, () -> {
+                        GoogleAds.allcount60.start();
                         IntentLanguage();
                     });
                 } else {
@@ -82,9 +82,9 @@ public final class ScreenResumeHome extends BaseActivity {
                 str = "6";
                 break;
             case R.id.userSkill:
-                if (GoogleAppLovinAds.adsdisplay) {
-                    GoogleAppLovinAds.showFullAds(ScreenResumeHome.this, () -> {
-                        GoogleAppLovinAds.allcount60.start();
+                if (GoogleAds.adsdisplay) {
+                    GoogleAds.showFullAds(ScreenResumeHome.this, () -> {
+                        GoogleAds.allcount60.start();
                         IntentSkill();
                     });
                 } else {
@@ -92,9 +92,9 @@ public final class ScreenResumeHome extends BaseActivity {
                 }
                 return;
             case R.id.settingDetail:
-                if (GoogleAppLovinAds.adsdisplay) {
-                    GoogleAppLovinAds.showFullAds(ScreenResumeHome.this, () -> {
-                        GoogleAppLovinAds.allcount60.start();
+                if (GoogleAds.adsdisplay) {
+                    GoogleAds.showFullAds(ScreenResumeHome.this, () -> {
+                        GoogleAds.allcount60.start();
                         IntentResume("7");
                     });
                 } else {
@@ -106,9 +106,9 @@ public final class ScreenResumeHome extends BaseActivity {
                 break;
         }
 
-        if (GoogleAppLovinAds.adsdisplay) {
-            GoogleAppLovinAds.showFullAds(ScreenResumeHome.this, () -> {
-                GoogleAppLovinAds.allcount60.start();
+        if (GoogleAds.adsdisplay) {
+            GoogleAds.showFullAds(ScreenResumeHome.this, () -> {
+                GoogleAds.allcount60.start();
                 IntentResume(str);
             });
         } else {

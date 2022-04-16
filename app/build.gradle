@@ -1,19 +1,18 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'com.google.gms.google-services'
 }
 
 android {
+
     signingConfigs {
         release {
-            storeFile file('E:\\Nency\\NEW Application\\Document Reader - Word, Excel\\Document Reader - Word, Excel\\app\\KeyStore\\doc_reader.jks')
+            storeFile file('E:\\Future Apps Solutions\\Document Redaer - Pdf Reader\\KeyStore\\doc_reader.jks')
             storePassword 'doc_reader'
             keyAlias 'doc_reader'
             keyPassword 'doc_reader'
         }
     }
-
     dexOptions {
         preDexLibraries true
         javaMaxHeapSize "4G"
@@ -35,10 +34,11 @@ android {
         applicationId "com.docreader.docviewer.pdfcreator.pdfreader.filereader"
         minSdk 21
         targetSdk 31
-        versionCode 3
-        versionName "1.2"
+        versionCode 4
+        versionName "1.2.1"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.release
     }
 
     buildTypes {
@@ -63,13 +63,14 @@ android {
         abortOnError false
         checkReleaseBuilds false
     }
+    namespace 'com.docreader.docviewer.pdfcreator.pdfreader.filereader'
 }
 
 dependencies {
     api 'androidx.appcompat:appcompat:1.4.1'
     api 'com.google.android.material:material:1.5.0'
-    api 'androidx.constraintlayout:constraintlayout:2.1.2'
-    api 'androidx.constraintlayout:constraintlayout-core:1.0.2'
+    api 'androidx.constraintlayout:constraintlayout:2.1.3'
+    api 'androidx.constraintlayout:constraintlayout-core:1.0.3'
     api 'androidx.exifinterface:exifinterface:1.3.3'
     api 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
@@ -80,7 +81,7 @@ dependencies {
     api 'org.tukaani:xz:1.9'
     api 'com.itextpdf:itextpdf:5.5.13.2'
     api 'com.intuit.sdp:sdp-android:1.0.6'
-    api 'com.airbnb.android:lottie:4.2.2'
+    api 'com.airbnb.android:lottie:5.0.2'
     api group: 'org.apache.commons', name: 'commons-compress', version: '1.21'
 
     api 'com.android.volley:volley:1.2.1'
@@ -88,13 +89,12 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
-    api platform('com.google.firebase:firebase-bom:29.0.3')
-    api 'com.google.firebase:firebase-database:20.0.3'
+
+
 
     //Advertisement
     api 'com.google.android.gms:play-services-ads:20.6.0'
-    api 'com.applovin:applovin-sdk:11.1.2'
-    api 'com.applovin.mediation:facebook-adapter:6.8.0.8'
+    api 'com.google.ads.mediation:facebook:6.8.0.0'
 
     api "androidx.lifecycle:lifecycle-extensions:2.2.0"
     api "androidx.lifecycle:lifecycle-runtime:2.4.1"

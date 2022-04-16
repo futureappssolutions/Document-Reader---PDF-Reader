@@ -10,7 +10,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
 
 public class WebViewBase extends BaseActivity {
@@ -25,7 +25,7 @@ public class WebViewBase extends BaseActivity {
 
 
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        GoogleAppLovinAds.showBannerAds(WebViewBase.this, ll_banner);
+        GoogleAds.showBannerAds(WebViewBase.this, ll_banner);
 
 
         f801wv = findViewById(R.id.browser);

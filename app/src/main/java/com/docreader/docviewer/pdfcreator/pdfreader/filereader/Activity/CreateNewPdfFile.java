@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Adapter.CreatedDocumentFilesListAdp;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Database.DatabaseHelper;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.GetSet.DocumentFiles;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
@@ -60,7 +60,7 @@ public class CreateNewPdfFile extends BaseActivity {
 
         SharedPrefs prefs = new SharedPrefs(CreateNewPdfFile.this);
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        GoogleAppLovinAds.showBannerAds(CreateNewPdfFile.this, ll_banner);
+        GoogleAds.showBannerAds(CreateNewPdfFile.this, ll_banner);
 
         toolBarTitle = findViewById(R.id.toolBarTitle);
         progressBar = findViewById(R.id.progressBar);
@@ -71,9 +71,9 @@ public class CreateNewPdfFile extends BaseActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         findViewById(R.id.createNewDocumentBtn).setOnClickListener(view -> {
-            if (GoogleAppLovinAds.adsdisplay) {
-                GoogleAppLovinAds.showFullAds(CreateNewPdfFile.this, () -> {
-                    GoogleAppLovinAds.allcount60.start();
+            if (GoogleAds.adsdisplay) {
+                GoogleAds.showFullAds(CreateNewPdfFile.this, () -> {
+                    GoogleAds.allcount60.start();
                     CreateNewPdfFile.selectedFileSource = "";
                     selectedFileSourceId = 0;
                     intent.putExtra("sourceFileId", selectedFileSourceId + "");

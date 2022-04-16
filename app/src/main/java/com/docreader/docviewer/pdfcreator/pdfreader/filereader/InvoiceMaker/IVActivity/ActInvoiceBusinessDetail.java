@@ -28,7 +28,7 @@ import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActivity;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Database.InvoiceDatabaseHelper;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVGetSet.BusinessInfo;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVGetSet.Invoice;
@@ -86,7 +86,7 @@ public class ActInvoiceBusinessDetail extends BaseActivity {
         SharedPrefs mPrefs = new SharedPrefs(ActInvoiceBusinessDetail.this);
 
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        GoogleAppLovinAds.showBannerAds(ActInvoiceBusinessDetail.this, ll_banner);
+        GoogleAds.showBannerAds(ActInvoiceBusinessDetail.this, ll_banner);
 
 
         if (getIntent() != null) {

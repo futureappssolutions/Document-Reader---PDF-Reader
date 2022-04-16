@@ -23,7 +23,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Adapter.ImageToPdfAdp;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.GetSet.ImageModel;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.CoroutinesTask;
@@ -115,7 +115,7 @@ public class ImageToPDF extends BaseActivity implements View.OnClickListener {
         prefs = new SharedPrefs(ImageToPDF.this);
 
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        GoogleAppLovinAds.showBannerAds(ImageToPDF.this, ll_banner);
+        GoogleAds.showBannerAds(ImageToPDF.this, ll_banner);
 
         init();
         initGridView();
@@ -229,9 +229,9 @@ public class ImageToPDF extends BaseActivity implements View.OnClickListener {
             if (str1 != null) {
                 Singleton.getInstance().setFileDeleted(true);
                 new AlertDialog.Builder(ImageToPDF.this).setMessage(getResources().getString(R.string.pdfFileCreatedSuccessfully)).setPositiveButton(getResources().getString(R.string.openThisFile), (dialogInterface, i) -> {
-                    if (GoogleAppLovinAds.adsdisplay) {
-                        GoogleAppLovinAds.showFullAds(ImageToPDF.this, () -> {
-                            GoogleAppLovinAds.allcount60.start();
+                    if (GoogleAds.adsdisplay) {
+                        GoogleAds.showFullAds(ImageToPDF.this, () -> {
+                            GoogleAds.allcount60.start();
                             CreateNewPdfFile.selectedFileSource = "";
                             IntentPDFView(str1);
                             dialogInterface.dismiss();

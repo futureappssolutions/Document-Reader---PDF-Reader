@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvActivity.ScreenCVEdit;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.Singleton;
@@ -54,7 +54,7 @@ public class RTFView extends BaseActivity {
         TextView textView = findViewById(R.id.toolBarTitle);
 
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        GoogleAppLovinAds.showBannerAds(RTFView.this, ll_banner);
+        GoogleAds.showBannerAds(RTFView.this, ll_banner);
 
 
         if (getIntent() != null) {

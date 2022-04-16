@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAds;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvActivity.ScreenCVEdit;
@@ -60,7 +60,7 @@ public class ActCreateNote extends BaseActivity implements View.OnClickListener 
         prefs = new SharedPrefs(this);
 
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        GoogleAppLovinAds.showBannerAds(ActCreateNote.this, ll_banner);
+        GoogleAds.showBannerAds(ActCreateNote.this, ll_banner);
 
         titleEditText = findViewById(R.id.TitleEditText);
         contentEditText = findViewById(R.id.ContentEditText);

@@ -17,7 +17,6 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +24,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActivity;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.SharedPrefs;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.Utility;
@@ -39,14 +38,11 @@ import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.android.play.core.tasks.OnSuccessListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.Locale;
 
 public class Splash extends BaseActivity implements OnSuccessListener<AppUpdateInfo> {
+
     public static final int REQUEST_CODE = 1234;
     public final int RC_APP_UPDATE = 100;
     public boolean mNeedsFlexibleUpdate;
@@ -80,70 +76,50 @@ public class Splash extends BaseActivity implements OnSuccessListener<AppUpdateI
         appUpdateManager = AppUpdateManagerFactory.create(Splash.this);
         mNeedsFlexibleUpdate = false;
 
-        FirebaseDatabase.getInstance().getReference().child("doc_data").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                prefs.setGoogle_banner(dataSnapshot.child("banner_id").getValue(String.class));
-                prefs.setGoogle_full(dataSnapshot.child("full_id").getValue(String.class));
-                prefs.setGoogle_native(dataSnapshot.child("native_id").getValue(String.class));
-                prefs.setGoogle_open(dataSnapshot.child("app_open_id").getValue(String.class));
-                prefs.setGoogle_reward(dataSnapshot.child("reward_ads_id").getValue(String.class));
-                prefs.setAds_time(dataSnapshot.child("ads_time").getValue(String.class));
-                prefs.setAds_name(dataSnapshot.child("ads_name").getValue(String.class));
-                prefs.setAppLovin_banner(dataSnapshot.child("al_banner").getValue(String.class));
-                prefs.setAppLovin_full(dataSnapshot.child("al_full").getValue(String.class));
-                prefs.setAppLovin_native(dataSnapshot.child("al_native").getValue(String.class));
-                prefs.setAppLovin_reward(dataSnapshot.child("al_reward").getValue(String.class));
-                prefs.setRemove_ads_weekly(dataSnapshot.child("weekly_key").getValue(String.class));
-                prefs.setRemove_ads_monthly(dataSnapshot.child("monthly_key").getValue(String.class));
-                prefs.setRemove_ads_yearly(dataSnapshot.child("yearly_key").getValue(String.class));
-                prefs.setBase_key(dataSnapshot.child("base_key").getValue(String.class));
 
-                try {
-                    GoogleAppLovinAds.allcount60 = new android.os.CountDownTimer(Integer.parseInt(prefs.getAds_time()) * 1000L, 1000) {
-                        public void onTick(long millisUntilFinished) {
-                            GoogleAppLovinAds.adsdisplay = false;
-                        }
+        prefs.setRemove_ads_weekly("weekly_plan");
+        prefs.setRemove_ads_monthly("monthly_plan");
+        prefs.setRemove_ads_yearly("yearly_plan");
 
-                        public void onFinish() {
-                            GoogleAppLovinAds.adsdisplay = true;
-                        }
-                    };
-                    GoogleAppLovinAds.allcount60.start();
-                } catch (NumberFormatException ex) {
-                    ex.printStackTrace();
+
+        try {
+            GoogleAds.allcount60 = new android.os.CountDownTimer(8 * 1000L, 1000) {
+                public void onTick(long millisUntilFinished) {
+                    GoogleAds.adsdisplay = false;
                 }
 
-                GoogleAppLovinAds.preLoadAds(Splash.this);
+                public void onFinish() {
+                    GoogleAds.adsdisplay = true;
+                }
+            };
+            GoogleAds.allcount60.start();
+        } catch (NumberFormatException ex) {
+            ex.printStackTrace();
+        }
 
-                new Handler().postDelayed(() -> {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                        if (Environment.isExternalStorageManager()) {
-                            if (prefs.getAppLocalizationCode().equals("en")) {
-                                startActivity(new Intent(getBaseContext(), ActMain.class));
-                            } else {
-                                setLocale(prefs.getAppLocalizationCode());
-                            }
-                            finish();
-                        } else {
-                            Intent intent = new Intent();
-                            intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-                            intent.addCategory("android.intent.category.DEFAULT");
-                            intent.setData(Uri.parse(String.format("package:%s", getPackageName())));
-                            startActivityForResult(intent, 100);
-                        }
+        GoogleAds.preLoadAds(Splash.this);
+
+        new Handler().postDelayed(() -> {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                if (Environment.isExternalStorageManager()) {
+                    if (prefs.getAppLocalizationCode().equals("en")) {
+                        startActivity(new Intent(getBaseContext(), ActMain.class));
                     } else {
-                        ActivityCompat.requestPermissions(Splash.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                        setLocale(prefs.getAppLocalizationCode());
                     }
-
-                }, 1700);
+                    finish();
+                } else {
+                    Intent intent = new Intent();
+                    intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                    intent.addCategory("android.intent.category.DEFAULT");
+                    intent.setData(Uri.parse(String.format("package:%s", getPackageName())));
+                    startActivityForResult(intent, 100);
+                }
+            } else {
+                ActivityCompat.requestPermissions(Splash.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(Splash.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        }, 1700);
     }
 
     @Override

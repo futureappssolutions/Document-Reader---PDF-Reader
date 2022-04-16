@@ -19,7 +19,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActivity;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvActivity.ScreenCVEdit;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Database.InvoiceDatabaseHelper;
@@ -68,7 +68,7 @@ public class ActInvoiceNewClient extends BaseActivity {
 
 
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        GoogleAppLovinAds.showBannerAds(ActInvoiceNewClient.this, ll_banner);
+        GoogleAds.showBannerAds(ActInvoiceNewClient.this, ll_banner);
 
         invoiceDatabaseHelper = new InvoiceDatabaseHelper(this);
         clientNameEt = findViewById(R.id.clientNameEt);

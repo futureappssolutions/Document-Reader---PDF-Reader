@@ -22,7 +22,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import com.bumptech.glide.Glide;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Database.InvoiceDatabaseHelper;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVGetSet.Attachment;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
@@ -71,7 +71,7 @@ public class ActInvoiceAttachment extends AppCompatActivity implements View.OnCl
 
 
         FrameLayout fl_native = findViewById(R.id.fl_native);
-        GoogleAppLovinAds.showNativeAds(ActInvoiceAttachment.this,fl_native);
+        GoogleAds.showNativeAds(ActInvoiceAttachment.this,fl_native);
 
 
         if (getIntent() != null) {

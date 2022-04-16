@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Adapter.FolderViewAdp;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Adapter.PickImageVideoAdp;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Interface.OnFolderItemClickListener;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Interface.OnPhotosLoadListener;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Interface.onRecyclerViewItemClick;
@@ -70,7 +70,7 @@ public class SelectImage extends BaseActivity implements onRecyclerViewItemClick
 
         SharedPrefs prefs = new SharedPrefs(SelectImage.this);
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        GoogleAppLovinAds.showBannerAds(SelectImage.this, ll_banner);
+        GoogleAds.showBannerAds(SelectImage.this, ll_banner);
 
 
         initFolderViewRecyclerView();

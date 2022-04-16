@@ -14,7 +14,7 @@ import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActivity;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvGetSet.ResumeEvent;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvTemplate.TextChangeListener;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
@@ -149,7 +149,7 @@ public class ScreenCVEdit extends BaseActivity {
 
 
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        GoogleAppLovinAds.showBannerAds(ScreenCVEdit.this, ll_banner);
+        GoogleAds.showBannerAds(ScreenCVEdit.this, ll_banner);
 
         titleEditText.addTextChangedListener(new TextChangeListener() {
             @Override

@@ -17,7 +17,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVFragment.FrgInvoice;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVFragment.FrgInvoiceClients;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVFragment.FrgInvoiceProduct;
@@ -47,7 +47,7 @@ public class ActInvoiceMain extends AppCompatActivity {
 
 
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        GoogleAppLovinAds.showBannerAds(ActInvoiceMain.this, ll_banner);
+        GoogleAds.showBannerAds(ActInvoiceMain.this, ll_banner);
 
 
         ((BottomNavigationView) findViewById(R.id.nav_view)).setOnItemSelectedListener(item -> {

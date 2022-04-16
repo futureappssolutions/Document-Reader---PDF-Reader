@@ -22,7 +22,7 @@ import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.PDFViewW
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.RTFView;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.TextViewer;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.BaseActivity;
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CSVFileViewer.UI.CSVFileViewerActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.EBookViewer.EPubFileViewerActivity;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.FilePicker.filter.FileFilter;
@@ -75,7 +75,7 @@ public class FilePickerActivity extends BaseActivity implements DirectoryFragmen
 
         SharedPrefs prefs = new SharedPrefs(FilePickerActivity.this);
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        GoogleAppLovinAds.showBannerAds(FilePickerActivity.this, ll_banner);
+        GoogleAds.showBannerAds(FilePickerActivity.this, ll_banner);
 
 
         initArguments(bundle);

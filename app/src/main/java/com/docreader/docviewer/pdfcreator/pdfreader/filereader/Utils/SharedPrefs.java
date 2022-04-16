@@ -8,23 +8,10 @@ public class SharedPrefs {
     SharedPreferences.Editor editor;
     SharedPreferences prefs;
 
-    private final String Google_full = "Google_full";
-    private final String Google_banner = "Google_banner";
-    private final String Google_native = "Google_native";
-    private final String Google_open = "Google_open";
-    private final String Google_reward = "Google_reward";
-    private final String AppLovin_full = "AppLovin_full";
-    private final String AppLovin_banner = "AppLovin_banner";
-    private final String AppLovin_native = "AppLovin_native";
-    private final String AppLovin_reward = "AppLovin_reward";
-
-    private final String Ads_time = "Ads_time";
-    private final String Ads_name = "Ads_name";
 
     private final String remove_ads_weekly = "remove_ads_weekly";
     private final String remove_ads_monthly = "remove_ads_monthly";
     private final String remove_ads_yearly = "remove_ads_yearly";
-    private final String base_key = "base_key";
 
     private final String active_Weekly = "active_Weekly";
     private final String active_Monthly = "active_Monthly";
@@ -181,94 +168,7 @@ public class SharedPrefs {
         return this.prefs.getString("invoiceBusinessInfo", "");
     }
 
-    public String getGoogle_full() {
-        return prefs.getString(Google_full, "");
-    }
 
-    public void setGoogle_full(String value) {
-        editor.putString(Google_full, value).apply();
-    }
-
-    public String getGoogle_banner() {
-        return prefs.getString(Google_banner, "");
-    }
-
-    public void setGoogle_banner(String value) {
-        editor.putString(Google_banner, value).apply();
-    }
-
-    public String getGoogle_native() {
-        return prefs.getString(Google_native, "");
-    }
-
-    public void setGoogle_native(String value) {
-        editor.putString(Google_native, value).apply();
-    }
-
-    public String getGoogle_open() {
-        return prefs.getString(Google_open, "");
-    }
-
-    public void setGoogle_open(String value) {
-        editor.putString(Google_open, value).apply();
-    }
-
-    public String getGoogle_reward() {
-        return prefs.getString(Google_reward, "");
-    }
-
-    public void setGoogle_reward(String value) {
-        editor.putString(Google_reward, value).apply();
-    }
-
-    public String getAppLovin_full() {
-        return prefs.getString(AppLovin_full, "");
-    }
-
-    public void setAppLovin_full(String value) {
-        editor.putString(AppLovin_full, value).apply();
-    }
-
-    public String getAppLovin_banner() {
-        return prefs.getString(AppLovin_banner, "");
-    }
-
-    public void setAppLovin_banner(String value) {
-        editor.putString(AppLovin_banner, value).apply();
-    }
-
-    public String getAppLovin_native() {
-        return prefs.getString(AppLovin_native,"");
-    }
-
-    public void setAppLovin_native(String value) {
-        editor.putString(AppLovin_native, value).apply();
-    }
-
-    public String getAppLovin_reward() {
-        return prefs.getString(AppLovin_reward, "");
-    }
-
-    public void setAppLovin_reward(String value) {
-        editor.putString(AppLovin_reward, value).apply();
-    }
-
-
-    public String getAds_time() {
-        return prefs.getString(Ads_time, "");
-    }
-
-    public void setAds_time(String value) {
-        editor.putString(Ads_time, value).apply();
-    }
-
-    public String getAds_name() {
-        return prefs.getString(Ads_name, "");
-    }
-
-    public void setAds_name(String value) {
-        editor.putString(Ads_name, value).apply();
-    }
 
     public String getRemove_ads_weekly() {
         return prefs.getString(remove_ads_weekly, "");
@@ -292,14 +192,6 @@ public class SharedPrefs {
 
     public void setRemove_ads_yearly(String value) {
         editor.putString(remove_ads_yearly, value).apply();
-    }
-
-    public String getBase_key() {
-        return prefs.getString(base_key, "");
-    }
-
-    public void setBase_key(String value) {
-        editor.putString(base_key, value).apply();
     }
 
     public String getActive_Weekly() {

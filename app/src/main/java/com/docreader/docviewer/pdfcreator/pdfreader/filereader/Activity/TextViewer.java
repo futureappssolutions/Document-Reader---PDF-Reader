@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.SharedPrefs;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.View.Code.CodeView;
@@ -52,7 +52,7 @@ public class TextViewer extends BaseActivity implements CodeView.OnHighlightList
 
         SharedPrefs prefs = new SharedPrefs(TextViewer.this);
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        GoogleAppLovinAds.showBannerAds(TextViewer.this, ll_banner);
+        GoogleAds.showBannerAds(TextViewer.this, ll_banner);
 
 
         String stringExtra = getIntent().getStringExtra("path");

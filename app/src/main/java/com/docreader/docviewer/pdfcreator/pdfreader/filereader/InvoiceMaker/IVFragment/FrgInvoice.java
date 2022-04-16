@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvActivity.ScreenCVEdit;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Database.InvoiceDatabaseHelper;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVActivity.ActNewInvoice;
@@ -71,9 +71,9 @@ public class FrgInvoice extends Fragment implements View.OnClickListener {
             recyclerView.setItemAnimator(new DefaultItemAnimator());
 
             root.findViewById(R.id.createNewInvoice).setOnClickListener(view -> {
-                if (GoogleAppLovinAds.adsdisplay) {
-                    GoogleAppLovinAds.showFullAds(requireActivity(), () -> {
-                        GoogleAppLovinAds.allcount60.start();
+                if (GoogleAds.adsdisplay) {
+                    GoogleAds.showFullAds(requireActivity(), () -> {
+                        GoogleAds.allcount60.start();
                         IntentInvoice();
                     });
                 } else {

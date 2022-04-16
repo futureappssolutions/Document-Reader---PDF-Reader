@@ -20,7 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 
-import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAppLovinAds;
+import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Ads.GoogleAds;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Main.ActMain;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.R;
 import com.docreader.docviewer.pdfcreator.pdfreader.filereader.Utils.SharedPrefs;
@@ -174,7 +174,7 @@ public class FilesView extends BaseActivity implements IMainFrame {
 
         SharedPrefs prefs = new SharedPrefs(FilesView.this);
         LinearLayout ll_banner = findViewById(R.id.ll_banner);
-        GoogleAppLovinAds.showBannerAds(FilesView.this, ll_banner);
+        GoogleAds.showBannerAds(FilesView.this, ll_banner);
 
         if (getIntent() != null) {
             filePath = getIntent().getStringExtra("path");
