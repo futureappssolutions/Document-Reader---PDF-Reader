@@ -19,3 +19,4 @@
 -keep public class com.docreader.docviewer.pdfcreator.pdfreader.filereader.CSVFileViewer.CSVModel.** {*;}
 -keep public class com.docreader.docviewer.pdfcreator.pdfreader.filereader.CvMaker.CvGetSet.** {*;}
 -keep public class com.docreader.docviewer.pdfcreator.pdfreader.filereader.InvoiceMaker.IVGetSet.** {*;}
+-keep public class com.docreader.docviewer.pdfcreator.pdfreader.filereader.Activity.FilesView.** {*;}
